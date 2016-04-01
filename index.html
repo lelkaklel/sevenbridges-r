@@ -20,18 +20,17 @@
 
     <section class="main-content">
       <h1>
-<a id="r-client-for-seven-bridges-genomics-api" class="anchor" href="#r-client-for-seven-bridges-genomics-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>R Client for Seven Bridges Genomics API</h1>
+<a id="r-package-for-seven-bridges-platform" class="anchor" href="#r-package-for-seven-bridges-platform" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>R Package for Seven Bridges Platform</h1>
 
-
-
-<p>Please checkout the <a href="http://bioconductor.org/packages/3.3/bioc/html/sevenbridges.html">bioductor page</a> for more information</p>
+<p>Please checkout the <a href="http://bioconductor.org/packages/3.3/bioc/html/sevenbridges.html">bioconductor page</a> for more information</p>
 
 <h2>
 <a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
 
 <ul>
 <li><p>Complete API R client with user friendly API like a$project("demo")$file("sample.tz")$delete()</p></li>
-<li><p>CWL Tool interface, you can directly describe your tool in R, export to JSON/YAML, or add it to your online project</p></li>
+<li><p>CWL Tool interface, you can directly describe your tool in R, export to JSON/YAML, or add it to your online project. This package defines a complete set
+of CWL object.</p></li>
 <li><p>Task monitoring hook allow you to add hook function to task status when you monitor a task, for example, when task is finished sent you email or download all files.</p></li>
 <li><p>Cross platform support, if it's cwl compatible platform from Seven
 Bridges, like Cancer genomics cloud or Seven bridges on google and
@@ -42,12 +41,12 @@ AWS, you can use it.</p></li>
 <h2>
 <a id="tutorials" class="anchor" href="#tutorials" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tutorials</h2>
 
-<p>Tutorials are listed on  <a href="http://bioconductor.org/packages/3.3/bioc/html/sevenbridges.html">bioductor page</a></p>
+<p>Tutorials are listed on  <a href="http://bioconductor.org/packages/3.3/bioc/html/sevenbridges.html">bioconductor page</a></p>
 
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>The package is currently not availble in the Bioconductor <code>release</code> branch yet until next Bioc release cycle, please switch to the <code>devel</code> branch by following code to install.</p>
+<p>The package is currently not available in the Bioconductor <code>release</code> branch yet until next Bioc release cycle, please switch to the <code>devel</code> branch by following code to install.</p>
 
 <pre><code>source("http://bioconductor.org/biocLite.R")
 useDevel(devel = TRUE)
@@ -57,14 +56,40 @@ biocLite("sevenbridges")
 <p>Alternatively, you can install the latest development version of the package from GitHub too:</p>
 
 <pre><code># install.packages("devtools") if devtools was not installed
-library("devtools")
-install_github("tengfei/sevenbridges")
+source("http://bioconductor.org/biocLite.R")
+##  useDevel() ## ignore the erro if you cannot use devel
+## biocLite("BiocUpgrade") ## don't have to run
+library(devtools)
+install_github("tengfei/sevenbridges", build_vignettes=TRUE, 
+  repos=BiocInstaller::biocinstallRepos(),
+  dependencies=TRUE)
 </code></pre>
 
 <p>To load the package in R, simply call</p>
 
 <pre><code>library("sevenbridges")
 </code></pre>
+
+<h2>
+<a id="launch-rstudio-server-and-shiny-server-with-sevenbridges-utils" class="anchor" href="#launch-rstudio-server-and-shiny-server-with-sevenbridges-utils" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Launch Rstudio Server and Shiny Server with sevenbridges utils</h2>
+
+<pre><code>docker run  -d -p 8787:8787 -p 80:3838 tengfei/sevenbridges:local &amp;
+</code></pre>
+
+<p>check out the ip</p>
+
+<pre><code>docker-machine ip default
+</code></pre>
+
+<p><code>http://&lt;url&gt;:8787/</code> for Rstudio
+<code>http://&lt;url&gt;:8787/&lt;username of rstudio&gt;/</code> for Shiny server</p>
+
+<p>For example, if 192.168.99.100 is what returned, visit <code>http://192.168.99.100:8787/</code> for Rstudio.</p>
+
+<p>Note: for users of that Rstudio, just create <code>ShinyApps</code> folder under
+your home folder, then put your apps under that folder, so you can
+visit <code>http://&lt;url&gt;:8787/&lt;username of rstudio&gt;/&lt;app name&gt;</code> for your
+shiny apps. For example `<code>http://192.168.99.100:8787/tengfei/hello</code></p>
 
 <hr>
 
