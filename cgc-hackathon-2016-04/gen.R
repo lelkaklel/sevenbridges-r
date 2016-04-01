@@ -2,3 +2,6 @@
 library(rmarkdown)
 render("~/Code/svnrepos/bioc-devel/sevenbridges/vignettes/bioc-workflow.Rmd",
        output_dir = ".")
+
+knitr::purl("~/Code/svnrepos/bioc-devel/sevenbridges/vignettes/bioc-workflow.Rmd")
+
