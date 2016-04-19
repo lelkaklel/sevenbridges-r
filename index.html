@@ -19,86 +19,135 @@
     </section>
 
     <section class="main-content">
-      <h1>
-<a id="nci-cancer-genomics-cloud-hackathon-tutorials" class="anchor" href="#nci-cancer-genomics-cloud-hackathon-tutorials" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>NCI Cancer Genomics Cloud Hackathon Tutorials</h1>
-
-<p>Workshop tutorial: [<a href="http://www.tengfei.name/sevenbridges/cgc-hackathon-2016-04/bioc-workflow.html">html</a>] [<a href="https://raw.githubusercontent.com/tengfei/sevenbridges/master/vignettes/bioc-workflow.Rmd">R markdown</a>] [<a href="http://www.tengfei.name/sevenbridges/cgc-hackathon-2016-04/bioc-workflow.R">R script</a>]</p>
+      <p><a href="https://travis-ci.org/tengfei/sevenbridges"><img src="https://travis-ci.org/tengfei/sevenbridges.svg?branch=master" alt="Build Status"></a></p>
 
 <h1>
-<a id="r-package-for-seven-bridges-platform" class="anchor" href="#r-package-for-seven-bridges-platform" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>R Package for Seven Bridges Platform</h1>
+<a id="sevenbridges-r-package-for-seven-bridges-platform-from-api-client-to-cwl-generator" class="anchor" href="#sevenbridges-r-package-for-seven-bridges-platform-from-api-client-to-cwl-generator" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>sevenbridges: R Package for Seven Bridges Platform from API client to CWL generator</h1>
 
-<p>You can also checkout the <a href="http://bioconductor.org/packages/3.3/bioc/html/sevenbridges.html">bioconductor page</a> for more information</p>
+<p>[<a href="http://bioconductor.org/packages/3.3/bioc/html/sevenbridges.html">official bioconductor devel page</a>] 
+[<a href="http://www.tengfei.name/sevenbridges/">github homepage</a>]</p>
 
-<h2>
-<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
+<h3>
+<a id="events" class="anchor" href="#events" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Events</h3>
 
 <ul>
-<li><p>Complete API R client with user friendly API like 
-<code>a$project("demo")$file("sample.tz")$delete()</code> <code>a$project(id = "tengfei/quickstart")$upload("folder_path", metadata = list(platform = "Illumina"))</code></p></li>
+<li>May 27 - 29, 2016 <a href="http://china-r.org/bj2016/index.html">The 9th China-R Conference 2016</a> @ Remin University, Beijng, China. (talk)</li>
+<li>June 24 - 26, 2016 <a href="http://bioconductor.org/help/course-materials/2016/BioC2016/">BioC 2016: Where Software and Biology Connect</a> @ Stanford University, Stanford, CA (workshop)</li>
+<li>June 27 - 30, 2016 <a href="http://user2016.org/">The R User Conference 2016</a> @ Stanford University, Stanford, CA (talk)</li>
+<li>(Past) <a href="http://www.cancergenomicscloud.org/hacking-cancer/">NCI Cancer Genomics Cloud Hackathon Tutorials</a> @ Boston 2016
+[<a href="http://www.tengfei.name/sevenbridges/cgc-hackathon-2016-04/bioc-workflow.html">html</a>] 
+[<a href="https://raw.githubusercontent.com/tengfei/sevenbridges/master/vignettes/bioc-workflow.Rmd">R markdown</a>] 
+[<a href="http://www.tengfei.name/sevenbridges/cgc-hackathon-2016-04/bioc-workflow.R">R script</a>]</li>
+</ul>
+
+<h3>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h3>
+
+<ul>
+<li>Complete API R client with user friendly API in object-oriented fashion with user friendly printing, support operation on users, billing, project, file, app, task etc, short example.</li>
+</ul>
+
+<pre><code>## get project
+p = a$project("demo")
+## detele files from a project
+p$file("sample.tz")$delete()
+## upload fies from a folder to a project with metadata
+p$upload("folder_path", metadata = list(platform = "Illumina"))`
+</code></pre>
+
+<ul>
 <li><p>CWL Tool interface, you can directly describe your tool in R, export to JSON/YAML, or add it to your online project. This package defines a complete set
 of CWL object.</p></li>
 <li><p>Task monitoring hook allow you to add hook function to task status when you monitor a task, for example, when task is finished sent you email or download all files.</p></li>
-<li><p>Cross platform support, if it's cwl compatible platform from Seven
-Bridges, like Cancer genomics cloud or Seven bridges on google and
+<li><p>Cross platform support from Seven
+Bridges, such as <a href="http://www.cancergenomicscloud.org/">NCI Cancer genomics cloud</a> or <a href="https://www.sbgenomics.com/">Seven bridges</a> on google and
 AWS, you can use it.</p></li>
 <li><p>Authentification management for multiple platforms/users via config file.</p></li>
 </ul>
 
-<h2>
-<a id="tutorials" class="anchor" href="#tutorials" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tutorials</h2>
+<h3>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h3>
 
-<p>Tutorials are listed on  <a href="http://bioconductor.org/packages/3.3/bioc/html/sevenbridges.html">bioconductor page</a></p>
+<p>After bioconductor 3.3 <a href="http://bioconductor.org/developers/release-schedule/">release</a> on May 5th, you will be able to install like this</p>
 
-<pre><code>browseVignettes("sevenbridges")
+<pre><code>source("http://bioconductor.org/biocLite.R")
+biocLite("sevenbridges")
 </code></pre>
 
-<h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
-
-<p>The package is currently not available in the Bioconductor <code>release</code> branch yet until next Bioc release cycle, please switch to the <code>devel</code> branch by following code to install.</p>
+<p>Install from <code>devel</code> branch by following code to install.</p>
 
 <pre><code>source("http://bioconductor.org/biocLite.R")
 useDevel(devel = TRUE)
 biocLite("sevenbridges")
 </code></pre>
 
-<p>Alternatively, you can install the latest development version of the package from GitHub too:</p>
+<p>Alternatively, you can always install the latest development version of the package from GitHub too:</p>
 
 <pre><code># install.packages("devtools") if devtools was not installed
 source("http://bioconductor.org/biocLite.R")
-##  useDevel() ## ignore the erro if you cannot use devel
-## biocLite("BiocUpgrade") ## don't have to run
 library(devtools)
 install_github("tengfei/sevenbridges", build_vignettes=TRUE, 
   repos=BiocInstaller::biocinstallRepos(),
   dependencies=TRUE)
 </code></pre>
 
+<p>If you have trouble with pandoc, either install it or set <code>build_vignettes = FALSE</code> to avoid vignettes build, </p>
+
 <p>To load the package in R, simply call</p>
 
 <pre><code>library("sevenbridges")
 </code></pre>
 
-<h2>
-<a id="launch-rstudio-server-and-shiny-server-with-sevenbridges-utils" class="anchor" href="#launch-rstudio-server-and-shiny-server-with-sevenbridges-utils" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Launch Rstudio Server and Shiny Server with sevenbridges utils</h2>
+<h3>
+<a id="launch-rstudio-server-and-shiny-server-with-sevenbridges-ide-docker-container" class="anchor" href="#launch-rstudio-server-and-shiny-server-with-sevenbridges-ide-docker-container" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Launch Rstudio Server and Shiny Server with sevenbridges IDE docker container</h3>
 
-<pre><code>docker run  -d -p 8787:8787 -p 80:3838 tengfei/sevenbridges:local &amp;
+<pre><code>docker run  -d -p 8787:8787 -p 3838:3838 tengfei/sevenbridges
 </code></pre>
 
-<p>check out the ip</p>
+<p>check out the ip from docker machine if you are on mac os.</p>
 
 <pre><code>docker-machine ip default
 </code></pre>
 
-<p><code>http://&lt;url&gt;:8787/</code> for Rstudio
-<code>http://&lt;url&gt;:8787/&lt;username of rstudio&gt;/</code> for Shiny server</p>
+<p>In your browser, </p>
+
+<p><code>http://&lt;url&gt;:8787/</code> for Rstudio</p>
+
+<p><code>http://&lt;url&gt;:3838/&lt;username of rstudio&gt;/app_dir</code> for Shiny server</p>
 
 <p>For example, if 192.168.99.100 is what returned, visit <code>http://192.168.99.100:8787/</code> for Rstudio.</p>
 
 <p>Note: for users of that Rstudio, just create <code>ShinyApps</code> folder under
 your home folder, then put your apps under that folder, so you can
-visit <code>http://&lt;url&gt;:8787/&lt;username of rstudio&gt;/&lt;app name&gt;</code> for your
-shiny apps. For example `<code>http://192.168.99.100:8787/tengfei/hello</code></p>
+visit <code>http://&lt;url&gt;:3838/&lt;username of rstudio&gt;/&lt;app name&gt;</code> for your
+shiny apps. For example </p>
+
+<p>In your Rstudio server launched from container, please run</p>
+
+<pre><code>file.copy("/usr/local/lib/R/site-library/shiny/examples/01_hello/", "~/ShinyApps/", recursive = TRUE)
+</code></pre>
+
+<p>If you are login as username 'rstudio', then visit  <code>http://192.168.99.100:3838/rstudio/01_hello</code> you should be
+able to see the hello example.</p>
+
+<h3>
+<a id="issue-report" class="anchor" href="#issue-report" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Issue report</h3>
+
+<p>All feedback are welcomed! Please file bug/issue/request on the <a href="https://github.com/tengfei/sevenbridges/issues">issue page</a> here on github, we wil 
+try to respond asap.</p>
+
+<h3>
+<a id="qa" class="anchor" href="#qa" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q&amp;A</h3>
+
+<ul>
+<li><p><strong>Q</strong>: Does this package support older API which is not cwl compatible?<br>
+<strong>A</strong>: No it only supports API v2 +, for older version, please check <a href="https://github.com/road2stat/sbgr">sbgr</a> package, but 
+please note that the old API or project type will be deprecated. </p></li>
+<li><p><strong>Q</strong>: Which version of CWL (common worklfow language) supported now? <br>
+<strong>A</strong>: draft 2, progress on draft 3.</p></li>
+<li><p><strong>Q</strong>: Is there a python binding for the API? <br>
+<strong>A</strong>: Yes, coming soon! Developed by other developers. And lots pyton recipes are now <a href="https://github.com/sbg/okAPI">here</a></p></li>
+</ul>
 
 <hr>
 
