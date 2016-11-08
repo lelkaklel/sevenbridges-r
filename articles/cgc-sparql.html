@@ -50,7 +50,7 @@
 <h1 class="hasAnchor"><html><body><a href="#quick-start" class="anchor"> </a></body></html>Quick start</h1>
 <div id="graphical-data-explorer" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#graphical-data-explorer" class="anchor"> </a></body></html>Graphical data explorer</h2>
-<p>Please read tutorial <a href="http://docs.cancergenomicscloud.org/docs/the-data-browser">here</a></p>
+<p>Please read tutorial <a href="http://docs.cancergenomicscloud.org/docs/the-data-browser">here</a>.</p>
 </div>
 <div id="sparql-examples" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#sparql-examples" class="anchor"> </a></body></html>SPARQL examples</h2>
@@ -58,8 +58,8 @@
 <p>Please read following tutorials first</p>
 <ul><li><a href="http://docs.cancergenomicscloud.org/docs/query-tcga-metadata-programmatically#section-example-queries">Query TCGA metadata programmatically</a></li>
 <li><a href="http://docs.cancergenomicscloud.org/docs/sample-sparql-queries">Examples of TCGA metadata queries in SPARQL</a></li>
-</ul><p>Here let me show you an example here, you will need R package &ldquo;SPARQL&rdquo;</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SPARQL)
+</ul><p>Here let me show you an example here, you will need R package &ldquo;SPARQL&rdquo;:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"SPARQL"</span>)
 endpoint =<span class="st"> "https://opensparql.sbgenomics.com/blazegraph/namespace/tcga_metadata_kb/sparql"</span>
 query =<span class="st"> "</span>
 <span class="st">prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span>
@@ -118,7 +118,7 @@ df.path</code></pre></div>
 <p>You can directly copy those files to a project, make sure if the files is controled access</p>
 <ul><li>project support TCGA controlled access</li>
 <li>you login from ERA Common.</li>
-</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sevenbridges)
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"sevenbridges"</span>)
 a =<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">platform =</span> <span class="st">"cgc"</span>, <span class="dt">username =</span> <span class="st">"tengfei"</span>)
 ## get id (only works for CGC platform)
 ids =<span class="st"> </span>a$<span class="kw">get_id_from_path</span>(df.path)
@@ -138,7 +138,7 @@ a$<span class="kw">copyFile</span>(ids, p$id)</code></pre></div>
 <p>Create an Auth object with your token, make sure you are using the correct url.</p>
 <ul><li><a href="https://cgc-datasets-api.sbgenomics.com/" class="uri">https://cgc-datasets-api.sbgenomics.com/</a></li>
 </ul><p>use <code>Auth$api()</code> method you don&rsquo;t have to re-type token and url.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sevenbridges)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"sevenbridges"</span>)
 ## create an Auth 
 a =<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">url =</span> <span class="st">"https://cgc-datasets-api.sbgenomics.com/"</span>, 
          <span class="dt">token =</span> <span class="st">"your_cgc_token"</span>)

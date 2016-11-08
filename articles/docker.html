@@ -111,11 +111,11 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">runif</code></pre></div>
 <pre><code>## function (n, min = 0, max = 1) 
 ## .Call(C_runif, n, min, max)
-## &lt;bytecode: 0x106f985c8&gt;
+## &lt;bytecode: 0x10990e238&gt;
 ## &lt;environment: namespace:stats&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">10</span>)</code></pre></div>
-<pre><code>##  [1] 0.37212390 0.57285336 0.90820779 0.20168193 0.89838968 0.94467527
-##  [7] 0.66079779 0.62911404 0.06178627 0.20597457</code></pre>
+<pre><code>##  [1] 0.6344345 0.8055396 0.8130249 0.6087329 0.7140146 0.0701941 0.4008628
+##  [8] 0.3319039 0.4135866 0.6999962</code></pre>
 <div id="using-docopt-package" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#using-docopt-package" class="anchor"> </a></body></html>Using docopt package</h3>
 <p>In R, we also have a nice implementation in a package called <code>docopt</code>, developed by <em>Edwin de Jonge</em>. Check out its <a href="https://github.com/docopt/docopt.R">tutorial</a> on GitHub.</p>
@@ -133,7 +133,7 @@ number of observations. If length(n) &gt; 1, the length is taken to be the numbe
 min, max    
 lower and upper limits of the distribution. Must be finite.</code></pre>
 <p>I will add one more parameter to set seed, here is the R script file called <code>runif.R</code>.</p>
-<p>At the beginning of the commadn line script, I use docopt standard to write my tool help.</p>
+<p>At the beginning of the commadn line script, I use the docopt standard to write my tool help.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">'usage: runif.R [--n=&lt;int&gt; --min=&lt;float&gt; --max=&lt;float&gt; --seed=&lt;float&gt;]</span>
 
 <span class="st">options:</span>
@@ -142,7 +142,7 @@ lower and upper limits of the distribution. Must be finite.</code></pre>
 <span class="st"> --max=&lt;float&gt;   upper limits of the distribution. Must be finite [default: 1].</span>
 <span class="st"> --seed=&lt;float&gt;  seed for set.seed() function [default: 1]'</span> -&gt;<span class="st"> </span>doc
 
-<span class="kw">library</span>(docopt)</code></pre></div>
+<span class="kw">library</span>(<span class="st">"docopt"</span>)</code></pre></div>
 <p>Let&rsquo;s first do some testing in your R session before you make it a full functional command line tool.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">docopt</span>(doc) <span class="co">#with no argumetns provided</span></code></pre></div>
 <pre><code>## List of 8
@@ -183,7 +183,7 @@ lower and upper limits of the distribution. Must be finite.</code></pre>
 <span class="st"> --max=&lt;float&gt;   upper limits of the distribution. Must be finite [default: 1].</span>
 <span class="st"> --seed=&lt;float&gt;  seed for set.seed() function [default: 1]'</span> -&gt;<span class="st"> </span>doc
 
-<span class="kw">library</span>(docopt)
+<span class="kw">library</span>(<span class="st">"docopt"</span>)
 opts &lt;-<span class="st"> </span><span class="kw">docopt</span>(doc)
 <span class="kw">set.seed</span>(opts$seed)
 <span class="kw">runif</span>(<span class="dt">n =</span> <span class="kw">as.integer</span>(opts$n), 
@@ -244,8 +244,8 @@ hist(r)</code></pre>
 <p>Ignore the comment part, I will introduce spin/stich later. My base command will be somethine like</p>
 <pre><code>Rscript runif2spin.R 10 30 50</code></pre>
 <p>I just describe my tool in this way</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sevenbridges)
-<span class="kw">library</span>(readr)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"sevenbridges"</span>)
+<span class="kw">library</span>(<span class="st">"readr"</span>)
 fd &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CPURequirement-class.html">fileDef</a></span>(<span class="dt">name =</span> <span class="st">"runif.R"</span>,
               <span class="dt">content =</span> <span class="kw">read_file</span>(fl))
 
@@ -307,7 +307,7 @@ hist(r)
 write.csv(r, file = "out.csv")</code></pre>
 <pre><code>Rscript runif_args.R --n=10 --min=30 --max=50</code></pre>
 <p>I just describe my tool in this way, note, I use <code>separate=FALSE</code> and add <code>=</code> to my prefix as a hack.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"readr"</span>)
 fd &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CPURequirement-class.html">fileDef</a></span>(<span class="dt">name =</span> <span class="st">"runif.R"</span>,
               <span class="dt">content =</span> <span class="kw">read_file</span>(fl))
 
@@ -375,7 +375,7 @@ write.csv(r, file = "out.csv")</code></pre>
 <p>You command is something like this</p>
 <pre><code>Rscript -e "rmarkdown::render(knitr::spin('runif_args.R', FALSE))" --args --n=100 --min=30 --max=50</code></pre>
 <p>And so I describe my tool like this with docker image <code>rocker/hadleyverse</code> this contians knitr and rmarkdown package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"readr"</span>)
 fd &lt;-<span class="st"> </span><span class="kw"><a href="../reference/CPURequirement-class.html">fileDef</a></span>(<span class="dt">name =</span> <span class="st">"runif.R"</span>,
               <span class="dt">content =</span> <span class="kw">read_file</span>(fl))
 
@@ -468,7 +468,7 @@ hist(r)
 <li>login your dockerhub account, following this <a href="https://docs.docker.com/docker-hub/builds/">tutorial</a> to make &ldquo;automated build&rdquo; from your GitHub account. Make sure you input the right location for your Dockerfile, by customizing it.</li>
 <li>Then you will have auto-build every time you push a new update in GitHub.</li>
 <li>Start using your docker image like &lsquo;tengfei/runif&rsquo;</li>
-<li>Feel free to push it onto your SevenBridges platform registry as well.</li>
+<li>Feel free to push it onto your Seven Bridges platform registry as well.</li>
 </ol></div>
 <div id="more-examples" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#more-examples" class="anchor"> </a></body></html>More examples</h2>

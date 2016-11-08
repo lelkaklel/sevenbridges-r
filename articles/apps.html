@@ -46,15 +46,15 @@
 </div>
 <div id="app-workflow-and-tool" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#app-workflow-and-tool" class="anchor"> </a></body></html>App, Workflow and Tool</h2>
-<p>In our terminology, a <strong>workflow</strong> is composed of one or more <strong>tool</strong>, both of them are just <strong>app</strong> to users. You can imagine some raw input data go through a pipeline with many nodes that each step perform a function on the data in the flow, and in the end, you got want you want: a fully processed data or result (plot, report, action)</p>
-<p>Here are some key ideas</p>
+<p>In our terminology, a <strong>workflow</strong> is composed of one or more <strong>tool</strong>, both of them are just <strong>app</strong> to users. You can imagine some raw input data go through a pipeline with many nodes that each step perform a function on the data in the flow, and in the end, you got want you want: a fully processed data or result (plot, report, action).</p>
+<p>Here are some key ideas:</p>
 <ul><li>Tool is the unit or a single node of workflow, so different tools could be connected into a workflow. That&rsquo;s how we achieve reusability of components.</li>
 <li>Tool is described with key components: input, output, parameters and requirements and more details. You understand the tool more like a black box (container) which digest some input(s) with specified setup and output another format.</li>
 <li>When input files matches output between two tools, they could be connected.</li>
 <li>Input is composed of files and parameters, we call it types: File, Enum, Integer, String and so on.</li>
 <li>App could be described in JSON/YAML format, following Common Workflow Language (CWL) open-source standard.</li>
 <li>CWL is just the collection of logic and schema. To execute this <strong>pure text file</strong>, we need executor in the cloud or local. With Seven Bridges platform, you can simply execute it at scale.</li>
-</ul><p>Looks like full of jargons and hard to understand. Here is an example. You have a csv table, full of missing value and you want to process it in 3 step</p>
+</ul><p>Looks like full of jargons and hard to understand. Here is an example. You have a csv table, full of missing value and you want to process it in 3 steps:</p>
 <ol style="list-style-type: decimal"><li>replace missing value</li>
 <li>filtering out rows that column &ldquo;age&rdquo; is smaller than 10</li>
 <li>output 3 item: a processed table csv file, a plot and a summary report in pdf.</li>
@@ -65,7 +65,7 @@
 <h2 class="hasAnchor"><html><body><a href="#describe-tools-in-r" class="anchor"> </a></body></html>Describe Tools in R</h2>
 <p><code>Tool</code> is the basic unit, and also your &ldquo;lego brick&rdquo; you usually start with. As developer you also want to provide those &ldquo;lego&rdquo; piecies to users to directly run it or make their own flow with it.</p>
 <p>The main interface provided by <code>sevenbridges</code> package is <code>Tool</code> function, it&rsquo;s much more straight forward to describe than composing your raw CWL json file from scratch. A &ldquo;Tool&rdquo; object in R could be exported into JSON or imported from a CWL JSON file.</p>
-<p>I highly recommend user go over documentation <a href="http://docs.cancergenomicscloud.org/docs/the-tool-editor">The Tool Editor</a> chapter for cancer genomic cloud to understand how it works, and even try it on the platform with the GUI. This will help understand our R interface better.</p>
+<p>I highly recommend going over documentation <a href="http://docs.cancergenomicscloud.org/docs/the-tool-editor">The Tool Editor</a> chapter for the Cancer Genomics Cloud to understand how it works, and even try it on the platform with the GUI. This will help understand our R interface better.</p>
 <div id="import-from-json-file" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#import-from-json-file" class="anchor"> </a></body></html>Import from JSON file</h3>
 <p>Sometimes people share Tool in pure JSON text format. You can simply load it into R by using <code>convert_app</code> function, this will recognize your JSON file class (Tool or Workflow) automatically.</p>
