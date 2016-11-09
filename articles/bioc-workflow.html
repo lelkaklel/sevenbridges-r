@@ -444,11 +444,7 @@ opts_chunk$set(message = FALSE, error = FALSE,
 <div id="step-5-describe-your-tool-in-r-into-cwl-" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#step-5-describe-your-tool-in-r-into-cwl-" class="anchor"> </a></body></html>Step 5: Describe your tool in R into CWL.</h4>
 <p>Finally it&rsquo;s time to describe your tool in R (cwl format)!</p>
-<p>Well, you are always encouraged to use graphical user interface like this</p>
-<div class="figure">
-<img src="https://www.filepicker.io/api/file/lRKPOLKhQE6ctWzWd0Qv" alt="rabix-ui"><p class="caption">rabix-ui</p>
-</div>
-<p>But it&rsquo;s at the same time fun to learn how to do it in R, so you could script how you build it together, like what I did here, for every single tool json, I have a R script called generator.R in the same folder, so I can always trace back.</p>
+<p>Well, you are always encouraged to use graphical user interface, but it&rsquo;s at the same time fun to learn how to do it in R, so you could script how you build it together, like what I did here, for every single tool json, I have an R script called generator.R in the same folder, so I can always trace back.</p>
 <p>For example, you can see the same in my github page, under <a href="https://github.com/sbg/sevenbridges-r/tree/master/inst/docker">inst/docker</a>, you will see three examples, 1. package docker 2. rna-seq tool 3. report tool, under each folder, you will see 1. one dockerfile, 2. src/ for command line 3. report/ for report template and 4. rabix a generator file and a json.</p>
 <p><img src="http://i.imgur.com/Wnf015S.png" alt="rstudio-dir"><img src="http://i.imgur.com/OYoa6kq.png" alt="rstudio-file"></p>
 <p>Tool is the simple basic unit of a workflow, you can put the whole flow in one container and one tool, it of course works, just make it hard to factorize components. This is the exact example, I can make one tool for DESeq2 and one tool for Rsamtools, I can also put everything I need in one tool and provide single functionality.</p>
@@ -856,9 +852,6 @@ for(f in <span class="kw">readLines</span>(download.fl)){
 ## upload to the project you created
 p$<span class="kw">upload</span>(td)</code></pre></div>
 <p>Copy this list, and then in your project, click &ldquo;add files&rdquo;, and choose &ldquo;import from ftp&rdquo; (<a href="http://docs.cancergenomicscloud.org/docs/copy-files-to-a-project">tutorial</a>)</p>
-<div class="figure">
-<img src="https://www.filepicker.io/api/file/pv6nUh4ORNKDephHGxse" alt="add-files"><p class="caption">add-files</p>
-</div>
 <p>When it&rsquo;s finished, refresh your file page, you will be able to see all of them. The cool thing is that you can search file by &lsquo;name&rsquo; not by id, it support fuzz pattern match.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## get file id you need as inout
 (bamfiles.in &lt;-<span class="st"> </span>p$<span class="kw">file</span>(<span class="st">".bam"</span>))

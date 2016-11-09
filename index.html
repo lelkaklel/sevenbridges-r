@@ -45,29 +45,193 @@
 </ul><div id="overview" class="section level2">
 <h2 class="hasAnchor"><a href="#overview" class="anchor"> </a>Overview</h2>
 <p>sevenbridges is an <a href="https://cran.r-project.org/">R</a>/<a href="https://www.bioconductor.org/">Bioconductor</a> package that provides an interface for the <a href="https://www.sbgenomics.com/">Seven Bridges Platform</a> and <a href="https://www.cancergenomicscloud.org/">Cancer Genomics Cloud</a> public APIs.</p>
+<p>The Seven Bridges Platform is a cloud-based environment for conducting bioinformatic analyses. It is a central hub for teams to store, analyze, and jointly interpret their bioinformatic data. The Platform co-locates analysis workflows alongside the largest genomic datasets to optimize processing, allocating storage and compute resources on demand.</p>
+<p>The Cancer Genomics Cloud (CGC), powered by Seven Bridges, is also a cloud-based computation environment. It was built as one of three pilot systems funded by the <a href="https://www.cancer.gov/">National Cancer Institute</a> to explore the paradigm of colocalizing massive genomics datasets, like <a href="https://cancergenome.nih.gov/">The Cancer Genomics Atlas (TCGA)</a>, alongside secure and scalable computational resources to analyze them. The CGC makes more than a petabyte of multi-dimensional data available immediately to authorized researchers. You can add your own data to analyze alongside TCGA using predefined analytical workflows or your own tools.</p>
 </div>
-<div id="events" class="section level2">
-<h2 class="hasAnchor"><a href="#events" class="anchor"> </a>Events</h2>
-<ul><li>Sep 12 - 14, 2016 <a href="https://www.stats.ox.ac.uk/events/probgen16">Probabilistic Modeling in Genomics</a> (poster) <span class="citation">@University</span> of Oxford, Oxford, UK</li>
-<li>May 27 - 29, 2016 <a href="http://china-r.org/bj2016/index.html">The 9th China-R Conference</a> (talk) <span class="citation">@Renmin</span> University of China, Beijng, China</li>
-<li>Jun 27 - 30, 2016 <a href="http://user2016.org/">The R User Conference 2016</a> (talk) <span class="citation">@Stanford</span> University, Stanford, CA</li>
-<li>Jun 24 - 26, 2016 <a href="https://bioconductor.org/help/course-materials/2016/BioC2016/">BioC 2016: Where Software and Biology Connect</a> (workshop) <span class="citation">@Stanford</span> University, Stanford, CA</li>
-<li>Apr 1 - 3, 2016 <a href="https://www.cancergenomicscloud.org/hacking-cancer/">NCI Cancer Genomics Cloud Hackathon</a> (tutorial) [<a href="https://sbg.github.io/sevenbridges-r/articles/bioc-workflow.html">HTML</a>] [<a href="https://raw.githubusercontent.com/sbg/sevenbridges-r/master/vignettes/bioc-workflow.Rmd">R Markdown Source</a>] <span class="citation">@Seven</span> Bridges Genomics, Inc., Boston, MA</li>
+<div id="table-of-contents" class="section level2">
+<h2 class="hasAnchor"><a href="#table-of-contents" class="anchor"> </a>Table of Contents</h2>
+<ul><li><a href="#installation">Installation</a></li>
+<li><a href="#bioconductor---release-version">Bioconductor - Release Version</a></li>
+<li><a href="#bioconductor---development-version">Bioconductor - Development Version</a></li>
+<li><a href="#latest-development-version">Latest Development Version</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#tutorials">Tutorials</a></li>
+<li><a href="#ide-docker-image">IDE Docker Image</a></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#events">Events</a></li>
+<li><a href="#contribute">Contribute</a></li>
 </ul></div>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor"><a href="#installation" class="anchor"> </a>Installation</h2>
+<div id="bioconductor---release-version" class="section level3">
+<h3 class="hasAnchor"><a href="#bioconductor---release-version" class="anchor"> </a>Bioconductor - Release Version</h3>
+<p>This installation is recommended for most users as it is the most stable. The current release of Bioconductor is version 3.3, and it works with <strong>R version 3.3.0</strong>. Users of older R and Bioconductor versions must update their installation to take advantage of new features.</p>
+<p>If you do not want to update R, please install the sevenbridges package directly from GitHub by following the instructions below.</p>
+<div id="check-r-version" class="section level4">
+<h4 class="hasAnchor"><a href="#check-r-version" class="anchor"> </a>Check R version</h4>
+<p>First, check which version of R you are using with the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> R.version.string</code></pre></div>
+<p>If you are not running latest R, install R 3.3 by following <a href="http://www.bioconductor.org/install/#install-R">these instructions</a>. If you are using RStudio, close and restart RStudio after installing R 3.3. RStudio will detect the new installation.</p>
+</div>
+<div id="install-the-package" class="section level4">
+<h4 class="hasAnchor"><a href="#install-the-package" class="anchor"> </a>Install the package</h4>
+<p>Install the sevenbridges package as shown below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"http://bioconductor.org/biocLite.R"</span>)
+<span class="kw">biocLite</span>(<span class="st">"sevenbridges"</span>)</code></pre></div>
+</div>
+</div>
+<div id="bioconductor---development-version" class="section level3">
+<h3 class="hasAnchor"><a href="#bioconductor---development-version" class="anchor"> </a>Bioconductor - Development Version</h3>
+<p>If you are developing tools in the <code>devel</code> branch or if you are a user who uses the development version for R and Bioconductor, install the package from the bioconductor <code>devel</code> branch. You need to install R-devel first by following the directions in <a href="http://bioconductor.org/developers/how-to/useDevel/">&ldquo;Using the &lsquo;Devel&rsquo; Version of Bioconductor&rdquo;</a>. After upgrading R, this method of installation is harder. To try the latest features, please install directly from GitHub as next shown below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"http://bioconductor.org/biocLite.R"</span>)
+<span class="kw">useDevel</span>(<span class="dt">devel =</span> <span class="ot">TRUE</span>)
+<span class="kw">biocLite</span>(<span class="st">"sevenbridges"</span>)</code></pre></div>
+<p>To load the package in R, simply call</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"sevenbridges"</span>)</code></pre></div>
+</div>
+<div id="latest-development-version" class="section level3">
+<h3 class="hasAnchor"><a href="#latest-development-version" class="anchor"> </a>Latest Development Version</h3>
+<p>You can always install the latest development version of the sevenbridges package from GitHub. We push to the Bioconductor branch (<code>release</code>/<code>devel</code>) regularly.</p>
+<div id="if-devtools-was-not-installed" class="section level4">
+<h4 class="hasAnchor"><a href="#if-devtools-was-not-installed" class="anchor"> </a>If <code>devtools</code> was not installed</h4>
+<p>Installing the sevenbridges package requires you have the <code>devtools</code> package. If you do not have <code>devtools</code>, install it from <a href="https://cran.r-project.org/web/packages/devtools/README.html">CRAN</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>)</code></pre></div>
+<p>You may got an error and need system dependecies for curl and ssl. For example, you probably need to do the following first in order to install <code>devtools</code> and in order to build vignettes since you need <code>pandoc</code> under Ubuntu.</p>
+<pre><code>apt-get update
+apt-get install libcurl4-gnutls-dev libssl-dev pandoc pandoc-citeproc</code></pre>
+</div>
+<div id="if-devtools-is-already-installed" class="section level4">
+<h4 class="hasAnchor"><a href="#if-devtools-is-already-installed" class="anchor"> </a>If <code>devtools</code> is already installed</h4>
+<p>Install latest version of sevenbridges from GitHub with the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"http://bioconductor.org/biocLite.R"</span>)
+<span class="kw">biocLite</span>(<span class="st">"readr"</span>)
+
+devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbridges-r"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>,
+                         <span class="dt">repos =</span> BiocInstaller::<span class="kw">biocinstallRepos</span>(),
+                         <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>If you have trouble with <code>pandoc</code> and do not want to install it, set <code>build_vignettes = FALSE</code> to avoid building the vignettes.</p>
+</div>
+</div>
+</div>
 <div id="features" class="section level2">
 <h2 class="hasAnchor"><a href="#features" class="anchor"> </a>Features</h2>
-<ul><li>Complete API R client with user friendly API in object-oriented fashion with user friendly printing, support operation on users, billing, project, file, app, task etc, short example.</li>
-</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## get project
+<p>The sevenbridges package includes the following features:</p>
+<ul><li>A complete API R client with a user-friendly, object-oriented API with printing and support operations for API requests relating to users, billing, projects, files, apps, and tasks. Short examples are also included, as shown below:</li>
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get a project by pattern-matching its name</span>
 p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="st">"demo"</span>)
-## detele files from a project
+<span class="co"># Get a project by its id</span>
+p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo"</span>)
+<span class="co"># Delete files from a project</span>
 p$<span class="kw">file</span>(<span class="st">"sample.tz"</span>)$<span class="kw"><a href="reference/delete.html">delete</a></span>()
-## upload fies from a folder to a project with metadata
+<span class="co"># Upload fies from a folder to a project and include file metadata</span>
 p$<span class="kw">upload</span>(<span class="st">"folder_path"</span>, <span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">platform =</span> <span class="st">"Illumina"</span>))</code></pre></div>
-<ul><li><p>CWL Tool interface, you can directly describe your tool in R, export to JSON/YAML, or add it to your online project. This package defines a complete set of CWL object.</p></li>
-<li><p>Task monitoring hook allow you to add hook function to task status when you monitor a task, for example, when task is finished sent you email or download all files.</p></li>
-<li><p>Cross platform support from Seven Bridges, such as <a href="https://www.cancergenomicscloud.org/">NCI Cancer Genomics Cloud</a> or <a href="https://www.sbgenomics.com/">Seven Bridges</a> on Google and AWS, you can use it.</p></li>
-<li><p>Authentification management for multiple platforms/users via config file.</p></li>
-</ul></div>
+<ul><li>A task monitoring hook which allows you to add a hook function to specific task statuses as you monitor a task. For example, you can opt to receive an email when the task is completed or specify to download all files produced by the task, as shown below:</li>
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/setTaskHook.html">setTaskHook</a></span>(<span class="st">"completed"</span>, function() {
+    tsk$<span class="kw"><a href="reference/download.html">download</a></span>(<span class="st">"~/Downloads"</span>)
+})
+tsk$<span class="kw">monitor</span>()</code></pre></div>
+<ul><li>Batch tasks by metadata and by item.</li>
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Batch by item</span>
+(tsk &lt;-<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> <span class="st">"RNA DE report new batch 2"</span>,
+                   <span class="dt">description =</span> <span class="st">"RNA DE analysis report"</span>,
+                   <span class="dt">app =</span> rna.app$id,
+                   <span class="dt">batch =</span> <span class="kw"><a href="reference/batch.html">batch</a></span>(<span class="dt">input =</span> <span class="st">"bamfiles"</span>),
+                   <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">bamfiles =</span> bamfiles.in,
+                                 <span class="dt">design =</span> design.in,
+                                 <span class="dt">gtffile =</span> gtf.in)))
+
+<span class="co"># Batch by metadata. Note that input files must have relevant metadata fields specified.</span>
+(tsk &lt;-<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> <span class="st">"RNA DE report new batch 3"</span>,
+                   <span class="dt">description =</span> <span class="st">"RNA DE analysis report"</span>,
+                   <span class="dt">app =</span> rna.app$id,
+                   <span class="dt">batch =</span> <span class="kw"><a href="reference/batch.html">batch</a></span>(<span class="dt">input =</span> <span class="st">"fastq"</span>,
+                                 <span class="kw">c</span>(<span class="st">"metadata.sample_id"</span>,
+                                 <span class="st">"metadata.library_id"</span>)),
+                   <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">bamfiles =</span> bamfiles.in,
+                                 <span class="dt">design =</span> design.in,
+                                 <span class="dt">gtffile =</span> gtf.in)))</code></pre></div>
+<ul><li><p>Cross-platform support for Seven Bridges, such as <a href="https://www.cancergenomicscloud.org/">NCI Cancer Genomics Cloud</a> or <a href="https://www.sbgenomics.com/">Seven Bridges Platform</a> on either the Google Cloud Platform or Amazon Web Services deploy.</p></li>
+<li><p>Manage your authentication credentials for various Seven Bridges products, such as the Platform and the Cancer Genomics Cloud, via a configuration file as follows:</p></li>
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># standard</span>
+a =<span class="st"> </span><span class="kw"><a href="reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"fake_token"</span>, <span class="dt">url =</span> <span class="st">"api_url"</span>)
+<span class="co"># OR from config file, multiple platform/user support</span>
+a =<span class="st"> </span><span class="kw"><a href="reference/Auth-class.html">Auth</a></span>(<span class="dt">username =</span> <span class="st">"tengfei"</span>, <span class="dt">platform =</span> <span class="st">"cgc"</span>)</code></pre></div>
+<ul><li>A <a href="http://www.commonwl.org/">Common Workflow Language (CWL)</a> Tool interface to directly describe your tool in R, export it to JSON or YAML, or add it to your online project. This package defines a complete set of CWL object, so you can describe tools as follows:</li>
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"readr"</span>)
+fd &lt;-<span class="st"> </span><span class="kw"><a href="reference/CPURequirement-class.html">fileDef</a></span>(<span class="dt">name =</span> <span class="st">"runif.R"</span>,
+              <span class="dt">content =</span> <span class="kw">read_file</span>(fl))
+rbx &lt;-<span class="st"> </span><span class="kw"><a href="reference/Tool-class.html">Tool</a></span>(<span class="dt">id =</span> <span class="st">"runif"</span>,
+            <span class="dt">label =</span> <span class="st">"runif"</span>,
+            <span class="dt">hints =</span> <span class="kw"><a href="reference/CPURequirement-class.html">requirements</a></span>(<span class="kw"><a href="reference/CPURequirement-class.html">docker</a></span>(<span class="dt">pull =</span> <span class="st">"rocker/r-base"</span>),
+                                 <span class="kw"><a href="reference/CPURequirement-class.html">cpu</a></span>(<span class="dv">1</span>), <span class="kw"><a href="reference/CPURequirement-class.html">mem</a></span>(<span class="dv">2000</span>)),
+            <span class="dt">requirements =</span> <span class="kw"><a href="reference/CPURequirement-class.html">requirements</a></span>(fd),
+            <span class="dt">baseCommand =</span> <span class="st">"Rscript runif.R"</span>,
+            <span class="dt">stdout =</span> <span class="st">"output.txt"</span>,
+            <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="kw"><a href="reference/CLB.html">input</a></span>(<span class="dt">id =</span> <span class="st">"number"</span>,
+                                <span class="dt">type =</span> <span class="st">"integer"</span>,
+                                <span class="dt">position =</span> <span class="dv">1</span>),
+                          <span class="kw"><a href="reference/CLB.html">input</a></span>(<span class="dt">id =</span> <span class="st">"min"</span>,
+                                <span class="dt">type =</span> <span class="st">"float"</span>,
+                                <span class="dt">position =</span> <span class="dv">2</span>),
+                          <span class="kw"><a href="reference/CLB.html">input</a></span>(<span class="dt">id =</span> <span class="st">"max"</span>,
+                                <span class="dt">type =</span> <span class="st">"float"</span>,
+                                <span class="dt">position =</span> <span class="dv">3</span>)),
+            <span class="dt">outputs =</span> <span class="kw"><a href="reference/CLB.html">output</a></span>(<span class="dt">id =</span> <span class="st">"random"</span>, <span class="dt">glob =</span> <span class="st">"output.txt"</span>))
+<span class="co"># output CWL JSON</span>
+rbx$<span class="kw">toJSON</span>(<span class="dt">pretty =</span> <span class="ot">TRUE</span>)
+<span class="co"># output CWL YAML</span>
+rbx$<span class="kw">toYAML</span>()</code></pre></div>
+<ul><li>Utilities for Tool and Flow, for example</li>
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># converting a SBG CWL json file</span>
+<span class="kw">library</span>(<span class="st">"sevenbridges"</span>)
+t1 =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/app"</span>, <span class="st">"tool_star.json"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
+<span class="co"># convert json file into a Tool object</span>
+t1 =<span class="st"> </span><span class="kw"><a href="reference/convert_app.html">convert_app</a></span>(t1)
+<span class="co"># shows all input matrix</span>
+t1$<span class="kw">input_matrix</span>()</code></pre></div>
+</div>
+<div id="tutorials" class="section level2">
+<h2 class="hasAnchor"><a href="#tutorials" class="anchor"> </a>Tutorials</h2>
+<p>We maintain 3 different sets of documentation: the sevenbridges-r GitHub repository (latest and most up-to-date), Bioconductor release channel, and Bioconductor development channel. Below, only the GitHub version is linked to provide the latest documentation. For the other versions, please visit <a href="http://www.bioconductor.org/packages/release/bioc/html/sevenbridges.html">Bioconductor Release version</a> or <a href="http://www.bioconductor.org/packages/devel/bioc/html/sevenbridges.html">Bioconductor Development version</a>. The tutorials below are auto-generated at 8:00 PM everyday for the GitHub repository.</p>
+<table style="width:54%;" class="table"><colgroup><col width="23%"><col width="12%"><col width="18%"></colgroup><thead><tr class="header"><th align="left">Tutorial Title</th>
+<th align="left">HTML</th>
+<th align="left">Rmd Source</th>
+</tr></thead><tbody><tr class="odd"><td align="left">Complete Reference for the API R Client</td>
+<td align="left"><a href="https://sbg.github.io/sevenbridges-r/articles/api.html">HTML</a></td>
+<td align="left"><a href="https://raw.githubusercontent.com/sbg/sevenbridges-r/master/vignettes/api.Rmd">Source</a></td>
+</tr><tr class="even"><td align="left">Use R on the Cancer Genomics Cloud</td>
+<td align="left"><a href="https://sbg.github.io/sevenbridges-r/articles/bioc-workflow.html">HTML</a></td>
+<td align="left"><a href="https://raw.githubusercontent.com/sbg/sevenbridges-r/master/vignettes/bioc-workflow.Rmd">Source</a></td>
+</tr><tr class="odd"><td align="left">Create a Docker Container and use Command Line Interface for R</td>
+<td align="left"><a href="https://sbg.github.io/sevenbridges-r/articles/docker.html">HTML</a></td>
+<td align="left"><a href="https://raw.githubusercontent.com/sbg/sevenbridges-r/master/vignettes/docker.Rmd">Source</a></td>
+</tr><tr class="even"><td align="left">Describe and execute Common Workflow Language (CWL) Tools and Workflows in R</td>
+<td align="left"><a href="https://sbg.github.io/sevenbridges-r/articles/apps.html">HTML</a></td>
+<td align="left"><a href="https://raw.githubusercontent.com/sbg/sevenbridges-r/master/vignettes/apps.Rmd">Source</a></td>
+</tr><tr class="odd"><td align="left"><a name="ide"></a>IDE container: Rstudio and Shiny server and more</td>
+<td align="left"><a href="https://sbg.github.io/sevenbridges-r/articles/rstudio.html">HTML</a></td>
+<td align="left"><a href="https://raw.githubusercontent.com/sbg/sevenbridges-r/master/vignettes/rstudio.Rmd">Source</a></td>
+</tr><tr class="even"><td align="left">Browse data on the Cancer Genomics Cloud via the Data Explorer, a SPARQL query, <br>or the Datasets API</td>
+<td align="left"><a href="https://sbg.github.io/sevenbridges-r/articles/cgc-sparql.html">HTML</a></td>
+<td align="left"><a href="https://raw.githubusercontent.com/sbg/sevenbridges-r/master/vignettes/cgc-sparql.Rmd">Source</a></td>
+</tr></tbody></table></div>
+<div id="ide-docker-image" class="section level2">
+<h2 class="hasAnchor"><a href="#ide-docker-image" class="anchor"> </a>IDE Docker Image</h2>
+<p>In the tutorial for <a href="#tutorials">IDE container</a> above, we built a Docker container locally from which we can launch RStudio and Shiny. To launch RStudio and Shiny Server with the Seven Bridges IDE Docker container, do the following:</p>
+<pre class="shell"><code>docker run  -d -p 8787:8787 -p 3838:3838 --name rstudio_shiny_server tengfei/sevenbridges</code></pre>
+<p>To mount a file system, you need to use <code>--privileged</code> with fuse.</p>
+<pre class="shell"><code>docker run  --privileged -d -p 8787:8787 -p 3838:3838 --name rstudio_shiny_server tengfei/sevenbridges</code></pre>
+<p>Check out the IP from Docker Machine if you are on a Mac OS.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker-machine</span> ip default</code></pre></div>
+<p>In your browser, you can see where the RStudio server is located from the path <code>http://&lt;url&gt;:8787/</code>. For example, if 192.168.99.100 is returned, visit <code>http://192.168.99.100:8787/</code> for Rstudio.</p>
+<p>For the Shiny server, each app__ is hosted at <code>http://&lt;url&gt;:3838/users/&lt;username of rstudio&gt;/&lt;app_dir&gt;</code> for the Shiny server. For example, an app called <code>01_hello</code> owned by user <code>rstudio</code> (a default user) has the path <code>http://&lt;url&gt;:3838/users/rstudio/01_hello/</code>. To develop your Shiny apps as an Rstudio user, you can login your RStudio server and create a folder in your home folder called <code>~/ShinyApps</code>. There, you can develop shiny apps in that folder. For example, you can create an app called <code>02_text</code> at <code>~/ShinyApps/02_text/</code>.</p>
+<p>Log into your RStudio at <code>http://&lt;url&gt;:8787</code>. Then, try to copy an app to your home folder, as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dir.create</span>(<span class="st">"~/ShinyApps"</span>)
+<span class="kw">file.copy</span>(<span class="st">"/usr/local/lib/R/site-library/shiny/examples/01_hello/"</span>,
+          <span class="st">"~/ShinyApps/"</span>, <span class="dt">recursive =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>If you are logged in as user <code>rstudio</code>, visit <code>http://192.168.99.100:3838/rstudio/01_hello</code>. You should be able to see the &ldquo;hello&rdquo; example.</p>
+<p><em>Note</em>: Generic Shiny apps can also be hosted at <code>http://&lt;url&gt;:3838/</code> or, for a particular app, at <code>http://&lt;url&gt;:3838/&lt;app_dir&gt;</code>. Inside the Docker container, it&rsquo;s hosted under <code>/srv/shiny-server/</code>.</p>
+</div>
 <div id="faq" class="section level2">
 <h2 class="hasAnchor"><a href="#faq" class="anchor"> </a>FAQ</h2>
 <p>The best place to ask a question about the sevenbridges package is the <a href="https://support.bioconductor.org/">Bioconductor support website</a>. Visit the website and tag your post with the package name <strong>sevenbridges</strong>.</p>
@@ -77,6 +241,27 @@ p$<span class="kw">upload</span>(<span class="st">"folder_path"</span>, <span cl
 <li><p><strong>Q</strong>: Why do I get warning messages when I use the API R client?<br><strong>A</strong>: The warning only exists in Rstudio and is potentially a bug in Rstudio. To ignore, it use <code>options(warn = -1)</code></p></li>
 <li><p><strong>Q</strong>: I still have problems despite dismissing the messages.<br><strong>A</strong>: Please try to use the latest package on GitHub or update your package on Bioconductor. This usually includes the most recent bug fixes.</p></li>
 </ul></div>
+<div id="events" class="section level2">
+<h2 class="hasAnchor"><a href="#events" class="anchor"> </a>Events</h2>
+<table style="width:56%;" class="table"><colgroup><col width="27%"><col width="12%"><col width="15%"></colgroup><thead><tr class="header"><th align="left">Time</th>
+<th align="left">Event</th>
+<th align="left">Location</th>
+</tr></thead><tbody><tr class="odd"><td align="left">Sep 12 - 14, 2016</td>
+<td align="left"><a href="https://www.stats.ox.ac.uk/events/probgen16">Probabilistic Modeling in Genomics</a> (poster)</td>
+<td align="left">University of Oxford, Oxford, UK</td>
+</tr><tr class="even"><td align="left">May 27 - 29, 2016</td>
+<td align="left"><a href="http://china-r.org/bj2016/index.html">The 9th China-R Conference</a> (talk)</td>
+<td align="left">Renmin University of China, Beijng, China</td>
+</tr><tr class="odd"><td align="left">Jun 27 - 30, 2016</td>
+<td align="left"><a href="http://user2016.org/">The R User Conference 2016</a> (talk)</td>
+<td align="left">Stanford University, Stanford, CA</td>
+</tr><tr class="even"><td align="left">Jun 24 - 26, 2016</td>
+<td align="left"><a href="https://bioconductor.org/help/course-materials/2016/BioC2016/">BioC 2016: Where Software and Biology Connect</a> (workshop)</td>
+<td align="left">Stanford University, Stanford, CA</td>
+</tr><tr class="odd"><td align="left">Apr 1 - 3, 2016</td>
+<td align="left"><a href="https://www.cancergenomicscloud.org/hacking-cancer/">NCI Cancer Genomics Cloud Hackathon</a> (tutorial)<br>[<a href="https://sbg.github.io/sevenbridges-r/articles/bioc-workflow.html">HTML</a>] [<a href="https://raw.githubusercontent.com/sbg/sevenbridges-r/master/vignettes/bioc-workflow.Rmd">R Markdown Source</a>]</td>
+<td align="left">Seven Bridges Genomics, Inc., Boston, MA</td>
+</tr></tbody></table></div>
 <div id="contribute" class="section level2">
 <h2 class="hasAnchor"><a href="#contribute" class="anchor"> </a>Contribute</h2>
 <p>All feedback is welcome! Please file bug reports/feature requests on the <a href="https://github.com/sbg/sevenbridges-r/issues">issue page</a>, or create pull requests <a href="https://github.com/sbg/sevenbridges-r/pulls">here</a>.</p>
