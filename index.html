@@ -34,7 +34,7 @@
     <div id="sevenbridges" class="section level1">
 <div class="page-header"><h1 class="hasAnchor"><a href="#sevenbridges" class="anchor"> </a>sevenbridges <a href="http://www.sevenbridges.com"><img src="logo.png" align="right" alt="logo" height="128" width="128"></a></h1></div>
 
-<p><a href="http://www.bioconductor.org/packages/release/bioc/html/sevenbridges.html">BioC (Release)</a> &middot; <a href="http://www.bioconductor.org/packages/devel/bioc/html/sevenbridges.html">BioC (Development)</a> &middot; <a href="https://github.com/sbg/sevenbridges-r">GitHub (Latest)</a></p>
+<p><a href="https://www.bioconductor.org/packages/release/bioc/html/sevenbridges.html">BioC (Release)</a> &middot; <a href="https://www.bioconductor.org/packages/devel/bioc/html/sevenbridges.html">BioC (Development)</a> &middot; <a href="https://github.com/sbg/sevenbridges-r">GitHub (Latest)</a></p>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"> </a>Overview</h2>
@@ -69,21 +69,21 @@
 <a href="#check-r-version" class="anchor"> </a>Check R version</h4>
 <p>First, check which version of R you are using with the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> R.version.string</code></pre></div>
-<p>If you are not running latest R, install R 3.3 by following <a href="http://www.bioconductor.org/install/#install-R">these instructions</a>. If you are using RStudio, close and restart RStudio after installing R 3.3. RStudio will detect the new installation.</p>
+<p>If you are not running latest R, install R 3.3 by following <a href="https://www.bioconductor.org/install/#install-R">these instructions</a>. If you are using RStudio, close and restart RStudio after installing R 3.3. RStudio will detect the new installation.</p>
 </div>
 <div id="install-the-package" class="section level4">
 <h4 class="hasAnchor">
 <a href="#install-the-package" class="anchor"> </a>Install the package</h4>
 <p>Install the sevenbridges package as shown below:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"http://bioconductor.org/biocLite.R"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"https://bioconductor.org/biocLite.R"</span>)
 <span class="kw">biocLite</span>(<span class="st">"sevenbridges"</span>)</code></pre></div>
 </div>
 </div>
 <div id="bioconductor---development-version" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bioconductor---development-version" class="anchor"> </a>Bioconductor - Development Version</h3>
-<p>If you are developing tools in the <code>devel</code> branch or if you are a user who uses the development version for R and Bioconductor, install the package from the bioconductor <code>devel</code> branch. You need to install R-devel first by following the directions in <a href="http://bioconductor.org/developers/how-to/useDevel/">&ldquo;Using the &lsquo;Devel&rsquo; Version of Bioconductor&rdquo;</a>. After upgrading R, this method of installation is harder. To try the latest features, please install directly from GitHub as next shown below:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"http://bioconductor.org/biocLite.R"</span>)
+<p>If you are developing tools in the <code>devel</code> branch or if you are a user who uses the development version for R and Bioconductor, install the package from the bioconductor <code>devel</code> branch. You need to install R-devel first by following the directions in <a href="https://bioconductor.org/developers/how-to/useDevel/">&ldquo;Using the &lsquo;Devel&rsquo; Version of Bioconductor&rdquo;</a>. After upgrading R, this method of installation is harder. To try the latest features, please install directly from GitHub as next shown below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"https://bioconductor.org/biocLite.R"</span>)
 <span class="kw">useDevel</span>(<span class="dt">devel =</span> <span class="ot">TRUE</span>)
 <span class="kw">biocLite</span>(<span class="st">"sevenbridges"</span>)</code></pre></div>
 <p>To load the package in R, simply call</p>
@@ -106,7 +106,7 @@ apt-get install libcurl4-gnutls-dev libssl-dev pandoc pandoc-citeproc</code></pr
 <h4 class="hasAnchor">
 <a href="#if-devtools-is-already-installed" class="anchor"> </a>If <code>devtools</code> is already installed</h4>
 <p>Install latest version of sevenbridges from GitHub with the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"http://bioconductor.org/biocLite.R"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"https://bioconductor.org/biocLite.R"</span>)
 <span class="kw">biocLite</span>(<span class="st">"readr"</span>)
 
 devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbridges-r"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>,
@@ -197,7 +197,7 @@ t1$<span class="kw">input_matrix</span>()</code></pre></div>
 <div id="tutorials" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tutorials" class="anchor"> </a>Tutorials</h2>
-<p>We maintain 3 different sets of documentation: the sevenbridges-r GitHub repository (latest and most up-to-date), Bioconductor release channel, and Bioconductor development channel. Below, only the GitHub version is linked to provide the latest documentation. For the other versions, please visit <a href="http://www.bioconductor.org/packages/release/bioc/html/sevenbridges.html">Bioconductor Release version</a> or <a href="http://www.bioconductor.org/packages/devel/bioc/html/sevenbridges.html">Bioconductor Development version</a>. The tutorials below are re-generated regularly as we update the package on GitHub.</p>
+<p>We maintain 3 different sets of documentation: the sevenbridges-r GitHub repository (latest and most up-to-date), Bioconductor release channel, and Bioconductor development channel. Below, only the GitHub version is linked to provide the latest documentation. For the other versions, please visit <a href="https://www.bioconductor.org/packages/release/bioc/html/sevenbridges.html">Bioconductor Release version</a> or <a href="https://www.bioconductor.org/packages/devel/bioc/html/sevenbridges.html">Bioconductor Development version</a>. The tutorials below are re-generated regularly as we update the package on GitHub.</p>
 <table class="table table-bordered table-striped" style="width:100%;"><colgroup><col width="70%"><col width="15%"><col width="15%"></colgroup><thead><tr class="header"><th align="left">Tutorial Title</th>
 <th align="left">HTML</th>
 <th align="left">Rmd Source</th>
@@ -299,12 +299,12 @@ t1$<span class="kw">input_matrix</span>()</code></pre></div>
   <img src="https://travis-ci.org/sbg/sevenbridges-r.svg?branch=master" alt="Build Status"></a></li>
 <li><a href="https://ci.appveyor.com/project/road2stat/sevenbridges-r">
   <img src="https://ci.appveyor.com/api/projects/status/github/sbg/sevenbridges-r?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
-<li><a href="http://bioconductor.org/packages/release/bioc/html/sevenbridges.html#archives">
-  <img src="http://www.bioconductor.org/shields/availability/devel/sevenbridges.svg" alt="platform"></a></li>
-<li><a href="http://bioconductor.org/packages/release/bioc/html/sevenbridges.html#since">
-  <img src="http://www.bioconductor.org/shields/years-in-bioc/sevenbridges.svg" alt="bioc"></a></li>
-<li><a href="http://bioconductor.org/packages/stats/bioc/sevenbridges/">
-  <img src="http://www.bioconductor.org/shields/downloads/sevenbridges.svg" alt="downloads"></a></li>
+<li><a href="https://bioconductor.org/packages/release/bioc/html/sevenbridges.html#archives">
+  <img src="https://www.bioconductor.org/shields/availability/devel/sevenbridges.svg" alt="platform"></a></li>
+<li><a href="https://bioconductor.org/packages/release/bioc/html/sevenbridges.html#since">
+  <img src="https://www.bioconductor.org/shields/years-in-bioc/sevenbridges.svg" alt="bioc"></a></li>
+<li><a href="https://bioconductor.org/packages/stats/bioc/sevenbridges/">
+  <img src="https://www.bioconductor.org/shields/downloads/sevenbridges.svg" alt="downloads"></a></li>
 </ul></body></html></div>
 </div>
 
