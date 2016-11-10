@@ -107,15 +107,16 @@
 </div>
 <div id="tutorial-random-number-generator" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#tutorial-random-number-generator" class="anchor"> </a></body></html>Tutorial: random number generator</h2>
-<p>Our goal here is to making a cwl app to generate unif random numbers, yes, the core function is <code>runif()</code>, it&rsquo;s native function in R.</p>
+<p>Our goal here is to making a cwl app to generate unif random numbers, yes, the core function is <code>runif()</code>, it&rsquo;s a native function in R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">runif</code></pre></div>
 <pre><code>## function (n, min = 0, max = 1) 
 ## .Call(C_runif, n, min, max)
-## &lt;bytecode: 0x10903c1c8&gt;
+## &lt;bytecode: 0x10982e9c8&gt;
 ## &lt;environment: namespace:stats&gt;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dv">10</span>)</code></pre></div>
-<pre><code>##  [1] 0.37212390 0.57285336 0.90820779 0.20168193 0.89838968 0.94467527
-##  [7] 0.66079779 0.62911404 0.06178627 0.20597457</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1001</span>)
+<span class="kw">runif</span>(<span class="dv">10</span>)</code></pre></div>
+<pre><code>##  [1] 0.985688783 0.412628483 0.429539246 0.419172236 0.426506559
+##  [6] 0.887797565 0.006096034 0.081215761 0.288657362 0.765342145</code></pre>
 <div id="using-docopt-package" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#using-docopt-package" class="anchor"> </a></body></html>Using docopt package</h3>
 <p>In R, we also have a nice implementation in a package called <code>docopt</code>, developed by <em>Edwin de Jonge</em>. Check out its <a href="https://github.com/docopt/docopt.R">tutorial</a> on GitHub.</p>
