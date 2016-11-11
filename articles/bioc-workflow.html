@@ -73,9 +73,7 @@ devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbrid
 </div>
 <div id="register-on-nci-cancer-genomics-cloud" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#register-on-nci-cancer-genomics-cloud" class="anchor"> </a></body></html>Register on NCI Cancer Genomics Cloud</h3>
-<div class="figure">
-<img src="https://i.imgur.com/p52wIsi.png" alt="cgc-home"><p class="caption">cgc-home</p>
-</div>
+<p><img src="https://i.imgur.com/p52wIsi.png" width="100%" class="img-responsive" alt="cgc-home"></p>
 <p>You can find login/registration on NCI Cancer Genomics Cloud homepage <a href="https://www.cancergenomicscloud.org" class="uri">https://www.cancergenomicscloud.org</a>, follow up the <a href="http://docs.cancergenomicscloud.org/docs/sign-up-for-the-cgc">signup tutorial</a> if you have ERA Commons.</p>
 </div>
 <div id="get-your-authentifiation" class="section level3">
@@ -86,9 +84,7 @@ devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbrid
 <h3 class="hasAnchor"><html><body><a href="#optional-register-on-shinyapps-io" class="anchor"> </a></body></html>(optional) register on shinyapps.io</h3>
 <p>In this tutorial, if you want to try to deploy the application automatically on shiny server like shinyapps.io, please visit <a href="https://www.shinyapps.io/" class="uri">https://www.shinyapps.io/</a> to register and login.</p>
 <p>Get you token and secret ready to deploy</p>
-<div class="figure">
-<img src="https://i.imgur.com/ChCBhf6.png" alt="shinyapps-token"><p class="caption">shinyapps-token</p>
-</div>
+<p><img src="https://i.imgur.com/ChCBhf6.png" width="100%" class="img-responsive" alt="shinyapps-token"></p>
 </div>
 <div id="issues-report" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#issues-report" class="anchor"> </a></body></html>Issues report</h3>
@@ -103,20 +99,15 @@ devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbrid
 <ol style="list-style-type: decimal"><li>Input gene feature, design matrix, bam files, and generate differential expression report and output full report, a picture and a count table as example.</li>
 <li>Add report tool with two Shiny app template and two R markdown template to collect files from previous flow and generate new report, even deploy on shinyapps.io automatically after a task is finished.</li>
 </ol><p>The final workflow looks like this, it&rsquo;s composed of two tools: RNA-seq analysis tool and reporting tool.</p>
-<div class="figure">
-<img src="https://i.imgur.com/OkgB2tl.png" alt="quickstart-flow"><p class="caption">quickstart-flow</p>
-</div>
+<p><img src="https://i.imgur.com/OkgB2tl.png" width="100%" class="img-responsive" alt="quickstart-flow"></p>
 <p>The shiny app report with ggvis module on the shinyapps.io server looks like <a href="https://tengfei.shinyapps.io/scatter_plot/">this</a></p>
 <p>A ggvis interactive scatter plot</p>
-<div class="figure">
-<img src="https://i.imgur.com/X8M2O0T.png" alt="ggvis"><p class="caption">ggvis</p>
-</div>
+<p><img src="https://i.imgur.com/X8M2O0T.png" width="100%" class="img-responsive" alt="ggvis"></p>
 <p>A differential expression table</p>
-<div class="figure">
-<img src="https://i.imgur.com/wQ9O3Ys.png" alt="de-table"><p class="caption">de-table</p>
-</div>
+<p><img src="https://i.imgur.com/wQ9O3Ys.png" width="100%" class="img-responsive" alt="de-table"></p>
 <p>A full html report included, it&rsquo;s also output from the first tool, in this way, you can orchestrate many tools output into single report for your task.</p>
-<p><img src="https://i.imgur.com/9vgBQQC.png" alt="html-report"><img src="https://i.imgur.com/l5Xgq9R.png" alt="heatmap"></p>
+<p><img src="https://i.imgur.com/9vgBQQC.png" width="100%" class="img-responsive" alt="html-report"></p>
+<p><img src="https://i.imgur.com/l5Xgq9R.png" width="100%" class="img-responsive" alt="heatmap"></p>
 <p>Now let&rsquo;s start building tools.</p>
 <div id="create-a-project-on-your-account-via-api-r-client" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#create-a-project-on-your-account-via-api-r-client" class="anchor"> </a></body></html>Create a project on your account via API R client</h3>
@@ -157,9 +148,7 @@ gcp:
                     <span class="dt">billing_group_id =</span> b$id, 
                     <span class="dt">description =</span> <span class="st">"This project is for CGC hackathon"</span>))</code></pre></div>
 <p>Now check it on CGC, you will see a fresh new project is created.</p>
-<div class="figure">
-<img src="https://i.imgur.com/oI0dXyu.png" alt="cgc-projects"><p class="caption">cgc-projects</p>
-</div>
+<p><img src="https://i.imgur.com/oI0dXyu.png" width="100%" class="img-responsive" alt="cgc-projects"></p>
 <p>To delete it, just call, but I will suggest you keep it for following tutorial : )</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## p$delete()</code></pre></div>
 </div>
@@ -172,9 +161,7 @@ gcp:
 <ol style="list-style-type: decimal"><li>What Input, Output and Parameter you want to define for the tool</li>
 <li>Is there a docker container already available for your tool? do you want to build one with command line interface?</li>
 </ol><p>First thing first, let&rsquo;s define our tool first, here is a diagram generated with Seven Bridges&rsquo; graphical user interface.</p>
-<div class="figure">
-<img src="fig/diagram_rnaseq.png" alt="rnaseq-diagram"><p class="caption">rnaseq-diagram</p>
-</div>
+<p><img src="fig/diagram_rnaseq.png" width="100%" class="img-responsive" alt="rnaseq-diagram"></p>
 <ul><li>Input
 <ul><li>Gene feature file</li>
 <li>A list of bamfiles</li>
@@ -446,7 +433,8 @@ opts_chunk$set(message = FALSE, error = FALSE,
 <p>Finally it&rsquo;s time to describe your tool in R (cwl format)!</p>
 <p>Well, you are always encouraged to use graphical user interface, but it&rsquo;s at the same time fun to learn how to do it in R, so you could script how you build it together, like what I did here, for every single tool json, I have an R script called generator.R in the same folder, so I can always trace back.</p>
 <p>For example, you can see the same in my github page, under <a href="https://github.com/sbg/sevenbridges-r/tree/master/inst/docker">inst/docker</a>, you will see three examples, 1. package docker 2. rna-seq tool 3. report tool, under each folder, you will see 1. one dockerfile, 2. src/ for command line 3. report/ for report template and 4. rabix a generator file and a json.</p>
-<p><img src="https://i.imgur.com/Wnf015S.png" alt="rstudio-dir"><img src="https://i.imgur.com/OYoa6kq.png" alt="rstudio-file"></p>
+<p><img src="https://i.imgur.com/Wnf015S.png" width="100%" class="img-responsive" alt="rstudio-dir"></p>
+<p><img src="https://i.imgur.com/OYoa6kq.png" width="100%" class="img-responsive" alt="rstudio-file"></p>
 <p>Tool is the simple basic unit of a workflow, you can put the whole flow in one container and one tool, it of course works, just make it hard to factorize components. This is the exact example, I can make one tool for DESeq2 and one tool for Rsamtools, I can also put everything I need in one tool and provide single functionality.</p>
 <p>Note: you can use single docker image, but describe as many tools as you want if it contains what you need such as different command.</p>
 <p>Follow the example to create Tool with <code>Tool</code> function. It&rsquo;s straightforward. Especially if you are familiar with Seven Bridges Tool editor already.</p>
@@ -918,9 +906,7 @@ tsk$<span class="kw">monitor</span>()</code></pre></div>
 </ul><p>Here I am developing a report tool to support all these in a single tool and it uses two different engines to provide isolated environment to generate report, because each report has different dependencies.</p>
 <ul><li>packrat engine: isolated libraries</li>
 <li>liftr engine (in progress): docker in docker</li>
-</ul><div class="figure">
-<img src="https://i.imgur.com/yPTNpqp.png" alt="report-tool"><p class="caption">report-tool</p>
-</div>
+</ul><p><img src="https://i.imgur.com/yPTNpqp.png" width="100%" class="img-responsive" alt="report-tool"></p>
 <p><strong>Requirement for your report template</strong></p>
 <p>this is how it works</p>
 <ol style="list-style-type: decimal"><li>An app folder is created for each template</li>
@@ -1299,13 +1285,9 @@ RUN chmod a+x /usr/local/bin/report.R</code></pre>
 <h3 class="hasAnchor"><html><body><a href="#compose-a-full-workflow" class="anchor"> </a></body></html>Compose a full workflow</h3>
 <p>Even though in R with &lsquo;sevenbridges&rsquo; package you can use <code>%&gt;&gt;%</code> to connect two Tool object, but this only works for linear simple flow. For complicated flow, we recommend you to use graphic user interface, it&rsquo;s lot fun.</p>
 <p>Now connect your RNA-seq tool with the report tool you just add it to your project, follow the tutorial <a href="http://docs.cancergenomicscloud.org/docs/the-pipeline-editor">here</a>, then make a workflow like this:</p>
-<div class="figure">
-<img src="https://i.imgur.com/dTKvLdt.png" alt="cgc-workflow"><p class="caption">cgc-workflow</p>
-</div>
+<p><img src="https://i.imgur.com/dTKvLdt.png" width="100%" class="img-responsive" alt="cgc-workflow"></p>
 <p>And next run a task on the platform via UI like this:</p>
-<div class="figure">
-<img src="https://i.imgur.com/6VsC69W.png" alt="rnaseq-runtask"><p class="caption">rnaseq-runtask</p>
-</div>
+<p><img src="https://i.imgur.com/6VsC69W.png" width="100%" class="img-responsive" alt="rnaseq-runtask"></p>
 </div>
 </div>
 <div id="exercise-bring-your-own-tool" class="section level2">
