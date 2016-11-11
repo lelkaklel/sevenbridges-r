@@ -59,24 +59,24 @@
 <div id="installation" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#installation" class="anchor"> </a></body></html>Installation</h3>
 <p>First download the <a href="https://raw.githubusercontent.com/sbg/sevenbridges-r/master/vignettes/bioc-workflow.Rmd">R markdown file</a> of this page, so you can load it to yoru Rstudio or your favorite IDE to run through all examples and tweak setup.</p>
-<p>This package <strong>sevenbridges</strong> is already on Bioconductor <a href="http://www.bioconductor.org/packages/3.3/bioc/html/sevenbridges.html">devel branch</a>, the release day is going to be May 4th, 2016. Please check the detailed <a href="http://www.bioconductor.org/developers/release-schedule/">release schedule</a>. It&rsquo;s also synced on <a href="https://github.com/sbg/sevenbridges-r">github page</a></p>
+<p>This package <strong>sevenbridges</strong> is already on Bioconductor <a href="https://www.bioconductor.org/packages/3.3/bioc/html/sevenbridges.html">devel branch</a>, the release day is going to be May 4th, 2016. Please check the detailed <a href="https://www.bioconductor.org/developers/release-schedule/">release schedule</a>. It&rsquo;s also synced on <a href="https://github.com/sbg/sevenbridges-r">GitHub page</a></p>
 <p>For now I recommend you to install the latest version of &lsquo;sevenbridges&rsquo; from github directly by running the script:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if(!<span class="kw">require</span>(<span class="st">"devtools"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)){
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if (!<span class="kw">require</span>(<span class="st">"devtools"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {
     <span class="kw">install.packages</span>(<span class="st">"devtools"</span>) 
 }
-<span class="kw">source</span>(<span class="st">"http://bioconductor.org/biocLite.R"</span>)
+<span class="kw">source</span>(<span class="st">"https://bioconductor.org/biocLite.R"</span>)
 devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbridges-r"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>,
                          <span class="dt">repos =</span> BiocInstaller::<span class="kw">biocinstallRepos</span>(),
                          <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>After the installation you can always browser vignette</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">browseVignettes</span>(<span class="dt">package =</span> <span class="st">'sevenbridges'</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">browseVignettes</span>(<span class="dt">package =</span> <span class="st">"sevenbridges"</span>)</code></pre></div>
 </div>
 <div id="register-on-nci-cancer-genomics-cloud" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#register-on-nci-cancer-genomics-cloud" class="anchor"> </a></body></html>Register on NCI Cancer Genomics Cloud</h3>
 <div class="figure">
-<img src="http://i.imgur.com/p52wIsi.png?1" alt="cgc-home"><p class="caption">cgc-home</p>
+<img src="https://i.imgur.com/p52wIsi.png" alt="cgc-home"><p class="caption">cgc-home</p>
 </div>
-<p>You can find login/registration on NCI Cancer Genomics Cloud homepage <a href="http://www.cancergenomicscloud.org/" class="uri">http://www.cancergenomicscloud.org/</a>, follow up the <a href="http://docs.cancergenomicscloud.org/docs/sign-up-for-the-cgc">signup tutorial</a> if you have ERA Commons.</p>
+<p>You can find login/registration on NCI Cancer Genomics Cloud homepage <a href="https://www.cancergenomicscloud.org" class="uri">https://www.cancergenomicscloud.org</a>, follow up the <a href="http://docs.cancergenomicscloud.org/docs/sign-up-for-the-cgc">signup tutorial</a> if you have ERA Commons.</p>
 </div>
 <div id="get-your-authentifiation" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#get-your-authentifiation" class="anchor"> </a></body></html>Get your authentifiation</h3>
@@ -84,10 +84,10 @@ devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbrid
 </div>
 <div id="optional-register-on-shinyapps-io" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#optional-register-on-shinyapps-io" class="anchor"> </a></body></html>(optional) register on shinyapps.io</h3>
-<p>In this tutorial, if you want to try to deploy the application automatically on shiny server like shinyapps.io, please visit <a href="http://www.shinyapps.io/" class="uri">http://www.shinyapps.io/</a> register and login.</p>
+<p>In this tutorial, if you want to try to deploy the application automatically on shiny server like shinyapps.io, please visit <a href="https://www.shinyapps.io/" class="uri">https://www.shinyapps.io/</a> to register and login.</p>
 <p>Get you token and secret ready to deploy</p>
 <div class="figure">
-<img src="http://shiny.rstudio.com/images/tokens2.png" alt="shiny-token-open"><p class="caption">shiny-token-open</p>
+<img src="https://i.imgur.com/ChCBhf6.png" alt="shinyapps-token"><p class="caption">shinyapps-token</p>
 </div>
 </div>
 <div id="issues-report" class="section level3">
@@ -104,19 +104,19 @@ devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbrid
 <li>Add report tool with two Shiny app template and two R markdown template to collect files from previous flow and generate new report, even deploy on shinyapps.io automatically after a task is finished.</li>
 </ol><p>The final workflow looks like this, it&rsquo;s composed of two tools: RNA-seq analysis tool and reporting tool.</p>
 <div class="figure">
-<img src="http://i.imgur.com/OkgB2tl.png" alt="quickstart-flow"><p class="caption">quickstart-flow</p>
+<img src="https://i.imgur.com/OkgB2tl.png" alt="quickstart-flow"><p class="caption">quickstart-flow</p>
 </div>
 <p>The shiny app report with ggvis module on the shinyapps.io server looks like <a href="https://tengfei.shinyapps.io/scatter_plot/">this</a></p>
 <p>A ggvis interactive scatter plot</p>
 <div class="figure">
-<img src="http://i.imgur.com/X8M2O0T.png" alt="ggvis"><p class="caption">ggvis</p>
+<img src="https://i.imgur.com/X8M2O0T.png" alt="ggvis"><p class="caption">ggvis</p>
 </div>
 <p>A differential expression table</p>
 <div class="figure">
-<img src="http://i.imgur.com/wQ9O3Ys.png" alt="de-table"><p class="caption">de-table</p>
+<img src="https://i.imgur.com/wQ9O3Ys.png" alt="de-table"><p class="caption">de-table</p>
 </div>
 <p>A full html report included, it&rsquo;s also output from the first tool, in this way, you can orchestrate many tools output into single report for your task.</p>
-<p><img src="http://i.imgur.com/9vgBQQC.png" alt="html-report"><img src="http://i.imgur.com/l5Xgq9R.png" alt="heatmap"></p>
+<p><img src="https://i.imgur.com/9vgBQQC.png" alt="html-report"><img src="https://i.imgur.com/l5Xgq9R.png" alt="heatmap"></p>
 <p>Now let&rsquo;s start building tools.</p>
 <div id="create-a-project-on-your-account-via-api-r-client" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#create-a-project-on-your-account-via-api-r-client" class="anchor"> </a></body></html>Create a project on your account via API R client</h3>
@@ -158,7 +158,7 @@ gcp:
                     <span class="dt">description =</span> <span class="st">"This project is for CGC hackathon"</span>))</code></pre></div>
 <p>Now check it on CGC, you will see a fresh new project is created.</p>
 <div class="figure">
-<img src="http://i.imgur.com/oI0dXyu.png" alt="cgc-projects"><p class="caption">cgc-projects</p>
+<img src="https://i.imgur.com/oI0dXyu.png" alt="cgc-projects"><p class="caption">cgc-projects</p>
 </div>
 <p>To delete it, just call, but I will suggest you keep it for following tutorial : )</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## p$delete()</code></pre></div>
@@ -205,7 +205,7 @@ gcp:
 <td align="center">hadleyverse + rOpenSci packages</td>
 </tr><tr class="even"><td>rocker/r-devel-san</td>
 <td align="center">base, SVN&rsquo;s R-devel and SAN</td>
-</tr></tbody></table><p>Bioconductor have a nice <a href="http://bioconductor.org/help/docker/">page</a> about the official docker images, please read for more details.</p>
+</tr></tbody></table><p>Bioconductor have a nice <a href="https://bioconductor.org/help/docker/">page</a> about the official docker images, please read for more details.</p>
 <table class="table"><thead><tr class="header"><th>Image</th>
 </tr></thead><tbody><tr class="odd"><td>bioconductor/devel_base</td>
 </tr><tr class="even"><td>bioconductor/devel_core</td>
@@ -381,7 +381,7 @@ options:
 </div>
 <div id="step-4-add-default-report-template-to-your-app" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#step-4-add-default-report-template-to-your-app" class="anchor"> </a></body></html>Step 4: Add default report template to your app</h4>
-<p>As a developer, if you always have a fixed report template provided for you tool, you can hard-code your template into your docker container, like you noticed in the Dockerfile I created, I insert a report R markdown template. And in the command line interface, in the end, I pass it to <code>rmarkdown::render</code> function as parameters &lsquo;param&rsquo;. In this way, you define your input in the header of R markdown. Examples like this, this template I used here, is exactly the same report on Bioconductor&rsquo;s RNA-seq workflow <a href="http://www.bioconductor.org/help/workflows/rnaseqGene/">website</a></p>
+<p>As a developer, if you always have a fixed report template provided for you tool, you can hard-code your template into your docker container, like you noticed in the Dockerfile I created, I insert a report R markdown template. And in the command line interface, in the end, I pass it to <code>rmarkdown::render</code> function as parameters &lsquo;param&rsquo;. In this way, you define your input in the header of R markdown. Examples like this, this template I used here, is exactly the same report on Bioconductor&rsquo;s RNA-seq workflow <a href="https://www.bioconductor.org/help/workflows/rnaseqGene/">website</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"docker/rnaseqGene/report"</span>, <span class="st">"rnaseqGene.Rmd"</span>, 
                   <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)</code></pre></div>
 <p>Here is the current content ( first 50 lines of the whole report) of the template</p>
@@ -446,7 +446,7 @@ opts_chunk$set(message = FALSE, error = FALSE,
 <p>Finally it&rsquo;s time to describe your tool in R (cwl format)!</p>
 <p>Well, you are always encouraged to use graphical user interface, but it&rsquo;s at the same time fun to learn how to do it in R, so you could script how you build it together, like what I did here, for every single tool json, I have an R script called generator.R in the same folder, so I can always trace back.</p>
 <p>For example, you can see the same in my github page, under <a href="https://github.com/sbg/sevenbridges-r/tree/master/inst/docker">inst/docker</a>, you will see three examples, 1. package docker 2. rna-seq tool 3. report tool, under each folder, you will see 1. one dockerfile, 2. src/ for command line 3. report/ for report template and 4. rabix a generator file and a json.</p>
-<p><img src="http://i.imgur.com/Wnf015S.png" alt="rstudio-dir"><img src="http://i.imgur.com/OYoa6kq.png" alt="rstudio-file"></p>
+<p><img src="https://i.imgur.com/Wnf015S.png" alt="rstudio-dir"><img src="https://i.imgur.com/OYoa6kq.png" alt="rstudio-file"></p>
 <p>Tool is the simple basic unit of a workflow, you can put the whole flow in one container and one tool, it of course works, just make it hard to factorize components. This is the exact example, I can make one tool for DESeq2 and one tool for Rsamtools, I can also put everything I need in one tool and provide single functionality.</p>
 <p>Note: you can use single docker image, but describe as many tools as you want if it contains what you need such as different command.</p>
 <p>Follow the example to create Tool with <code>Tool</code> function. It&rsquo;s straightforward. Especially if you are familiar with Seven Bridges Tool editor already.</p>
@@ -919,7 +919,7 @@ tsk$<span class="kw">monitor</span>()</code></pre></div>
 <ul><li>packrat engine: isolated libraries</li>
 <li>liftr engine (in progress): docker in docker</li>
 </ul><div class="figure">
-<img src="http://i.imgur.com/yPTNpqp.png" alt="report-tool"><p class="caption">report-tool</p>
+<img src="https://i.imgur.com/yPTNpqp.png" alt="report-tool"><p class="caption">report-tool</p>
 </div>
 <p><strong>Requirement for your report template</strong></p>
 <p>this is how it works</p>
@@ -1300,11 +1300,11 @@ RUN chmod a+x /usr/local/bin/report.R</code></pre>
 <p>Even though in R with &lsquo;sevenbridges&rsquo; package you can use <code>%&gt;&gt;%</code> to connect two Tool object, but this only works for linear simple flow. For complicated flow, we recommend you to use graphic user interface, it&rsquo;s lot fun.</p>
 <p>Now connect your RNA-seq tool with the report tool you just add it to your project, follow the tutorial <a href="http://docs.cancergenomicscloud.org/docs/the-pipeline-editor">here</a>, then make a workflow like this:</p>
 <div class="figure">
-<img src="http://i.imgur.com/dTKvLdt.png" alt="cgc-workflow"><p class="caption">cgc-workflow</p>
+<img src="https://i.imgur.com/dTKvLdt.png" alt="cgc-workflow"><p class="caption">cgc-workflow</p>
 </div>
 <p>And next run a task on the platform via UI like this:</p>
 <div class="figure">
-<img src="http://i.imgur.com/6VsC69W.png" alt="rnaseq-runtask"><p class="caption">rnaseq-runtask</p>
+<img src="https://i.imgur.com/6VsC69W.png" alt="rnaseq-runtask"><p class="caption">rnaseq-runtask</p>
 </div>
 </div>
 </div>
@@ -1316,7 +1316,7 @@ RUN chmod a+x /usr/local/bin/report.R</code></pre>
 <h2 class="hasAnchor"><html><body><a href="#more-tutorials" class="anchor"> </a></body></html>More tutorials</h2>
 <p>After you install the package</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">browseVignettes</span>(<span class="st">"sevenbridges"</span>)</code></pre></div>
-<p>or on Bioconductor devel branch sevenbridges <a href="http://bioconductor.org/packages/3.3/bioc/html/sevenbridges.html">page</a>.</p>
+<p>or on the <a href="https://sbg.github.io/sevenbridges-r/articles/index.html">vignettes page</a>.</p>
 </div>
 </div>
   </div>
