@@ -76,7 +76,7 @@
     </div>
 
     
-    <p>set task function hoook according to</p>
+    <p>set task function hook according to</p>
     
 
     <pre><span class='fu'>setTaskHook</span>(<span class='kw'>status</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"queued"</span>, <span class='st'>"draft"</span>, <span class='st'>"running"</span>, <span class='st'>"completed"</span>, <span class='st'>"aborted"</span>,
@@ -88,10 +88,12 @@
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
       <dt>status</dt>
-      <dd>one of (&quot;queued&quot;, &quot;draft&quot;, &quot;running&quot;, &quot;completed&quot;, &quot;aborted&quot;, &quot;failed&quot;)</dd>
+      <dd>one of &quot;queued&quot;, &quot;draft&quot;, &quot;running&quot;,
+&quot;completed&quot;, &quot;aborted&quot;, or &quot;failed&quot;.</dd>
       <dt>fun</dt>
-      <dd>function it must return a TRUE or FALSE in the end of function body, when it&#39;s
-TRUE this function will also terminate monitor process, if FALSE, function called, but not going
+      <dd>function it must return a TRUE or FALSE in the end of
+function body, when it&#39;s TRUE this function will also terminate
+monitor process, if FALSE, function called, but not going
 to terminate task monitoring process.</dd>
     </dl>
     
@@ -102,7 +104,7 @@ to terminate task monitoring process.</dd>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='fu'>getTaskHook</span>(<span class='st'>"completed"</span>)
-<span class='fu'>setTaskHook</span>(<span class='st'>"completed"</span>, <span class='kw'>function</span>(){
+<span class='fu'>setTaskHook</span>(<span class='st'>"completed"</span>, <span class='kw'>function</span>() {
     <span class='fu'>message</span>(<span class='st'>"completed"</span>)
     <span class='fu'>return</span>(<span class='fl'>TRUE</span>)
 })</pre>

@@ -90,8 +90,8 @@ If left out, default batching criteria defined in the app is used.</dd>
       <dt>criteria</dt>
       <dd>a character vector, for example.
 <code>c(&quot;metadata.sample_id&quot;, &quot;metadata.library_id&quot;)</code>. The meaning of the
-above batch_by dictionary is - group inputs (usually files) first on sample ID
-and then on library ID. If NULL, using type &quot;ITEM&quot; by default.</dd>
+above batch_by dictionary is - group inputs (usually files) first on sample
+ID and then on library ID. If NULL, using type &quot;ITEM&quot; by default.</dd>
       <dt>type</dt>
       <dd>Criteria on which to batch on - can be in two formats.&quot;ITEM&quot; and
 &quot;CRITERIA&quot;. If you wish to batch per item in the input (usually a file)
@@ -107,7 +107,7 @@ on which you wish to group inputs on. Please check examples.</dd>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='fu'>batch</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='st'>"fastq"</span>) <span class='co'># by ITEM</span>
 <span class='fu'>batch</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='st'>"fastq"</span>, <span class='fu'>c</span>(<span class='st'>"metadata.sample_id"</span>, <span class='st'>"metadata.library_id"</span>))
-<span class='co'>## shorthand for this</span>
+<span class='co'># shorthand for this</span>
 <span class='fu'>batch</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='st'>"fastq"</span>, <span class='fu'>c</span>(<span class='st'>"metadata.sample_id"</span>, <span class='st'>"metadata.library_id"</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"CRITERIA"</span>)</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
