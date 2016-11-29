@@ -55,7 +55,7 @@
 <h3 class="hasAnchor"><html><body><a href="#api-r-client" class="anchor"> </a></body></html>API R client</h3>
 <p>The <code>sevenbridges</code> package only supports V2+ versions of the API, since versions prior to V2 are not compatible with the Common Workflow Language (CWL). This package provides a simple interface for accessing and trying out various methods.</p>
 <p>There are two ways of constructing API calls. For instance, you can use low-level API calls which use arguments like <code>path</code>, <code>query</code>, and <code>body</code>. These are documented in the API reference libraries for the <a href="http://docs.sevenbridges.com/v1.0/docs/list-of-api-calls">Seven Bridges Platform</a> and the <a href="http://docs.cancergenomicscloud.org/docs/new-1">CGC</a>. An example of a low-level request to &ldquo;list all projects&rdquo; is shown below. In this request, you can also pass <code>query</code> and <code>body</code> as a list.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sevenbridges)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"sevenbridges"</span>)
 a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"8c3329a4de664c35bb657499bb2f335c"</span>, 
           <span class="dt">url =</span> <span class="st">"https://api.sbgenomics.com/v2/"</span>)
 a$<span class="kw"><a href="../reference/api.html">api</a></span>(<span class="dt">path =</span> <span class="st">"project"</span>, <span class="dt">method =</span> <span class="st">"GET"</span>)</code></pre></div>
@@ -76,7 +76,7 @@ Offset defines where the retrieved items started.
 <li>
 Limit defines the quantity of items you want to get.
 </li>
-</ul><p>By default, <code>offset</code> is set to <code>0</code> and <code>limit</code> is set to <code>50</code>. As such, your API request returns the <strong>first 100 items</strong> when you list items or search for items by name. To search and list all items, use <code>complete = TRUE</code> in your API request.</p>
+</ul><p>By default, <code>offset</code> is set to <code>0</code> and <code>limit</code> is set to <code>100</code>. As such, your API request returns the <strong>first 100 items</strong> when you list items or search for items by name. To search and list all items, use <code>complete = TRUE</code> in your API request.</p>
 <p><strong>Search by ID</strong></p>
 <p>When searching by ID, your request will return your exact resource as it is unique. As such, you don&rsquo;t have to manually set <code>offset</code> and <code>limit</code>. It&rsquo;s good practice to find your resources by their ID and pass this ID as an input to your task. You can find a resource&rsquo;s ID in the final part of the URL on the visual interface or via the API requests to list resources or get a resource&rsquo;s details.</p>
 <p><strong>Search by name</strong></p>
@@ -88,7 +88,7 @@ Limit defines the quantity of items you want to get.
 <div id="installation" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#installation" class="anchor"> </a></body></html>Installation</h3>
 <p>The <code>sevenbridges</code> package is on both the Bioconductor released and devel branches, as shown below.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## try http:// if https:// URLs are not supported
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># try http:// if https:// URLs are not supported</span>
 <span class="kw">source</span>(<span class="st">"https://bioconductor.org/biocLite.R"</span>)
 <span class="kw">biocLite</span>(<span class="st">"sevenbridges"</span>)</code></pre></div>
 <p>Since we are constantly improving our API and binding libraries, please also visit our <a href="https://github.com/sbg/sevenbridges-r">github homepage</a> for most recent news and for latest version of the package.</p>
@@ -97,7 +97,7 @@ Limit defines the quantity of items you want to get.
 </div>
 <p><strong>If you don&rsquo;t have <code>devtools</code></strong></p>
 <p>This installation requires that you have the <code>devtools</code> package. If you do not have this package, you can install it from <a href="https://cran.r-project.org/web/packages/devtools/index.html">CRAN</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>) </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>)</code></pre></div>
 <p>You may got an error and need system dependecies for curl and ssl. For example, in ubuntu you probably need to do the following first in order to install <code>devtools</code> and in order to build vignettes since you need <code>pandoc</code>.</p>
 <pre><code>apt-get update
 apt-get install libcurl4-gnutls-dev libssl-dev pandoc pandoc-citeproc</code></pre>
@@ -121,8 +121,8 @@ devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbrid
 <div id="create-auth-object" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#create-auth-object" class="anchor"> </a></body></html>Create Auth object</h3>
 <p>Before you can access your account via the API, you have to pass along your credentials. You can obtain your credentials in the form of an <a href="http://docs.sevenbridges.com/v1.0/docs/get-your-authentication-token">authentication token</a> from the <strong>Developer Tab</strong> under <strong>Account Settings</strong> on the visual interface. Once you&rsquo;ve obtained this, let&rsquo;s set up the <code>Auth</code> object so it remembers your authentication token and the path for the API. All subsequent requests will draw upon these two pieces of information.</p>
-<p><strong>Step 1: Load the library</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sevenbridges)</code></pre></div>
+<p><strong>Step 1: Load the package</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"sevenbridges"</span>)</code></pre></div>
 <p><strong>Step 2: Set up your authentication token</strong></p>
 <p>You have three different ways to set up your token. Choose from one of the three methods below:</p>
 <ol style="list-style-type: decimal"><li><a href="#method1">Direct setup via <code>Auth</code> function:</a> This explicityly sets up your token and API url.</li>
@@ -131,15 +131,15 @@ devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbrid
 </ol><div style="margin-left:3em">
 <p><a name="method1"></a><strong><em>Method 1: Direct setup</em></strong></p>
 <p>This is the most common way to construct your <code>auth</code> object.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## direct setup
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># direct setup</span>
 (a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"&lt;fake_token&gt;"</span>,
           <span class="dt">url =</span> <span class="st">"https://cgc-api.sbgenomics.com/v2/"</span>))
-## or load default from config file (autoloaded into options)</code></pre></div>
+<span class="co"># or load default from config file (autoloaded into options)</span></code></pre></div>
 <pre><code>== Auth ==
 token : &lt;fake_token&gt;
 url : https://cgc-api.sbgenomics.com/v2/</code></pre>
 <p><a name="method2"></a><strong><em>Method 2: Via a configuration file</em></strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## from platfrom "us" for user "tengfei"
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># from platfrom "us" for user "tengfei"</span>
 a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">platform =</span> <span class="st">"us"</span>, <span class="dt">username =</span> <span class="st">"tengfei"</span>)</code></pre></div>
 <p><a name="method3"></a><strong><em>Method 3: update the <code>auth</code> object from another config file</em></strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/Auth-class.html">updateAuthList</a></span>(<span class="st">"new_config.yml"</span>)</code></pre></div>
@@ -187,7 +187,7 @@ reset : 1457980957</code></pre>
 <h3 class="hasAnchor"><html><body><a href="#show-billing-information" class="anchor"> </a></body></html>Show billing information</h3>
 <p>Each project must have a Billing Group associated with it. This Billing Group pays for the storage and computation in the project.</p>
 <p>For example, your first project(s) were created with the free funds from the Pilot Funds Billing Group assigned to each user at sign-up. To get information about billing:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## check your billing info
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># check your billing info</span>
 a$<span class="kw">billing</span>()
 a$<span class="kw">invoice</span>()</code></pre></div>
 <p>For more information, use <code>breakdown = TRUE</code>.</p>
@@ -200,14 +200,14 @@ a$<span class="kw">invoice</span>()</code></pre></div>
 <h3 class="hasAnchor"><html><body><a href="#create-a-project" class="anchor"> </a></body></html>Create a project</h3>
 <p>Projects are the core building blocks of the Platform. Each project corresponds to a distinct scientific investigation, serving as a container for its data, analysis tools, results, and team of collaborators.</p>
 <p>Create a new project called &ldquo;api testing&rdquo; with the billing group <code>id</code> obtained above.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## get billing group id
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get billing group id</span>
 bid &lt;-<span class="st"> </span>a$<span class="kw">billing</span>()$id
-## create new project
-(p &lt;-<span class="st"> </span>a$<span class="kw">project_new</span>(<span class="dt">name =</span> <span class="st">"api testing"</span>, bid, <span class="dt">description =</span> <span class="st">"Just a testing"</span>))</code></pre></div>
+<span class="co"># create new project</span>
+(p &lt;-<span class="st"> </span>a$<span class="kw">project_new</span>(<span class="dt">name =</span> <span class="st">"api testing"</span>, bid, <span class="dt">description =</span> <span class="st">"Just a test"</span>))</code></pre></div>
 <pre><code>== Project ==
 id : tengfei/api-testing
 name : api testing
-description : Just a testing
+description : Just a test
 billing_group_id : &lt;fake_bid&gt;
 type : v2
 -- Permission --</code></pre>
@@ -217,13 +217,13 @@ type : v2
 </div>
 <div id="get-details-about-an-existing-project" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#get-details-about-an-existing-project" class="anchor"> </a></body></html>Get details about an existing project</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## list first 100 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># list first 100 </span>
 a$<span class="kw">project</span>()
-## list all
+<span class="co"># list all</span>
 a$<span class="kw">project</span>(<span class="dt">complete =</span> <span class="ot">TRUE</span>)
-## return all named match "demo"
+<span class="co"># return all named match "demo"</span>
 a$<span class="kw">project</span>(<span class="dt">name =</span> <span class="st">"demo"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)
-## get the project you want by id
+<span class="co"># get the project you want by id</span>
 p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/api-tutorial"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -235,22 +235,22 @@ p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">i
 <p>To find out more about public apps, you can do the following:</p>
 <ul><li>Browse them online. Check out the <a href="http://docs.cancergenomicscloud.org/docs/">tutorial</a> for the &ldquo;Find apps&rdquo; section.</li>
 <li>You can use the <code>sevenbridges</code> package to find it, as shown below.</li>
-</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## search by name matching, complete = TRUE search all apps, not 
-## limited by offset or limit.
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># search by name matching, complete = TRUE search all apps,</span>
+<span class="co"># not limited by offset or limit.</span>
 a$<span class="kw">public_app</span>(<span class="dt">name =</span> <span class="st">"STAR"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)
-## search by id is accurate
+<span class="co"># search by id is accurate</span>
 a$<span class="kw">public_app</span>(<span class="dt">id =</span> <span class="st">"admin/sbg-public-data/rna-seq-alignment-star/5"</span>)
-## you can also get everything 
+<span class="co"># you can also get everything</span>
 a$<span class="kw">public_app</span>(<span class="dt">complete =</span> <span class="ot">TRUE</span>)
-## default limit = 100, offset = 0 which means first 100
+<span class="co"># default limit = 100, offset = 0 which means the first 100</span>
 a$<span class="kw">public_app</span>()</code></pre></div>
 <p>Now, from your <code>Auth</code> object, you copy an App <code>id</code> into your <code>project</code> id with a new <code>name</code>, following this logic.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## copy
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># copy</span>
 a$<span class="kw">copy_app</span>(<span class="dt">id =</span> <span class="st">"admin/sbg-public-data/rna-seq-alignment-star/5"</span>, 
            <span class="dt">project =</span> <span class="st">"tengfei/api-testing"</span>, <span class="dt">name =</span> <span class="st">"new copy of star"</span>)
-## check its' copyed
+<span class="co"># check if it is copied</span>
 p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/api-testing"</span>)
-## list apps your got in your project
+<span class="co"># list apps your got in your project</span>
 p$<span class="kw">app</span>()</code></pre></div>
 <p>The short name is changed to <code>newcopyofstar</code>.</p>
 <pre><code>== App ==
@@ -270,7 +270,7 @@ app$<span class="kw">copy_to</span>(<span class="dt">project =</span> <span clas
 <h3 class="hasAnchor"><html><body><a href="#import-cwl-app-and-run-a-task" class="anchor"> </a></body></html>Import CWL app and run a task</h3>
 <p>You can also upload your own Common Workflow Language JSON file which describes your app to your project.</p>
 <p><strong><em>Note:</em></strong> Alternatively, you can directly describe your CWL tool in R with this package. Please read the vignette on &ldquo;Describe CWL Tools/Workflows in R and Execution&rdquo;.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Add an CWL file to your project
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add an CWL file to your project</span>
 f.star =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/app"</span>, <span class="st">"flow_star.json"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 app =<span class="st"> </span>p$<span class="kw">app_add</span>(<span class="st">"starlocal"</span>, fl.runif)
 (aid &lt;-<span class="st"> </span>app$id)</code></pre></div>
@@ -336,7 +336,7 @@ rbx &lt;- Tool(id = "runif",
 fl &lt;- "inst/docker/sevenbridges/rabix/runif.json"
 write(rbx$toJSON(pretty = TRUE), fl)</code></pre>
 <p>Then, you can add it like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## rbx is the object returned by Tool function
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># rbx is the object returned by Tool function</span>
 app =<span class="st"> </span>p$<span class="kw">app_add</span>(<span class="st">"runif"</span>, rbx)
 (aid &lt;-<span class="st"> </span>app$id)</code></pre></div>
 <p>Please consult another tutorial about how to describe tools and flows in R.</p>
@@ -356,16 +356,16 @@ app =<span class="st"> </span>p$<span class="kw">app_add</span>(<span class="st"
 <li>The inputs for your workflow. In this case, the CWL app accepts four parameters: number, min, max, and seed.</li>
 </ul><p>You can always check the App details on the visual interface for task input requirements. To find the required inputs with R, you need to get an <code>App</code> object first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">app =<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">id =</span> <span class="st">"tengfei/api-testing-2/newcopyofstar"</span>)
-## get input matrix
+<span class="co"># get input matrix</span>
 app$<span class="kw">input_matrix</span>()
 app$<span class="kw">input_matrix</span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"label"</span>, <span class="st">"type"</span>))
 app$<span class="kw">input_matrix</span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"label"</span>, <span class="st">"type"</span>), <span class="dt">required =</span> <span class="ot">TRUE</span>)
-## get required input names and types only
+<span class="co"># get required input names and types only</span>
 app$<span class="kw">get_required</span>()</code></pre></div>
 <p>Conversely, you can load the app from a CWL JSON and convert it into an R object first, as shown below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/app"</span>, <span class="st">"flow_star.json"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 app =<span class="st"> </span><span class="kw"><a href="../reference/convert_app.html">convert_app</a></span>(f1)
-## get input matrix
+<span class="co"># get input matrix</span>
 app$<span class="kw">input_matrix</span>()</code></pre></div>
 <pre><code>##                                id                    label    type
 ## 1                    #sjdbGTFfile              sjdbGTFfile File...
@@ -396,7 +396,7 @@ app$<span class="kw">input_matrix</span>()</code></pre></div>
 <pre><code>##                  id            label    type
 ## 2            #fastq            fastq File...
 ## 3 #genomeFastaFiles genomeFastaFiles    File</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## get required input names and types only
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get required input names and types only</span>
 app$<span class="kw">get_required</span>()</code></pre></div>
 <pre><code>##            fastq genomeFastaFiles 
 ##        "File..."           "File"</code></pre>
@@ -417,13 +417,13 @@ app$<span class="kw">get_required</span>()</code></pre></div>
 <h4 class="hasAnchor"><html><body><a href="#get-your-input-files-ready" class="anchor"> </a></body></html>Get your input files ready</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fastqs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"SRR1039508_1.fastq"</span>, <span class="st">"SRR1039508_2.fastq"</span>)
 
-## get all 2 exact files
-fastq_in =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name=</span> fastqs, <span class="dt">exact =</span> <span class="ot">TRUE</span>) 
+<span class="co"># get all 2 exact files</span>
+fastq_in =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name=</span> fastqs, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
 
-## get single file
+<span class="co"># get a single file</span>
 fasta_in =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"Homo_sapiens.GRCh38.dna.primary_assembly.fa"</span>, 
                   <span class="dt">exact =</span> <span class="ot">TRUE</span>)
-## get all single file
+<span class="co"># get all single file</span>
 gtf_in =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"Homo_sapiens.GRCh38.84.gtf"</span>, 
                 <span class="dt">exact =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <div align="right">
@@ -432,7 +432,7 @@ gtf_in =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt"
 </div>
 <div id="create-a-new-draft-task" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#create-a-new-draft-task" class="anchor"> </a></body></html>Create a new Draft Task</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Add new tasks
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add new tasks</span>
 taskName =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"tengfei_star-alignment "</span>,<span class="kw">date</span>())
 
 tsk =<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> taskName,
@@ -444,10 +444,10 @@ tsk =<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt
 <p>Remember the <code>fastq</code> input expects a list of files. You can also do something as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"SRR1039508_1.fastq"</span>, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
 f2 =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"SRR1039508_2.fastq"</span>, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
-## get all 2 exact files
-fastq_in =<span class="st"> </span><span class="kw">list</span>(f1, f2) 
+<span class="co"># get all 2 exact files</span>
+fastq_in =<span class="st"> </span><span class="kw">list</span>(f1, f2)
 
-## or if you know you only have 2 file name matching SRR924146*.fastq
+<span class="co"># or if you know you only have 2 files whose names match SRR924146*.fastq</span>
 fastq_in =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"SRR1039508*.fastq"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Using <code>complete = TRUE</code> when items is over 100.</p>
 </div>
@@ -458,10 +458,10 @@ fastq_in =<span class="st"> </span>p$<span class="kw">file</span>(<span class="d
             <span class="st">"SRR1039509_2.fastq"</span>, <span class="st">"SRR1039512_1.fastq"</span>, <span class="st">"SRR1039512_2.fastq"</span>, 
             <span class="st">"SRR1039513_1.fastq"</span>, <span class="st">"SRR1039513_2.fastq"</span>)
 
-## get all 8 files
-fastq_in =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name=</span> fastqs, <span class="dt">exact =</span> <span class="ot">TRUE</span>) 
-## can also try to returned all SRR*.fastq files
-## fastq_in = p$file(name= "SRR*.fastq", complete = TRUE) 
+<span class="co"># get all 8 files</span>
+fastq_in =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name=</span> fastqs, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
+<span class="co"># can also try to returned all SRR*.fastq files</span>
+<span class="co"># fastq_in = p$file(name= "SRR*.fastq", complete = TRUE)</span>
 
 tsk =<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> taskName,
            <span class="dt">description =</span> <span class="st">"Batch Star Test"</span>, 
@@ -480,19 +480,19 @@ tsk =<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt
 <div id="run-a-task" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#run-a-task" class="anchor"> </a></body></html>Run a task</h3>
 <p>Now, we&rsquo;re ready to run our task.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Run your task
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run your task</span>
 tsk$<span class="kw">run</span>()</code></pre></div>
 <p>Before you run your task, you can adjust your draft task if you have any final modifications. Or, you can delete the draft task if you no longer wish to run it.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## not run
-## tsk$delete()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># # not run</span>
+<span class="co"># tsk$delete()</span></code></pre></div>
 <p>After you run a task, you can abort it</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Abort your task
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># abort your task</span>
 tsk$<span class="kw">abort</span>()</code></pre></div>
 <p>If you want to update your task and then re-run it, follow the example below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tsk$<span class="kw">getInputs</span>()
-## missing number input, only update number
+<span class="co"># missing number input, only update number</span>
 tsk$<span class="kw">update</span>(<span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">sjdbGTFfile =</span> <span class="st">"some new file"</span>))
-## double check 
+<span class="co"># double check </span>
 tsk$<span class="kw">getInputs</span>()</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -503,8 +503,8 @@ tsk$<span class="kw">getInputs</span>()</code></pre></div>
 <p>To monitor your task as it runs, you can always request a task <code>update</code> to ask your task to report its status. Or, you can monitor a running task with a hook function, which triggers the function when that status is &ldquo;completed&rdquo;. Please check the details in <a href="#hooktask">section</a> below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tsk$<span class="kw">update</span>()</code></pre></div>
 <p>By default, your task alerts you by email when it has been completed.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Monitor your task (skip this part)
-## tsk$monitor()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Monitor your task (skip this part)</span>
+<span class="co"># tsk$monitor()</span></code></pre></div>
 <p>Use the following to download all files from a completed task.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tsk$<span class="kw"><a href="../reference/download.html">download</a></span>(<span class="st">"~/Downloads"</span>)</code></pre></div>
 <p><a name="hooktask"></a>Instead of the default task monitor action, you can use <code>setTaskHook</code> to connect a function call to the status of a task. When you run <code>tsk$monitor(time = 30)</code> it will check your task every 30 seconds to see if the current task status matches one of the following statuses: &ldquo;queued&rdquo;, &ldquo;draft&rdquo;, &ldquo;running&rdquo;, &ldquo;completed&rdquo;, &ldquo;aborted&rdquo;, and &ldquo;failed&rdquo;. When it finds a match for the task status, <code>getTaskHook</code> returns the function call for the specific status.</p>
@@ -513,7 +513,7 @@ tsk$<span class="kw">getInputs</span>()</code></pre></div>
 ##                                         cat("\r", "completed")
 ##                                         return(TRUE)
 ##                                     }
-## &lt;environment: 0x112343a70&gt;</code></pre>
+## &lt;environment: 0x10fde7980&gt;</code></pre>
 <p>If you want to customize the monitor function, you can adjust the following requirement. Your function must return <code>TRUE</code> or <code>FALSE</code> in the end. When it&rsquo;s <code>TRUE</code> (or non-logical value) it means the monitoring will be terminated after it finds a status matched and the function executes, such as when the task is completed. When it&rsquo;s <code>FALSE</code> it means the monitoring will continue for the next iteration of checking, e.g.&nbsp;when it&rsquo;s &ldquo;running&rdquo;, you want to keep tracking.</p>
 <p>Follow the example below to set a new function to monitor the status &ldquo;completed&rdquo;. Then, when the task is completed, it will download all task output files to local folder.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/setTaskHook.html">setTaskHook</a></span>(<span class="st">"completed"</span>, function(){
@@ -556,13 +556,13 @@ gcp:
     tengfei:
       token: fake_token</code></pre>
 <p>When you load the <code>sevenbridges</code> package, it first tries to parse your token configuration file into an options list, as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Create Auth object from config file
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create Auth object from config file</span>
 a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">username =</span> <span class="st">"yintengfei"</span>, <span class="dt">platform =</span> <span class="st">"us"</span>)
-## show all 
+<span class="co"># show all</span>
 <span class="kw"><a href="../reference/Auth-class.html">getToken</a></span>()
-## show all pre-set user token for platform 
+<span class="co"># show all pre-set user token for platform </span>
 <span class="kw"><a href="../reference/Auth-class.html">getToken</a></span>(<span class="st">"cgc"</span>)
-## show individual token for a user
+<span class="co"># show individual token for a user</span>
 <span class="kw"><a href="../reference/Auth-class.html">getToken</a></span>(<span class="dt">platform =</span> <span class="st">"cgc"</span>, <span class="dt">username =</span> <span class="st">"tengfei"</span>)</code></pre></div>
 <p><strong><em>Note:</em></strong> When you edit your <code>.sbg.auth.yml</code> file, you have to reload your <code>sevenbridges</code> package.</p>
 <div align="right">
@@ -578,8 +578,8 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-clas
 </ul><p>The logic is as follows:</p>
 <ol style="list-style-type: decimal"><li>If you didn&rsquo;t pass url or token, the package will assume you are loading it from the config file.</li>
 <li>If no environment or user is specified, the package will use the first item in your config file. <strong>This is not recommended. Please provide an environment and username.</strong></li>
-</ol><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sevenbridges)
-## direct setup
+</ol><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"sevenbridges"</span>)
+<span class="co"># direct setup</span>
 a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"1c0e6e202b544030870ccc147092c257"</span>,
           <span class="dt">url =</span> <span class="st">"https://cgc-api.sbgenomics.com/v2/"</span>)</code></pre></div>
 <p>The above will point to the Cancer Genomics Cloud environment, unless you specify the API URL or the environment. The <code>sevenbridges</code> package currently supports specifying <code>cgc</code> for the Cancer Genomics Cloud, <code>us</code> for the Seven Bridges Platform on AWS, and <code>gcp</code> for the Seven Bridges Platform on GCP.</p>
@@ -615,19 +615,18 @@ Limit defines the quantity of items you want to get.
 <p><strong>Search by name</strong></p>
 <p>Search by name returns all partial matches unless you specify <code>exact = TRUE</code>. This type of search will only search across current pulled content, so use <code>complete = TRUE</code> if you want to search across everything.</p>
 <p>For example, to list all public apps, use <code>visibility</code> argument, but make sure you pass <code>complete = TRUE</code> to it, to show every single things. This arguments generally works for items like &ldquo;App&rdquo;, &ldquo;Project&rdquo;, &ldquo;Task&rdquo;, &ldquo;File&rdquo; etc</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## first, search by id is fast
-x &lt;-<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">id =</span> <span class="st">"djordje_klisic/public-apps-by-seven-bridges/sbg-ucsc-b37-bed-converter/0"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first, search by id is fast</span>
+x &lt;-<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">id =</span> <span class="st">"admin/sbg-public-data/sbg-ucsc-b37-bed-converter/1"</span>)
 
-## show 100 items from public
+<span class="co"># show 100 items from public</span>
 x &lt;-<span class="st">  </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>)
-<span class="kw">length</span>(x) ## 100
-
+<span class="kw">length</span>(x)  <span class="co"># 100</span>
 
 x &lt;-<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)
-<span class="kw">length</span>(x) ## 211 by March, 2016
-## this return nothing, because it's not in the first 100 
+<span class="kw">length</span>(x)  <span class="co"># 272 by Nov 2016</span>
+<span class="co"># this return nothing, because it's not in the first 100 returned names</span>
 a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">name =</span> <span class="st">"bed converter"</span>)
-## this return an app, because it pulls all apps and did serach.
+<span class="co"># this return an app, because it pulls *all* app names and did search</span>
 a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">name =</span> <span class="st">"bed converter"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -645,9 +644,9 @@ a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="
 <h3 class="hasAnchor"><html><body><a href="#users" class="anchor"> </a></body></html>Users</h3>
 <p>This call returns a list of the resources, such as projects, billing groups, and organizations, that are accessible to you. Currently, this call will only return a successful response if {username} is replaced with your own username. Be sure to capitalize your username in the same way as when you registered for an account.</p>
 <p>If you don&rsquo;t provide a username, your user information will be shown.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## return your information
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return your information</span>
 a$<span class="kw">user</span>()
-## return user 'tengfei''s information
+<span class="co"># return user tengfei's information</span>
 a$<span class="kw">user</span>(<span class="st">"tengfei"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -658,7 +657,7 @@ a$<span class="kw">user</span>(<span class="st">"tengfei"</span>)</code></pre></
 <div id="for-billing" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#for-billing" class="anchor"> </a></body></html>For billing</h4>
 <p>If no billing group <code>id</code> is provided, this call returns a list of paths used to access billing information via the API. If a username is provided, this call lists all your billing groups, including groups that are pending or which have been disabled. If you specify <code>breakdown = TRUE</code>, the call below returns a breakdown of the spending per-project for the billing group specified by billing_group. Information is also displayed for each of the projects a particular billing group is associated with, including task executions, their initiating user, start and end time, and their cost.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## return a BillingList object
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return a BillingList object</span>
 (b &lt;-<span class="st"> </span>a$<span class="kw">billing</span>())
 a$<span class="kw">billing</span>(<span class="dt">id =</span> b$id, <span class="dt">breakdown =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <div align="right">
@@ -678,7 +677,7 @@ a$<span class="kw">invoice</span>(<span class="dt">id =</span> <span class="st">
 </div>
 <div id="project-operation" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#project-operation" class="anchor"> </a></body></html>Project Operation</h3>
-<p>Projects are the basic units to organize different entities: files, tasks, apps, etc. As such, many actions stem from the `Project&rsquo; object.</p>
+<p>Projects are the basic units to organize different entities: files, tasks, apps, etc. As such, many actions stem from the <code>Project</code> object.</p>
 <div align="right">
 <a href="#top">top</a>
 </div>
@@ -697,8 +696,8 @@ a$<span class="kw">project</span>(<span class="dt">owner =</span> <span class="s
 </div>
 <div id="partial-match-project-name" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#partial-match-project-name" class="anchor"> </a></body></html>Partial Match Project Name</h4>
-<p>For a more friendly interface and convenient search, the <code>sevenbridges</code> package supports partial name matching. The first argument for the following request is <code>name</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## want to return a project called
+<p>For a more friendly interface and convenient search, the <code>sevenbridges</code> package supports <em>partial name matching</em>. The first argument for the following request is <code>name</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># want to return a project called</span>
 a$<span class="kw">project</span>(<span class="st">"hello"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -710,7 +709,7 @@ a$<span class="kw">project</span>(<span class="st">"hello"</span>)</code></pre><
 <ul><li><code>name</code> (required)</li>
 <li><code>billing_group_id</code> (required)</li>
 <li><code>description</code> (optional)</li>
-<li><code>tags</code> (optional): This has to be a list(). If you are using the API on the CGC environment, you can create a TCGA Controlled DAta project by specifying <code>TCGA</code> in <code>tags</code>.</li>
+<li><code>tags</code> (optional): This has to be a list(). If you are using the API on the CGC environment, you can create a TCGA Controlled Data project by specifying <code>TCGA</code> in <code>tags</code>.</li>
 <li><code>type</code> (optional): By default, we create a V2, CWL compatible project.</li>
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">project_new</span>(<span class="st">"api_testing_tcga"</span>, b$id,
               <span class="dt">description =</span> <span class="st">"Test for API"</span>)</code></pre></div>
@@ -730,10 +729,10 @@ a$<span class="kw">project</span>(<span class="st">"hello"</span>)</code></pre><
 <div id="delete-a-project" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#delete-a-project" class="anchor"> </a></body></html>Delete a Project</h4>
 <p>You can delete a <em>single</em> project by making the request to <code>$delete()</code>. Note that the returned object from <code>a$project()</code> sometimes returns list if you use partial matching by name. The <code>$delete()</code> request cannot operate on a list. If you want to operate on a list of object, read more about batch functions in the relevant section below.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## remove it, not run
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># remove it, not run</span>
 a$<span class="kw">project</span>(<span class="st">"api_testing"</span>)$<span class="kw"><a href="../reference/delete.html">delete</a></span>()
-## check
-## will delete all projects matcht the name
+<span class="co"># check</span>
+<span class="co"># will delete all projects match the name</span>
 <span class="kw"><a href="../reference/delete.html">delete</a></span>(a$<span class="kw">project</span>(<span class="st">"api_testing_donnot_delete_me"</span>))</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -767,7 +766,8 @@ a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">
 <p>Requests to add a project member must include the key <code>permissions</code>. However, if you do not include a value, the member&rsquo;s permissions will be set to <code>false</code> by default.</p>
 <p>Set permission by passing the following values: <code>copy</code>, <code>write</code>, <code>execute</code>, <code>admin</code>, or <code>read</code>.</p>
 <p>Note: <code>read</code> is implicit and set by default. You can not be a project member without having <code>read</code> permissions.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo-project"</span>)$<span class="kw">member_add</span>(<span class="dt">username =</span> <span class="st">"yintengfei"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo-project"</span>)$
+<span class="st">       </span><span class="kw">member_add</span>(<span class="dt">username =</span> <span class="st">"yintengfei"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
@@ -794,7 +794,7 @@ admin : FALSE</code></pre>
 <h5 class="hasAnchor"><html><body><a href="#delete-a-member" class="anchor"> </a></body></html>Delete a member</h5>
 <p>To delete an existing member, just call the <code><a href="../reference/delete.html">delete()</a></code> action on the <code>Member</code> object.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m$<span class="kw"><a href="../reference/delete.html">delete</a></span>()
-## confirm
+<span class="co"># confirm</span>
 a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo-project"</span>)$<span class="kw">member</span>()</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -816,9 +816,9 @@ p$<span class="kw">file</span>()</code></pre></div>
 <div id="list-all-files-1" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#list-all-files-1" class="anchor"> </a></body></html>List all files</h4>
 <p>A better way to list files in a project uses the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## first 100 files, default offset = 0, limit = 100
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first 100 files, default offset = 0, limit = 100</span>
 p$<span class="kw">file</span>()
-## list all files
+<span class="co"># list all files</span>
 p$<span class="kw">file</span>(<span class="dt">complete =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Alternatively you can get files from the <code>Auth</code> object.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">file</span>(<span class="dt">project =</span> p$id)
@@ -836,9 +836,9 @@ a$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"
 <li><p><strong>Second rule: understand the operation</strong>: When filtering on any resource, including the same field several times with different filtering criteria results in an implicit OR operation for that field and the different criteria.When filtering by different specified fields, an implicit AND is performed between those criteria." so which are different fields, metadata, origin.task, tags, those are different fields. <strong>Note</strong> different metadata fields are treated as different fields as well, so it will be <strong>AND</strong> operation for different metadata field.</p></li>
 </ol><p>So for a quick example, this examples gives me all files in project &ldquo;tengfei/demo&rdquo; that with metadata sample_id &ldquo;Sample1&rdquo; <strong>OR</strong> &ldquo;Sample2&rdquo;, <strong>AND</strong> the library id has to be &ldquo;EXAMPLE&rdquo;, <strong>AND</strong> tags has either &ldquo;hello&rdquo; <strong>OR</strong> &ldquo;world&rdquo;.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo"</span>)
-p$<span class="kw">file</span>(<span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">sample_id =</span> <span class="st">"Sample1"</span>, 
-                       <span class="dt">sample_id =</span> <span class="st">"Sample2"</span>, 
-                       <span class="dt">library_id =</span> <span class="st">"EXAMPLE"</span>), 
+p$<span class="kw">file</span>(<span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">sample_id =</span> <span class="st">"Sample1"</span>,
+                       <span class="dt">sample_id =</span> <span class="st">"Sample2"</span>,
+                       <span class="dt">library_id =</span> <span class="st">"EXAMPLE"</span>),
        <span class="dt">tag =</span> <span class="kw">c</span>(<span class="st">"hello"</span>, <span class="st">"world"</span>))</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -849,25 +849,25 @@ p$<span class="kw">file</span>(<span class="dt">metadata =</span> <span class="k
 <p>There are two ways to return the exact file you want. One is by <code>id</code>, the other one is by exact <code>name</code>.</p>
 <p><strong><em>For advanced users:</em></strong> When searching by name with <code>exact = TRUE</code>, it directly uses our public API call to match exact name and return the object with a single query. When you turn off <code>exact</code>, it will <code>grep</code> all files or files defined with <code>limit</code> and <code>offset</code> first, then match by name, which could be slow.</p>
 <p>To get the file id, you can check the url on the visual interface from the file details page.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## return single object id is "some_file_id"
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return single object id is "some_file_id"</span>
 p$<span class="kw">file</span>(<span class="dt">id =</span> <span class="st">"some_file_id"</span>)
-## return single object named a.fastq
+<span class="co"># return a single object named a.fastq</span>
 p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"a.fastq"</span>, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
-## public file search using Auth object
+<span class="co"># public file search using Auth object</span>
 a$<span class="kw">public_file</span>(<span class="dt">name =</span> <span class="st">"ucsc.hg19.fasta.fai"</span>, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
 a$<span class="kw">public_file</span>(<span class="dt">id =</span> <span class="st">"578cf94a507c17681a3117e8"</span>)</code></pre></div>
 <p>To get more than one object, the arguments <code>id</code> and <code>name</code> both accept vectors, so you can pass more than one <code>id</code> or <code>name</code> to it.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## get two files
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get two files</span>
 p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">"test1.fastq"</span>, <span class="st">"test2.fastq"</span>), <span class="dt">exact =</span> <span class="ot">TRUE</span>)
-## get two files from public files using shorhand
-a$<span class="kw">public_file</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">"ucsc.hg19.fasta.fai"</span>, <span class="st">"ucsc.hg19.fasta"</span>), 
+<span class="co"># get two files from public files using shorthand</span>
+a$<span class="kw">public_file</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">"ucsc.hg19.fasta.fai"</span>, <span class="st">"ucsc.hg19.fasta"</span>),
               <span class="dt">exact =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>If you don&rsquo;t use <code>exact = TRUE</code>, the API will assume it&rsquo;s pattern grep and use partial matching.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## get matchd the pattern for searching first 100 files
+<p>If you did not use <code>exact = TRUE</code>, the API will assume it&rsquo;s pattern grep and use partial matching.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get matchd the pattern for searching first 100 files</span>
 p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">"gz"</span>, <span class="st">"fastq"</span>))
-## get all matched files from the project
+<span class="co"># get all matched files from the project</span>
 p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">"gz"</span>, <span class="st">"fastq"</span>), <span class="dt">complete =</span> <span class="ot">TRUE</span>)
-## get all files matched ucsc
+<span class="co"># get all files matched ucsc</span>
 a$<span class="kw">public_file</span>(<span class="dt">name =</span> <span class="st">"ucsc.hg19"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -880,7 +880,7 @@ a$<span class="kw">public_file</span>(<span class="dt">name =</span> <span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo"</span>)
 p$<span class="kw">file</span>(<span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">sample_id =</span> <span class="st">"Sample1"</span>, 
                        <span class="dt">sample_id =</span> <span class="st">"Sample2"</span>, 
-                       <span class="dt">library_id =</span> <span class="st">"EXAMPLE"</span>)) </code></pre></div>
+                       <span class="dt">library_id =</span> <span class="st">"EXAMPLE"</span>))</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
@@ -898,12 +898,12 @@ p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="kw">c<
 <div id="search-by-original-task-id" class="section level5">
 <h5 class="hasAnchor"><html><body><a href="#search-by-original-task-id" class="anchor"> </a></body></html>Search by original task id</h5>
 <p>You can also get all files from a task. There are two ways to do it:</p>
-<ol style="list-style-type: decimal"><li>You can started from the <code>Task</code> object.</li>
-<li>You can also use the filter criteria.</li>
-</ol><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## list all outputs file from a task id
+<ol style="list-style-type: decimal"><li>Started from the <code>Task</code> object;</li>
+<li>Use the filter criteria.</li>
+</ol><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># list all outputs file from a task id</span>
 a$<span class="kw">task</span>(<span class="dt">id =</span> <span class="st">"53020538-6936-422f-80de-02fa65ae4b39"</span>)$<span class="kw">file</span>()
 
-## OR
+<span class="co"># OR</span>
 p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo"</span>)
 p$<span class="kw">file</span>(<span class="dt">origin.task =</span> <span class="st">"53020538-6936-422f-80de-02fa65ae4b39"</span>)</code></pre></div>
 <div align="right">
@@ -920,10 +920,10 @@ p$<span class="kw">file</span>(<span class="dt">origin.task =</span> <span class
 <ul><li><code>id</code>: file id or list/vector of files ids</li>
 <li><code>project</code>: project id.</li>
 <li><code>name</code> (optional):if omitted, use the same name as the original file name</li>
-</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## 1000G_omni2.5.b37.vcf
-fid &lt;-<span class="st"> "561e1b33e4b0aa6ec48167d7"</span>
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 1000G_omni2.5.b37.vcf</span>
+fid  &lt;-<span class="st"> "561e1b33e4b0aa6ec48167d7"</span>
 fid2 &lt;-<span class="st"> "561e1b33e4b0aa6ec48167d3"</span>
-pid &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="st">"demo"</span>)$id
+pid  &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="st">"demo"</span>)$id
 a$<span class="kw">copyFile</span>(<span class="kw">c</span>(fid, fid2), <span class="dt">project =</span> pid)
 a$<span class="kw">project</span>(<span class="dt">id =</span> pid)$<span class="kw">file</span>()</code></pre></div>
 <p><strong><em>NOTE:</em></strong> To copy a group of files, you need the <code>Auth$copyFile()</code> interface. The <code>id</code> of the files in your project will be different from their <code>id</code> in the Public Files repository.</p>
@@ -973,16 +973,16 @@ a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="k
 <li>From FTP, HTTP, etc. from the visual interface directly</li>
 <li>The API uploader that you can directly call with the <code>sevenbridges</code> package</li>
 </ul><p>Use the API client uploader by calling the <code>project$upload</code> function to upload a file, a file list, or a folder recursively:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">username =</span> <span class="st">"tengfei"</span>, <span class="dt">platform =</span> <span class="st">"cgc"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">username =</span> <span class="st">"tengfei"</span>, <span class="dt">platform =</span> <span class="st">"cgc"</span>)
 fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"sample1.fastq"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 
 (p &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/quickstart"</span>))
 
-## by default load .meta for the file
+<span class="co"># by default load .meta for the file</span>
 p$<span class="kw">upload</span>(fl, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)
-## pass metadata
+<span class="co"># pass metadata</span>
 p$<span class="kw">upload</span>(fl, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>, <span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">library_id =</span> <span class="st">"testid2"</span>, <span class="dt">platform =</span> <span class="st">"Illumina x11"</span>))
-## rename
+<span class="co"># rename</span>
 p$<span class="kw">upload</span>(fl, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>, <span class="dt">name =</span> <span class="st">"sample_new_name.fastq"</span>, 
          <span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">library_id =</span> <span class="st">"new_id"</span>))</code></pre></div>
 <p><strong>Upload a folder</strong></p>
@@ -991,7 +991,7 @@ p$<span class="kw">upload</span>(fl, <span class="dt">overwrite =</span> <span c
 p$<span class="kw">upload</span>(dir.ext, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Upload a file list</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dir.ext &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
-## enable full name
+<span class="co"># enable full name</span>
 fls &lt;-<span class="st"> </span><span class="kw">list.files</span>(dir.ext, <span class="dt">recursive =</span> <span class="ot">TRUE</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
 p$<span class="kw">upload</span>(fls, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)
 p$<span class="kw">upload</span>(<span class="st">"~/Documents/Data/sbgtest/1000G_phase1.snps.high_confidence.b37.vcf"</span>)</code></pre></div>
@@ -1004,18 +1004,18 @@ p$<span class="kw">upload</span>(<span class="st">"~/Documents/Data/sbgtest/1000
 <p>You can call the <code>update()</code> function from the Files object. Using this call, the following can be updated:</p>
 <ul><li>The file&rsquo;s <code>name</code>.</li>
 <li>The file&rsquo;s <code>metadata</code>. The metadata is in the form of a list. Note that as this call overwrites all the metadata for a given file, please supply a full list of all the metadata for the file. Conversely, you can use the <a href="#set_metadata"><code>set_meta()</code> function</a> to patch but not overwrite the metadata for a file.</li>
-</ul><p>If no parameters are provided, this call will just get the details of that file and update the object itself.</p>
+</ul><p>If no parameters were provided, this call will just get the details of that file and update the object itself.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(fl &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo-project"</span>)$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"sample.fastq"</span>))</code></pre></div>
 <pre><code>== File ==
 id : 56c7916ae4b03b56a7d7
 name : sample.fastq
 project : tengfei/demo-project</code></pre>
 <p><strong>Show metadata</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## show metadata
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># show metadata</span>
 fl$<span class="kw">meta</span>()</code></pre></div>
 <p><strong>Update meta</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl$<span class="kw">update</span>(<span class="dt">name =</span> <span class="st">"sample.fastq"</span>, <span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">new_item1 =</span> <span class="st">"item1"</span>, <span class="dt">new_item2 =</span> <span class="st">"item2"</span>, <span class="dt">file_extension =</span> <span class="st">"fastq"</span>))
-## check it out
+<span class="co"># check it out</span>
 fl$<span class="kw">meta</span>()</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -1026,30 +1026,30 @@ fl$<span class="kw">meta</span>()</code></pre></div>
 <p>Learn about metadata fields and their values for the relevant environment: [<a href="http://docs.sevenbridges.com/docs/metadata-on-the-seven-bridges-platform">Seven Bridges Platform</a>] [<a href="http://docs.cancergenomicscloud.org/v1.0/docs/metadata-for-private-data">CGC</a>]</p>
 <p>Note that the name of a file is not the same as its ID. A file&rsquo;s ID is a hexadecimal string automatically assigned to a file in a project. The file&rsquo;s name is a human-readable string. For information, please see the API overview for the <a href="http://docs.sevenbridges.com/v1.0/docs/the-api">Seven Bridges Platform</a> and for the <a href="http://docs.cancergenomicscloud.org/docs/the-cgc-api">CGC</a>.</p>
 <p><strong>Get metadata</strong> To get the metadata for a file, call the <code>meta()</code> function, as shown below.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## meta is pulling the latest information via API
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># meta is pulling the latest information via API</span>
 fl$<span class="kw">meta</span>()
-## field meta data saved the previous saved one
+<span class="co"># field meta data saved the previous saved one</span>
 fl$metadata</code></pre></div>
 <p><a name="set_metadata"></a> <strong>Set metadata</strong> Files from curated datasets on Seven Bridges environments have a defined set of metadata which is visible on the visual interface of each environment. However, you can also pass additional metadata for each file which is stored with your copy of the file in your project.</p>
 <p>To set metadata but not overwrite all previously stored metadata, call the <code>set_meta()</code> function from the Files object. Unlike the <code>update()</code> function for the Files object, the <code>set_meta()</code> function doesn&rsquo;t overwrite the metadata field. To overwrite the metadata field, use the <code>update()</code> function or pass the optional argument <code>overwrite = TRUE</code> for the <code>set_meta()</code> call.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl$<span class="kw">set_meta</span>(<span class="dt">new_item3 =</span> <span class="st">"item3"</span>)
 fl
-## oops it removed rest of the meta
+<span class="co"># oops it removed rest of the meta</span>
 fl$<span class="kw">set_meta</span>(<span class="dt">new_item4 =</span> <span class="st">"item4"</span>, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)
 fl</code></pre></div>
 <p><strong>Check details of each metadata field</strong></p>
 <p>You can use the <code><a href="../reference/Metadata-class.html">Metadata()</a></code> constructor to check the details of each metadata field. Simply call the function (name of the metadata) to display descriptions and enumerated itemts. Please pay attention to the <code>suggested_values</code> field.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## check which schema we have
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># check which schema we have</span>
 <span class="kw"><a href="../reference/Metadata-class.html">Metadata</a></span>()$<span class="kw">show</span>(<span class="dt">full =</span> <span class="ot">TRUE</span>)
-## check details for each, play with it
+<span class="co"># check details for each, play with it</span>
 <span class="kw"><a href="../reference/Metadata-class.html">platform</a></span>()
 <span class="kw"><a href="../reference/Metadata-class.html">paired_end</a></span>()
 <span class="kw"><a href="../reference/Metadata-class.html">quality_scale</a></span>()</code></pre></div>
 <p>As you can see, some metadata fields have suggested values. To construct the metadata, use <code><a href="../reference/Metadata-class.html">Metadata()</a></code> directly to pass the metadata fields and their values directly into the call. The call will perform the validation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/Metadata-class.html">Metadata</a></span>(<span class="dt">platform  =</span> <span class="st">"Affymetrix SNP Array 6.0"</span>, 
-         <span class="dt">paired_end =</span> <span class="dv">1</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/Metadata-class.html">Metadata</a></span>(<span class="dt">platform      =</span> <span class="st">"Affymetrix SNP Array 6.0"</span>, 
+         <span class="dt">paired_end    =</span> <span class="dv">1</span>, 
          <span class="dt">quality_scale =</span> <span class="st">"sanger"</span>,
-         <span class="dt">new_item =</span> <span class="st">"new test"</span>)</code></pre></div>
+         <span class="dt">new_item      =</span> <span class="st">"new test"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
@@ -1061,34 +1061,34 @@ fl</code></pre></div>
 <p>To add a new tag, call the <code>obj$add_tag()</code> method for the File object with a single tag string or a list or vector of tags.</p>
 <p><strong>Overwrite the tags for a file</strong></p>
 <p>To completely overwrite the tags for a file, use the <code>obj$set_tag()</code> method, which contains the default argument <code>overwrite = TRUE</code>.</p>
-<p>Let&rsquo;s use a file called &ldquo;sample.bam&rdquo; and play with its tags.</p>
+<p>Let&rsquo;s use a file called <code>sample.bam</code> and play with its tags.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/s3tutorial"</span>)
 fl =<span class="st"> </span>p$<span class="kw">file</span>(<span class="st">"sample.bam"</span>, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
-## show tags for single file
+<span class="co"># show tags for single file</span>
 fl$<span class="kw">tag</span>()
-## add new tags
+<span class="co"># add new tags</span>
 fl$<span class="kw"><a href="../reference/set_tag.html">add_tag</a></span>(<span class="st">"new tag"</span>)
-## equavilent to 
+<span class="co"># equavilent to </span>
 fl$<span class="kw"><a href="../reference/set_tag.html">set_tag</a></span>(<span class="st">"new tag 2"</span>, <span class="dt">overwrite =</span> <span class="ot">FALSE</span>)
-## set tags to overwrite existing
+<span class="co"># set tags to overwrite existing</span>
 x =<span class="st"> </span><span class="kw">list</span>(<span class="st">"this"</span>, <span class="st">"is"</span>, <span class="dv">1234</span>)
 fl$<span class="kw"><a href="../reference/set_tag.html">set_tag</a></span>(x)
-## filter by tags
+<span class="co"># filter by tags</span>
 p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="kw">c</span>(<span class="st">"1234"</span>, <span class="st">"new"</span>))
 p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="kw">list</span>(<span class="st">"1234"</span>, <span class="st">"new"</span>))
 p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="st">"1234"</span>)</code></pre></div>
 <p>Below, find convenient methods for <code>FilesList</code>. Let&rsquo;s add the tag &ldquo;s1&rdquo; to a group files matching &ldquo;Sample1&rdquo; and add the tag &ldquo;s2&rdquo; to a group of files that match &ldquo;s2&rdquo;. Then, we&rsquo;ll filter by these tags to obtain specific files.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## work on a group of files
-## add tag "s2" to a group of files named with "Sample2" in it
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># work on a group of files</span>
+<span class="co"># add tag "s2" to a group of files named with "Sample2" in it</span>
 fl2 =<span class="st"> </span>p$<span class="kw">file</span>(<span class="st">"Sample2"</span>)
 <span class="kw"><a href="../reference/set_tag.html">add_tag</a></span>(fl2, <span class="st">"s2"</span>)
-## add tag "s2" to a group of files named with "Sample1" in it
+<span class="co"># add tag "s2" to a group of files named with "Sample1" in it</span>
 fl1 =<span class="st"> </span>p$<span class="kw">file</span>(<span class="st">"Sample1"</span>)
 <span class="kw"><a href="../reference/set_tag.html">add_tag</a></span>(fl1, <span class="st">"s1"</span>)
-## filter by tag s1 or s2
+<span class="co"># filter by tag s1 or s2</span>
 p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="st">"s1"</span>)
 p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="st">"s2"</span>)
-## get files tagged with s2 and 1234
+<span class="co"># get files tagged with s2 and 1234</span>
 p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="kw">list</span>(<span class="st">"s2"</span>, <span class="st">"s1"</span>))</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -1097,7 +1097,7 @@ p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="kw">li
 </div>
 <div id="app" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#app" class="anchor"> </a></body></html>App</h3>
-<p>All Seven Bridges environments support the <a href="http://www.commonwl.org/">Common Workflow Language (CWL)</a> natively to allow for reproducible and portable workflows and tools. In this section, we will work with apps, including tools and workflows, via the API using the R library.</p>
+<p>All Seven Bridges environments support the <a href="http://www.commonwl.org/">Common Workflow Language (CWL)</a> natively to allow for reproducible and portable workflows and tools. In this section, we will work with apps, including tools and workflows, via the API using the <code>sevenbridges</code> R package.</p>
 <div align="right">
 <a href="#top">top</a>
 </div>
@@ -1105,29 +1105,29 @@ p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="kw">li
 <h4 class="hasAnchor"><html><body><a href="#list-all-apps" class="anchor"> </a></body></html>List all apps</h4>
 <p>This call lists all the apps available to you.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">app</span>()
-## or show details
+<span class="co"># or show details</span>
 a$<span class="kw">app</span>(<span class="dt">detail =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><strong>Search for an app by name</strong></p>
 <p>To search for a specific app by its name, pass a pattern for the <code>name</code> argument or provide a unique <code>id</code> as shown below.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## pattern match
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pattern match</span>
 a$<span class="kw">app</span>(<span class="dt">name =</span> <span class="st">"STAR"</span>)
-## unique id
+<span class="co"># unique id</span>
 aid &lt;-<span class="st"> </span>a$<span class="kw">app</span>()[[<span class="dv">1</span>]]$id
 aid
 a$<span class="kw">app</span>(<span class="dt">id =</span> aid)
-## get a specific revision from an app
+<span class="co"># get a specific revision from an app</span>
 a$<span class="kw">app</span>(<span class="dt">id =</span> aid, <span class="dt">revision =</span> <span class="dv">0</span>)</code></pre></div>
 <p><strong>List all apps in a project</strong></p>
 <p>To list all apps belonging to a specific project, use the <code>project</code> argument.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## my favorite, always
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># my favorite, always</span>
 a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">app</span>()
 
-## or alternatviely
+<span class="co"># or alternatviely</span>
 pid &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="st">"demo"</span>)$id
 a$<span class="kw">app</span>(<span class="dt">project =</span> pid)</code></pre></div>
 <p><strong>List all public apps</strong></p>
 <p>To list all public apps, use the <code>visibility</code> argument.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## show 100 items from public
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># show 100 items from public</span>
 x =<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>)
 <span class="kw">length</span>(x)
 x =<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)
@@ -1150,7 +1150,7 @@ a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="
 <li><code>name</code> (optional): use this field to optionally re-name your app</li>
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aid &lt;-<span class="st"> </span>a$<span class="kw">public_app</span>()[[<span class="dv">1</span>]]$id
 a$<span class="kw">copy_app</span>(aid, <span class="dt">project =</span> pid, <span class="dt">name =</span> <span class="st">"copy-rename-test"</span>)
-## check it is copied
+<span class="co"># check if it is copied</span>
 a$<span class="kw">app</span>(<span class="dt">project =</span> pid)</code></pre></div>
 <p>You can also copy directly from the app object, as shown below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">app =<span class="st"> </span>a$<span class="kw">public_app</span>(<span class="dt">id =</span> <span class="st">"admin/sbg-public-data/rna-seq-alignment-star"</span>)
@@ -1167,7 +1167,7 @@ app$<span class="kw">copy_to</span>(<span class="dt">project =</span> <span clas
 <p>To get a specific revision, pass the <code>revision</code> argument.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ap &lt;-<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>)[[<span class="dv">1</span>]]
 a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">app</span>(<span class="st">"index"</span>)
-## get a specific revision
+<span class="co"># get a specific revision</span>
 a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">app</span>(<span class="st">"index"</span>, <span class="dt">revision =</span> <span class="dv">0</span>)</code></pre></div>
 <p>Coming soon: converting apps to CWL objects</p>
 <div align="right">
@@ -1200,16 +1200,16 @@ a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="k
 <div id="list-tasks" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#list-tasks" class="anchor"> </a></body></html>List tasks</h4>
 <p>This call returns a list of tasks that you can access. You are able to filter tasks by status.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## all tasks
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># all tasks</span>
 a$<span class="kw">task</span>()
-## filter
+<span class="co"># filter</span>
 a$<span class="kw">task</span>(<span class="dt">status =</span> <span class="st">"completed"</span>)
 a$<span class="kw">task</span>(<span class="dt">status =</span> <span class="st">"running"</span>)</code></pre></div>
 <p>To list all tasks in a project, use the following.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## better way
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># a better way</span>
 a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">task</span>()
 
-## alternatively
+<span class="co"># alternatively</span>
 pid &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="st">"demo"</span>)$id
 a$<span class="kw">task</span>(<span class="dt">project =</span> pid)</code></pre></div>
 <p>To list all tasks with details, pass <code>detail = TRUE</code>.</p>
@@ -1232,16 +1232,16 @@ p$<span class="kw">task</span>(<span class="dt">parent =</span> <span class="st"
 <li><code>description</code> (optional): A description for this task</li>
 <li><code>app</code>: The app id</li>
 <li><code>inputs</code>: A list of inputs for this task</li>
-</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## push an app first
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># push an app first</span>
 fl.runif &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"runif.json"</span>, <span class="dt">package =</span> <span class="st">"sbgr"</span>)
 a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">app_add</span>(<span class="st">"runif_draft"</span>, fl.runif)
 runif_id &lt;-<span class="st"> "tengfei/demo-project/runif_draft"</span>
-## create a draft task
-a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">task_add</span>(<span class="dt">name =</span> <span class="st">"Draft runif 3"</span>, 
-                           <span class="dt">description =</span> <span class="st">"Description for runif 3"</span>, 
+<span class="co"># create a draft task</span>
+a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">task_add</span>(<span class="dt">name =</span> <span class="st">"Draft runif 3"</span>,
+                           <span class="dt">description =</span> <span class="st">"Description for runif 3"</span>,
                            <span class="dt">app =</span> runif_id,
                            <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">min =</span> <span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">10</span>))
-## confirm
+<span class="co"># confirm</span>
 a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">task</span>(<span class="dt">status =</span> <span class="st">"draft"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -1253,12 +1253,12 @@ a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="k
 <ul><li><code>name</code></li>
 <li><code>description</code></li>
 <li><code>inputs</code> list. Note that you can only update the items you provided.</li>
-</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## get the single task you want to update
+</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get the single task you want to update</span>
 tsk &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">task</span>(<span class="st">"Draft runif 3"</span>)
 tsk
 tsk$<span class="kw">update</span>(<span class="dt">name =</span> <span class="st">"Draft runif update"</span>, <span class="dt">description =</span> <span class="st">"draft 2"</span>, 
            <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">max =</span> <span class="dv">100</span>))
-## alternative way to check all inputs
+<span class="co"># alternative way to check all inputs</span>
 tsk$<span class="kw">getInputs</span>()</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -1268,7 +1268,7 @@ tsk$<span class="kw">getInputs</span>()</code></pre></div>
 <h4 class="hasAnchor"><html><body><a href="#run-a-task-1" class="anchor"> </a></body></html>Run a task</h4>
 <p>This call runs (&ldquo;executes&rdquo;) the specified task. Only tasks with a &ldquo;DRAFT&rdquo; status may be run.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tsk$<span class="kw">run</span>()
-## run update without information just return latest information
+<span class="co"># run update without information just return latest information</span>
 tsk$<span class="kw">update</span>()</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -1291,9 +1291,9 @@ tsk$<span class="kw">update</span>()</code></pre></div>
 <div id="abort-a-running-task" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#abort-a-running-task" class="anchor"> </a></body></html>Abort a running task</h4>
 <p>This call aborts the specified task. Only tasks whose status is &ldquo;RUNNING&rdquo; may be aborted.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## abort
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># abort</span>
 tsk$<span class="kw">abort</span>()
-## check
+<span class="co"># check</span>
 tsk$<span class="kw">update</span>()</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -1303,11 +1303,11 @@ tsk$<span class="kw">update</span>()</code></pre></div>
 <h4 class="hasAnchor"><html><body><a href="#delete-a-task" class="anchor"> </a></body></html>Delete a task</h4>
 <p>Note that you can only delete DRAFT tasks, not running tasks.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tsklst &lt;-<span class="st"> </span>a$<span class="kw">task</span>(<span class="dt">status =</span> <span class="st">"draft"</span>)
-## delete a single task
+<span class="co"># delete a single task</span>
 tsklst[[<span class="dv">1</span>]]$<span class="kw"><a href="../reference/delete.html">delete</a></span>()
-## confirm
+<span class="co"># confirm</span>
 a$<span class="kw">task</span>(<span class="dt">status =</span> <span class="st">"draft"</span>)
-## delete a list of tasks
+<span class="co"># delete a list of tasks</span>
 <span class="kw"><a href="../reference/delete.html">delete</a></span>(tsklst)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -1323,7 +1323,7 @@ a$<span class="kw">task</span>(<span class="dt">status =</span> <span class="st"
 <div id="run-task-in-batch-mode" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#run-task-in-batch-mode" class="anchor"> </a></body></html>Run task in batch mode</h4>
 <p>To run task in batch mode, (check <code><a href="../reference/batch.html">?batch</a></code>) for more details. The code below is a mock.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## batch by items
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># batch by items</span>
 (tsk &lt;-<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> <span class="st">"RNA DE report new batch 2"</span>, 
                    <span class="dt">description =</span> <span class="st">"RNA DE analysis report"</span>, 
                    <span class="dt">app =</span> rna.app$id,
@@ -1332,13 +1332,13 @@ a$<span class="kw">task</span>(<span class="dt">status =</span> <span class="st"
                                  <span class="dt">design =</span> design.in,
                                  <span class="dt">gtffile =</span> gtf.in)))
 
-## batch by metadata, input files has to have metadata fields specified
-(tsk &lt;-<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> <span class="st">"RNA DE report new batch 3"</span>, 
-                   <span class="dt">description =</span> <span class="st">"RNA DE analysis report"</span>, 
+<span class="co"># batch by metadata, input files has to have metadata fields specified</span>
+(tsk &lt;-<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> <span class="st">"RNA DE report new batch 3"</span>,
+                   <span class="dt">description =</span> <span class="st">"RNA DE analysis report"</span>,
                    <span class="dt">app =</span> rna.app$id,
-                   <span class="dt">batch =</span> <span class="kw"><a href="../reference/batch.html">batch</a></span>(<span class="dt">input =</span> <span class="st">"fastq"</span>, 
+                   <span class="dt">batch =</span> <span class="kw"><a href="../reference/batch.html">batch</a></span>(<span class="dt">input =</span> <span class="st">"fastq"</span>,
                                  <span class="kw">c</span>(<span class="st">"metadata.sample_id"</span>, <span class="st">"metadata.library_id"</span>)),
-                   <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">bamfiles =</span> bamfiles.in, 
+                   <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">bamfiles =</span> bamfiles.in,
                                  <span class="dt">design =</span> design.in,
                                  <span class="dt">gtffile =</span> gtf.in)))</code></pre></div>
 <div align="right">
@@ -1369,11 +1369,11 @@ a$<span class="kw">add_volume</span>(<span class="dt">name =</span> <span class=
 </div>
 <div id="list-and-search-all-volumes" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#list-and-search-all-volumes" class="anchor"> </a></body></html>List and search all volumes</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## list all volume
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># list all volume</span>
 a$<span class="kw">volume</span>()
-## get unique volume by id
+<span class="co"># get unique volume by id</span>
 a$<span class="kw">volume</span>(<span class="dt">id =</span> <span class="st">"tengfei/tengfei_demo"</span>)
-## partial search by name
+<span class="co"># partial search by name</span>
 a$<span class="kw">volume</span>(<span class="dt">name =</span> <span class="st">"demo"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -1405,8 +1405,8 @@ res =<span class="st"> </span>v$<span class="kw">import</span>(<span class="dt">
          <span class="dt">name =</span> <span class="st">"new.bam.bai"</span>, 
          <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)
 
-## get job status update
-## state will be "COMPLETED" when it's finished other wise "P<span class="re">END</span>ING"
+<span class="co"># get job status update</span>
+<span class="co"># state will be "COMPLETED" when it's finished, otherwise "PENDING"</span>
 v$<span class="kw">get_import_job</span>(res$id)
 v</code></pre></div>
 </div>
@@ -1418,10 +1418,10 @@ v</code></pre></div>
 </ul><p>When testing please update your file in a project.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res =<span class="st"> </span>v$<span class="kw">export</span>(<span class="dt">file =</span> <span class="st">"579fb1c9e4b08370afe7903a"</span>, 
          <span class="dt">volume =</span> <span class="st">"tengfei/tutorial_volume"</span>,
-         <span class="dt">location =</span> <span class="st">""</span>, ## when "" use old name
+         <span class="dt">location =</span> <span class="st">""</span>,  <span class="co"># when "" use old name</span>
          <span class="dt">sse_algorithm =</span>  <span class="st">"AES256"</span>)
-## get job status update
-## state will be "COMPLETED" when it's finished other wise "P<span class="re">END</span>ING"
+<span class="co"># get job status update</span>
+<span class="co"># state will be "COMPLETED" when it's finished other wise "PENDING"</span>
 v$<span class="kw">get_export_job</span>(res$id)
 v</code></pre></div>
 <div align="right">
@@ -1434,18 +1434,18 @@ v</code></pre></div>
 <p>Seven Bridges hosts publicly accessible files and apps on its environments. The <code>sevenbridges</code> package provides two easy function calls from the Authentication object to search for and copy files and apps to a project.</p>
 <div id="public-files" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#public-files" class="anchor"> </a></body></html>Public files</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## list first 100 files 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># list the first 100 files</span>
 a$<span class="kw">public_file</span>()
-## list by offset and limit
+<span class="co"># list by offset and limit</span>
 a$<span class="kw">public_file</span>(<span class="dt">offset =</span> <span class="dv">100</span>, <span class="dt">limit =</span> <span class="dv">100</span>)
-## simply list everything!
+<span class="co"># simply list everything!</span>
 a$<span class="kw">public_file</span>(<span class="dt">complete =</span> <span class="ot">TRUE</span>)
-## get exact file by id
+<span class="co"># get exact file by id</span>
 a$<span class="kw">public_file</span>(<span class="dt">id =</span> <span class="st">"5772b6f0507c175267448700"</span>)
-## get exact file by name with exact = TRUE
+<span class="co"># get exact file by name with exact = TRUE</span>
 a$<span class="kw">public_file</span>(<span class="dt">name =</span> <span class="st">"G20479.HCC1143.2.converted.pe_1_1Mreads.fastq"</span>, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
-## with exact = FALSE by default search by name pattern
-a$<span class="kw">public_file</span>(<span class="dt">name =</span> <span class="st">"fastq"</span>) 
+<span class="co"># with exact = FALSE by default search by name pattern</span>
+a$<span class="kw">public_file</span>(<span class="dt">name =</span> <span class="st">"fastq"</span>)
 a$<span class="kw">public_file</span>(<span class="dt">name =</span> <span class="st">"G20479.HCC1143.2.converted.pe_1_1Mreads.fastq"</span>)</code></pre></div>
 <p>Public files are hosted in the project called <code>admin/sbg-public-data</code>, and you can alternatively use the <code>file</code> request to get files you need.</p>
 <div align="right">
@@ -1455,15 +1455,15 @@ a$<span class="kw">public_file</span>(<span class="dt">name =</span> <span class
 <div id="public-apps" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#public-apps" class="anchor"> </a></body></html>Public apps</h4>
 <p>For public apps, there are similar API calls.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## list for 100 apps
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># list for 100 apps</span>
 a$<span class="kw">public_app</span>()
-## list by offset and limit
+<span class="co"># list by offset and limit</span>
 a$<span class="kw">public_app</span>(<span class="dt">offset =</span> <span class="dv">100</span>, <span class="dt">limit =</span> <span class="dv">50</span>)
-## search by id
+<span class="co"># search by id</span>
 a$<span class="kw">public_app</span>(<span class="dt">id =</span> <span class="st">"admin/sbg-public-data/control-freec-8-1/12"</span>)
-## search by name in ALL apps
+<span class="co"># search by name in ALL apps</span>
 a$<span class="kw">public_app</span>(<span class="dt">name =</span> <span class="st">"STAR"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)
-## search by name with exact match
+<span class="co"># search by name with exact match</span>
 a$<span class="kw">public_app</span>(<span class="dt">name =</span> <span class="st">"Control-FREEC"</span>, <span class="dt">exact =</span> <span class="ot">TRUE</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
@@ -1519,7 +1519,7 @@ a$<span class="kw">project_new</span>(<span class="dt">name =</span> , <span cla
 a$<span class="kw">project</span>()
 a$<span class="kw">project</span>(<span class="dt">owner =</span> <span class="st">"yintengfei"</span>)
 ### partial match
-p &lt;-<span class="st">  </span>a$<span class="kw">project</span>(<span class="dt">name =</span> , <span class="dt">id =</span> , <span class="dt">exact =</span> <span class="ot">TRUE</span>)
+p &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">name =</span> , <span class="dt">id =</span> , <span class="dt">exact =</span> <span class="ot">TRUE</span>)
 ### delete
 p$<span class="kw"><a href="../reference/delete.html">delete</a></span>()
 ### update
@@ -1545,7 +1545,7 @@ p$<span class="kw">file</span>(<span class="dt">id =</span> fid3)$<span class="k
 ### download all
 <span class="kw"><a href="../reference/download.html">download</a></span>(p$<span class="kw">file</span>())
 ### update a file
-fl$<span class="kw">update</span>(<span class="dt">name =</span> , <span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">a =</span>  ,<span class="dt">b =</span> , ...))
+fl$<span class="kw">update</span>(<span class="dt">name =</span> , <span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">a =</span> , <span class="dt">b =</span> , ...))
 ### meta
 fl$<span class="kw">meta</span>()
 fl$<span class="kw">setMeta</span>()
@@ -1579,7 +1579,7 @@ tsk$<span class="kw">getInputs</span>()
 tsk$<span class="kw">monitor</span>()
 
 <span class="kw"><a href="../reference/setTaskHook.html">getTaskHook</a></span>()
-<span class="kw"><a href="../reference/setTaskHook.html">setTaskHook</a></span>(<span class="dt">statis =</span> , <span class="dt">fun  =</span>)</code></pre></div>
+<span class="kw"><a href="../reference/setTaskHook.html">setTaskHook</a></span>(<span class="dt">status =</span> , <span class="dt">fun =</span> )</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
