@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Files class — Files-class • sevenbridges</title>
+<title>Class Files — Files-class • sevenbridges</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -72,11 +72,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Files class</h1>
+    <h1>Class Files</h1>
     </div>
 
     
-    <p>Files Class</p>
+    <p>Class Files</p>
     
 
     <pre><span class='fu'>FilesList</span>(<span class='no'>...</span>)</pre>
@@ -84,7 +84,7 @@
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
       <dt>...</dt>
-      <dd>one or more Files objects</dd>
+      <dd>one or more <code>Files</code> objects</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -93,10 +93,10 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Files (with &quot;s&quot;) class contains CWL File class, it&#39;s usally returned by
-the API call which returns Files. A group of Files is defined as FilesList.
-Users do not usually need to construct Files or FilesList manually,
-they are generated from a API call most of the time.</p>
+    <p><code>Files</code> (with &quot;<code>s</code>&quot;) class is usally returned by the API call
+which returns Files. A group of <code>Files</code> is defined as <code>FilesList</code>.
+Users do not usually need to construct <code>Files</code> or <code>FilesList</code>
+manually, they are generated from a API call most of the time.</p>
     
     <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
 
@@ -104,13 +104,16 @@ they are generated from a API call most of the time.</p>
     <p><dl class='dl-horizontal'>
 <dt><code>id</code></dt><dd>character used as file id</dd></p>
     <p><dt><code>name</code></dt><dd>string used as file name</dd></p>
-    <p><dt><code>metdata</code></dt><dd>a list for metdata associated with the file</dd></p>
+    <p><dt><code>size</code></dt><dd>file size</dd></p>
     <p><dt><code>project</code></dt><dd>project id if any, when returned by a API call,
 it usually return the project id and stored with the object.</dd></p>
-    <p><dt><code>url</code></dt><dd>url</dd></p>
     <p><dt><code>created_on</code></dt><dd>date created on</dd></p>
-    <p><dt><code>modifield_on</code></dt><dd>data modified on</dd></p>
-    <p><dt><code>origin</code></dt><dd>list as origin</dd>
+    <p><dt><code>modified_on</code></dt><dd>date modified on</dd></p>
+    <p><dt><code>storage</code></dt><dd>list as storage type</dd></p>
+    <p><dt><code>origin</code></dt><dd>list as origin</dd></p>
+    <p><dt><code>tags</code></dt><dd>list as tags</dd></p>
+    <p><dt><code>metadata</code></dt><dd>a list for metadata associated with the file</dd></p>
+    <p><dt><code>url</code></dt><dd>file url</dd>
 </dl></p>
     
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
@@ -131,6 +134,13 @@ is set to TRUE, it overwrites the metadata</dd></p>
 and tags for a specified file.</dd>
 </dl></p>
     
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>In sevenbridges package version &lt;= 1.5.4, the <code>Files</code> class
+inherits from the <code>File</code> class defined in CWL. To avoid confusion,
+in the current implementation, they are defined separately and not
+coupled anymore.</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='fu'>Files</span>(<span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"test_id"</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"test.bam"</span>)</pre>
@@ -147,6 +157,8 @@ and tags for a specified file.</dd>
       <li><a href="#fields">Fields</a></li>
 
       <li><a href="#methods">Methods</a></li>
+
+      <li><a href="#note">Note</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
