@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert App or a cwl JSON file to Tool or Flow object — convert_app • sevenbridges</title>
+<title>Convert App or a CWL JSON file to Tool or Flow object — convert_app • sevenbridges</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -72,11 +72,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert App or a cwl JSON file to Tool or Flow object</h1>
+    <h1>Convert App or a CWL JSON file to Tool or Flow object</h1>
     </div>
 
     
-    <p>Convert App or a cwl JSON file to Tool or Flow object</p>
+    <p>Convert App or a CWL JSON file to Tool or Flow object</p>
     
 
     <pre><span class='fu'>convert_app</span>(<span class='no'>from</span>)
@@ -86,34 +86,33 @@
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
       <dt>from</dt>
-      <dd>an App object or a cwl JSON</dd>
+      <dd>an App object or a CWL JSON</dd>
       <dt>x</dt>
       <dd>a App object</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Tool or Flow object depends on cwl type.</p>
+    <p>Tool or Flow object depends on CWL type.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function import cwl JSON file, based on its class: CommandLineTool
+    <p>This function import CWL JSON file, based on its class: CommandLineTool
 or Worklfow to relevant object in R, Tool object or Flow object.</p>
     
     <h2 class="hasAnchor" id="apptype"><a class="anchor" href="#apptype"></a>appType</h2>
 
     <p></p>
     <p><dl class='dl-horizontal'>
- this function return class of a App object.
-</dl></p>
+ this function return class of a App object.</dl></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='no'>tool.in</span> <span class='kw'>=</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/app"</span>, <span class='st'>"tool_star.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"sevenbridges"</span>)
 <span class='no'>flow.in</span> <span class='kw'>=</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/app"</span>, <span class='st'>"flow_star.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"sevenbridges"</span>)
-<span class='co'>## convert to Tool object</span>
+<span class='co'># convert to Tool object</span>
 <span class='fu'>convert_app</span>(<span class='no'>tool.in</span>)
-<span class='co'>## convert to Flow object</span>
+<span class='co'># convert to Flow object</span>
 <span class='fu'>convert_app</span>(<span class='no'>flow.in</span>)</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -86,19 +86,19 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'>## show schema (you can still provide customized one)</span>
-<span class='co'>## empty beause they are all NULL</span>
+    <pre class="examples"><span class='co'># show schema (you can still provide customized one)</span>
+<span class='co'># empty beause they are all NULL</span>
 <span class='fu'>Metadata</span>()
-<span class='co'>## show schema</span>
+<span class='co'># show schema</span>
 <span class='fu'>Metadata</span>()$<span class='fu'>show</span>(<span class='fl'>TRUE</span>)
-<span class='co'>## or</span>
+<span class='co'># or</span>
 <span class='fu'>names</span>(<span class='fu'>Metadata</span>()$<span class='fu'><a href='asList.html'>asList</a></span>(<span class='fl'>TRUE</span>))
-<span class='co'>## returned meta field is actually define as function too, direclty</span>
-<span class='co'>## call them will give you details</span>
+<span class='co'># returned meta field is actually define as function too, direclty</span>
+<span class='co'># call them will give you details</span>
 <span class='fu'>platform</span>()
 <span class='fu'>paired_end</span>()
 <span class='fu'>quality_scale</span>()
-<span class='co'>## check their suggested value and construct your metadata</span>
+<span class='co'># check their suggested value and construct your metadata</span>
 <span class='fu'>Metadata</span>(<span class='kw'>platform</span>  <span class='kw'>=</span> <span class='st'>"Affymetrix SNP Array 6.0"</span>, <span class='kw'>paired_end</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>quality_scale</span> <span class='kw'>=</span> <span class='st'>"sanger"</span>)</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

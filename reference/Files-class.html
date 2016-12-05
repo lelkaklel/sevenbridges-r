@@ -113,7 +113,7 @@ it usually return the project id and stored with the object.</dd></p>
     <p><dt><code>origin</code></dt><dd>list as origin</dd></p>
     <p><dt><code>tags</code></dt><dd>list as tags</dd></p>
     <p><dt><code>metadata</code></dt><dd>a list for metadata associated with the file</dd></p>
-    <p><dt><code>url</code></dt><dd>file url</dd>
+    <p><dt><code>url</code></dt><dd>file download url</dd>
 </dl></p>
     
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
@@ -121,8 +121,8 @@ it usually return the project id and stored with the object.</dd></p>
     <p></p>
     <p><dl class='dl-horizontal'>
 <dt><code>add_tag(x, ...)</code></dt><dd>add new tags while keeping old tags</dd></p>
-    <p><dt><code>copy_to(project = NULL, name = NULL)</code></dt><dd>copy a file to a project (id) with new name </dd></p>
-    <p><dt><code>download(destfile, ..., method = &quot;curl&quot;)</code></dt><dd>see help(download.file) for more options</dd></p>
+    <p><dt><code>copy_to(project = NULL, name = NULL)</code></dt><dd>copy a file to a project (id) with new name</dd></p>
+    <p><dt><code>download(destfile, ..., method = &quot;curl&quot;)</code></dt><dd>see `help(download.file)` for more options</dd></p>
     <p><dt><code>meta()</code></dt><dd>get metadata from a file</dd></p>
     <p><dt><code>setMeta(..., overwrite = FALSE)</code></dt><dd>set metadata with provided list, when overwrite
 is set to TRUE, it overwrites the metadata</dd></p>

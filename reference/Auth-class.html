@@ -90,8 +90,9 @@
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
       <dt>platform</dt>
-      <dd>which platform you are using, by default it is cgc platform, it tries
-to search your .sbg.auth.yml file to parse platform id your deinfed there.</dd>
+      <dd>which platform you are using, by default it is cgc platform,
+it tries to search your .sbg.auth.yml file to parse platform id your
+deinfed there.</dd>
       <dt>username</dt>
       <dd>username defined in .sbg.auth.yml file</dd>
       <dt>config</dt>
@@ -105,8 +106,8 @@ to search your .sbg.auth.yml file to parse platform id your deinfed there.</dd>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Every object could be requested from this Auth object and any action
-could start from this object using cascading style. Please check vignette
-&#39;easy-api&#39; for more information.</p>
+could start from this object using cascading style. Please check
+<code>vignette(&quot;easy-api&quot;)</code> for more information.</p>
     <p>Current config file is set on home directory with the name .sbg.auth.yml</p>
     
     <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
@@ -128,8 +129,9 @@ deinfed there.</dd></p>
     <p></p>
     <p><dl class='dl-horizontal'>
 <dt><code>api(..., limit = getOption(&quot;sevenbridges&quot;)$limit,
-  offset = getOption(&quot;sevenbridges&quot;)$offset, complete = FALSE)</code></dt><dd>This call returns all API paths, and pass arguments to api() function and input token and url automatically</dd></p>
-    <p><dt><code>billing(id = NULL, breakdown = FALSE, ...)</code></dt><dd>if no id provided, This call returns a list of
+  offset = getOption(&quot;sevenbridges&quot;)$offset, complete = FALSE)</code></dt><dd>This call returns all API paths, and pass arguments
+to api() function and input token and url automatically</dd></p>
+    <p><dt><code>billing(id = NULL, breakdown = FALSE, ...)</code></dt><dd>If no id provided, This call returns a list of
 paths used to access billing information via the
 API. else, This call lists all your billing groups,
 including groups that are pending or have been disabled.
@@ -142,11 +144,21 @@ initiating user (the runner), start and end times,
 and cost.</dd></p>
     <p><dt><code>file(name = NULL, id = NULL, project = NULL, exact = FALSE,
   detail = FALSE, metadata = list(), origin.task = NULL, tag = NULL,
-  complete = FALSE, search.engine = c(&quot;server&quot;, &quot;brute&quot;), ...)</code></dt><dd>This call returns a list of all files in a specified project that you can access. For each file, the call returns: 1) Its ID 2) Its filename The project is specified as a query parameter in the call.</dd></p>
-    <p><dt><code>invoice(id = NULL, ...)</code></dt><dd>no id provided, This call returns a list of invoices, with information about each, including whether or not the invoice is pending and the billing period it covers.</p>
-    <p>The call returns information about all your available invoices, unless you use the query parameter bg_id to specify the ID of a particular billing group, in which case it will return the invoice incurred by that billing group only.</p>
-    <p>if id provided, This call retrieves information about a selected invoice, including the costs for analysis and storage, and the invoice period.
-                            </dd></p>
+  complete = FALSE, search.engine = c(&quot;server&quot;, &quot;brute&quot;), ...)</code></dt><dd>This call returns a list of all files in a specified
+project that you can access. For each file, the call
+returns: 1) Its ID 2) Its filename The project is
+specified as a query parameter in the call.</dd></p>
+    <p><dt><code>invoice(id = NULL, ...)</code></dt><dd>                            If no id provided, This call returns a list of invoices,
+                            with information about each, including whether or not
+                            the invoice is pending and the billing period it covers.</p>
+    <p>The call returns information about all your available
+                            invoices, unless you use the query parameter bg_id to
+                            specify the ID of a particular billing group, in which
+                            case it will return the invoice incurred by that billing
+                            group only.</p>
+    <p>If id was provided, This call retrieves information about
+                            a selected invoice, including the costs for analysis
+                            and storage, and the invoice period.</dd></p>
     <p><dt><code>project(name = NULL, id = NULL, index = NULL, ignore.case = TRUE,
   exact = FALSE, owner = NULL, detail = FALSE, ...)</code></dt><dd>If no id or name provided, this call returns a
 list of all projects you are a member of.
@@ -162,7 +174,7 @@ Each project&#39;s ID and URL will be returned.</dd></p>
     <p><dt><code>rate_limit(...)</code></dt><dd>This call returns information about your current
 rate limit. This is the number of API calls you can
 make in one hour.</dd></p>
-    <p><dt><code>user(username = NULL, ...)</code></dt><dd>This call returns a list of the resources, such as projects,
+    <p><dt><code>user(username = NULL, ...)</code></dt><dd>                            This call returns a list of the resources, such as projects,
                             billing groups, and organizations, that are accessible to you.</p>
     <p>If you are not an administrator, this call will only return a
                             successful response if username is replaced with your own
@@ -170,12 +182,14 @@ make in one hour.</dd></p>
                             username with the username of any CGC user, to return
                             information on their resources.</dd></p>
     <p><dt><code>volume(name = NULL, id = NULL, index = NULL, ignore.case = TRUE,
-  exact = FALSE, detail = FALSE, ...)</code></dt><dd>If no id or name provided, this call returns a list of all volumes you are a member of. If name or id provided, we did a match search the list</dd>
+  exact = FALSE, detail = FALSE, ...)</code></dt><dd>If no id or name provided, this call returns a list
+of all volumes you are a member of. If name or id
+provided, we did a match search the list</dd>
 </dl></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'>## replace it with real token</span>
+    <pre class="examples"><span class='co'># replace it with real token</span>
 <span class='no'>token</span> <span class='kw'>&lt;-</span> <span class='st'>"aef7e9e3f6c54fb1b338ac4ecddf1a56"</span>
 <span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'>Auth</span>(<span class='no'>token</span>)</pre>
   </div>
