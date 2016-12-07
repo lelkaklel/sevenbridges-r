@@ -41,7 +41,7 @@
 <div class="contents">
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#introduction" class="anchor"> </a></body></html>Introduction</h2>
-<p>The goal of this <code>tengfei/sevenbridges</code> docker image is to provide</p>
+<p>The goal of this <code>tengfei/sevenbridges</code> Docker image is to provide</p>
 <ul><li>SDK environment that includes
 <ul><li>Command line uploader</li>
 <li>Seven Bridgs Command line tools</li>
@@ -54,13 +54,11 @@
 <h2 class="hasAnchor"><html><body><a href="#docker-container" class="anchor"> </a></body></html>Docker container</h2>
 <div id="build-container-locally" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#build-container-locally" class="anchor"> </a></body></html>Build container locally</h3>
-<p>The Dockerfile is included with the package in <code>inst/docker</code> folder.</p>
-<p>Here is the current content of Dockerfile</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"docker/sevenbridges/"</span>, <span class="st">"Dockerfile"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
-<span class="kw">cat</span>(<span class="kw">readLines</span>(fl), <span class="dt">sep =</span> <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</code></pre></div>
-<pre><code>Warning in readLines(fl): incomplete final line found on '/usr/local/lib/R/
-3.3/site-library/sevenbridges/docker/sevenbridges//Dockerfile'</code></pre>
-<pre><code>FROM rocker/hadleyverse 
+<p>The <code>Dockerfile</code> is included with the package in <code>inst/docker</code> folder.</p>
+<p>Here is the current content of <code>Dockerfile</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"docker/sevenbridges/"</span>, <span class="st">"Dockerfile"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
+<span class="kw">cat</span>(<span class="kw">readLines</span>(fl), <span class="dt">sep =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</code></pre></div>
+<pre><code>FROM rocker/hadleyverse
 MAINTAINER "Tengfei Yin" yintengfei@gmail.com
 
 ## install docker (docker in docker)
@@ -76,9 +74,9 @@ RUN apt-get update &amp;&amp; apt-get install -y  \
     unp \
     emacs \
     supervisor \
-    libfuse-dev 
+    libfuse-dev
 ##     aufs-tools \
-##     cgroupfs-mount 
+##     cgroupfs-mount
 
 # RUN wget --no-verbose http://ftp.us.debian.org/debian/pool/main/l/lvm2/libdevmapper1.02.1_1.02.136-1_amd64.deb &amp;&amp; \
 #    dpkg -i libdevmapper1.02.1_1.02.136-1_amd64.deb &amp;&amp; \
@@ -93,7 +91,7 @@ RUN apt-get install -y apt-transport-https ca-certificates \
     &amp;&amp; apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D \
     &amp;&amp; echo "deb https://apt.dockerproject.org/repo debian-jessie main" &gt; /etc/apt/sources.list.d/docker.list \
     &amp;&amp; echo "//APT::Default-Release \"testing\";" &gt; /etc/apt/apt.conf.d/default   \
-    &amp;&amp; apt-cache policy docker-engine 
+    &amp;&amp; apt-cache policy docker-engine
 
 Run apt-get update -y \
     &amp;&amp; apt-get upgrade -y \
@@ -129,7 +127,7 @@ RUN Rscript -e "source('http://bioconductor.org/biocLite.R');\
 ## RUN wget https://igor.sbgenomics.com/sbg-uploader/sbg-uploader.tgz \
 ##     &amp;&amp; tar zxvf sbg-uploader.tgz -C / \
 ##    &amp;&amp; ln -s  /sbg-uploader/bin/sbg-uploader.sh /usr/local/bin/sbg-uploader.sh
-    
+
 
 ## install SBG rabix
 RUN wget https://github.com/rabix/bunny/releases/download/v0.1.0-alpha/rabix-0.1.1-alpha.tar.gz \
@@ -144,7 +142,7 @@ RUN wget https://github.com/rabix/bunny/releases/download/v0.1.0-alpha/rabix-0.1
 
 ## start insert command line interface and report template needed
 ADD src/runif.R /usr/local/bin/
-RUN mkdir /report/ 
+RUN mkdir /report/
 ADD report/report.Rmd /report/
 
 
@@ -210,44 +208,45 @@ COPY src/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 ## CMD ["/init;/usr/bin/shiny-server.sh"]
 ## CMD ["sh", "-c", "/usr/bin/shiny-server.sh;/init"]</code></pre>
-<p>You can simply build it locally, enter folder which contain that dockerfile, in this case, it&rsquo;s under <code>inst/docker/sevenbridges</code></p>
-<pre><code>docker build -t tengfei/sevenbridges .</code></pre>
+<p>You can simply build it locally, enter folder which contain that <code>Dockerfile</code>, in this case, it&rsquo;s under <code>inst/docker/sevenbridges</code></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> build -t tengfei/sevenbridges .</code></pre></div>
 </div>
 <div id="pull-from-docker-hub" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#pull-from-docker-hub" class="anchor"> </a></body></html>Pull from docker hub</h3>
-<p>A hook is added to build the docker image automatically from my <a href="https://github.com/tengfei/sevenbridges">github</a>, it&rsquo;s under <code>inst/docker</code>, it&rsquo;s automatically build on my dockerhub <a href="https://hub.docker.com/r/tengfei/sevenbridges/">page</a>. you can directly use this <code>tengfei/sevenbridges</code>. Everytime a push is made in the github repos, the docker container is re-built.</p>
+<h3 class="hasAnchor"><html><body><a href="#pull-from-docker-hub" class="anchor"> </a></body></html>Pull from Docker Hub</h3>
+<p>A hook is added to build the Docker image automatically from the <a href="https://github.com/sbg/sevenbridges-r/tree/master/inst/docker/sevenbridges">sevenbridges-r GitHub repository</a>. It is automatically built on <a href="https://hub.docker.com/r/tengfei/sevenbridges/">Docker Hub</a>. You can directly use this image <code>tengfei/sevenbridges</code>. Everytime a push is made in the GitHub repo, the Docker container is re-built.</p>
 </div>
 </div>
 <div id="launch-rstudio-server-from-docker-container" class="section level2">
-<h2 class="hasAnchor"><html><body><a href="#launch-rstudio-server-from-docker-container" class="anchor"> </a></body></html>Launch Rstudio server from docker container</h2>
-<p>For example, you can ssh into your AWS instance, here I suppose you already have docker installed, and pull the image</p>
-<pre><code>docker pull tengfei/sevenbridges</code></pre>
+<h2 class="hasAnchor"><html><body><a href="#launch-rstudio-server-from-docker-container" class="anchor"> </a></body></html>Launch Rstudio server from Docker container</h2>
+<p>For example, you can ssh into your AWS instance, here I suppose you already have Docker installed, and pull the image</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> pull tengfei/sevenbridges</code></pre></div>
 <p>To launch sevenbridges Rstudio server image, I recommend you read this <a href="https://github.com/rocker-org/rocker/wiki/Using-the-RStudio-image">tutorial</a></p>
 <p>Or following the quick instruction here</p>
-<pre><code>docker run -d -p 8787:8787 tengfei/sevenbridges
-docker run -d -p 8787:8787 -e USER=&lt;username&gt; -e PASSWORD=&lt;password&gt; rocker/rstudio</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> run -d -p 8787:8787 tengfei/sevenbridges
+<span class="ex">docker</span> run -d -p 8787:8787 -e USER=<span class="op">&lt;</span>username<span class="op">&gt;</span> -e PASSWORD=<span class="op">&lt;</span>password<span class="op">&gt;</span> rocker/rstudio</code></pre></div>
 <p>You will be able to access the Rstudio in the browser by something like</p>
 <p><code>http://&lt;your ip address&gt;:8787</code></p>
 <p>Sometimes you want to add more users, to add users</p>
-<pre><code>## Enter the container
-docker exec -it &lt;container-id&gt; bash
-## Interactively input password and everything else
-adduser &lt;username&gt;</code></pre>
-<div id="launch-both-rstudio-and-shiny-server-from-same-docker-container" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#launch-both-rstudio-and-shiny-server-from-same-docker-container" class="anchor"> </a></body></html>Launch both Rstudio and Shiny server from same docker container</h3>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">## Enter the container</span>
+<span class="ex">docker</span> exec -it <span class="op">&lt;</span>container-id<span class="op">&gt;</span> bash
+<span class="co">## Interactively input password and everything else</span>
+<span class="ex">adduser</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></code></pre></div>
+<div id="launch-both-rstudio-and-shiny-server-from-the-same-docker-container" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#launch-both-rstudio-and-shiny-server-from-the-same-docker-container" class="anchor"> </a></body></html>Launch both Rstudio and Shiny server from the same Docker container</h3>
 <p>Sometimes it&rsquo;s very conventient to launch both Rstudio and Shiny server from a singel container and your users can manage to using Rstudio and publish Shiny apps at the same time in the same container. To do so, just pull the same image and launch them at different port.</p>
-<pre class="shell"><code>docker run  -d -p 8787:8787 -p 3838:3838 --name rstudio_shiny_server tengfei/sevenbridges</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> run  -d -p 8787:8787 -p 3838:3838 --name rstudio_shiny_server tengfei/sevenbridges</code></pre></div>
 <p>To mount file system you need to use <code>--privileged</code> with fuse.</p>
-<pre class="shell"><code>docker run  --privileged -d -p 8787:8787 -p 3838:3838 --name rstudio_shiny_server tengfei/sevenbridges</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> run  --privileged -d -p 8787:8787 -p 3838:3838 --name rstudio_shiny_server tengfei/sevenbridges</code></pre></div>
 <p>check out the ip from docker machine if you are on mac os.</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker-machine</span> ip default</code></pre></div>
 <p>In your browser, <code>http://&lt;url&gt;:8787/</code> for Rstudio server, for example, if 192.168.99.100 is what returned, visit <code>http://192.168.99.100:8787/</code> for Rstudio.</p>
 <p>For shiny server, <strong>per user app</strong> is hosted <code>http://&lt;url&gt;:3838/users/&lt;username of rstudio&gt;/&lt;app_dir&gt;</code>, for example, for user <code>rstudio</code> (a default user) and an app called <code>01_hello</code>, it will be <code>http://&lt;url&gt;:3838/users/rstudio/01_hello/</code>. To develop your shiny app from Rstudio server, you can login your rstudio server with your username, and create a fold at home folder called <code>~/ShinyApps</code> and develop shiny apps under that folder, for example, you can create an app called <code>02_text</code> at <code>~/ShinyApps/02_text/</code>.</p>
 <p>Let&rsquo;s try this, please login your rstudio at <code>http://&lt;url&gt;:8787</code> now, then try to copy some example over to your home folder under <code>~/ShinyApps/</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dir.create</span>(<span class="st">"~/ShinyApps"</span>)
-<span class="kw">file.copy</span>(<span class="st">"/usr/local/lib/R/site-library/shiny/examples/01_hello/"</span>, <span class="st">"~/ShinyApps/"</span>, <span class="dt">recursive =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>If you are login as username &lsquo;rstudio&rsquo;, then visit <code>http://192.168.99.100:3838/rstudio/01_hello</code> you should be able to see the hello example.</p>
-<p>Note: Generic shiny app can also be hosted <code>http://&lt;url&gt;:3838/</code> or for particular app, <code>http://&lt;url&gt;:3838/&lt;app_dir&gt;</code> and inside the docker container, it&rsquo;s hosted under <code>/srv/shiny-server/</code></p>
+<span class="kw">file.copy</span>(<span class="st">"/usr/local/lib/R/site-library/shiny/examples/01_hello/"</span>,
+          <span class="st">"~/ShinyApps/"</span>, <span class="dt">recursive =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>If you logged in with the username <code>rstudio</code>, then visit <code>http://192.168.99.100:3838/rstudio/01_hello</code> you should be able to see the hello example.</p>
+<p>Note: Generic shiny apps can also be hosted <code>http://&lt;url&gt;:3838/</code> or for particular app, <code>http://&lt;url&gt;:3838/&lt;app_dir&gt;</code> and inside the Docker container, it&rsquo;s hosted under <code>/srv/shiny-server/</code>.</p>
 </div>
 </div>
 </div>
@@ -258,7 +257,7 @@ adduser &lt;username&gt;</code></pre>
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked"><li><a href="#introduction">Introduction</a></li>
       <li><a href="#docker-container">Docker container</a></li>
-      <li><a href="#launch-rstudio-server-from-docker-container">Launch Rstudio server from docker container</a></li>
+      <li><a href="#launch-rstudio-server-from-docker-container">Launch Rstudio server from Docker container</a></li>
       </ul></div>
       </div>
 
