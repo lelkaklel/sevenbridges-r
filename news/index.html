@@ -83,7 +83,15 @@
 <div id="improvements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#improvements" class="anchor"> </a>Improvements</h2>
-<ul><li>Redesigned authentication process: compliant with the new specification</li>
+<ul><li>Support three authentication methods: direct authentication, via environment variables, or via user configuration file. Compliant with the new API client authentication specification.</li>
+<li>Updated platform types: users can now choose from <code>cgc</code>, <code>aws-us</code>, <code>aws-eu</code>, <code>gcp</code>, and <code>cavatica</code>.</li>
+<li>File ID support on task input (directly) (<a href="https://github.com/sbg/sevenbridges-r/issues/27">#27</a>)</li>
+<li>Removed credential information parsing when package is loaded.</li>
+<li>Improved robustness of <code>convert_app</code> when a CWL JSON has more fields than defined (<a href="https://github.com/sbg/sevenbridges-r/issues/44">#44</a>)</li>
+<li>Migrate Docker images to Seven Bridges Docker Hub account <a href="https://github.com/sbg/sevenbridges-r/issues/43">#43</a>
+</li>
+<li>New argument <code>keep_test</code> for <code>task_add()</code> added: when users push a Tool object with no <code>sbg:job</code> information, can still use <code>keep_test = TRUE</code> to keep previous test information. (<a href="https://github.com/sbg/sevenbridges-r/issues/31">#31</a>)</li>
+<li>New vignette style (<a href="https://github.com/sbg/sevenbridges-r/issues/38">#38</a>)</li>
 </ul></div>
 </div>
     <div id="sevenbridges-1-5-4" class="section level1">

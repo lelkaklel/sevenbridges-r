@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create Rabix tool object — ToolUI • sevenbridges</title>
+<title>Set authentication environment variables for Seven Bridges API — sbg_set_env • sevenbridges</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -72,26 +72,41 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create Rabix tool object</h1>
+    <h1>Set authentication environment variables for Seven Bridges API</h1>
     </div>
 
     
-    <p>Call this as an addin to create an Rabix tool object.</p>
+    <p>Set authentication environment variables for Seven Bridges API</p>
     
 
-    <pre><span class='fu'>ToolUI</span>()</pre>
-        
+    <pre><span class='fu'>sbg_set_env</span>(<span class='kw'>url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <dl class="dl-horizontal">
+      <dt>url</dt>
+      <dd>Base URL for API.</dd>
+      <dt>token</dt>
+      <dd>Your authentication token.</dd>
+    </dl>
+    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An RStudio addin</p>
+    <p>set two environment variables for authentication</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='kw'>NULL</span></pre>
+    <pre class="examples"><span class='co'># set and get environment variables for Cancer Genomics Cloud</span>
+<span class='co'>## Not run: ------------------------------------</span>
+<span class='co'># sbg_set_env("https://cgc-api.sbgenomics.com/v2",</span>
+<span class='co'>#             "aef7e9f3fec54fb1b438ac4fcddf1a56")</span>
+<span class='co'># sbg_get_env("SB_API_ENDPOINT")</span>
+<span class='co'># sbg_get_env("SB_AUTH_TOKEN")</span>
+<span class='co'>## ---------------------------------------------</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
       

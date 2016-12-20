@@ -33,31 +33,29 @@
   <div class="col-md-9">
     <div class="page-header toc-ignore">
       <h1>Complete Guide for Seven Bridges API R Client</h1>
+                        <h4 class="author">Tengfei Yin &lt;<a href="mailto:tengfei.yin@sbgenomics.com">tengfei.yin@sbgenomics.com</a>&gt;</h4>
             
+            <h4 class="date">2016-12-20</h4>
           </div>
 
     
     
 <div class="contents">
 <p><a name="top"></a></p>
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor"><html><body><a href="#introduction" class="anchor"> </a></body></html>Introduction</h2>
-<p>sevenbridges-r is an R/Bioconductor package that provides an interface for the <a href="https://www.sbgenomics.com/">Seven Bridges Platform</a> and <a href="http://www.cancergenomicscloud.org/">Cancer Genomics Cloud (CGC)</a> public APIs.</p>
+<div id="introduction" class="section level1">
+<h1 class="hasAnchor"><html><body><a href="#introduction" class="anchor"> </a></body></html>Introduction</h1>
+<p>sevenbridges-r is an R/Bioconductor package that provides an interface for the <a href="https://www.sbgenomics.com">Seven Bridges Platform</a> and <a href="https://www.cancergenomicscloud.org">Cancer Genomics Cloud (CGC)</a> public APIs.</p>
 <p>Learn more from our documentation on the <a href="http://docs.sevenbridges.com/page/api">Seven Bridges Platform</a> and the <a href="http://docs.cancergenomicscloud.org/v1.0/page/the-cgc-api">Cancer Genomics Cloud (CGC)</a>.</p>
-<p><strong><em>Note:</em></strong> API paths differ for each Seven Bridges environment. Be sure to provide the correct path for the environment you are using. The paths are as follows:</p>
-<ul><li><strong>Cancer Genomics Cloud:</strong> <a href="https://cgc-api.sbgenomics.com/v2/" class="uri">https://cgc-api.sbgenomics.com/v2/</a></li>
-<li><strong>Seven Bridges Platform on Amazon Web Services:</strong> <a href="https://api.sbgenomics.com/v2/" class="uri">https://api.sbgenomics.com/v2/</a></li>
-<li><strong>Seven Bridges Platform on Google Cloud Platform: </strong><a href="https://gcp-api.sbgenomics.com/v2/" class="uri">https://gcp-api.sbgenomics.com/v2/</a></li>
-</ul><div align="right">
+<div align="right">
 <a href="#top">top</a>
 </div>
-<div id="api-r-client" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#api-r-client" class="anchor"> </a></body></html>API R client</h3>
-<p>The <code>sevenbridges</code> package only supports V2+ versions of the API, since versions prior to V2 are not compatible with the Common Workflow Language (CWL). This package provides a simple interface for accessing and trying out various methods.</p>
+<div id="r-client-for-seven-bridges-api" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#r-client-for-seven-bridges-api" class="anchor"> </a></body></html>R Client for Seven Bridges API</h2>
+<p>The <code>sevenbridges</code> package only supports v2+ versions of the API, since versions prior to V2 are not compatible with the Common Workflow Language (CWL). This package provides a simple interface for accessing and trying out various methods.</p>
 <p>There are two ways of constructing API calls. For instance, you can use low-level API calls which use arguments like <code>path</code>, <code>query</code>, and <code>body</code>. These are documented in the API reference libraries for the <a href="http://docs.sevenbridges.com/v1.0/docs/list-of-api-calls">Seven Bridges Platform</a> and the <a href="http://docs.cancergenomicscloud.org/docs/new-1">CGC</a>. An example of a low-level request to &ldquo;list all projects&rdquo; is shown below. In this request, you can also pass <code>query</code> and <code>body</code> as a list.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"sevenbridges"</span>)
-a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"8c3329a4de664c35bb657499bb2f335c"</span>, 
-          <span class="dt">url =</span> <span class="st">"https://api.sbgenomics.com/v2/"</span>)
+a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"8c3329a4de664c35bb657499bb2f335c"</span>,
+          <span class="dt">platform =</span> <span class="st">"aws-us"</span>)
 a$<span class="kw"><a href="../reference/api.html">api</a></span>(<span class="dt">path =</span> <span class="st">"projects"</span>, <span class="dt">method =</span> <span class="st">"GET"</span>)</code></pre></div>
 <p><strong><em>(Advanced user option)</em></strong> The second way of constructing an API request is to directly use the <code>httr</code> package to make your API calls, as shown below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">project</span>()</code></pre></div>
@@ -65,8 +63,8 @@ a$<span class="kw"><a href="../reference/api.html">api</a></span>(<span class="d
 <a href="#top">top</a>
 </div>
 </div>
-<div id="api-general-information" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#api-general-information" class="anchor"> </a></body></html>API general information</h3>
+<div id="api-general-information" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#api-general-information" class="anchor"> </a></body></html>API General Information</h2>
 <p>Before we start, keep in mind the following:</p>
 <p><strong><code>offset</code> and <code>limit</code></strong></p>
 Every API call accept arguments called <code>offset</code> and <code>limit</code>.
@@ -78,29 +76,29 @@ Limit defines the quantity of items you want to get.
 </li>
 </ul><p>By default, <code>offset</code> is set to <code>0</code> and <code>limit</code> is set to <code>100</code>. As such, your API request returns the <strong>first 100 items</strong> when you list items or search for items by name. To search and list all items, use <code>complete = TRUE</code> in your API request.</p>
 <p><strong>Search by ID</strong></p>
-<p>When searching by ID, your request will return your exact resource as it is unique. As such, you don&rsquo;t have to manually set <code>offset</code> and <code>limit</code>. It&rsquo;s good practice to find your resources by their ID and pass this ID as an input to your task. You can find a resource&rsquo;s ID in the final part of the URL on the visual interface or via the API requests to list resources or get a resource&rsquo;s details.</p>
+<p>When searching by ID, your request will return your exact resource as it is unique. As such, you do not have to manually set <code>offset</code> and <code>limit</code>. It is a good practice to find your resources by their ID and pass this ID as an input to your task. You can find a resource&rsquo;s ID in the final part of the URL on the visual interface or via the API requests to list resources or get a resource&rsquo;s details.</p>
 <p><strong>Search by name</strong></p>
 <p>Search by name returns all partial matches unless you specify <code>exact = TRUE</code>. &nbsp;</p>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="installation" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#installation" class="anchor"> </a></body></html>Installation</h3>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#installation" class="anchor"> </a></body></html>Installation</h2>
 <p>The <code>sevenbridges</code> package is on both the Bioconductor released and devel branches, as shown below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># try http:// if https:// URLs are not supported</span>
 <span class="kw">source</span>(<span class="st">"https://bioconductor.org/biocLite.R"</span>)
 <span class="kw">biocLite</span>(<span class="st">"sevenbridges"</span>)</code></pre></div>
-<p>Since we are constantly improving our API and binding libraries, please also visit our <a href="https://github.com/sbg/sevenbridges-r">github homepage</a> for most recent news and for latest version of the package.</p>
+<p>Since we are constantly improving our API and client libraries, please also visit our <a href="https://github.com/sbg/sevenbridges-r">GitHub repository</a> for most recent news and for latest version of the package.</p>
 <div align="right">
 <a href="#top">top</a>
 </div>
-<p><strong>If you don&rsquo;t have <code>devtools</code></strong></p>
-<p>This installation requires that you have the <code>devtools</code> package. If you do not have this package, you can install it from <a href="https://cran.r-project.org/web/packages/devtools/index.html">CRAN</a>.</p>
+<p><strong>If you do not have <code>devtools</code></strong></p>
+<p>This installation requires that you have the <code>devtools</code> package. If you do not have this package, you can install it from <a href="https://cran.r-project.org/package=devtools">CRAN</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>)</code></pre></div>
-<p>You may got an error and need system dependecies for curl and ssl. For example, in ubuntu you probably need to do the following first in order to install <code>devtools</code> and in order to build vignettes since you need <code>pandoc</code>.</p>
-<pre><code>apt-get update
-apt-get install libcurl4-gnutls-dev libssl-dev pandoc pandoc-citeproc</code></pre>
+<p>You may got an error and need system dependecies for curl and ssl. For example, in Ubuntu you probably need to do the following first in order to install <code>devtools</code> and in order to build vignettes since you need <code>pandoc</code>.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">apt-get</span> update
+<span class="ex">apt-get</span> install libcurl4-gnutls-dev libssl-dev pandoc pandoc-citeproc</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
@@ -109,47 +107,88 @@ apt-get install libcurl4-gnutls-dev libssl-dev pandoc pandoc-citeproc</code></pr
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"http://bioconductor.org/biocLite.R"</span>)
 <span class="kw">biocLite</span>(<span class="st">"readr"</span>)
 
-devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbridges-r"</span>, <span class="dt">build_vignettes=</span><span class="ot">TRUE</span>,
+devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbridges-r"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>,
   <span class="dt">repos =</span> BiocInstaller::<span class="kw">biocinstallRepos</span>(),
   <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>If you have trouble with <code>pandoc</code> and don&rsquo;t want to install it, set <code>build_vignettes = FALSE</code> to avoid the vignettes build.</p>
+<p>If you have trouble with <code>pandoc</code> and do not want to install it, set <code>build_vignettes = FALSE</code> to avoid the vignettes build.</p>
 </div>
 </div>
-<div id="quickstart" class="section level2">
-<h2 class="hasAnchor"><html><body><a href="#quickstart" class="anchor"> </a></body></html>Quickstart</h2>
-<p>For more details about how to use the API client in R, please consult the <a href="#reference">User-friendly API</a> section below for a complete guide. This section is a Quickstart which walks through the basics of using the R cliet libary to help you get started.</p>
-<div id="create-auth-object" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#create-auth-object" class="anchor"> </a></body></html>Create Auth object</h3>
-<p>Before you can access your account via the API, you have to pass along your credentials. You can obtain your credentials in the form of an <a href="http://docs.sevenbridges.com/v1.0/docs/get-your-authentication-token">authentication token</a> from the <strong>Developer Tab</strong> under <strong>Account Settings</strong> on the visual interface. Once you&rsquo;ve obtained this, let&rsquo;s set up the <code>Auth</code> object so it remembers your authentication token and the path for the API. All subsequent requests will draw upon these two pieces of information.</p>
-<p><strong>Step 1: Load the package</strong></p>
+<div id="quickstart" class="section level1">
+<h1 class="hasAnchor"><html><body><a href="#quickstart" class="anchor"> </a></body></html>Quickstart</h1>
+<p>For more details about how to use the API client in R, please consult the <a href="#reference">Seven Bridges API Reference</a> section below for a complete guide. This section is a Quickstart which walks through the basics of using the R cliet libary to help you get started.</p>
+<div id="create-auth-object" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#create-auth-object" class="anchor"> </a></body></html>Create <code>Auth</code> Object</h2>
+<p>Before you can access your account via the API, you have to provide your credentials. You can obtain your credentials in the form of an <a href="http://docs.sevenbridges.com/v1.0/docs/get-your-authentication-token">&ldquo;authentication token&rdquo;</a> from the <strong>Developer Tab</strong> under <strong>Account Settings</strong> on the visual interface. Once you&rsquo;ve obtained this, create an <code>Auth</code> object so it remembers your authentication token and the path for the API. All subsequent requests will draw upon these two pieces of information.</p>
+<p>Let&rsquo;s load the package first:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"sevenbridges"</span>)</code></pre></div>
-<p><strong>Step 2: Set up your authentication token</strong></p>
-<p>You have three different ways to set up your token. Choose from one of the three methods below:</p>
-<ol style="list-style-type: decimal"><li><a href="#method1">Direct setup via <code>Auth</code> function:</a> This explicityly sets up your token and API url.</li>
-<li><a href="#method2">Via a configuration file in your home folder:</a> This file, such as &ldquo;.sbg.auth.yml&rdquo;, is very easy to manage and is implicitly loaded everytime you start a new R session.</li>
-<li><a href="#method3">Via a temporary setup:</a> This is an option when for each R session.</li>
+<p>You have three different ways to provide your token. Choose from one method below:</p>
+<ol style="list-style-type: decimal"><li><a href="#method1">Direct authentication.</a> This explicitly and temporarily sets up your token and platform type (or alternatively, API base url) in the function call arguments to <code><a href="../reference/Auth-class.html">Auth()</a></code>.</li>
+<li><a href="#method2">Authentication via system environment variables.</a> This will read the credential information from two system environment variables: <code>SB_API_ENDPOINT</code> and <code>SB_AUTH_TOKEN</code>.</li>
+<li><a href="#method3">Authentication via user configuration file.</a> This file, by default <code>$HOME/.sevenbridges/credentials</code>, provides an organized way to collect and manage all your API authentication information for Seven Bridges platforms.</li>
 </ol><div style="margin-left:3em">
-<p><a name="method1"></a><strong><em>Method 1: Direct setup</em></strong></p>
-<p>This is the most common way to construct your <code>auth</code> object.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># direct setup</span>
-(a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"&lt;fake_token&gt;"</span>,
-          <span class="dt">url =</span> <span class="st">"https://cgc-api.sbgenomics.com/v2/"</span>))
-<span class="co"># or load default from config file (autoloaded into options)</span></code></pre></div>
-<pre><code>== Auth ==
-token : &lt;fake_token&gt;
-url : https://cgc-api.sbgenomics.com/v2/</code></pre>
-<p><a name="method2"></a><strong><em>Method 2: Via a configuration file</em></strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># from platfrom "us" for user "tengfei"</span>
-a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">platform =</span> <span class="st">"us"</span>, <span class="dt">username =</span> <span class="st">"tengfei"</span>)</code></pre></div>
-<p><a name="method3"></a><strong><em>Method 3: update the <code>auth</code> object from another config file</em></strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/Auth-class.html">updateAuthList</a></span>(<span class="st">"new_config.yml"</span>)</code></pre></div>
+<p><a name="method1"></a><strong>Method 1: Direct authentication</strong></p>
+<p>This is the most common method to construct the <code>Auth</code> object. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">platform =</span> <span class="st">"cgc"</span>, <span class="dt">token =</span> <span class="st">"your_token"</span>))</code></pre></div>
+<pre><code>Using platform: cgc
+== Auth ==
+url : https://cgc-api.sbgenomics.com/v2/
+token : &lt;your_token&gt;</code></pre>
+<p><a name="method2"></a><strong>Method 2: Environment variables</strong></p>
+<p>To set the two environment variables in your system, you could use the function <code><a href="../reference/sbg_set_env.html">sbg_set_env()</a></code>. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/sbg_set_env.html">sbg_set_env</a></span>(<span class="st">"https://cgc-api.sbgenomics.com/v2"</span>, <span class="st">"your_token"</span>)</code></pre></div>
+<p>Note that this change might be just temporary, please feel free to use the standard method to set persistent environment variables according to your operation system.</p>
+<p>Create an <code>Auth</code> object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">from =</span> <span class="st">"env"</span>)</code></pre></div>
+<p><a name="method3"></a><strong><em>Method 3: User configuration file</em></strong></p>
+<p>Assume we have already created the configuration file named <code>credentials</code> under the directory <code>$HOME/.sevenbridges/</code>:</p>
+<pre><code>[aws-us-tengfei]
+api_endpoint = https://api.sbgenomics.com/v2
+auth_token = token_for_this_user
+
+# This is a comment:
+# another user on the same platform
+[aws-us-yintengfei]
+api_endpoint = https://api.sbgenomics.com/v2
+auth_token = token_for_this_user
+
+[default]
+api_endpoint = https://cgc-api.sbgenomics.com/v2
+auth_token = token_for_this_user
+
+[gcp]
+api_endpoint = https://gcp-api.sbgenomics.com/v2
+auth_token = token_for_this_user</code></pre>
+<p>To load the user profile <code>aws-us-tengfei</code> from this configuration file, simply use:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">from =</span> <span class="st">"file"</span>, <span class="dt">profile_name =</span> <span class="st">"aws-us-tengfei"</span>)</code></pre></div>
+<p>If <code>profile_name</code> is not specified, we will try to load the profile named <code>[default]</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">from =</span> <span class="st">"file"</span>)</code></pre></div>
+<p><strong><em>Note:</em></strong> API paths (base URLs) differ for each Seven Bridges environment. Be sure to provide the correct path for the environment you are using. API paths for some of the environments are as follows:</p>
+<table class="table"><colgroup><col width="48%"><col width="37%"><col width="13%"></colgroup><thead><tr class="header"><th>Platform</th>
+<th>API Base URL</th>
+<th>Platform Name</th>
+</tr></thead><tbody><tr class="odd"><td><p>Cancer Genomics Cloud (CGC)</p></td>
+<td><p><code>https://cgc-api.sbgenomics.com/v2</code></p></td>
+<td><p><code>"cgc"</code></p></td>
+</tr><tr class="even"><td><p>Seven Bridges Platform on Amazon Web Services (US)</p></td>
+<td><p><code>https://api.sbgenomics.com/v2</code></p></td>
+<td><p><code>"aws-us"</code></p></td>
+</tr><tr class="odd"><td><p>Seven Bridges Platform on Amazon Web Services (EU)</p></td>
+<td><p><code>https://eu-api.sbgenomics.com/v2</code></p></td>
+<td><p><code>"aws-eu"</code></p></td>
+</tr><tr class="even"><td><p>Seven Bridges Platform on Google Cloud Platform (GCP)</p></td>
+<td><p><code>https://gcp-api.sbgenomics.com/v2</code></p></td>
+<td><p><code>"gcp"</code></p></td>
+</tr><tr class="odd"><td><p>Cavatica</p></td>
+<td><p><code>https://cavatica-api.sbgenomics.com/v2</code></p></td>
+<td><p><code>"cavatica"</code></p></td>
+</tr></tbody></table><p>Please refer to the <a href="#auth-reference">API reference section</a> for more usage and technical details about the three authentication methods.</p>
 </div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="get-user-information" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#get-user-information" class="anchor"> </a></body></html>Get user information</h3>
+<div id="get-user-information" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#get-user-information" class="anchor"> </a></body></html>Get User Information</h2>
 <p><a name="youruser"></a><strong>Get your own information</strong></p>
 <p>This call returns information about your account.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">user</span>()</code></pre></div>
@@ -171,8 +210,8 @@ country : United States</code></pre>
 <a href="#top">top</a>
 </div>
 </div>
-<div id="rate-limit" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#rate-limit" class="anchor"> </a></body></html>Rate limit</h3>
+<div id="rate-limit" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#rate-limit" class="anchor"> </a></body></html>Rate Limit</h2>
 <p>This call returns information about your current rate limit. This is the number of API calls you can make in one hour.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">rate_limit</span>()</code></pre></div>
 <pre><code>== Rate Limit ==
@@ -183,8 +222,8 @@ reset : 1457980957</code></pre>
 <a href="#top">top</a>
 </div>
 </div>
-<div id="show-billing-information" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#show-billing-information" class="anchor"> </a></body></html>Show billing information</h3>
+<div id="show-billing-information" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#show-billing-information" class="anchor"> </a></body></html>Show Billing Information</h2>
 <p>Each project must have a Billing Group associated with it. This Billing Group pays for the storage and computation in the project.</p>
 <p>For example, your first project(s) were created with the free funds from the Pilot Funds Billing Group assigned to each user at sign-up. To get information about billing:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># check your billing info</span>
@@ -196,9 +235,9 @@ a$<span class="kw">invoice</span>()</code></pre></div>
 <a href="#top">top</a>
 </div>
 </div>
-<div id="create-a-project" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#create-a-project" class="anchor"> </a></body></html>Create a project</h3>
-<p>Projects are the core building blocks of the Platform. Each project corresponds to a distinct scientific investigation, serving as a container for its data, analysis tools, results, and team of collaborators.</p>
+<div id="create-project" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#create-project" class="anchor"> </a></body></html>Create Project</h2>
+<p>Projects are the core building blocks of the platform. Each project corresponds to a distinct scientific investigation, serving as a container for its data, analysis tools, results, and team of collaborators.</p>
 <p>Create a new project called &ldquo;api testing&rdquo; with the billing group <code>id</code> obtained above.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get billing group id</span>
 bid &lt;-<span class="st"> </span>a$<span class="kw">billing</span>()$id
@@ -215,22 +254,22 @@ type : v2
 <a href="#top">top</a>
 </div>
 </div>
-<div id="get-details-about-an-existing-project" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#get-details-about-an-existing-project" class="anchor"> </a></body></html>Get details about an existing project</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># list first 100 </span>
+<div id="get-details-about-existing-project" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#get-details-about-existing-project" class="anchor"> </a></body></html>Get Details about Existing Project</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># list first 100</span>
 a$<span class="kw">project</span>()
 <span class="co"># list all</span>
 a$<span class="kw">project</span>(<span class="dt">complete =</span> <span class="ot">TRUE</span>)
 <span class="co"># return all named match "demo"</span>
 a$<span class="kw">project</span>(<span class="dt">name =</span> <span class="st">"demo"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)
 <span class="co"># get the project you want by id</span>
-p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/api-tutorial"</span>)</code></pre></div>
+p &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/api-tutorial"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="copy-a-public-app-into-your-project" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#copy-a-public-app-into-your-project" class="anchor"> </a></body></html>Copy a public app into your project</h3>
+<div id="copy-public-apps-into-your-project" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#copy-public-apps-into-your-project" class="anchor"> </a></body></html>Copy Public Apps into Your Project</h2>
 <p>Seven Bridges maintains workflows and tools available to all of its users in the Public Apps repository.</p>
 <p>To find out more about public apps, you can do the following:</p>
 <ul><li>Browse them online. Check out the <a href="http://docs.cancergenomicscloud.org/docs/">tutorial</a> for the &ldquo;Find apps&rdquo; section.</li>
@@ -246,10 +285,10 @@ a$<span class="kw">public_app</span>(<span class="dt">complete =</span> <span cl
 a$<span class="kw">public_app</span>()</code></pre></div>
 <p>Now, from your <code>Auth</code> object, you copy an App <code>id</code> into your <code>project</code> id with a new <code>name</code>, following this logic.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># copy</span>
-a$<span class="kw">copy_app</span>(<span class="dt">id =</span> <span class="st">"admin/sbg-public-data/rna-seq-alignment-star/5"</span>, 
+a$<span class="kw">copy_app</span>(<span class="dt">id =</span> <span class="st">"admin/sbg-public-data/rna-seq-alignment-star/5"</span>,
            <span class="dt">project =</span> <span class="st">"tengfei/api-testing"</span>, <span class="dt">name =</span> <span class="st">"new copy of star"</span>)
 <span class="co"># check if it is copied</span>
-p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/api-testing"</span>)
+p &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/api-testing"</span>)
 <span class="co"># list apps your got in your project</span>
 p$<span class="kw">app</span>()</code></pre></div>
 <p>The short name is changed to <code>newcopyofstar</code>.</p>
@@ -259,38 +298,39 @@ name : RNA-seq Alignment - STAR
 project : tengfei/api-testing-2
 revision : 0</code></pre>
 <p>Alternatively, you can copy it from the <code>app</code> object.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">app =<span class="st"> </span>a$<span class="kw">public_app</span>(<span class="dt">id =</span> <span class="st">"admin/sbg-public-data/rna-seq-alignment-star"</span>)
-app$<span class="kw">copy_to</span>(<span class="dt">project =</span> <span class="st">"tengfei/api-testing"</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">app &lt;-<span class="st"> </span>a$<span class="kw">public_app</span>(<span class="dt">id =</span> <span class="st">"admin/sbg-public-data/rna-seq-alignment-star"</span>)
+app$<span class="kw">copy_to</span>(<span class="dt">project =</span> <span class="st">"tengfei/api-testing"</span>,
             <span class="dt">name =</span> <span class="st">"copy of star"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="import-cwl-app-and-run-a-task" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#import-cwl-app-and-run-a-task" class="anchor"> </a></body></html>Import CWL app and run a task</h3>
+<div id="import-cwl-app-and-run-a-task" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#import-cwl-app-and-run-a-task" class="anchor"> </a></body></html>Import CWL App and Run a Task</h2>
 <p>You can also upload your own Common Workflow Language JSON file which describes your app to your project.</p>
 <p><strong><em>Note:</em></strong> Alternatively, you can directly describe your CWL tool in R with this package. Please read the vignette on &ldquo;Describe CWL Tools/Workflows in R and Execution&rdquo;.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add an CWL file to your project</span>
-f.star =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/app"</span>, <span class="st">"flow_star.json"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
-app =<span class="st"> </span>p$<span class="kw">app_add</span>(<span class="st">"starlocal"</span>, fl.runif)
+f.star &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/app"</span>, <span class="st">"flow_star.json"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
+app &lt;-<span class="st"> </span>p$<span class="kw">app_add</span>(<span class="st">"starlocal"</span>, fl.runif)
 (aid &lt;-<span class="st"> </span>app$id)</code></pre></div>
-<p>You&rsquo;ll get an app <code>id</code>, like the one below:</p>
+<p>You will get an app <code>id</code>, like the one below:</p>
 <pre><code>"tengfei/api-testing/starlocal/0"</code></pre>
 <p>It&rsquo;s composed of the following elements:</p>
-<ol style="list-style-type: decimal"><li><strong>project id</strong> : tengfei/api</li>
-<li><strong>app short name</strong> : runif</li>
-<li><strong>revision</strong> : 0</li>
+<ol style="list-style-type: decimal"><li><strong>project id</strong> : <code>tengfei/api</code></li>
+<li><strong>app short name</strong> : <code>runif</code></li>
+<li><strong>revision</strong> : <code>0</code></li>
 </ol><p>Alternatively, you can describe tools in R directly, as shown below:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"docker"</span>, <span class="st">"sevenbridges/rabix/generator.R"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
-<span class="kw">cat</span>(<span class="kw">readLines</span>(fl), <span class="dt">sep =</span> <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</code></pre></div>
-<pre><code>library(sevenbridges)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"docker"</span>, <span class="st">"sevenbridges/rabix/generator.R"</span>,
+                  <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
+<span class="kw">cat</span>(<span class="kw">readLines</span>(fl), <span class="dt">sep =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</code></pre></div>
+<pre><code>library("sevenbridges")
 in.lst &lt;- list(input(id = "number",
                      description = "number of observations",
                      type = "integer",
                      label = "number",
                      prefix = "--n",
                      default = 1,
-                     required = TRUE, 
+                     required = TRUE,
                      cmdInclude = TRUE),
                input(id = "min",
                      description = "lower limits of the distribution",
@@ -315,47 +355,45 @@ in.lst &lt;- list(input(id = "number",
 ## the same method for outputs
 out.lst &lt;- list(output(id = "random",
                        type = "file",
-                       label = "output", 
+                       label = "output",
                        description = "random number file",
                        glob = "*.txt"),
                 output(id = "report",
                        type = "file",
-                       label = "report", 
+                       label = "report",
                        glob = "*.html"))
-
 
 rbx &lt;- Tool(id = "runif",
             label = "Random number generator",
-            hints = requirements(docker(pull = "tengfei/runif"), 
+            hints = requirements(docker(pull = "tengfei/runif"),
                                  cpu(1), mem(2000)),
             baseCommand = "runif.R",
-            inputs = in.lst, ## or ins.df
+            inputs = in.lst,  # or ins.df
             outputs = out.lst)
-
 
 fl &lt;- "inst/docker/sevenbridges/rabix/runif.json"
 write(rbx$toJSON(pretty = TRUE), fl)</code></pre>
 <p>Then, you can add it like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># rbx is the object returned by Tool function</span>
-app =<span class="st"> </span>p$<span class="kw">app_add</span>(<span class="st">"runif"</span>, rbx)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># rbx is the object returned by `Tool` function</span>
+app &lt;-<span class="st"> </span>p$<span class="kw">app_add</span>(<span class="st">"runif"</span>, rbx)
 (aid &lt;-<span class="st"> </span>app$id)</code></pre></div>
-<p>Please consult another tutorial about how to describe tools and flows in R.</p>
+<p>Please consult another tutorial <code><a href="../articles/apps.html">vignette("apps", "sevenbridges")</a></code> about how to describe tools and flows in R.</p>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="execute-a-new-task" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#execute-a-new-task" class="anchor"> </a></body></html>Execute a new task</h3>
-<div id="find-your-app-inputs" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#find-your-app-inputs" class="anchor"> </a></body></html>Find your app inputs</h4>
+<div id="execute-a-new-task" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#execute-a-new-task" class="anchor"> </a></body></html>Execute a New Task</h2>
+<div id="find-your-app-inputs" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#find-your-app-inputs" class="anchor"> </a></body></html>Find your app inputs</h3>
 <p>Once you have copied the public app <code>admin/sbg-public-data/rna-seq-alignment-star/5</code> into your project, <code>username/api-testing</code>, the app <code>id</code> in your current project is <code>username/api-testing/newcopyofstar</code>. Conversely, you can use another app you already have in your project for this Quickstart.</p>
 <p>To draft a new task, you need to specify the following:</p>
 <ul><li>The name of the task</li>
 <li>An optional description</li>
-<li>The app <code>id</code> of the workflow you&rsquo;re executing</li>
+<li>The app <code>id</code> of the workflow you are executing</li>
 <li>The inputs for your workflow. In this case, the CWL app accepts four parameters: number, min, max, and seed.</li>
 </ul><p>You can always check the App details on the visual interface for task input requirements. To find the required inputs with R, you need to get an <code>App</code> object first.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">app =<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">id =</span> <span class="st">"tengfei/api-testing-2/newcopyofstar"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">app &lt;-<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">id =</span> <span class="st">"tengfei/api-testing-2/newcopyofstar"</span>)
 <span class="co"># get input matrix</span>
 app$<span class="kw">input_matrix</span>()
 app$<span class="kw">input_matrix</span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"label"</span>, <span class="st">"type"</span>))
@@ -363,8 +401,8 @@ app$<span class="kw">input_matrix</span>(<span class="kw">c</span>(<span class="
 <span class="co"># get required input names and types only</span>
 app$<span class="kw">get_required</span>()</code></pre></div>
 <p>Conversely, you can load the app from a CWL JSON and convert it into an R object first, as shown below.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/app"</span>, <span class="st">"flow_star.json"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
-app =<span class="st"> </span><span class="kw"><a href="../reference/convert_app.html">convert_app</a></span>(f1)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/app"</span>, <span class="st">"flow_star.json"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
+app &lt;-<span class="st"> </span><span class="kw"><a href="../reference/convert_app.html">convert_app</a></span>(f1)
 <span class="co"># get input matrix</span>
 app$<span class="kw">input_matrix</span>()</code></pre></div>
 <pre><code>##                                id                    label    type
@@ -408,78 +446,79 @@ app$<span class="kw">get_required</span>()</code></pre></div>
 </ul><p>You can find a list of possible input types below:</p>
 <ul><li><strong>number, character or integer:</strong> you can directly pass these to the input parameter as it is.</li>
 <li><strong>enum type:</strong> Pass this value to the input parameter.</li>
-<li>**<a href="file:**" class="uri">file:**</a> This input is a file. However, while some inputs accept only single file (&lsquo;File&rsquo;), other inputs takes more than one file (File arrays, FilesList, or &lsquo;File&hellip;&rsquo; ). This input require you to pass a <code>Files</code> object (for a single file input) or <code>FilesList</code> object (for inputs which accept more than one file) or simply a list in a &ldquo;Files&rdquo; object. You can search for your file by <code>id</code> or by <code>name</code> with an exact match (<code>exact = TRUE</code>), as shown in the example below.</li>
+<li>**<a href="file:**" class="uri">file:**</a> This input is a file. However, while some inputs accept only single file (<code>File</code>), other inputs takes more than one file (<code>File</code> arrays, <code>FilesList</code>, or &lsquo;<code>File...</code>&rsquo; ). This input require you to pass a <code>Files</code> object (for a single file input) or <code>FilesList</code> object (for inputs which accept more than one file) or simply a list in a &ldquo;Files&rdquo; object. You can search for your file by <code>id</code> or by <code>name</code> with an exact match (<code>exact = TRUE</code>), as shown in the example below.</li>
 </ul><div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="get-your-input-files-ready" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#get-your-input-files-ready" class="anchor"> </a></body></html>Get your input files ready</h4>
+<div id="get-your-input-files-ready" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#get-your-input-files-ready" class="anchor"> </a></body></html>Get your input files ready</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fastqs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"SRR1039508_1.fastq"</span>, <span class="st">"SRR1039508_2.fastq"</span>)
 
 <span class="co"># get all 2 exact files</span>
-fastq_in =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name=</span> fastqs, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
+fastq_in &lt;-<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name=</span> fastqs, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
 
 <span class="co"># get a single file</span>
-fasta_in =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"Homo_sapiens.GRCh38.dna.primary_assembly.fa"</span>, 
-                  <span class="dt">exact =</span> <span class="ot">TRUE</span>)
+fasta_in &lt;-<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"Homo_sapiens.GRCh38.dna.primary_assembly.fa"</span>,
+                   <span class="dt">exact =</span> <span class="ot">TRUE</span>)
 <span class="co"># get all single file</span>
-gtf_in =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"Homo_sapiens.GRCh38.84.gtf"</span>, 
-                <span class="dt">exact =</span> <span class="ot">TRUE</span>)</code></pre></div>
+gtf_in &lt;-<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"Homo_sapiens.GRCh38.84.gtf"</span>,
+                 <span class="dt">exact =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="create-a-new-draft-task" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#create-a-new-draft-task" class="anchor"> </a></body></html>Create a new Draft Task</h4>
+<div id="create-a-new-draft-task" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#create-a-new-draft-task" class="anchor"> </a></body></html>Create a new draft task</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># add new tasks</span>
-taskName =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"tengfei_star-alignment "</span>,<span class="kw">date</span>())
+taskName &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"tengfei_star-alignment "</span>,<span class="kw">date</span>())
 
-tsk =<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> taskName,
-           <span class="dt">description =</span> <span class="st">"star test"</span>, 
-           <span class="dt">app =</span> <span class="st">"tengfei/api-testing-2/newcopyofstar/0"</span>,
-           <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">sjdbGTFfile =</span> gtf_in,
-                         <span class="dt">fastq =</span> fastq_in,
-                         <span class="dt">genomeFastaFiles =</span> fasta_in))</code></pre></div>
+tsk &lt;-<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> taskName,
+                  <span class="dt">description =</span> <span class="st">"star test"</span>,
+                  <span class="dt">app =</span> <span class="st">"tengfei/api-testing-2/newcopyofstar/0"</span>,
+                  <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">sjdbGTFfile =</span> gtf_in,
+                                <span class="dt">fastq =</span> fastq_in,
+                                <span class="dt">genomeFastaFiles =</span> fasta_in))</code></pre></div>
 <p>Remember the <code>fastq</code> input expects a list of files. You can also do something as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"SRR1039508_1.fastq"</span>, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
-f2 =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"SRR1039508_2.fastq"</span>, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 &lt;-<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"SRR1039508_1.fastq"</span>, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
+f2 &lt;-<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"SRR1039508_2.fastq"</span>, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
 <span class="co"># get all 2 exact files</span>
-fastq_in =<span class="st"> </span><span class="kw">list</span>(f1, f2)
+fastq_in &lt;-<span class="st"> </span><span class="kw">list</span>(f1, f2)
 
 <span class="co"># or if you know you only have 2 files whose names match SRR924146*.fastq</span>
-fastq_in =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"SRR1039508*.fastq"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)</code></pre></div>
+fastq_in &lt;-<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"SRR1039508*.fastq"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Using <code>complete = TRUE</code> when items is over 100.</p>
 </div>
-<div id="draft-a-batch-task" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#draft-a-batch-task" class="anchor"> </a></body></html>Draft a batch task</h4>
-<p>Now let&rsquo;s do a batch with 8 files in 4 groups, which is batched by metadata <code>sample_id</code> and <code>library_id</code>. We&rsquo;ll assume each file has these two metadata fields entered. Since these files can be evenly grouped into 4, we will have a single parent batch task with 4 child tasks.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fastqs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"SRR1039508_1.fastq"</span>, <span class="st">"SRR1039508_2.fastq"</span>, <span class="st">"SRR1039509_1.fastq"</span>, 
-            <span class="st">"SRR1039509_2.fastq"</span>, <span class="st">"SRR1039512_1.fastq"</span>, <span class="st">"SRR1039512_2.fastq"</span>, 
+<div id="draft-a-batch-task" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#draft-a-batch-task" class="anchor"> </a></body></html>Draft a batch task</h3>
+<p>Now let&rsquo;s do a batch with 8 files in 4 groups, which is batched by metadata <code>sample_id</code> and <code>library_id</code>. We will assume each file has these two metadata fields entered. Since these files can be evenly grouped into 4, we will have a single parent batch task with 4 child tasks.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fastqs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"SRR1039508_1.fastq"</span>, <span class="st">"SRR1039508_2.fastq"</span>, <span class="st">"SRR1039509_1.fastq"</span>,
+            <span class="st">"SRR1039509_2.fastq"</span>, <span class="st">"SRR1039512_1.fastq"</span>, <span class="st">"SRR1039512_2.fastq"</span>,
             <span class="st">"SRR1039513_1.fastq"</span>, <span class="st">"SRR1039513_2.fastq"</span>)
 
 <span class="co"># get all 8 files</span>
-fastq_in =<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name=</span> fastqs, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
+fastq_in &lt;-<span class="st"> </span>p$<span class="kw">file</span>(<span class="dt">name=</span> fastqs, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
 <span class="co"># can also try to returned all SRR*.fastq files</span>
-<span class="co"># fastq_in = p$file(name= "SRR*.fastq", complete = TRUE)</span>
+<span class="co"># fastq_in &lt;- p$file(name= "SRR*.fastq", complete = TRUE)</span>
 
-tsk =<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> taskName,
-           <span class="dt">description =</span> <span class="st">"Batch Star Test"</span>, 
-           <span class="dt">app =</span> <span class="st">"tengfei/api-testing-2/newcopyofstar/0"</span>,
-           <span class="dt">batch =</span> <span class="kw"><a href="../reference/batch.html">batch</a></span>(<span class="dt">input =</span> <span class="st">"fastq"</span>, 
-                         <span class="dt">criteria =</span> <span class="kw">c</span>(<span class="st">"metadata.sample_id"</span>,<span class="st">"metadata.noexist_id"</span>)),
-           <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">sjdbGTFfile =</span> gtf_in,
-                         <span class="dt">fastq =</span> fastqs_in,
-                         <span class="dt">genomeFastaFiles =</span> fasta_in))</code></pre></div>
+tsk &lt;-<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> taskName,
+                  <span class="dt">description =</span> <span class="st">"Batch Star Test"</span>,
+                  <span class="dt">app =</span> <span class="st">"tengfei/api-testing-2/newcopyofstar/0"</span>,
+                  <span class="dt">batch =</span> <span class="kw"><a href="../reference/batch.html">batch</a></span>(<span class="dt">input =</span> <span class="st">"fastq"</span>,
+                                <span class="dt">criteria =</span> <span class="kw">c</span>(<span class="st">"metadata.sample_id"</span>,<span class="st">"metadata.noexist_id"</span>)),
+                  <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">sjdbGTFfile =</span> gtf_in,
+                                <span class="dt">fastq =</span> fastqs_in,
+                                <span class="dt">genomeFastaFiles =</span> fasta_in))</code></pre></div>
 <p>Now you have a draft batch task, please check it out in the visual interface. Your response body should inform you of any errors or warnings.</p>
+<p>Note: you can also directly pass file id or file names as characters to inputs list, the package will first guess if the passed strings are file id (24 bit hexdecimal) or names, then convert it to Files or FilesList object. However, as a good practice, we recommend you construct your files object(e.g. <code>p$file(id = , name = )</code>) first, check the value, then pass it to <code>task_add</code> inputs, this is a more safe approach.</p>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
 </div>
-<div id="run-a-task" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#run-a-task" class="anchor"> </a></body></html>Run a task</h3>
-<p>Now, we&rsquo;re ready to run our task.</p>
+<div id="run-a-task" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#run-a-task" class="anchor"> </a></body></html>Run a Task</h2>
+<p>Now, we are ready to run our task.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># run your task</span>
 tsk$<span class="kw">run</span>()</code></pre></div>
 <p>Before you run your task, you can adjust your draft task if you have any final modifications. Or, you can delete the draft task if you no longer wish to run it.</p>
@@ -492,14 +531,14 @@ tsk$<span class="kw">abort</span>()</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tsk$<span class="kw">getInputs</span>()
 <span class="co"># missing number input, only update number</span>
 tsk$<span class="kw">update</span>(<span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">sjdbGTFfile =</span> <span class="st">"some new file"</span>))
-<span class="co"># double check </span>
+<span class="co"># double check</span>
 tsk$<span class="kw">getInputs</span>()</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="task-monitoring" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#task-monitoring" class="anchor"> </a></body></html>Task monitoring</h3>
+<div id="task-monitoring" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#task-monitoring" class="anchor"> </a></body></html>Task Monitoring</h2>
 <p>To monitor your task as it runs, you can always request a task <code>update</code> to ask your task to report its status. Or, you can monitor a running task with a hook function, which triggers the function when that status is &ldquo;completed&rdquo;. Please check the details in <a href="#hooktask">section</a> below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tsk$<span class="kw">update</span>()</code></pre></div>
 <p>By default, your task alerts you by email when it has been completed.</p>
@@ -513,8 +552,8 @@ tsk$<span class="kw">getInputs</span>()</code></pre></div>
 ##                                         cat("\r", "completed")
 ##                                         return(TRUE)
 ##                                     }
-## &lt;environment: 0x110c9f990&gt;</code></pre>
-<p>If you want to customize the monitor function, you can adjust the following requirement. Your function must return <code>TRUE</code> or <code>FALSE</code> in the end. When it&rsquo;s <code>TRUE</code> (or non-logical value) it means the monitoring will be terminated after it finds a status matched and the function executes, such as when the task is completed. When it&rsquo;s <code>FALSE</code> it means the monitoring will continue for the next iteration of checking, e.g.&nbsp;when it&rsquo;s &ldquo;running&rdquo;, you want to keep tracking.</p>
+## &lt;environment: 0x10ea9adc0&gt;</code></pre>
+<p>If you want to customize the monitor function, you can adjust the following requirement. Your function must return <code>TRUE</code> or <code>FALSE</code> in the end. When it is <code>TRUE</code> (or non-logical value) it means the monitoring will be terminated after it finds a status matched and the function executes, such as when the task is completed. When it is <code>FALSE</code> it means the monitoring will continue for the next iteration of checking, e.g.&nbsp;when it is &ldquo;running&rdquo;, you want to keep tracking.</p>
 <p>Follow the example below to set a new function to monitor the status &ldquo;completed&rdquo;. Then, when the task is completed, it will download all task output files to local folder.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/setTaskHook.html">setTaskHook</a></span>(<span class="st">"completed"</span>, function(){
     tsk$<span class="kw"><a href="../reference/download.html">download</a></span>(<span class="st">"~/Downloads"</span>)
@@ -527,77 +566,102 @@ tsk$<span class="kw">monitor</span>()</code></pre></div>
 <p><a name="reference"></a></p>
 </div>
 </div>
-<div id="user-friendly-api" class="section level2">
-<h2 class="hasAnchor"><html><body><a href="#user-friendly-api" class="anchor"> </a></body></html>User-friendly API</h2>
-<p>The <code>sevenbridges</code> package provides a user-friendly interface so you don&rsquo;t have to combine several <code><a href="../reference/api.html">api()</a></code> calls and constantly reference the API documentation to issue API requests.</p>
+<div id="seven-bridges-api-reference" class="section level1">
+<h1 class="hasAnchor"><html><body><a href="#seven-bridges-api-reference" class="anchor"> </a></body></html>Seven Bridges API Reference</h1>
+<p>The <code>sevenbridges</code> package provides a user-friendly interface so you do not have to combine several <code><a href="../reference/api.html">api()</a></code> calls and constantly reference the API documentation to issue API requests.</p>
 <div align="right">
 <a href="#top">top</a>
 </div>
-<div id="authentification" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#authentification" class="anchor"> </a></body></html>Authentification</h3>
-<div id="set-up-a-default-token-for-different-environments" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#set-up-a-default-token-for-different-environments" class="anchor"> </a></body></html>Set up a default token for different environments</h4>
-<p>You can create a file called &lsquo;.sbg.auth.yml&rsquo; in your home folder and maintain your credentials for multiple accounts across various Seven Bridges environments as follows:</p>
-<pre><code>us:
-  url: https://api.sbgenomics.com/v2/
-  user:
-    tengfei:
-      token: fake_token
-    yintengfei:
-      token: fake_token
-cgc:
-  url: https://cgc-api.sbgenomics.com/
-  user:
-    tengfei:
-      token: fake_token
-gcp:
-  url: https://gcp-api.sbgenomics.com/v2/
-  user:
-    tengfei:
-      token: fake_token</code></pre>
-<p>When you load the <code>sevenbridges</code> package, it first tries to parse your token configuration file into an options list, as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create Auth object from config file</span>
-a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">username =</span> <span class="st">"yintengfei"</span>, <span class="dt">platform =</span> <span class="st">"us"</span>)
-<span class="co"># show all</span>
-<span class="kw"><a href="../reference/Auth-class.html">getToken</a></span>()
-<span class="co"># show all pre-set user token for platform </span>
-<span class="kw"><a href="../reference/Auth-class.html">getToken</a></span>(<span class="st">"cgc"</span>)
-<span class="co"># show individual token for a user</span>
-<span class="kw"><a href="../reference/Auth-class.html">getToken</a></span>(<span class="dt">platform =</span> <span class="st">"cgc"</span>, <span class="dt">username =</span> <span class="st">"tengfei"</span>)</code></pre></div>
-<p><strong><em>Note:</em></strong> When you edit your <code>.sbg.auth.yml</code> file, you have to reload your <code>sevenbridges</code> package.</p>
+<p><a name="auth-reference"></a></p>
+<div id="authentication" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#authentication" class="anchor"> </a></body></html>Authentication</h2>
+<p>Before you can interact with the API, you need to construct an <code>Auth</code> object which stores the following information:</p>
+<ul><li>Your authentication token. This is used to authenticate your credentials with the API. Learn more about obtaining your authentication token on the <a href="http://docs.sevenbridges.com/v1.0/docs/get-your-authentication-token">Seven Bridges Platform</a> and the <a href="http://docs.cancergenomicscloud.org/v1.0/docs/get-your-authentication-token">Cancer Genomics Cloud</a>. The approach for obtaining the authentication token also applies to the other Seven Bridges platforms.</li>
+<li>The path for the API (base URL).</li>
+<li>The platform name you are using (e.g.&nbsp;Seven Bridges Platform on AWS US, Seven Bridges Platform on AWS EU, Seven Bridges Platform on GCP, Cancer Genomics Cloud, or Cavatica). This is an optional field, as the base URL of the API ultimately decides where the API calls will be sent to. This field will only be blank when the URL was directly provided and the platform name could not be inferred from that URL.</li>
+</ul><p>The general authentication logic for <code><a href="../reference/Auth-class.html">Auth()</a></code> is as follows:</p>
+<ol style="list-style-type: decimal"><li>The package will use the direct authentication method if <code>from</code> is not specified explicitly or specified as <code>from = "direct"</code>.</li>
+<li>The package will load the authentication information from environment variables when <code>from = "env"</code>, or user configuration file when <code>from = "file"</code>.</li>
+</ol><div id="direct-authentication" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#direct-authentication" class="anchor"> </a></body></html>Direct authentication</h3>
+<p>To use direct authentication, users need to specify one of <code>platform</code> or <code>url</code>, with the corresponding <code>token</code>. Examples of direct authentication:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a =<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"1c0e6e202b544030870ccc147092c250"</span>,
+         <span class="dt">platform =</span> <span class="st">"aws-us"</span>)</code></pre></div>
+<p>The above will use the Seven Bridges Platform on AWS (US).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a =<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"1c0e6e202b544030870ccc147092c257"</span>,
+         <span class="dt">url =</span> <span class="st">"https://gcp-api.sbgenomics.com/v2"</span>)</code></pre></div>
+<p>The above will use the specified <code>url</code> as base URL for the API calls. In this example, the <code>url</code> points to the Seven Bridges Platform on Google Cloud Platform (GCP).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a =<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"2c0e6e202b544030870ccc147092c257"</span>)</code></pre></div>
+<p>The above will use the Cancer Genomics Cloud environment, since no <code>platform</code> nor <code>url</code> were explicitly specified (not recommended).</p>
+<p><strong><em>Note:</em></strong> <code>platform</code> and <code>url</code> should not be specified in the same time.</p>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="create-auth-object-directly" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#create-auth-object-directly" class="anchor"> </a></body></html>Create Auth object directly</h4>
-<p>Before you can interact with the API, you need to construct an <code>Auth</code> object which stores the following:</p>
-<ul><li>Your authentication token. This is used to authenticate your credentials with the API. Learn more about obtaining your authentication token on the <a href="http://docs.sevenbridges.com/v1.0/docs/get-your-authentication-token">Seven Bridges Platform</a> and the <a href="http://docs.cancergenomicscloud.org/v1.0/docs/get-your-authentication-token">Cancer Genomics Cloud</a>.</li>
-<li>The path for the API</li>
-<li>The environment you&rsquo;re using (Seven Bridges Platform on AWS, Seven Bridges Platform on GCP, or the Cancer Genomics Cloud). This is an optional step, as the environment will also be specified in the API path above.</li>
-</ul><p>The logic is as follows:</p>
-<ol style="list-style-type: decimal"><li>If you didn&rsquo;t pass url or token, the package will assume you are loading it from the config file.</li>
-<li>If no environment or user is specified, the package will use the first item in your config file. <strong>This is not recommended. Please provide an environment and username.</strong></li>
-</ol><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"sevenbridges"</span>)
-<span class="co"># direct setup</span>
-a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"1c0e6e202b544030870ccc147092c257"</span>,
-          <span class="dt">url =</span> <span class="st">"https://cgc-api.sbgenomics.com/v2/"</span>)</code></pre></div>
-<p>The above will point to the Cancer Genomics Cloud environment, unless you specify the API URL or the environment. The <code>sevenbridges</code> package currently supports specifying <code>cgc</code> for the Cancer Genomics Cloud, <code>us</code> for the Seven Bridges Platform on AWS, and <code>gcp</code> for the Seven Bridges Platform on GCP.</p>
+<div id="authentication-via-system-environment-variables" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#authentication-via-system-environment-variables" class="anchor"> </a></body></html>Authentication via system environment variables</h3>
+<p>The R API client supports reading authentication information stored in system environment variables.</p>
+<p>To set the two environment variables in your system, you could use the function <code><a href="../reference/sbg_set_env.html">sbg_set_env()</a></code>. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/sbg_set_env.html">sbg_set_env</a></span>(<span class="dt">url =</span> <span class="st">"https://cgc-api.sbgenomics.com/v2"</span>,
+            <span class="dt">token =</span> <span class="st">"your_token"</span>)</code></pre></div>
+<p>See if the environment variables are correctly set:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/sbg_get_env.html">sbg_get_env</a></span>(<span class="st">"SB_API_ENDPOINT"</span>)
+## "https://cgc-api.sbgenomics.com/v2"
+<span class="kw"><a href="../reference/sbg_get_env.html">sbg_get_env</a></span>(<span class="st">"SB_AUTH_TOKEN"</span>)
+## "your_token"</code></pre></div>
+<p>To create an <code>Auth</code> object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">from =</span> <span class="st">"env"</span>)</code></pre></div>
+<p>To unset the two environment variables:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.unsetenv</span>(<span class="st">"SB_API_ENDPOINT"</span>)
+<span class="kw">Sys.unsetenv</span>(<span class="st">"SB_AUTH_TOKEN"</span>)</code></pre></div>
+<div align="right">
+<a href="#top">top</a>
+</div>
+</div>
+<div id="authentication-via-user-configuration-file" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#authentication-via-user-configuration-file" class="anchor"> </a></body></html>Authentication via user configuration file</h3>
+<p>You can create an ini-like file named <code>credentials</code> under the folder <code>$HOME/.sevenbridges/</code> and maintain your credentials for multiple accounts across various Seven Bridges environments. An example:</p>
+<pre><code>[aws-us-tengfei]
+api_endpoint = https://api.sbgenomics.com/v2
+auth_token = token_for_this_user
+
+# This is a comment:
+# another user on the same platform
+[aws-us-yintengfei]
+api_endpoint = https://api.sbgenomics.com/v2
+auth_token = token_for_this_user
+
+[default]
+api_endpoint = https://cgc-api.sbgenomics.com/v2
+auth_token = token_for_this_user
+
+[gcp]
+api_endpoint = https://gcp-api.sbgenomics.com/v2
+auth_token = token_for_this_user</code></pre>
+<p>Please make sure to have two fields <strong>exactly</strong> named as <code>api_endpoint</code> and <code>auth_token</code> under each profile.</p>
+<p>To load the default profile (named <code>[default]</code>) from the default user configuration file (<code>$HOME/.sevenbridges/credentials</code>), please use:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">from =</span> <span class="st">"file"</span>)</code></pre></div>
+<p>To load the user profile <code>aws-us-tengfei</code> from this configuration file, change the <code>profile_name</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">from =</span> <span class="st">"file"</span>, <span class="dt">profile_name =</span> <span class="st">"aws-us-tengfei"</span>)</code></pre></div>
+<p>To use a user configuration file from other locations (not recommended), please specify the file path using the argument <code>config_file</code>. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">from =</span> <span class="st">"file"</span>, <span class="dt">config_file =</span> <span class="st">"~/sevenbridges.cfg"</span>,
+          <span class="dt">profile_name =</span> <span class="st">"aws-us-tengfei"</span>)</code></pre></div>
+<p><strong><em>Note:</em></strong> If you edited the <code>credentials</code> file, please use <code><a href="../reference/Auth-class.html">Auth()</a></code> to re-authenticate.</p>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
 </div>
-<div id="list-all-api-calls" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#list-all-api-calls" class="anchor"> </a></body></html>List All API calls</h3>
-<p>If you don&rsquo;t pass any parameters to <code><a href="../reference/api.html">api()</a></code> from <code>Auth</code>, it will list all API calls. Any parameters you provide will be passed to the <code><a href="../reference/api.html">api()</a></code> function, but you don&rsquo;t have to pass your input token and path once more ince the <code>Auth</code> object already has this information. The following call fromt he <code>Auth</code> object will check the response as well.</p>
+<div id="list-all-api-calls" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#list-all-api-calls" class="anchor"> </a></body></html>List All API Calls</h2>
+<p>If you did not pass any parameters to <code><a href="../reference/api.html">api()</a></code> from <code>Auth</code>, it will list all API calls. Any parameters you provide will be passed to the <code><a href="../reference/api.html">api()</a></code> function, but you do not have to pass your input token and path once more ince the <code>Auth</code> object already has this information. The following call fromt he <code>Auth</code> object will check the response as well.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw"><a href="../reference/api.html">api</a></span>()</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="offset-and-limit-and-search" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#offset-and-limit-and-search" class="anchor"> </a></body></html>Offset and Limit and Search</h3>
+<div id="offset-limit-and-search" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#offset-limit-and-search" class="anchor"> </a></body></html>Offset, Limit, and Search</h2>
 <p>Before we start, keep in mind the following:</p>
 <p><strong><code>offset</code> and <code>limit</code></strong></p>
 Every API call accept arguments called <code>offset</code> and <code>limit</code>.
@@ -611,20 +675,20 @@ Limit defines the quantity of items you want to get.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getOption</span>(<span class="st">"sevenbridges"</span>)$offset
 <span class="kw">getOption</span>(<span class="st">"sevenbridges"</span>)$limit</code></pre></div>
 <p><strong>Search by ID</strong></p>
-<p>When searching by ID, your request will return your exact resource as it is unique. As such, you don&rsquo;t have to manually set <code>offset</code> and <code>limit</code>. It&rsquo;s good practice to find your resources by their ID and pass this ID as an input to your task. You can find a resource&rsquo;s ID in the final part of the URL on the visual interface or via the API requests to list resources or get a resource&rsquo;s details.</p>
+<p>When searching by ID, your request will return your exact resource as it is unique. As such, you do not have to manually set <code>offset</code> and <code>limit</code>. It is a good practice to find your resources by their ID and pass this ID as an input to your task. You can find a resource&rsquo;s ID in the final part of the URL on the visual interface or via the API requests to list resources or get a resource&rsquo;s details.</p>
 <p><strong>Search by name</strong></p>
 <p>Search by name returns all partial matches unless you specify <code>exact = TRUE</code>. This type of search will only search across current pulled content, so use <code>complete = TRUE</code> if you want to search across everything.</p>
-<p>For example, to list all public apps, use <code>visibility</code> argument, but make sure you pass <code>complete = TRUE</code> to it, to show every single things. This arguments generally works for items like &ldquo;App&rdquo;, &ldquo;Project&rdquo;, &ldquo;Task&rdquo;, &ldquo;File&rdquo; etc</p>
+<p>For example, to list all public apps, use <code>visibility</code> argument, but make sure you pass <code>complete = TRUE</code> to it, to show every single things. This arguments generally works for items like &ldquo;App&rdquo;, &ldquo;Project&rdquo;, &ldquo;Task&rdquo;, &ldquo;File&rdquo;, etc.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first, search by id is fast</span>
-x &lt;-<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">id =</span> <span class="st">"admin/sbg-public-data/sbg-ucsc-b37-bed-converter/1"</span>)
+x =<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">id =</span> <span class="st">"admin/sbg-public-data/sbg-ucsc-b37-bed-converter/1"</span>)
 
 <span class="co"># show 100 items from public</span>
-x &lt;-<span class="st">  </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>)
+x =<span class="st">  </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>)
 <span class="kw">length</span>(x)  <span class="co"># 100</span>
 
-x &lt;-<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)
+x =<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)
 <span class="kw">length</span>(x)  <span class="co"># 272 by Nov 2016</span>
-<span class="co"># this return nothing, because it's not in the first 100 returned names</span>
+<span class="co"># this return nothing, because it is not in the first 100 returned names</span>
 a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">name =</span> <span class="st">"bed converter"</span>)
 <span class="co"># this return an app, because it pulls *all* app names and did search</span>
 a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">name =</span> <span class="st">"bed converter"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)</code></pre></div>
@@ -632,18 +696,18 @@ a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="
 <a href="#top">top</a>
 </div>
 </div>
-<div id="rate-limits" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#rate-limits" class="anchor"> </a></body></html>Rate Limits</h3>
+<div id="rate-limits" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#rate-limits" class="anchor"> </a></body></html>Rate Limits</h2>
 <p>This call returns information about your current rate limit. This is the number of API calls you can make in one hour.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">rate_limit</span>()</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="users" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#users" class="anchor"> </a></body></html>Users</h3>
+<div id="users" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#users" class="anchor"> </a></body></html>Users</h2>
 <p>This call returns a list of the resources, such as projects, billing groups, and organizations, that are accessible to you. Currently, this call will only return a successful response if {username} is replaced with your own username. Be sure to capitalize your username in the same way as when you registered for an account.</p>
-<p>If you don&rsquo;t provide a username, your user information will be shown.</p>
+<p>If you did not provide a username, your user information will be shown.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return your information</span>
 a$<span class="kw">user</span>()
 <span class="co"># return user tengfei's information</span>
@@ -652,10 +716,10 @@ a$<span class="kw">user</span>(<span class="st">"tengfei"</span>)</code></pre></
 <a href="#top">top</a>
 </div>
 </div>
-<div id="billing-group-and-invoices" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#billing-group-and-invoices" class="anchor"> </a></body></html>Billing Group and Invoices</h3>
-<div id="for-billing" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#for-billing" class="anchor"> </a></body></html>For billing</h4>
+<div id="billing-group-and-invoices" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#billing-group-and-invoices" class="anchor"> </a></body></html>Billing Group and Invoices</h2>
+<div id="for-billing" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#for-billing" class="anchor"> </a></body></html>For billing</h3>
 <p>If no billing group <code>id</code> is provided, this call returns a list of paths used to access billing information via the API. If a username is provided, this call lists all your billing groups, including groups that are pending or which have been disabled. If you specify <code>breakdown = TRUE</code>, the call below returns a breakdown of the spending per-project for the billing group specified by billing_group. Information is also displayed for each of the projects a particular billing group is associated with, including task executions, their initiating user, start and end time, and their cost.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return a BillingList object</span>
 (b &lt;-<span class="st"> </span>a$<span class="kw">billing</span>())
@@ -664,8 +728,8 @@ a$<span class="kw">billing</span>(<span class="dt">id =</span> b$id, <span class
 <a href="#top">top</a>
 </div>
 </div>
-<div id="for-invoices" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#for-invoices" class="anchor"> </a></body></html>For invoices</h4>
+<div id="for-invoices" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#for-invoices" class="anchor"> </a></body></html>For invoices</h3>
 <p>If no Billing Group <code>id</code> provided, This call returns a list of invoices, with information about each, including whether or not the invoice is pending and the billing period it covers. This call returns information about all your available invoices, unless you use the query parameter bg_id to specify the ID of a particular Billing Group, in which case it will return the invoice incurred by that Billing Group only. If an invoice <code>id</code> is provided, this call retrieves information about the specified invoice, including the costs for analysis and storage and the invoice period.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">invoice</span>()
 a$<span class="kw">invoice</span>(<span class="dt">id =</span> <span class="st">"fake_id"</span>)</code></pre></div>
@@ -675,14 +739,14 @@ a$<span class="kw">invoice</span>(<span class="dt">id =</span> <span class="st">
 </div>
 </div>
 </div>
-<div id="project-operation" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#project-operation" class="anchor"> </a></body></html>Project Operation</h3>
+<div id="project" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#project" class="anchor"> </a></body></html>Project</h2>
 <p>Projects are the basic units to organize different entities: files, tasks, apps, etc. As such, many actions stem from the <code>Project</code> object.</p>
 <div align="right">
 <a href="#top">top</a>
 </div>
-<div id="list-all-projects" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#list-all-projects" class="anchor"> </a></body></html>List All Projects</h4>
+<div id="list-all-projects" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#list-all-projects" class="anchor"> </a></body></html>List all projects</h3>
 <p>The following call returns a list of all projects of which you are a member. Each project&rsquo;s <code>project_id</code> and path will be returned.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">project</span>()</code></pre></div>
 <p>If you want to list the projects owned by and accessible to a particular user, specify the <code>owner</code> argument as follows. Each project&rsquo;s ID and path will be returned.</p>
@@ -694,8 +758,8 @@ a$<span class="kw">project</span>(<span class="dt">owner =</span> <span class="s
 <a href="#top">top</a>
 </div>
 </div>
-<div id="partial-match-project-name" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#partial-match-project-name" class="anchor"> </a></body></html>Partial Match Project Name</h4>
+<div id="partial-match-project-name" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#partial-match-project-name" class="anchor"> </a></body></html>Partial match project name</h3>
 <p>For a more friendly interface and convenient search, the <code>sevenbridges</code> package supports <em>partial name matching</em>. The first argument for the following request is <code>name</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># want to return a project called</span>
 a$<span class="kw">project</span>(<span class="st">"hello"</span>)</code></pre></div>
@@ -703,8 +767,8 @@ a$<span class="kw">project</span>(<span class="st">"hello"</span>)</code></pre><
 <a href="#top">top</a>
 </div>
 </div>
-<div id="create-a-new-project" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#create-a-new-project" class="anchor"> </a></body></html>Create a New Project</h4>
+<div id="create-a-new-project" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#create-a-new-project" class="anchor"> </a></body></html>Create a new project</h3>
 <p>To create a new project, users need to specify the following:</p>
 <ul><li><code>name</code> (required)</li>
 <li><code>billing_group_id</code> (required)</li>
@@ -717,8 +781,8 @@ a$<span class="kw">project</span>(<span class="st">"hello"</span>)</code></pre><
 <a href="#top">top</a>
 </div>
 </div>
-<div id="create-a-new-project-with-tcga-controlled-data-on-cgc" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#create-a-new-project-with-tcga-controlled-data-on-cgc" class="anchor"> </a></body></html>Create a new project with TCGA controlled data on CGC</h4>
+<div id="create-a-new-project-with-tcga-controlled-data-on-cgc" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#create-a-new-project-with-tcga-controlled-data-on-cgc" class="anchor"> </a></body></html>Create a new project with TCGA controlled data on CGC</h3>
 <p>Follow the directions above, but pass <code>tcga</code> as a value for <code>tags</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">project_new</span>(<span class="st">"controlled_project"</span>, b$id,
               <span class="dt">description =</span> <span class="st">"Test for API"</span>, <span class="dt">tags =</span> <span class="kw">list</span>(<span class="st">"tcga"</span>))</code></pre></div>
@@ -726,8 +790,8 @@ a$<span class="kw">project</span>(<span class="st">"hello"</span>)</code></pre><
 <a href="#top">top</a>
 </div>
 </div>
-<div id="delete-a-project" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#delete-a-project" class="anchor"> </a></body></html>Delete a Project</h4>
+<div id="delete-a-project" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#delete-a-project" class="anchor"> </a></body></html>Delete a project</h3>
 <p>You can delete a <em>single</em> project by making the request to <code>$delete()</code>. Note that the returned object from <code>a$project()</code> sometimes returns list if you use partial matching by name. The <code>$delete()</code> request cannot operate on a list. If you want to operate on a list of object, read more about batch functions in the relevant section below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># remove it, not run</span>
 a$<span class="kw">project</span>(<span class="st">"api_testing"</span>)$<span class="kw"><a href="../reference/delete.html">delete</a></span>()
@@ -738,20 +802,20 @@ a$<span class="kw">project</span>(<span class="st">"api_testing"</span>)$<span c
 <a href="#top">top</a>
 </div>
 </div>
-<div id="updateedit-a-project" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#updateedit-a-project" class="anchor"> </a></body></html>Update/Edit a Project</h4>
+<div id="updateedit-a-project" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#updateedit-a-project" class="anchor"> </a></body></html>Update/edit a project</h3>
 <p>You can update the following information about an existing project:</p>
 <ul><li><code>name</code></li>
 <li><code>description</code></li>
 <li><code>billing_group_id</code></li>
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/helloworld"</span>)
-a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/helloworld"</span>)$<span class="kw">update</span>(<span class="dt">name =</span> <span class="st">"Hello World Update"</span>, 
-                                                    <span class="dt">description =</span> <span class="st">"Update description"</span>)</code></pre></div>
+a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/helloworld"</span>)$<span class="kw">update</span>(<span class="dt">name =</span> <span class="st">"Hello World Update"</span>,
+                                            <span class="dt">description =</span> <span class="st">"Update description"</span>)</code></pre></div>
 </div>
-<div id="project-member" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#project-member" class="anchor"> </a></body></html>Project Member</h4>
-<div id="list-members" class="section level5">
-<h5 class="hasAnchor"><html><body><a href="#list-members" class="anchor"> </a></body></html>List members</h5>
+<div id="project-member" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#project-member" class="anchor"> </a></body></html>Project member</h3>
+<div id="list-members" class="section level4">
+<h4 class="hasAnchor"><html><body><a href="#list-members" class="anchor"> </a></body></html>List members</h4>
 <p>This call returns a list of the members of the specified project. For each member, the response lists:</p>
 <ul><li>The member&rsquo;s username</li>
 <li>The member&rsquo;s permissions in the specified project</li>
@@ -760,8 +824,8 @@ a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="add-a-member" class="section level5">
-<h5 class="hasAnchor"><html><body><a href="#add-a-member" class="anchor"> </a></body></html>Add a member</h5>
+<div id="add-a-member" class="section level4">
+<h4 class="hasAnchor"><html><body><a href="#add-a-member" class="anchor"> </a></body></html>Add a member</h4>
 <p>This call adds a new user to the specified project. It can only be made by a user who has admin permissions in the project.</p>
 <p>Requests to add a project member must include the key <code>permissions</code>. However, if you do not include a value, the member&rsquo;s permissions will be set to <code>false</code> by default.</p>
 <p>Set permission by passing the following values: <code>copy</code>, <code>write</code>, <code>execute</code>, <code>admin</code>, or <code>read</code>.</p>
@@ -770,7 +834,6 @@ a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">
 <span class="st">       </span><span class="kw">member_add</span>(<span class="dt">username =</span> <span class="st">"yintengfei"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
-</div>
 </div>
 </div>
 <div id="update-a-member" class="section level4">
@@ -790,8 +853,9 @@ admin : FALSE</code></pre>
 <div align="right">
 <a href="#top">top</a>
 </div>
-<div id="delete-a-member" class="section level5">
-<h5 class="hasAnchor"><html><body><a href="#delete-a-member" class="anchor"> </a></body></html>Delete a member</h5>
+</div>
+<div id="delete-a-member" class="section level4">
+<h4 class="hasAnchor"><html><body><a href="#delete-a-member" class="anchor"> </a></body></html>Delete a member</h4>
 <p>To delete an existing member, just call the <code><a href="../reference/delete.html">delete()</a></code> action on the <code>Member</code> object.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m$<span class="kw"><a href="../reference/delete.html">delete</a></span>()
 <span class="co"># confirm</span>
@@ -801,8 +865,8 @@ a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">
 </div>
 </div>
 </div>
-<div id="list-all-files" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#list-all-files" class="anchor"> </a></body></html>List all Files</h4>
+<div id="list-all-files" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#list-all-files" class="anchor"> </a></body></html>List all files</h3>
 <p>To list all files belonging to a project, use the following request:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo-project"</span>)
 p$<span class="kw">file</span>()</code></pre></div>
@@ -811,10 +875,10 @@ p$<span class="kw">file</span>()</code></pre></div>
 </div>
 </div>
 </div>
-<div id="files-and-metadata-and-tags" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#files-and-metadata-and-tags" class="anchor"> </a></body></html>Files and Metadata and Tags</h3>
-<div id="list-all-files-1" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#list-all-files-1" class="anchor"> </a></body></html>List all files</h4>
+<div id="files-metadata-and-tags" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#files-metadata-and-tags" class="anchor"> </a></body></html>Files, Metadata, and Tags</h2>
+<div id="list-all-files-1" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#list-all-files-1" class="anchor"> </a></body></html>List all files</h3>
 <p>A better way to list files in a project uses the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first 100 files, default offset = 0, limit = 100</span>
 p$<span class="kw">file</span>()
@@ -827,12 +891,12 @@ a$<span class="kw">file</span>(<span class="dt">name =</span> <span class="st">"
 <a href="#top">top</a>
 </div>
 </div>
-<div id="search-and-filter-files" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#search-and-filter-files" class="anchor"> </a></body></html>Search and filter file(s)</h4>
-<div id="rule-of-thumb" class="section level5">
-<h5 class="hasAnchor"><html><body><a href="#rule-of-thumb" class="anchor"> </a></body></html>Rule of thumb</h5>
+<div id="search-and-filter-files" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#search-and-filter-files" class="anchor"> </a></body></html>Search and filter file(s)</h3>
+<div id="rule-of-thumb" class="section level4">
+<h4 class="hasAnchor"><html><body><a href="#rule-of-thumb" class="anchor"> </a></body></html>Rule of thumb</h4>
 <p>You can easily search by partial name, exact name, or id for many items like project, apps, files. Fortunately, we have more powerful filters for files. User could serach by metadata, tags, and original task id.</p>
-<ol style="list-style-type: decimal"><li><p><strong>First rule: understand the scope</strong>: We know we have default <code>limit = 100</code> and <code>offset = 0</code> for first 100 items, unless you are using arguments <code>complete = TRUE</code>. Things are different when it comes to files. When you search with exact name (search by name with <code>exact = TRUE</code> on), metadata, or tags, it searches through ALL files. You don&rsquo;t have to specify <code>complete = TRUE</code>. Simply provide the project id or make the call from a project object as shown below.</p></li>
+<ol style="list-style-type: decimal"><li><p><strong>First rule: understand the scope</strong>: We know we have default <code>limit = 100</code> and <code>offset = 0</code> for first 100 items, unless you are using arguments <code>complete = TRUE</code>. Things are different when it comes to files. When you search with exact name (search by name with <code>exact = TRUE</code> on), metadata, or tags, it searches through ALL files. You do not have to specify <code>complete = TRUE</code>. Simply provide the project id or make the call from a project object as shown below.</p></li>
 <li><p><strong>Second rule: understand the operation</strong>: When filtering on any resource, including the same field several times with different filtering criteria results in an implicit OR operation for that field and the different criteria.When filtering by different specified fields, an implicit AND is performed between those criteria." so which are different fields, metadata, origin.task, tags, those are different fields. <strong>Note</strong> different metadata fields are treated as different fields as well, so it will be <strong>AND</strong> operation for different metadata field.</p></li>
 </ol><p>So for a quick example, this examples gives me all files in project &ldquo;tengfei/demo&rdquo; that with metadata sample_id &ldquo;Sample1&rdquo; <strong>OR</strong> &ldquo;Sample2&rdquo;, <strong>AND</strong> the library id has to be &ldquo;EXAMPLE&rdquo;, <strong>AND</strong> tags has either &ldquo;hello&rdquo; <strong>OR</strong> &ldquo;world&rdquo;.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo"</span>)
@@ -844,8 +908,8 @@ p$<span class="kw">file</span>(<span class="dt">metadata =</span> <span class="k
 <a href="#top">top</a>
 </div>
 </div>
-<div id="search-by-names-and-id" class="section level5">
-<h5 class="hasAnchor"><html><body><a href="#search-by-names-and-id" class="anchor"> </a></body></html>Search by names and id</h5>
+<div id="search-by-name-and-id" class="section level4">
+<h4 class="hasAnchor"><html><body><a href="#search-by-name-and-id" class="anchor"> </a></body></html>Search by name and id</h4>
 <p>There are two ways to return the exact file you want. One is by <code>id</code>, the other one is by exact <code>name</code>.</p>
 <p><strong><em>For advanced users:</em></strong> When searching by name with <code>exact = TRUE</code>, it directly uses our public API call to match exact name and return the object with a single query. When you turn off <code>exact</code>, it will <code>grep</code> all files or files defined with <code>limit</code> and <code>offset</code> first, then match by name, which could be slow.</p>
 <p>To get the file id, you can check the url on the visual interface from the file details page.</p>
@@ -862,7 +926,7 @@ p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="kw">c
 <span class="co"># get two files from public files using shorthand</span>
 a$<span class="kw">public_file</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">"ucsc.hg19.fasta.fai"</span>, <span class="st">"ucsc.hg19.fasta"</span>),
               <span class="dt">exact =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>If you did not use <code>exact = TRUE</code>, the API will assume it&rsquo;s pattern grep and use partial matching.</p>
+<p>If you did not use <code>exact = TRUE</code>, the API will assume it is pattern grep and use partial matching.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get matchd the pattern for searching first 100 files</span>
 p$<span class="kw">file</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">"gz"</span>, <span class="st">"fastq"</span>))
 <span class="co"># get all matched files from the project</span>
@@ -873,30 +937,30 @@ a$<span class="kw">public_file</span>(<span class="dt">name =</span> <span class
 <a href="#top">top</a>
 </div>
 </div>
-<div id="search-by-metadata" class="section level5">
-<h5 class="hasAnchor"><html><body><a href="#search-by-metadata" class="anchor"> </a></body></html>Search by metadata</h5>
+<div id="search-by-metadata" class="section level4">
+<h4 class="hasAnchor"><html><body><a href="#search-by-metadata" class="anchor"> </a></body></html>Search by metadata</h4>
 <p>When you specify different metadata fields, the values use an <strong>AND</strong> operation, and when you specify the same metadata fields, the values use an <strong>OR</strong> operation.</p>
 <p>To list all files in project &ldquo;tengfei/demo&rdquo;, that have a <code>sample_id</code> of &ldquo;Sample1&rdquo; <strong>OR</strong> &ldquo;Sample2&rdquo; <strong>AND</strong> another metadata field library_id set to &ldquo;EXAMPLE&rdquo;, make the following request</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo"</span>)
-p$<span class="kw">file</span>(<span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">sample_id =</span> <span class="st">"Sample1"</span>, 
-                       <span class="dt">sample_id =</span> <span class="st">"Sample2"</span>, 
+p$<span class="kw">file</span>(<span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">sample_id  =</span> <span class="st">"Sample1"</span>,
+                       <span class="dt">sample_id  =</span> <span class="st">"Sample2"</span>,
                        <span class="dt">library_id =</span> <span class="st">"EXAMPLE"</span>))</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="search-by-tags" class="section level5">
-<h5 class="hasAnchor"><html><body><a href="#search-by-tags" class="anchor"> </a></body></html>Search by tags</h5>
+<div id="search-by-tags" class="section level4">
+<h4 class="hasAnchor"><html><body><a href="#search-by-tags" class="anchor"> </a></body></html>Search by tags</h4>
 <p>Tags are more flexible than metadata. You can search with multiple tags using an <strong>OR</strong> operation.</p>
 <p>This examples shows how to return all files with the tag &ldquo;s1&rdquo; <strong>OR</strong> &ldquo;s2&rdquo;.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo"</span>)
-p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="kw">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>)) </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo"</span>)
+p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="kw">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>))</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="search-by-original-task-id" class="section level5">
-<h5 class="hasAnchor"><html><body><a href="#search-by-original-task-id" class="anchor"> </a></body></html>Search by original task id</h5>
+<div id="search-by-original-task-id" class="section level4">
+<h4 class="hasAnchor"><html><body><a href="#search-by-original-task-id" class="anchor"> </a></body></html>Search by original task id</h4>
 <p>You can also get all files from a task. There are two ways to do it:</p>
 <ol style="list-style-type: decimal"><li>Started from the <code>Task</code> object;</li>
 <li>Use the filter criteria.</li>
@@ -904,15 +968,15 @@ p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="kw">c<
 a$<span class="kw">task</span>(<span class="dt">id =</span> <span class="st">"53020538-6936-422f-80de-02fa65ae4b39"</span>)$<span class="kw">file</span>()
 
 <span class="co"># OR</span>
-p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo"</span>)
+p &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo"</span>)
 p$<span class="kw">file</span>(<span class="dt">origin.task =</span> <span class="st">"53020538-6936-422f-80de-02fa65ae4b39"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
 </div>
-<div id="copy-a-file-or-group-of-files" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#copy-a-file-or-group-of-files" class="anchor"> </a></body></html>Copy a file or group of files</h4>
+<div id="copy-a-file-or-group-of-files" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#copy-a-file-or-group-of-files" class="anchor"> </a></body></html>Copy a file or group of files</h3>
 <p>This call copies the specified file to a new project. Files retain their metadata when copied, but may be assigned new names in their target project.</p>
 <p>Note that Controlled Data files may not be copied to Open Data projects. To make this request, you should have copy permission within the project you are copying from.</p>
 <p>Let&rsquo;s try to copy a file from the Public File repository. The file&rsquo;s id is &ldquo;561e1b33e4b0aa6ec48167d7&rdquo;.</p>
@@ -933,13 +997,13 @@ a$<span class="kw">project</span>(<span class="dt">id =</span> pid)$<span class=
 <a href="#top">top</a>
 </div>
 </div>
-<div id="delete-files" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#delete-files" class="anchor"> </a></body></html>Delete file(s)</h4>
+<div id="delete-files" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#delete-files" class="anchor"> </a></body></html>Delete file(s)</h3>
 <p><strong><em>Note:</em></strong> The <code>delete</code> action only works for one file at a time. Be sure your <code>file</code> call returns a single file rather than a file list.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">file</span>()[[<span class="dv">1</span>]]$<span class="kw"><a href="../reference/delete.html">delete</a></span>()
 ## confirm the deletion
 a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">file</span>()</code></pre></div>
-<p>You can also delete a group of files or <code>FilesList</code> object, <strong>be careful</strong> with this function!</p>
+<p>You can also delete a group of files or <code>FilesList</code> object, just <strong>be careful</strong> when using this function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## return 5 files
 a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">file</span>(<span class="st">"phase1"</span>)
 ## delete all of them
@@ -949,8 +1013,8 @@ a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="k
 <a href="#top">top</a>
 </div>
 </div>
-<div id="download-files" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#download-files" class="anchor"> </a></body></html>Download files</h4>
+<div id="download-files" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#download-files" class="anchor"> </a></body></html>Download files</h3>
 <p>To get the download information, please use the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">file</span>()[[<span class="dv">1</span>]]$<span class="kw">download_url</span>()</code></pre></div>
 <p>To download directly from R, use the <code>download</code> call directly from a single <code>File</code> object.</p>
@@ -965,8 +1029,8 @@ a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="k
 <a href="#top">top</a>
 </div>
 </div>
-<div id="upload-files" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#upload-files" class="anchor"> </a></body></html>Upload files</h4>
+<div id="upload-files" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#upload-files" class="anchor"> </a></body></html>Upload files</h3>
 <p>Seven Bridges environments provide a few different methods for data import, as follows:</p>
 <ul><li>The command line uploader</li>
 <li>A graphic visual interface uploader</li>
@@ -983,7 +1047,7 @@ p$<span class="kw">upload</span>(fl, <span class="dt">overwrite =</span> <span c
 <span class="co"># pass metadata</span>
 p$<span class="kw">upload</span>(fl, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>, <span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">library_id =</span> <span class="st">"testid2"</span>, <span class="dt">platform =</span> <span class="st">"Illumina x11"</span>))
 <span class="co"># rename</span>
-p$<span class="kw">upload</span>(fl, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>, <span class="dt">name =</span> <span class="st">"sample_new_name.fastq"</span>, 
+p$<span class="kw">upload</span>(fl, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>, <span class="dt">name =</span> <span class="st">"sample_new_name.fastq"</span>,
          <span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">library_id =</span> <span class="st">"new_id"</span>))</code></pre></div>
 <p><strong>Upload a folder</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dir.ext &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
@@ -999,8 +1063,8 @@ p$<span class="kw">upload</span>(<span class="st">"~/Documents/Data/sbgtest/1000
 <a href="#top">top</a>
 </div>
 </div>
-<div id="update-a-file" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#update-a-file" class="anchor"> </a></body></html>Update a file</h4>
+<div id="update-a-file" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#update-a-file" class="anchor"> </a></body></html>Update a file</h3>
 <p>You can call the <code>update()</code> function from the Files object. Using this call, the following can be updated:</p>
 <ul><li>The file&rsquo;s <code>name</code>.</li>
 <li>The file&rsquo;s <code>metadata</code>. The metadata is in the form of a list. Note that as this call overwrites all the metadata for a given file, please supply a full list of all the metadata for the file. Conversely, you can use the <a href="#set_metadata"><code>set_meta()</code> function</a> to patch but not overwrite the metadata for a file.</li>
@@ -1014,23 +1078,28 @@ project : tengfei/demo-project</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># show metadata</span>
 fl$<span class="kw">meta</span>()</code></pre></div>
 <p><strong>Update meta</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl$<span class="kw">update</span>(<span class="dt">name =</span> <span class="st">"sample.fastq"</span>, <span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">new_item1 =</span> <span class="st">"item1"</span>, <span class="dt">new_item2 =</span> <span class="st">"item2"</span>, <span class="dt">file_extension =</span> <span class="st">"fastq"</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl$<span class="kw">update</span>(<span class="dt">name =</span> <span class="st">"sample.fastq"</span>,
+          <span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">new_item1 =</span> <span class="st">"item1"</span>,
+                          <span class="dt">new_item2 =</span> <span class="st">"item2"</span>,
+                          <span class="dt">file_extension =</span> <span class="st">"fastq"</span>))
 <span class="co"># check it out</span>
 fl$<span class="kw">meta</span>()</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="metadata-operations" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#metadata-operations" class="anchor"> </a></body></html>Metadata Operations</h4>
-<p>Learn about metadata fields and their values for the relevant environment: [<a href="http://docs.sevenbridges.com/docs/metadata-on-the-seven-bridges-platform">Seven Bridges Platform</a>] [<a href="http://docs.cancergenomicscloud.org/v1.0/docs/metadata-for-private-data">CGC</a>]</p>
+<div id="metadata-operations" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#metadata-operations" class="anchor"> </a></body></html>Metadata operations</h3>
+<p>Learn about metadata fields and their values for the relevant environment: [<a href="http://docs.sevenbridges.com/docs/metadata-on-the-seven-bridges-platform">Seven Bridges Platform</a>] [<a href="http://docs.cancergenomicscloud.org/v1.0/docs/metadata-for-private-data">CGC</a>].</p>
 <p>Note that the name of a file is not the same as its ID. A file&rsquo;s ID is a hexadecimal string automatically assigned to a file in a project. The file&rsquo;s name is a human-readable string. For information, please see the API overview for the <a href="http://docs.sevenbridges.com/v1.0/docs/the-api">Seven Bridges Platform</a> and for the <a href="http://docs.cancergenomicscloud.org/docs/the-cgc-api">CGC</a>.</p>
-<p><strong>Get metadata</strong> To get the metadata for a file, call the <code>meta()</code> function, as shown below.</p>
+<p><strong>Get metadata</strong></p>
+<p>To get the metadata for a file, call the <code>meta()</code> function, as shown below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># meta is pulling the latest information via API</span>
 fl$<span class="kw">meta</span>()
 <span class="co"># field meta data saved the previous saved one</span>
 fl$metadata</code></pre></div>
-<p><a name="set_metadata"></a> <strong>Set metadata</strong> Files from curated datasets on Seven Bridges environments have a defined set of metadata which is visible on the visual interface of each environment. However, you can also pass additional metadata for each file which is stored with your copy of the file in your project.</p>
+<p><a name="set_metadata"></a> <strong>Set metadata</strong></p>
+<p>Files from curated datasets on Seven Bridges environments have a defined set of metadata which is visible on the visual interface of each environment. However, you can also pass additional metadata for each file which is stored with your copy of the file in your project.</p>
 <p>To set metadata but not overwrite all previously stored metadata, call the <code>set_meta()</code> function from the Files object. Unlike the <code>update()</code> function for the Files object, the <code>set_meta()</code> function doesn&rsquo;t overwrite the metadata field. To overwrite the metadata field, use the <code>update()</code> function or pass the optional argument <code>overwrite = TRUE</code> for the <code>set_meta()</code> call.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl$<span class="kw">set_meta</span>(<span class="dt">new_item3 =</span> <span class="st">"item3"</span>)
 fl
@@ -1046,44 +1115,44 @@ fl</code></pre></div>
 <span class="kw"><a href="../reference/Metadata-class.html">paired_end</a></span>()
 <span class="kw"><a href="../reference/Metadata-class.html">quality_scale</a></span>()</code></pre></div>
 <p>As you can see, some metadata fields have suggested values. To construct the metadata, use <code><a href="../reference/Metadata-class.html">Metadata()</a></code> directly to pass the metadata fields and their values directly into the call. The call will perform the validation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/Metadata-class.html">Metadata</a></span>(<span class="dt">platform      =</span> <span class="st">"Affymetrix SNP Array 6.0"</span>, 
-         <span class="dt">paired_end    =</span> <span class="dv">1</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/Metadata-class.html">Metadata</a></span>(<span class="dt">platform      =</span> <span class="st">"Affymetrix SNP Array 6.0"</span>,
+         <span class="dt">paired_end    =</span> <span class="dv">1</span>,
          <span class="dt">quality_scale =</span> <span class="st">"sanger"</span>,
          <span class="dt">new_item      =</span> <span class="st">"new test"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="tag-files" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#tag-files" class="anchor"> </a></body></html>Tag file(s)</h4>
+<div id="tag-files" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#tag-files" class="anchor"> </a></body></html>Tag file(s)</h3>
 <p>You can tag your files with keywords or strings to make it easier to identify and organize files. Tags are different from metadata, and are more convenient and visible from the files list on the visual interface.</p>
 <p><strong>Add a new tag</strong></p>
 <p>To add a new tag, call the <code>obj$add_tag()</code> method for the File object with a single tag string or a list or vector of tags.</p>
 <p><strong>Overwrite the tags for a file</strong></p>
 <p>To completely overwrite the tags for a file, use the <code>obj$set_tag()</code> method, which contains the default argument <code>overwrite = TRUE</code>.</p>
 <p>Let&rsquo;s use a file called <code>sample.bam</code> and play with its tags.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/s3tutorial"</span>)
-fl =<span class="st"> </span>p$<span class="kw">file</span>(<span class="st">"sample.bam"</span>, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p  &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/s3tutorial"</span>)
+fl &lt;-<span class="st"> </span>p$<span class="kw">file</span>(<span class="st">"sample.bam"</span>, <span class="dt">exact =</span> <span class="ot">TRUE</span>)
 <span class="co"># show tags for single file</span>
 fl$<span class="kw">tag</span>()
 <span class="co"># add new tags</span>
 fl$<span class="kw"><a href="../reference/set_tag.html">add_tag</a></span>(<span class="st">"new tag"</span>)
-<span class="co"># equavilent to </span>
+<span class="co"># equavilent to</span>
 fl$<span class="kw"><a href="../reference/set_tag.html">set_tag</a></span>(<span class="st">"new tag 2"</span>, <span class="dt">overwrite =</span> <span class="ot">FALSE</span>)
 <span class="co"># set tags to overwrite existing</span>
-x =<span class="st"> </span><span class="kw">list</span>(<span class="st">"this"</span>, <span class="st">"is"</span>, <span class="dv">1234</span>)
+x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">"this"</span>, <span class="st">"is"</span>, <span class="dv">1234</span>)
 fl$<span class="kw"><a href="../reference/set_tag.html">set_tag</a></span>(x)
 <span class="co"># filter by tags</span>
 p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="kw">c</span>(<span class="st">"1234"</span>, <span class="st">"new"</span>))
 p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="kw">list</span>(<span class="st">"1234"</span>, <span class="st">"new"</span>))
 p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="st">"1234"</span>)</code></pre></div>
-<p>Below, find convenient methods for <code>FilesList</code>. Let&rsquo;s add the tag &ldquo;s1&rdquo; to a group files matching &ldquo;Sample1&rdquo; and add the tag &ldquo;s2&rdquo; to a group of files that match &ldquo;s2&rdquo;. Then, we&rsquo;ll filter by these tags to obtain specific files.</p>
+<p>Below, find convenient methods for <code>FilesList</code>. Let&rsquo;s add the tag &ldquo;s1&rdquo; to a group files matching &ldquo;Sample1&rdquo; and add the tag &ldquo;s2&rdquo; to a group of files that match &ldquo;s2&rdquo;. Then, we will filter by these tags to obtain specific files.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># work on a group of files</span>
 <span class="co"># add tag "s2" to a group of files named with "Sample2" in it</span>
-fl2 =<span class="st"> </span>p$<span class="kw">file</span>(<span class="st">"Sample2"</span>)
+fl2 &lt;-<span class="st"> </span>p$<span class="kw">file</span>(<span class="st">"Sample2"</span>)
 <span class="kw"><a href="../reference/set_tag.html">add_tag</a></span>(fl2, <span class="st">"s2"</span>)
 <span class="co"># add tag "s2" to a group of files named with "Sample1" in it</span>
-fl1 =<span class="st"> </span>p$<span class="kw">file</span>(<span class="st">"Sample1"</span>)
+fl1 &lt;-<span class="st"> </span>p$<span class="kw">file</span>(<span class="st">"Sample1"</span>)
 <span class="kw"><a href="../reference/set_tag.html">add_tag</a></span>(fl1, <span class="st">"s1"</span>)
 <span class="co"># filter by tag s1 or s2</span>
 p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="st">"s1"</span>)
@@ -1095,14 +1164,14 @@ p$<span class="kw">file</span>(<span class="dt">tag =</span> <span class="kw">li
 </div>
 </div>
 </div>
-<div id="app" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#app" class="anchor"> </a></body></html>App</h3>
+<div id="app" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#app" class="anchor"> </a></body></html>App</h2>
 <p>All Seven Bridges environments support the <a href="http://www.commonwl.org/">Common Workflow Language (CWL)</a> natively to allow for reproducible and portable workflows and tools. In this section, we will work with apps, including tools and workflows, via the API using the <code>sevenbridges</code> R package.</p>
 <div align="right">
 <a href="#top">top</a>
 </div>
-<div id="list-all-apps" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#list-all-apps" class="anchor"> </a></body></html>List all apps</h4>
+<div id="list-all-apps" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#list-all-apps" class="anchor"> </a></body></html>List all apps</h3>
 <p>This call lists all the apps available to you.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">app</span>()
 <span class="co"># or show details</span>
@@ -1128,11 +1197,11 @@ a$<span class="kw">app</span>(<span class="dt">project =</span> pid)</code></pre
 <p><strong>List all public apps</strong></p>
 <p>To list all public apps, use the <code>visibility</code> argument.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># show 100 items from public</span>
-x =<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>)
+x &lt;-<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>)
 <span class="kw">length</span>(x)
-x =<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)
+x &lt;-<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)
 <span class="kw">length</span>(x)
-x =<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">project =</span> <span class="st">"tengfei/helloworld"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)
+x &lt;-<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">project =</span> <span class="st">"tengfei/helloworld"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)
 <span class="kw">length</span>(x)
 a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">limit =</span> <span class="dv">5</span>, <span class="dt">offset =</span> <span class="dv">150</span>)</code></pre></div>
 <p><strong>Search through all public apps in all locations</strong></p>
@@ -1142,8 +1211,8 @@ a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="
 <a href="#top">top</a>
 </div>
 </div>
-<div id="copy-an-app" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#copy-an-app" class="anchor"> </a></body></html>Copy an App</h4>
+<div id="copy-an-app" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#copy-an-app" class="anchor"> </a></body></html>Copy an app</h3>
 <p>This call copies the specified app to a specified project. The app should be one in a project that you can access, either an app which has been uploaded by a project member or a publicly availble app which has been copied to the project.</p>
 <p>This call requires the following two arguments:</p>
 <ul><li><code>project</code>: include the project id</li>
@@ -1153,15 +1222,15 @@ a$<span class="kw">copy_app</span>(aid, <span class="dt">project =</span> pid, <
 <span class="co"># check if it is copied</span>
 a$<span class="kw">app</span>(<span class="dt">project =</span> pid)</code></pre></div>
 <p>You can also copy directly from the app object, as shown below.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">app =<span class="st"> </span>a$<span class="kw">public_app</span>(<span class="dt">id =</span> <span class="st">"admin/sbg-public-data/rna-seq-alignment-star"</span>)
-app$<span class="kw">copy_to</span>(<span class="dt">project =</span> <span class="st">"tengfei/api-testing"</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">app &lt;-<span class="st"> </span>a$<span class="kw">public_app</span>(<span class="dt">id =</span> <span class="st">"admin/sbg-public-data/rna-seq-alignment-star"</span>)
+app$<span class="kw">copy_to</span>(<span class="dt">project =</span> <span class="st">"tengfei/api-testing"</span>,
             <span class="dt">name =</span> <span class="st">"copy of star"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="get-an-apps-cwl-description" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#get-an-apps-cwl-description" class="anchor"> </a></body></html>Get an app&rsquo;s CWL description</h4>
+<div id="get-an-apps-cwl-description" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#get-an-apps-cwl-description" class="anchor"> </a></body></html>Get an app&rsquo;s CWL description</h3>
 <p>This call returns the raw CWL of a specific app, including its raw CWL. The call differs from the call to GET details of an app in that it returns a JSON object that is the CWL.</p>
 <p>The app should be one in a project that you can access, either an app which has been uploaded by a project member or a publicly availble app which has been copied to the project.</p>
 <p>To get a specific revision, pass the <code>revision</code> argument.</p>
@@ -1174,8 +1243,8 @@ a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="k
 <a href="#top">top</a>
 </div>
 </div>
-<div id="add-cwl-as-an-app" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#add-cwl-as-an-app" class="anchor"> </a></body></html>Add CWL as an APP</h4>
+<div id="add-cwl-as-an-app" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#add-cwl-as-an-app" class="anchor"> </a></body></html>Add CWL as an app</h3>
 <p>To add a CWL object as an app, use the <code>app_add</code> function call for a <code>Project</code> object. The following two parameters are required:</p>
 <ul><li><code>short_name</code>: Project short names are based on the name you give to a project when you create it. Learn more about project short names on the <a href="http://docs.sevenbridges.com/v1.0/docs/the-api#section-project-short-names">Seven Bridges Platform</a> or the <a href="http://docs.cancergenomicscloud.org/v1.0/docs/the-cgc-api#section-project-short-names">CGC</a>.</li>
 <li><code>filename</code>: The name of the JSON file containing the CWL.</li>
@@ -1187,18 +1256,44 @@ a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="k
 <a href="#top">top</a>
 </div>
 </div>
-<div id="directly-describe-cwl-in-r" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#directly-describe-cwl-in-r" class="anchor"> </a></body></html>Directly Describe CWL in R</h4>
-<p>This is introduced in another vignette.</p>
+<div id="describe-cwl-in-r-directly" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#describe-cwl-in-r-directly" class="anchor"> </a></body></html>Describe CWL in R directly</h3>
+<p>This is introduced in another vignette (<code><a href="../articles/apps.html">vignette("apps", "sevenbridges")</a></code>).</p>
+<div align="right">
+<a href="#top">top</a>
+</div>
+</div>
+<div id="create-test-or-keep-previous-test-for-tool" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#create-test-or-keep-previous-test-for-tool" class="anchor"> </a></body></html>Create test or keep previous test for Tool</h3>
+<p>On sevenbridges platform, when you create or update your tools in the GUI, there is a test tab allow users to tweak the parameters and see what it looks like in your commandline simulatd terminal. To do this via R when you push your Tool object to your project, you need to provide &ldquo;sbg:job&rdquo; information like the example shown below</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rbx &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Tool-class.html">Tool</a></span>(<span class="dt">id =</span> <span class="st">"runif"</span>,
+            <span class="dt">label =</span> <span class="st">"Random number generator"</span>,
+            <span class="dt">hints =</span> <span class="kw"><a href="../reference/CPURequirement-class.html">requirements</a></span>(<span class="kw"><a href="../reference/CPURequirement-class.html">docker</a></span>(<span class="dt">pull =</span> <span class="st">"tengfei/runif"</span>),
+                                 <span class="kw"><a href="../reference/CPURequirement-class.html">cpu</a></span>(<span class="dv">1</span>), <span class="kw"><a href="../reference/CPURequirement-class.html">mem</a></span>(<span class="dv">2000</span>)),
+            <span class="dt">baseCommand =</span> <span class="st">"runif.R"</span>,
+            <span class="dt">inputs =</span> in.lst,
+            <span class="dt">outputs =</span> out.lst,
+            <span class="st">'sbg:job'</span> =<span class="st"> </span><span class="kw">list</span>(<span class="dt">allocatedResources =</span> <span class="kw">list</span>(<span class="dt">mem =</span> <span class="dv">9000</span>, <span class="dt">cpu =</span> <span class="dv">1</span>),
+                             <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">min =</span> <span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">150</span>)))
+p$<span class="kw">app_add</span>(<span class="st">"random"</span>, rbx)</code></pre></div>
+<p>Or if you have created a test info on the platform or previously pushed one, and you want to keep the previous test setup. We provide a arguments called <code>keep_test</code> to allow you keep the previous revision&rsquo;s test information.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rbx &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Tool-class.html">Tool</a></span>(<span class="dt">id =</span> <span class="st">"runif"</span>,
+            <span class="dt">label =</span> <span class="st">"Random number generator"</span>,
+            <span class="dt">hints =</span> <span class="kw"><a href="../reference/CPURequirement-class.html">requirements</a></span>(<span class="kw"><a href="../reference/CPURequirement-class.html">docker</a></span>(<span class="dt">pull =</span> <span class="st">"tengfei/runif"</span>),
+                                 <span class="kw"><a href="../reference/CPURequirement-class.html">cpu</a></span>(<span class="dv">1</span>), <span class="kw"><a href="../reference/CPURequirement-class.html">mem</a></span>(<span class="dv">2000</span>)),
+            <span class="dt">baseCommand =</span> <span class="st">"runif.R"</span>,
+            <span class="dt">inputs =</span> in.lst,
+            <span class="dt">outputs =</span> out.lst)
+p$<span class="kw">app_add</span>(<span class="st">"random"</span>, rbx, <span class="dt">keep_test =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
 </div>
-<div id="task-operation" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#task-operation" class="anchor"> </a></body></html>Task Operation</h3>
-<div id="list-tasks" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#list-tasks" class="anchor"> </a></body></html>List tasks</h4>
+<div id="task" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#task" class="anchor"> </a></body></html>Task</h2>
+<div id="list-tasks" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#list-tasks" class="anchor"> </a></body></html>List tasks</h3>
 <p>This call returns a list of tasks that you can access. You are able to filter tasks by status.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># all tasks</span>
 a$<span class="kw">task</span>()
@@ -1216,7 +1311,7 @@ a$<span class="kw">task</span>(<span class="dt">project =</span> pid)</code></pr
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p$<span class="kw">task</span>(<span class="dt">id =</span> <span class="st">"your task id here"</span>, <span class="dt">detail =</span> <span class="ot">TRUE</span>)
 p$<span class="kw">task</span>(<span class="dt">detail =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>To list a batch task using the <code>parent</code> parameter, pass the batch parent task id.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo"</span>)
 p$<span class="kw">task</span>(<span class="dt">id =</span> <span class="st">"2e1ebed1-c53e-4373-870d-4732acacbbbb"</span>)
 p$<span class="kw">task</span>(<span class="dt">parent =</span> <span class="st">"2e1ebed1-c53e-4373-870d-4732acacbbbb"</span>)
 p$<span class="kw">task</span>(<span class="dt">parent =</span> <span class="st">"2e1ebed1-c53e-4373-870d-4732acacbbbb"</span>, <span class="dt">status =</span> <span class="st">"completed"</span>)
@@ -1225,15 +1320,15 @@ p$<span class="kw">task</span>(<span class="dt">parent =</span> <span class="st"
 <a href="#top">top</a>
 </div>
 </div>
-<div id="create-a-draft-task" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#create-a-draft-task" class="anchor"> </a></body></html>Create a draft task</h4>
+<div id="create-a-draft-task" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#create-a-draft-task" class="anchor"> </a></body></html>Create a draft task</h3>
 <p>To create a draft task, you need to call the <code>task_add</code> function from the Project object. And you need to pass the following arguments:</p>
 <ul><li><code>name</code>: The name for this task</li>
 <li><code>description</code> (optional): A description for this task</li>
 <li><code>app</code>: The app id</li>
 <li><code>inputs</code>: A list of inputs for this task</li>
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># push an app first</span>
-fl.runif &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"runif.json"</span>, <span class="dt">package =</span> <span class="st">"sbgr"</span>)
+fl.runif &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"runif.json"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">app_add</span>(<span class="st">"runif_draft"</span>, fl.runif)
 runif_id &lt;-<span class="st"> "tengfei/demo-project/runif_draft"</span>
 <span class="co"># create a draft task</span>
@@ -1247,8 +1342,8 @@ a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="k
 <a href="#top">top</a>
 </div>
 </div>
-<div id="modify-a-task" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#modify-a-task" class="anchor"> </a></body></html>Modify a task</h4>
+<div id="modify-a-task" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#modify-a-task" class="anchor"> </a></body></html>Modify a task</h3>
 <p>Call the <code>update</code> function from a Task object to update the following:</p>
 <ul><li><code>name</code></li>
 <li><code>description</code></li>
@@ -1256,7 +1351,8 @@ a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="k
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get the single task you want to update</span>
 tsk &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="kw">task</span>(<span class="st">"Draft runif 3"</span>)
 tsk
-tsk$<span class="kw">update</span>(<span class="dt">name =</span> <span class="st">"Draft runif update"</span>, <span class="dt">description =</span> <span class="st">"draft 2"</span>, 
+tsk$<span class="kw">update</span>(<span class="dt">name =</span> <span class="st">"Draft runif update"</span>,
+           <span class="dt">description =</span> <span class="st">"draft 2"</span>,
            <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">max =</span> <span class="dv">100</span>))
 <span class="co"># alternative way to check all inputs</span>
 tsk$<span class="kw">getInputs</span>()</code></pre></div>
@@ -1264,8 +1360,8 @@ tsk$<span class="kw">getInputs</span>()</code></pre></div>
 <a href="#top">top</a>
 </div>
 </div>
-<div id="run-a-task-1" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#run-a-task-1" class="anchor"> </a></body></html>Run a task</h4>
+<div id="run-a-task-1" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#run-a-task-1" class="anchor"> </a></body></html>Run a task</h3>
 <p>This call runs (&ldquo;executes&rdquo;) the specified task. Only tasks with a &ldquo;DRAFT&rdquo; status may be run.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tsk$<span class="kw">run</span>()
 <span class="co"># run update without information just return latest information</span>
@@ -1273,7 +1369,7 @@ tsk$<span class="kw">update</span>()</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
-<p><a name="hook"></a> #### Monitor a running task and set the hook function</p>
+<p><a name="hook"></a> ### Monitor a running task and set the hook function</p>
 <p>To monitor a running task, call <code>monitor</code> from a Task object.</p>
 <ul><li>First argument, set the interval time to check the status</li>
 <li>Rest arguments might be used for hook function</li>
@@ -1288,8 +1384,8 @@ tsk$<span class="kw">update</span>()</code></pre></div>
 <a href="#top">top</a>
 </div>
 </div>
-<div id="abort-a-running-task" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#abort-a-running-task" class="anchor"> </a></body></html>Abort a running task</h4>
+<div id="abort-a-running-task" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#abort-a-running-task" class="anchor"> </a></body></html>Abort a running task</h3>
 <p>This call aborts the specified task. Only tasks whose status is &ldquo;RUNNING&rdquo; may be aborted.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># abort</span>
 tsk$<span class="kw">abort</span>()
@@ -1299,8 +1395,8 @@ tsk$<span class="kw">update</span>()</code></pre></div>
 <a href="#top">top</a>
 </div>
 </div>
-<div id="delete-a-task" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#delete-a-task" class="anchor"> </a></body></html>Delete a task</h4>
+<div id="delete-a-task" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#delete-a-task" class="anchor"> </a></body></html>Delete a task</h3>
 <p>Note that you can only delete DRAFT tasks, not running tasks.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tsklst &lt;-<span class="st"> </span>a$<span class="kw">task</span>(<span class="dt">status =</span> <span class="st">"draft"</span>)
 <span class="co"># delete a single task</span>
@@ -1313,22 +1409,22 @@ a$<span class="kw">task</span>(<span class="dt">status =</span> <span class="st"
 <a href="#top">top</a>
 </div>
 </div>
-<div id="download-all-files-from-a-completed-task" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#download-all-files-from-a-completed-task" class="anchor"> </a></body></html>Download all files from a completed task</h4>
+<div id="download-all-files-from-a-completed-task" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#download-all-files-from-a-completed-task" class="anchor"> </a></body></html>Download all files from a completed task</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tsk$<span class="kw"><a href="../reference/download.html">download</a></span>(<span class="st">"~/Downloads"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="run-task-in-batch-mode" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#run-task-in-batch-mode" class="anchor"> </a></body></html>Run task in batch mode</h4>
+<div id="run-task-in-batch-mode" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#run-task-in-batch-mode" class="anchor"> </a></body></html>Run task in batch mode</h3>
 <p>To run task in batch mode, (check <code><a href="../reference/batch.html">?batch</a></code>) for more details. The code below is a mock.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># batch by items</span>
-(tsk &lt;-<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> <span class="st">"RNA DE report new batch 2"</span>, 
-                   <span class="dt">description =</span> <span class="st">"RNA DE analysis report"</span>, 
+(tsk &lt;-<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> <span class="st">"RNA DE report new batch 2"</span>,
+                   <span class="dt">description =</span> <span class="st">"RNA DE analysis report"</span>,
                    <span class="dt">app =</span> rna.app$id,
                    <span class="dt">batch =</span> <span class="kw"><a href="../reference/batch.html">batch</a></span>(<span class="dt">input =</span> <span class="st">"bamfiles"</span>),
-                   <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">bamfiles =</span> bamfiles.in, 
+                   <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">bamfiles =</span> bamfiles.in,
                                  <span class="dt">design =</span> design.in,
                                  <span class="dt">gtffile =</span> gtf.in)))
 
@@ -1346,29 +1442,29 @@ a$<span class="kw">task</span>(<span class="dt">status =</span> <span class="st"
 </div>
 </div>
 </div>
-<div id="volumes" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#volumes" class="anchor"> </a></body></html>Volumes</h3>
+<div id="volumes" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#volumes" class="anchor"> </a></body></html>Volumes</h2>
 <p>Cloud storage providers come with their own interfaces, features and terminology. At a certain level, though, they all view resources as data objects organized in repositories. Authentication and operations are commonly defined on those objects and repositories, and while each cloud provider might call these things different names and apply different parameters to them, their basic behavior is the same.</p>
 <p>Seven Bridges environments mediate access to these repositories using volumes. A volume is associated with a particular cloud storage repository that you have enabled Seven Bridges to read from (and, optionally, to write to). Currently, volumes may be created using two types of cloud storage repository: Amazon Web Services&rsquo; (AWS) S3 buckets and Google Cloud Storage (GCS) buckets.</p>
 <p>A volume enables you to treat the cloud repository associated with it as external storage. You can &lsquo;import&rsquo; files from the volume to your Seven Bridges environment to use them as inputs for computation. Similarly, you can write files from the Seven Bridges environment to your cloud storage by &lsquo;exporting&rsquo; them to your volume.</p>
 <p>Learn more about volumes on the <a href="http://docs.sevenbridges.com/docs/connecting-cloud-storage-overview">Seven Bridges Platform</a> and the <a href="http://docs.cancergenomicscloud.org/docs/connect-cloud-storage-overview">CGC</a>.</p>
-<div id="create-a-volume" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#create-a-volume" class="anchor"> </a></body></html>Create a volume</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a =<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">user =</span> <span class="st">"tengfei"</span>, <span class="dt">platform =</span> <span class="st">"us"</span>)
-a$<span class="kw">add_volume</span>(<span class="dt">name =</span> <span class="st">"tutorial_volume"</span>, 
-             <span class="dt">type =</span> <span class="st">"s3"</span>, 
-             <span class="dt">bucket =</span> <span class="st">"tengfei-demo"</span>, 
+<div id="create-a-volume" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#create-a-volume" class="anchor"> </a></body></html>Create a volume</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">user =</span> <span class="st">"tengfei"</span>, <span class="dt">platform =</span> <span class="st">"aws-us"</span>)
+a$<span class="kw">add_volume</span>(<span class="dt">name   =</span> <span class="st">"tutorial_volume"</span>,
+             <span class="dt">type   =</span> <span class="st">"s3"</span>,
+             <span class="dt">bucket =</span> <span class="st">"tengfei-demo"</span>,
              <span class="dt">prefix =</span> <span class="st">""</span>,
-             <span class="dt">access_key_id =</span> <span class="st">"AKIAJQENSIA4DJQNZO3A"</span>,
-             <span class="dt">secret_access_key =</span> <span class="st">"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"</span>, 
-             <span class="dt">sse_algorithm =</span> <span class="st">"AES256"</span>, 
-             <span class="dt">access_mode =</span> <span class="st">"RW"</span>)</code></pre></div>
+             <span class="dt">access_key_id     =</span> <span class="st">"AKIAJQENSIA4DJQNZO3A"</span>,
+             <span class="dt">secret_access_key =</span> <span class="st">"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"</span>,
+             <span class="dt">sse_algorithm     =</span> <span class="st">"AES256"</span>,
+             <span class="dt">access_mode       =</span> <span class="st">"RW"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="list-and-search-all-volumes" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#list-and-search-all-volumes" class="anchor"> </a></body></html>List and search all volumes</h4>
+<div id="list-and-search-all-volumes" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#list-and-search-all-volumes" class="anchor"> </a></body></html>List and search all volumes</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># list all volume</span>
 a$<span class="kw">volume</span>()
 <span class="co"># get unique volume by id</span>
@@ -1379,16 +1475,16 @@ a$<span class="kw">volume</span>(<span class="dt">name =</span> <span class="st"
 <a href="#top">top</a>
 </div>
 </div>
-<div id="get-a-volumes-detail" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#get-a-volumes-detail" class="anchor"> </a></body></html>Get a volume&rsquo;s detail</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v =<span class="st"> </span>a$<span class="kw">volume</span>()
+<div id="get-a-volumes-detail" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#get-a-volumes-detail" class="anchor"> </a></body></html>Get a volume&rsquo;s detail</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span>a$<span class="kw">volume</span>()
 v[[<span class="dv">1</span>]]$<span class="kw">detail</span>()</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="delete-volume" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#delete-volume" class="anchor"> </a></body></html>Delete volume</h4>
+<div id="delete-volume" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#delete-volume" class="anchor"> </a></body></html>Delete volume</h3>
 <p>This call deletes a volume you&rsquo;ve created to refer to storage on Amazon Web Services or Google Cloud Storage.</p>
 <p>Note that any files you&rsquo;ve imported from your volume onto a Seven Bridges environment, known as an alias, will no longer be usable. If a new volume is created with the same volume_id as the deleted volume, aliases will point to files on the newly created volume instead (if those exist).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a$<span class="kw">volume</span>(<span class="dt">id =</span> <span class="st">"tengfei/tengfei_demo"</span>)$<span class="kw"><a href="../reference/delete.html">delete</a></span>()</code></pre></div>
@@ -1396,30 +1492,30 @@ v[[<span class="dv">1</span>]]$<span class="kw">detail</span>()</code></pre></di
 <a href="#top">top</a>
 </div>
 </div>
-<div id="import-file-from-volume-to-project" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#import-file-from-volume-to-project" class="anchor"> </a></body></html>Import file from volume to project</h4>
+<div id="import-file-from-volume-to-project" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#import-file-from-volume-to-project" class="anchor"> </a></body></html>Import file from volume to project</h3>
 <p>This call imports a file from volume to your project.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v =<span class="st"> </span>a$<span class="kw">volume</span>(<span class="dt">id =</span> <span class="st">"tengfei/tutorial_volume"</span>)
-res =<span class="st"> </span>v$<span class="kw">import</span>(<span class="dt">location =</span>  <span class="st">"A-RNA-File.bam.bai"</span>,
-         <span class="dt">project =</span> <span class="st">"tengfei/s3tutorial"</span>,
-         <span class="dt">name =</span> <span class="st">"new.bam.bai"</span>, 
-         <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span>a$<span class="kw">volume</span>(<span class="dt">id =</span> <span class="st">"tengfei/tutorial_volume"</span>)
+res &lt;-<span class="st"> </span>v$<span class="kw">import</span>(<span class="dt">location =</span>  <span class="st">"A-RNA-File.bam.bai"</span>,
+                <span class="dt">project =</span> <span class="st">"tengfei/s3tutorial"</span>,
+                <span class="dt">name =</span> <span class="st">"new.bam.bai"</span>,
+                <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)
 
 <span class="co"># get job status update</span>
 <span class="co"># state will be "COMPLETED" when it's finished, otherwise "PENDING"</span>
 v$<span class="kw">get_import_job</span>(res$id)
 v</code></pre></div>
 </div>
-<div id="export-file-from-project-to-volume" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#export-file-from-project-to-volume" class="anchor"> </a></body></html>Export file from project to volume</h4>
+<div id="export-file-from-project-to-volume" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#export-file-from-project-to-volume" class="anchor"> </a></body></html>Export file from project to volume</h3>
 <p><strong>Important</strong> :</p>
 <ul><li>The file selected for export must not be a public file or an alias. Aliases are objects stored in your cloud storage bucket which have been made available on a Seven Bridges environment. The volume you are exporting to must be configured for read-write access. To do this, set the access_mode parameter to RW when creating or modifying a volume.</li>
 <li>If this call is successful, the original project file will become an alias to the newly exported object on the volume. The source file will be deleted from the Seven Bridges environment and, if no more copies of this file exist, it will no longer count towards your total storage price on the Seven Bridges environment.</li>
 </ul><p>When testing please update your file in a project.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res =<span class="st"> </span>v$<span class="kw">export</span>(<span class="dt">file =</span> <span class="st">"579fb1c9e4b08370afe7903a"</span>, 
-         <span class="dt">volume =</span> <span class="st">"tengfei/tutorial_volume"</span>,
-         <span class="dt">location =</span> <span class="st">""</span>,  <span class="co"># when "" use old name</span>
-         <span class="dt">sse_algorithm =</span>  <span class="st">"AES256"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span>v$<span class="kw">export</span>(<span class="dt">file =</span> <span class="st">"579fb1c9e4b08370afe7903a"</span>,
+                <span class="dt">volume =</span> <span class="st">"tengfei/tutorial_volume"</span>,
+                <span class="dt">location =</span> <span class="st">""</span>,  <span class="co"># when "" use old name</span>
+                <span class="dt">sse_algorithm =</span> <span class="st">"AES256"</span>)
 <span class="co"># get job status update</span>
 <span class="co"># state will be "COMPLETED" when it's finished other wise "PENDING"</span>
 v$<span class="kw">get_export_job</span>(res$id)
@@ -1429,11 +1525,11 @@ v</code></pre></div>
 </div>
 </div>
 </div>
-<div id="public-files-and-apps" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#public-files-and-apps" class="anchor"> </a></body></html>Public Files and Apps</h3>
+<div id="public-files-and-apps" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#public-files-and-apps" class="anchor"> </a></body></html>Public Files and Apps</h2>
 <p>Seven Bridges hosts publicly accessible files and apps on its environments. The <code>sevenbridges</code> package provides two easy function calls from the Authentication object to search for and copy files and apps to a project.</p>
-<div id="public-files" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#public-files" class="anchor"> </a></body></html>Public files</h4>
+<div id="public-files" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#public-files" class="anchor"> </a></body></html>Public files</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># list the first 100 files</span>
 a$<span class="kw">public_file</span>()
 <span class="co"># list by offset and limit</span>
@@ -1452,8 +1548,8 @@ a$<span class="kw">public_file</span>(<span class="dt">name =</span> <span class
 <a href="#top">top</a>
 </div>
 </div>
-<div id="public-apps" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#public-apps" class="anchor"> </a></body></html>Public apps</h4>
+<div id="public-apps" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#public-apps" class="anchor"> </a></body></html>Public apps</h3>
 <p>For public apps, there are similar API calls.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># list for 100 apps</span>
 a$<span class="kw">public_app</span>()
@@ -1470,15 +1566,15 @@ a$<span class="kw">public_app</span>(<span class="dt">name =</span> <span class=
 </div>
 </div>
 </div>
-<div id="get-raw-response-from-httr" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#get-raw-response-from-httr" class="anchor"> </a></body></html>Get Raw Response from httr</h3>
+<div id="get-raw-response-from-httr" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#get-raw-response-from-httr" class="anchor"> </a></body></html>Get Raw Response from httr</h2>
 <p>In the easy API, we return an object which contains the raw response from <code>httr</code> as a field. You can either call <code><a href="../reference/response.html">response()</a></code> on that object or just use the field as is.</p>
 <div align="right">
 <a href="#top">top</a>
 </div>
 </div>
-<div id="batch-operation-on-projectfilestasks" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#batch-operation-on-projectfilestasks" class="anchor"> </a></body></html>Batch operation on project/files/tasks</h3>
+<div id="batch-operation-on-projectfilestasks" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#batch-operation-on-projectfilestasks" class="anchor"> </a></body></html>Batch Operation on Project/Files/Tasks</h2>
 <p>Currently, users have to use <code>lapply</code> to do those operations themselves. It&rsquo;s a simple implementation.</p>
 <p>In this package, we implement <code>delete</code> and <code>download</code> for some objects like task, project, or file.</p>
 <div align="right">
@@ -1486,15 +1582,15 @@ a$<span class="kw">public_app</span>(<span class="dt">name =</span> <span class=
 </div>
 </div>
 </div>
-<div id="cheatsheet" class="section level2">
-<h2 class="hasAnchor"><html><body><a href="#cheatsheet" class="anchor"> </a></body></html>Cheatsheet</h2>
+<div id="cheatsheet" class="section level1">
+<h1 class="hasAnchor"><html><body><a href="#cheatsheet" class="anchor"> </a></body></html>Cheatsheet</h1>
 <p>Quick cheat sheet (in progress)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Authentification
-<span class="kw"><a href="../reference/Auth-class.html">getToken</a></span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Authentication
+<span class="kw">getToken</span>()
 a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> token)
-a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> token, 
-          <span class="dt">url =</span> <span class="st">"https://cgc-api.sbgenomics.com/v2/"</span>)
-a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">platform =</span> <span class="st">"us"</span>, <span class="dt">username =</span> <span class="st">"tengfei"</span>)
+a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> token, <span class="dt">platform =</span> <span class="st">"cgc"</span>)
+a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">from =</span> <span class="st">"env"</span>)
+a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">from =</span> <span class="st">"file"</span>, <span class="dt">profile_name =</span> <span class="st">"aws-us-tengfei"</span>)
 
 ## list API
 a$<span class="kw"><a href="../reference/api.html">api</a></span>()
@@ -1556,7 +1652,7 @@ a$<span class="kw">app</span>()
 ### apps in a project
 p$<span class="kw">app</span>()
 p$<span class="kw">app</span>(name, id, <span class="dt">revision =</span> )
-a$<span class="kw">copyApp</span>(aid, <span class="dt">project =</span> pid, <span class="dt">name =</span> )
+a$<span class="kw">copy_app</span>(aid, <span class="dt">project =</span> pid, <span class="dt">name =</span> )
 ### add
 p$<span class="kw">app_add</span>(<span class="dt">short_name =</span> , <span class="dt">filename =</span>)
 
@@ -1590,9 +1686,37 @@ tsk$<span class="kw">monitor</span>()
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
       <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked"><li><a href="#introduction">Introduction</a></li>
-      <li><a href="#quickstart">Quickstart</a></li>
-      <li><a href="#user-friendly-api">User-friendly API</a></li>
+      <ul class="nav nav-pills nav-stacked"><li><a href="#introduction">Introduction</a><ul class="nav nav-pills nav-stacked"><li><a href="#r-client-for-seven-bridges-api">R Client for Seven Bridges API</a></li>
+      <li><a href="#api-general-information">API General Information</a></li>
+      <li><a href="#installation">Installation</a></li>
+      </ul></li>
+      <li><a href="#quickstart">Quickstart</a><ul class="nav nav-pills nav-stacked"><li><a href="#create-auth-object">Create <code>Auth</code> Object</a></li>
+      <li><a href="#get-user-information">Get User Information</a></li>
+      <li><a href="#rate-limit">Rate Limit</a></li>
+      <li><a href="#show-billing-information">Show Billing Information</a></li>
+      <li><a href="#create-project">Create Project</a></li>
+      <li><a href="#get-details-about-existing-project">Get Details about Existing Project</a></li>
+      <li><a href="#copy-public-apps-into-your-project">Copy Public Apps into Your Project</a></li>
+      <li><a href="#import-cwl-app-and-run-a-task">Import CWL App and Run a Task</a></li>
+      <li><a href="#execute-a-new-task">Execute a New Task</a></li>
+      <li><a href="#run-a-task">Run a Task</a></li>
+      <li><a href="#task-monitoring">Task Monitoring</a></li>
+      </ul></li>
+      <li><a href="#seven-bridges-api-reference">Seven Bridges API Reference</a><ul class="nav nav-pills nav-stacked"><li><a href="#authentication">Authentication</a></li>
+      <li><a href="#list-all-api-calls">List All API Calls</a></li>
+      <li><a href="#offset-limit-and-search">Offset, Limit, and Search</a></li>
+      <li><a href="#rate-limits">Rate Limits</a></li>
+      <li><a href="#users">Users</a></li>
+      <li><a href="#billing-group-and-invoices">Billing Group and Invoices</a></li>
+      <li><a href="#project">Project</a></li>
+      <li><a href="#files-metadata-and-tags">Files, Metadata, and Tags</a></li>
+      <li><a href="#app">App</a></li>
+      <li><a href="#task">Task</a></li>
+      <li><a href="#volumes">Volumes</a></li>
+      <li><a href="#public-files-and-apps">Public Files and Apps</a></li>
+      <li><a href="#get-raw-response-from-httr">Get Raw Response from httr</a></li>
+      <li><a href="#batch-operation-on-projectfilestasks">Batch Operation on Project/Files/Tasks</a></li>
+      </ul></li>
       <li><a href="#cheatsheet">Cheatsheet</a></li>
       </ul></div>
       </div>
