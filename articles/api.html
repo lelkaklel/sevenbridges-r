@@ -552,7 +552,7 @@ tsk$<span class="kw">getInputs</span>()</code></pre></div>
 ##                                         cat("\r", "completed")
 ##                                         return(TRUE)
 ##                                     }
-## &lt;environment: 0x10ea9adc0&gt;</code></pre>
+## &lt;environment: 0x10ebd4708&gt;</code></pre>
 <p>If you want to customize the monitor function, you can adjust the following requirement. Your function must return <code>TRUE</code> or <code>FALSE</code> in the end. When it is <code>TRUE</code> (or non-logical value) it means the monitoring will be terminated after it finds a status matched and the function executes, such as when the task is completed. When it is <code>FALSE</code> it means the monitoring will continue for the next iteration of checking, e.g.&nbsp;when it is &ldquo;running&rdquo;, you want to keep tracking.</p>
 <p>Follow the example below to set a new function to monitor the status &ldquo;completed&rdquo;. Then, when the task is completed, it will download all task output files to local folder.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/setTaskHook.html">setTaskHook</a></span>(<span class="st">"completed"</span>, function(){
@@ -1032,11 +1032,13 @@ a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="k
 <div id="upload-files" class="section level3">
 <h3 class="hasAnchor"><html><body><a href="#upload-files" class="anchor"> </a></body></html>Upload files</h3>
 <p>Seven Bridges environments provide a few different methods for data import, as follows:</p>
-<ul><li>The command line uploader</li>
-<li>A graphic visual interface uploader</li>
+<pre><code>- The command line uploader</code></pre>
+<ul><li>A graphic visual interface uploader</li>
 <li>From FTP, HTTP, etc. from the visual interface directly</li>
 <li>The API uploader that you can directly call with the <code>sevenbridges</code> package</li>
-</ul><p>Use the API client uploader by calling the <code>project$upload</code> function to upload a file, a file list, or a folder recursively:</p>
+</ul><p>Use the API client uploader by calling the <code>project$upload</code> function to upload a file, a file list, or a folder recursively or via a manifest file</p>
+<div id="upload-single-file" class="section level4">
+<h4 class="hasAnchor"><html><body><a href="#upload-single-file" class="anchor"> </a></body></html>Upload single file</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">username =</span> <span class="st">"tengfei"</span>, <span class="dt">platform =</span> <span class="st">"cgc"</span>)
 fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"sample1.fastq"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 
@@ -1049,18 +1051,46 @@ p$<span class="kw">upload</span>(fl, <span class="dt">overwrite =</span> <span c
 <span class="co"># rename</span>
 p$<span class="kw">upload</span>(fl, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>, <span class="dt">name =</span> <span class="st">"sample_new_name.fastq"</span>,
          <span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">library_id =</span> <span class="st">"new_id"</span>))</code></pre></div>
-<p><strong>Upload a folder</strong></p>
+</div>
+<div id="upload-a-folder" class="section level4">
+<h4 class="hasAnchor"><html><body><a href="#upload-a-folder" class="anchor"> </a></body></html>Upload a folder</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dir.ext &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 <span class="kw">list.files</span>(dir.ext)
 p$<span class="kw">upload</span>(dir.ext, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>Upload a file list</p>
+</div>
+<div id="upload-a-file-list" class="section level4">
+<h4 class="hasAnchor"><html><body><a href="#upload-a-file-list" class="anchor"> </a></body></html>Upload a file list</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dir.ext &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 <span class="co"># enable full name</span>
 fls &lt;-<span class="st"> </span><span class="kw">list.files</span>(dir.ext, <span class="dt">recursive =</span> <span class="ot">TRUE</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
 p$<span class="kw">upload</span>(fls, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)
 p$<span class="kw">upload</span>(<span class="st">"~/Documents/Data/sbgtest/1000G_phase1.snps.high_confidence.b37.vcf"</span>)</code></pre></div>
+</div>
+<div id="upload-files-via-defined-manifest-file" class="section level4">
+<h4 class="hasAnchor"><html><body><a href="#upload-files-via-defined-manifest-file" class="anchor"> </a></body></html>Upload files via defined manifest file</h4>
+<p>A manifest file is a file used to define metadata values for a set of files. It can be used when uploading files to the Platform to set their metadata.The supported file format for the manifest file is CSV, i.e.&nbsp;comma separated values. A CSV file contains a number of rows with columns which are separated with a comma. Format of manifest file is defined in the <a href="http://docs.sevenbridges.com/docs/format-of-a-manifest-file">documentaion online</a></p>
+<p>Some requirements</p>
+<ul><li>The first row has to contain column names which are parsed as metadata fields (e.g. &ldquo;sample&rdquo;&ldquo;,&rdquo;library&ldquo;&rdquo;). When it&rsquo;s not customized fields, we do converstion for meta fields like &ldquo;sample_id&rdquo; which need to be string.</li>
+<li>The first column has to contain the names of the files which will be uploaded. In case the files are not in the same directory as the manifest file, you should also include a path to the files (e.g. ../filename.fastq).</li>
+</ul><p>We allow users to</p>
+<ul><li>choose to upload metadata or not.</li>
+<li>choose to use <code>subset</code> style to upload only part of metadata</li>
+<li>choose to use <code>subset</code> style to upload only part of files with filter</li>
+</ul><p>Please check couple examples below</p>
+<pre><code>## upload all fiels and all metadatas
+p$upload(manifest_file = "~/manifest.csv")
+## verbal = TRUE, print single file level progress
+p$upload(manifest_file = "~/manifest.csv", overwrite = TRUE, verbal = TRUE)
+## manifest_metadata = FALSE doens't attach any meta
+p$upload(manifest_file = "~/manifest.csv", manifest_metadata = FALSE, overwrite = TRUE)
+## filter fils first, upload only files that score &lt; 0.5
+p$upload(manifest_file = "~/manifest.csv", overwrite = TRUE, subset = score &lt; 0.5)
+## attach all meta except "bad_field" and "sample_id"
+p$upload(manifest_file = "~/manifest.csv", overwrite = TRUE,
+         subset = score &lt; 0.5, select = -c(bad_field, sample_id))</code></pre>
 <div align="right">
 <a href="#top">top</a>
+</div>
 </div>
 </div>
 <div id="update-a-file" class="section level3">
