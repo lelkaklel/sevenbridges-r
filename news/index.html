@@ -83,16 +83,37 @@
 <div id="improvements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#improvements" class="anchor"> </a>Improvements</h2>
-<ul><li>Support three authentication methods: direct authentication, via environment variables, or via user configuration file. Compliant with the new API client authentication specification.</li>
-<li>Updated platform types: users can now choose from <code>cgc</code>, <code>aws-us</code>, <code>aws-eu</code>, <code>gcp</code>, and <code>cavatica</code>.</li>
-<li>File ID support on task input (directly) (<a href="https://github.com/sbg/sevenbridges-r/issues/27">#27</a>)</li>
+<div id="api-client-authentication" class="section level3">
+<h3 class="hasAnchor">
+<a href="#api-client-authentication" class="anchor"> </a>API Client (Authentication)</h3>
+<ul><li>Support three authentication methods: direct authentication, via environment variables, or via user configuration file. Compliant with the new API client authentication specification. Please check the latest vignette <code><a href="../articles/api.html">vignette("api", package = "sevenbridges")</a></code> for the current authentication methods.</li>
+<li>Updated platform types: now users can choose from <code>"cgc"</code>, <code>"aws-us"</code>, <code>"aws-eu"</code>, <code>"gcp"</code>, and <code>"cavatica"</code> in <code><a href="../reference/Auth-class.html">Auth()</a></code> to avoid using API base URLs directly.</li>
 <li>Removed credential information parsing when package is loaded.</li>
-<li>Improved robustness of <code>convert_app</code> when a CWL JSON has more fields than defined (<a href="https://github.com/sbg/sevenbridges-r/issues/44">#44</a>)</li>
-<li>Migrate Docker images to Seven Bridges Docker Hub account (<a href="https://github.com/sbg/sevenbridges-r/issues/43">#43</a>)</li>
+</ul></div>
+<div id="api-client-task-and-upload" class="section level3">
+<h3 class="hasAnchor">
+<a href="#api-client-task-and-upload" class="anchor"> </a>API Client (Task and Upload)</h3>
+<ul><li>File ID support on task input (directly) (<a href="https://github.com/sbg/sevenbridges-r/issues/27">#27</a>)</li>
 <li>New argument <code>keep_test</code> for <code>task_add()</code> added: when users push a Tool object with no <code>sbg:job</code> information, can still use <code>keep_test = TRUE</code> to keep previous test information. (<a href="https://github.com/sbg/sevenbridges-r/issues/31">#31</a>)</li>
 <li>Support manifest file upload with fitler and subsetting for uploader (<a href="https://github.com/sbg/sevenbridges-r/issues/46">#46</a>)</li>
-<li>New vignette style (<a href="https://github.com/sbg/sevenbridges-r/issues/38">#38</a>)</li>
 </ul></div>
+<div id="docker-image" class="section level3">
+<h3 class="hasAnchor">
+<a href="#docker-image" class="anchor"> </a>Docker Image</h3>
+<ul><li>Migrate Docker images to Seven Bridges Docker Hub account (<a href="https://github.com/sbg/sevenbridges-r/issues/43">#43</a>), now users could use <code>docker pull sevenbridges/sevenbridges-r</code>
+</li>
+</ul></div>
+<div id="cwl-support" class="section level3">
+<h3 class="hasAnchor">
+<a href="#cwl-support" class="anchor"> </a>CWL Support</h3>
+<ul><li>Improved robustness of <code><a href="../reference/convert_app.html">convert_app()</a></code> when a CWL JSON has more fields than defined (<a href="https://github.com/sbg/sevenbridges-r/issues/44">#44</a>)</li>
+</ul></div>
+<div id="miscellaneous" class="section level3">
+<h3 class="hasAnchor">
+<a href="#miscellaneous" class="anchor"> </a>Miscellaneous</h3>
+<ul><li>New vignette style (<a href="https://github.com/sbg/sevenbridges-r/issues/38">#38</a>)</li>
+</ul></div>
+</div>
 </div>
     <div id="sevenbridges-1-5-4" class="section level1">
 <h1 class="hasAnchor">

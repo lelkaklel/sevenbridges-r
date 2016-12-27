@@ -45,11 +45,19 @@
 <div id="table-of-contents" class="section level2">
 <h2 class="hasAnchor">
 <a href="#table-of-contents" class="anchor"> </a>Table of Contents</h2>
-<ul><li><a href="#installation">Installation</a></li>
+<ul><li><a href="#overview">Overview</a></li>
+<li><a href="#installation">Installation</a></li>
 <li><a href="#bioconductor---release-version">Bioconductor - Release Version</a></li>
 <li><a href="#bioconductor---development-version">Bioconductor - Development Version</a></li>
 <li><a href="#latest-development-version">Latest Development Version</a></li>
 <li><a href="#features">Features</a></li>
+<li><a href="#flexible-authentication-methods">Flexible Authentication Methods</a></li>
+<li><a href="#complete-api-r-client">Complete API R Client</a></li>
+<li><a href="#task-monitoring">Task Monitoring</a></li>
+<li><a href="#batch-tasks-support">Batch Tasks Support</a></li>
+<li><a href="#cross-environment-support">Cross Environment Support</a></li>
+<li><a href="#common-workflow-language-tool-interface">Common Workflow Language Tool Interface</a></li>
+<li><a href="#utilities-for-tool-and-flow">Utilities for Tool and Flow</a></li>
 <li><a href="#tutorials">Tutorials</a></li>
 <li><a href="#ide-docker-image">IDE Docker Image</a></li>
 <li><a href="#faq">FAQ</a></li>
@@ -120,20 +128,47 @@ devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbrid
 <h2 class="hasAnchor">
 <a href="#features" class="anchor"> </a>Features</h2>
 <p>The sevenbridges package includes the following features:</p>
+<div id="flexible-authentication-methods" class="section level3">
+<h3 class="hasAnchor">
+<a href="#flexible-authentication-methods" class="anchor"> </a>Flexible Authentication Methods</h3>
+<ul><li>Multiple authentication methods support.</li>
+</ul><p>Direct authentication:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># direct authentication</span>
+a &lt;-<span class="st"> </span><span class="kw"><a href="reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"your_token"</span>, <span class="dt">platform =</span> <span class="st">"cgc"</span>)
+<span class="co"># or use base url</span>
+a &lt;-<span class="st"> </span><span class="kw"><a href="reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"your_token"</span>, <span class="dt">url =</span> <span class="st">"https://cgc-api.sbgenomics.com/v2"</span>)</code></pre></div>
+<p>Authentication via system environment variables:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/sbg_set_env.html">sbg_set_env</a></span>(<span class="dt">token =</span> <span class="st">"your_token"</span>, <span class="dt">url =</span> <span class="st">"https://cgc-api.sbgenomics.com/v2"</span>)
+a &lt;-<span class="st"> </span><span class="kw"><a href="reference/Auth-class.html">Auth</a></span>(<span class="dt">from =</span> <span class="st">"env"</span>)</code></pre></div>
+<p>Authentication via a user configuration file, collect and manage your credentials for multiple accounts across various Seven Bridges environments:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="reference/Auth-class.html">Auth</a></span>(<span class="dt">from =</span> <span class="st">"file"</span>, <span class="dt">profile_name =</span> <span class="st">"aws-us-tengfei"</span>)</code></pre></div>
+<p>Please check <code><a href="articles/api.html">vignette("api", package = "sevenbridges")</a></code> for technical details about all available authentication methods.</p>
+</div>
+<div id="complete-api-r-client" class="section level3">
+<h3 class="hasAnchor">
+<a href="#complete-api-r-client" class="anchor"> </a>Complete API R Client</h3>
 <ul><li>A complete API R client with a user-friendly, object-oriented API with printing and support operations for API requests relating to users, billing, projects, files, apps, and tasks. Short examples are also included, as shown below:</li>
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get a project by pattern-matching its name</span>
-p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="st">"demo"</span>)
+p &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="st">"demo"</span>)
 <span class="co"># Get a project by its id</span>
-p =<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo"</span>)
+p &lt;-<span class="st"> </span>a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/demo"</span>)
 <span class="co"># Delete files from a project</span>
 p$<span class="kw">file</span>(<span class="st">"sample.tz"</span>)$<span class="kw"><a href="reference/delete.html">delete</a></span>()
 <span class="co"># Upload fies from a folder to a project and include file metadata</span>
 p$<span class="kw">upload</span>(<span class="st">"folder_path"</span>, <span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">platform =</span> <span class="st">"Illumina"</span>))</code></pre></div>
+</div>
+<div id="task-monitoring" class="section level3">
+<h3 class="hasAnchor">
+<a href="#task-monitoring" class="anchor"> </a>Task Monitoring</h3>
 <ul><li>A task monitoring hook which allows you to add a hook function to specific task statuses as you monitor a task. For example, you can opt to receive an email when the task is completed or specify to download all files produced by the task, as shown below:</li>
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/setTaskHook.html">setTaskHook</a></span>(<span class="st">"completed"</span>, function() {
     tsk$<span class="kw"><a href="reference/download.html">download</a></span>(<span class="st">"~/Downloads"</span>)
 })
 tsk$<span class="kw">monitor</span>()</code></pre></div>
+</div>
+<div id="batch-tasks-support" class="section level3">
+<h3 class="hasAnchor">
+<a href="#batch-tasks-support" class="anchor"> </a>Batch Tasks Support</h3>
 <ul><li>Batch tasks by metadata and by item.</li>
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Batch by item</span>
 (tsk &lt;-<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> <span class="st">"RNA DE report new batch 2"</span>,
@@ -154,12 +189,15 @@ tsk$<span class="kw">monitor</span>()</code></pre></div>
                    <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">bamfiles =</span> bamfiles.in,
                                  <span class="dt">design =</span> design.in,
                                  <span class="dt">gtffile =</span> gtf.in)))</code></pre></div>
-<ul><li><p>Cross-platform support for Seven Bridges, such as <a href="https://www.cancergenomicscloud.org/">NCI Cancer Genomics Cloud</a> or <a href="https://www.sbgenomics.com/">Seven Bridges Platform</a> on either the Google Cloud Platform or Amazon Web Services deploy.</p></li>
-<li><p>Manage your authentication credentials for various Seven Bridges products, such as the Platform and the Cancer Genomics Cloud, via a configuration file as follows:</p></li>
-</ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># standard</span>
-a =<span class="st"> </span><span class="kw"><a href="reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"fake_token"</span>, <span class="dt">url =</span> <span class="st">"api_url"</span>)
-<span class="co"># OR from config file, multiple platform/user support</span>
-a =<span class="st"> </span><span class="kw"><a href="reference/Auth-class.html">Auth</a></span>(<span class="dt">username =</span> <span class="st">"tengfei"</span>, <span class="dt">platform =</span> <span class="st">"cgc"</span>)</code></pre></div>
+</div>
+<div id="cross-environment-support" class="section level3">
+<h3 class="hasAnchor">
+<a href="#cross-environment-support" class="anchor"> </a>Cross Environment Support</h3>
+<ul><li>Cross-platform support for Seven Bridges environments, such as <a href="https://www.cancergenomicscloud.org/">Cancer Genomics Cloud</a> or <a href="https://www.sbgenomics.com/">Seven Bridges Platform</a> on either Amazon Web Services or Google Cloud Platform.</li>
+</ul></div>
+<div id="common-workflow-language-tool-interface" class="section level3">
+<h3 class="hasAnchor">
+<a href="#common-workflow-language-tool-interface" class="anchor"> </a>Common Workflow Language Tool Interface</h3>
 <ul><li>A <a href="http://www.commonwl.org/">Common Workflow Language (CWL)</a> Tool interface to directly describe your tool in R, export it to JSON or YAML, or add it to your online project. This package defines a complete set of CWL object, so you can describe tools as follows:</li>
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"readr"</span>)
 fd &lt;-<span class="st"> </span><span class="kw"><a href="reference/CPURequirement-class.html">fileDef</a></span>(<span class="dt">name =</span> <span class="st">"runif.R"</span>,
@@ -185,14 +223,19 @@ rbx &lt;-<span class="st"> </span><span class="kw"><a href="reference/Tool-class
 rbx$<span class="kw">toJSON</span>(<span class="dt">pretty =</span> <span class="ot">TRUE</span>)
 <span class="co"># output CWL YAML</span>
 rbx$<span class="kw">toYAML</span>()</code></pre></div>
+</div>
+<div id="utilities-for-tool-and-flow" class="section level3">
+<h3 class="hasAnchor">
+<a href="#utilities-for-tool-and-flow" class="anchor"> </a>Utilities for Tool and Flow</h3>
 <ul><li>Utilities for Tool and Flow, for example</li>
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># converting a SBG CWL JSON file</span>
 <span class="kw">library</span>(<span class="st">"sevenbridges"</span>)
-t1 =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/app"</span>, <span class="st">"tool_star.json"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
+t1 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/app"</span>, <span class="st">"tool_star.json"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 <span class="co"># convert json file into a Tool object</span>
-t1 =<span class="st"> </span><span class="kw"><a href="reference/convert_app.html">convert_app</a></span>(t1)
+t1 &lt;-<span class="st"> </span><span class="kw"><a href="reference/convert_app.html">convert_app</a></span>(t1)
 <span class="co"># shows all input matrix</span>
 t1$<span class="kw">input_matrix</span>()</code></pre></div>
+</div>
 </div>
 <div id="tutorials" class="section level2">
 <h2 class="hasAnchor">
