@@ -60,7 +60,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/sbg/sevenbridges-r">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -87,7 +92,7 @@
 <h3 class="hasAnchor">
 <a href="#api-client-authentication" class="anchor"> </a>API Client (Authentication)</h3>
 <ul><li>Support three authentication methods: direct authentication, via environment variables, or via user configuration file. Compliant with the new API client authentication specification. Please check the latest vignette <code><a href="../articles/api.html">vignette("api", package = "sevenbridges")</a></code> for the current authentication methods.</li>
-<li>Updated platform types: now users can choose from <code>"cgc"</code>, <code>"aws-us"</code>, <code>"aws-eu"</code>, <code>"gcp"</code>, and <code>"cavatica"</code> in <code><a href="../reference/Auth-class.html">Auth()</a></code> to avoid using API base URLs directly.</li>
+<li>Updated platform types: now users can choose from <code>"cgc"</code>, <code>"aws-us"</code>, <code>"aws-eu"</code>, <code>"gcp"</code>, and <code>"cavatica"</code> in <code><a href="../reference/Auth-class.html">Auth()</a></code> to avoid using API base URLs explicitly.</li>
 <li>Removed credential information parsing when package is loaded.</li>
 </ul></div>
 <div id="api-client-task-and-upload" class="section level3">
@@ -100,7 +105,7 @@
 <div id="docker-image" class="section level3">
 <h3 class="hasAnchor">
 <a href="#docker-image" class="anchor"> </a>Docker Image</h3>
-<ul><li>Migrate Docker images to Seven Bridges Docker Hub account (<a href="https://github.com/sbg/sevenbridges-r/issues/43">#43</a>), now users could use <code>docker pull sevenbridges/sevenbridges-r</code>
+<ul><li>Migrated Docker images to Seven Bridges Docker Hub account (<a href="https://github.com/sbg/sevenbridges-r/issues/43">#43</a>), now users could use <code>docker pull sevenbridges/sevenbridges-r</code>
 </li>
 </ul></div>
 <div id="cwl-support" class="section level3">
