@@ -41,7 +41,7 @@
       <h1>Describe and Execute CWL Tools/Workflows in R</h1>
                         <h4 class="author">Tengfei Yin &lt;<a href="mailto:tengfei.yin@sbgenomics.com">tengfei.yin@sbgenomics.com</a>&gt;</h4>
             
-            <h4 class="date">2017-01-05</h4>
+            <h4 class="date">2017-01-17</h4>
           </div>
 
     
@@ -104,7 +104,7 @@ t1 =<span class="st"> </span><span class="kw"><a href="../reference/convert_app.
            splice_junctions          chimeric_junctions 
                      "File"                      "File" </code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return a input matrix with more informtion</span>
-<span class="kw">head</span>(t1$<span class="kw">input_matrix</span>())</code></pre></div>
+<span class="kw">head</span>(t1$<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>())</code></pre></div>
 <pre><code>                     id                label    type required
 1                #reads        Read sequence File...     TRUE
 95         #sjdbGTFfile Splice junction file File...    FALSE
@@ -127,7 +127,7 @@ t1 =<span class="st"> </span><span class="kw"><a href="../reference/convert_app.
 3                                                       null
 4                                                       null</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return only a few fields</span>
-<span class="kw">head</span>(t1$<span class="kw">input_matrix</span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"type"</span>, <span class="st">"required"</span>)))</code></pre></div>
+<span class="kw">head</span>(t1$<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"type"</span>, <span class="st">"required"</span>)))</code></pre></div>
 <pre><code>                     id    type required
 1                #reads File...     TRUE
 95         #sjdbGTFfile File...    FALSE
@@ -136,7 +136,7 @@ t1 =<span class="st"> </span><span class="kw"><a href="../reference/convert_app.
 3        #readMapNumber     int    FALSE
 4    #limitOutSJoneRead     int    FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return only required</span>
-t1$<span class="kw">input_matrix</span>(<span class="dt">required =</span> <span class="ot">TRUE</span>)</code></pre></div>
+t1$<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>(<span class="dt">required =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>         id         label    type required prefix
 1    #reads Read sequence File...     TRUE   &lt;NA&gt;
 102 #genome  Genome files    File     TRUE   &lt;NA&gt;
@@ -144,7 +144,7 @@ t1$<span class="kw">input_matrix</span>(<span class="dt">required =</span> <span
 1   FASTA, FASTQ, FA, FQ, FASTQ.GZ, FQ.GZ, FASTQ.BZ2, FQ.BZ2
 102                                                      TAR</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return a output matrix with more informtion</span>
-t1$<span class="kw">output_matrix</span>()</code></pre></div>
+t1$<span class="kw"><a href="../reference/input_matrix.html">output_matrix</a></span>()</code></pre></div>
 <pre><code>                            id                     label    type fileTypes
 1               #aligned_reads           Aligned SAM/BAM    File  SAM, BAM
 2 #transcriptome_aligned_reads  Transcriptome alignments    File       BAM
@@ -156,7 +156,7 @@ t1$<span class="kw">output_matrix</span>()</code></pre></div>
 8         #intermediate_genome Intermediate genome files    File       TAR
 9         #chimeric_alignments       Chimeric alignments    File       SAM</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return only a few fields</span>
-t1$<span class="kw">output_matrix</span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"type"</span>))</code></pre></div>
+t1$<span class="kw"><a href="../reference/input_matrix.html">output_matrix</a></span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"type"</span>))</code></pre></div>
 <pre><code>                            id    type
 1               #aligned_reads    File
 2 #transcriptome_aligned_reads    File
@@ -927,7 +927,7 @@ f1 =<span class="st"> </span><span class="kw"><a href="../reference/convert_app.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/app"</span>, <span class="st">"flow_star.json"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 f1 =<span class="st"> </span><span class="kw"><a href="../reference/convert_app.html">convert_app</a></span>(f1)
 <span class="co"># input matrix</span>
-<span class="kw">head</span>(f1$<span class="kw">input_matrix</span>())</code></pre></div>
+<span class="kw">head</span>(f1$<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>())</code></pre></div>
 <pre><code>                               id               label    type required
 1                    #sjdbGTFfile         sjdbGTFfile File...    FALSE
 2                          #fastq               fastq File...     TRUE
@@ -943,7 +943,7 @@ f1 =<span class="st"> </span><span class="kw"><a href="../reference/convert_app.
 5      null
 6      null</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># by name</span>
-<span class="kw">head</span>(f1$<span class="kw">input_matrix</span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"type"</span>, <span class="st">"required"</span>)))</code></pre></div>
+<span class="kw">head</span>(f1$<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"type"</span>, <span class="st">"required"</span>)))</code></pre></div>
 <pre><code>                               id    type required
 1                    #sjdbGTFfile File...    FALSE
 2                          #fastq File...     TRUE
@@ -952,12 +952,12 @@ f1 =<span class="st"> </span><span class="kw"><a href="../reference/convert_app.
 5       #sjdbGTFtagExonParentGene  string    FALSE
 6          #winAnchorMultimapNmax     int    FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return only required</span>
-<span class="kw">head</span>(f1$<span class="kw">input_matrix</span>(<span class="dt">required =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<span class="kw">head</span>(f1$<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>(<span class="dt">required =</span> <span class="ot">TRUE</span>))</code></pre></div>
 <pre><code>                 id            label    type required fileTypes
 2            #fastq            fastq File...     TRUE      null
 3 #genomeFastaFiles genomeFastaFiles    File     TRUE      null</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return everything</span>
-<span class="kw">head</span>(f1$<span class="kw">input_matrix</span>(<span class="ot">NULL</span>))</code></pre></div>
+<span class="kw">head</span>(f1$<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>(<span class="ot">NULL</span>))</code></pre></div>
 <pre><code>                               id    type required fileTypes
 1                    #sjdbGTFfile File...    FALSE      null
 2                          #fastq File...     TRUE      null
@@ -1001,7 +1001,7 @@ f1 =<span class="st"> </span><span class="kw"><a href="../reference/convert_app.
 5        #STAR_Genome_Generate.sjdbGTFtagExonParentGene
 6                           #STAR.winAnchorMultimapNmax</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return a output matrix with more informtion</span>
-<span class="kw">head</span>(f1$<span class="kw">output_matrix</span>())</code></pre></div>
+<span class="kw">head</span>(f1$<span class="kw"><a href="../reference/input_matrix.html">output_matrix</a></span>())</code></pre></div>
 <pre><code>                            id                       label    type
 1              #unmapped_reads              unmapped_reads File...
 2 #transcriptome_aligned_reads transcriptome_aligned_reads    File
@@ -1017,7 +1017,7 @@ f1 =<span class="st"> </span><span class="kw"><a href="../reference/convert_app.
 5      null
 6      null</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return only a few fields</span>
-<span class="kw">head</span>(f1$<span class="kw">output_matrix</span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"type"</span>)))</code></pre></div>
+<span class="kw">head</span>(f1$<span class="kw"><a href="../reference/input_matrix.html">output_matrix</a></span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"type"</span>)))</code></pre></div>
 <pre><code>                            id    type
 1              #unmapped_reads File...
 2 #transcriptome_aligned_reads    File
@@ -1026,7 +1026,7 @@ f1 =<span class="st"> </span><span class="kw"><a href="../reference/convert_app.
 5                   #log_files File...
 6          #chimeric_junctions    File</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return everything</span>
-<span class="kw">head</span>(f1$<span class="kw">output_matrix</span>(<span class="ot">NULL</span>))</code></pre></div>
+<span class="kw">head</span>(f1$<span class="kw"><a href="../reference/input_matrix.html">output_matrix</a></span>(<span class="ot">NULL</span>))</code></pre></div>
 <pre><code>                            id                       label    type
 1              #unmapped_reads              unmapped_reads File...
 2 #transcriptome_aligned_reads transcriptome_aligned_reads    File

@@ -41,7 +41,7 @@
       <h1>Complete Guide for Seven Bridges API R Client</h1>
                         <h4 class="author">Tengfei Yin &lt;<a href="mailto:tengfei.yin@sbgenomics.com">tengfei.yin@sbgenomics.com</a>&gt;</h4>
             
-            <h4 class="date">2017-01-05</h4>
+            <h4 class="date">2017-01-17</h4>
           </div>
 
     
@@ -401,16 +401,15 @@ app &lt;-<span class="st"> </span>p$<span class="kw">app_add</span>(<span class=
 </ul><p>You can always check the App details on the visual interface for task input requirements. To find the required inputs with R, you need to get an <code>App</code> object first.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">app &lt;-<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">id =</span> <span class="st">"tengfei/api-testing-2/newcopyofstar"</span>)
 <span class="co"># get input matrix</span>
-app$<span class="kw">input_matrix</span>()
-app$<span class="kw">input_matrix</span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"label"</span>, <span class="st">"type"</span>))
-app$<span class="kw">input_matrix</span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"label"</span>, <span class="st">"type"</span>), <span class="dt">required =</span> <span class="ot">TRUE</span>)
-<span class="co"># get required input names and types only</span>
-app$<span class="kw">get_required</span>()</code></pre></div>
+app$<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>()
+app$<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"label"</span>, <span class="st">"type"</span>))
+<span class="co"># get required node only</span>
+app$<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"label"</span>, <span class="st">"type"</span>), <span class="dt">required =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Conversely, you can load the app from a CWL JSON and convert it into an R object first, as shown below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/app"</span>, <span class="st">"flow_star.json"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 app &lt;-<span class="st"> </span><span class="kw"><a href="../reference/convert_app.html">convert_app</a></span>(f1)
 <span class="co"># get input matrix</span>
-app$<span class="kw">input_matrix</span>()</code></pre></div>
+app$<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>()</code></pre></div>
 <pre><code>##                                id                    label    type
 ## 1                    #sjdbGTFfile              sjdbGTFfile File...
 ## 2                          #fastq                    fastq File...
@@ -427,7 +426,7 @@ app$<span class="kw">input_matrix</span>()</code></pre></div>
 ## 5    FALSE      null
 ## 6    FALSE      null
 ## 7    FALSE      null</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">app$<span class="kw">input_matrix</span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"label"</span>, <span class="st">"type"</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">app$<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"label"</span>, <span class="st">"type"</span>))</code></pre></div>
 <pre><code>##                                id                    label    type
 ## 1                    #sjdbGTFfile              sjdbGTFfile File...
 ## 2                          #fastq                    fastq File...
@@ -436,14 +435,20 @@ app$<span class="kw">input_matrix</span>()</code></pre></div>
 ## 5       #sjdbGTFtagExonParentGene                Gene name  string
 ## 6          #winAnchorMultimapNmax         Max loci anchors     int
 ## 7             #winAnchorDistNbins Max bins between anchors     int</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">app$<span class="kw">input_matrix</span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"label"</span>, <span class="st">"type"</span>), <span class="dt">required =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">app$<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>(<span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"label"</span>, <span class="st">"type"</span>), <span class="dt">required =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>##                  id            label    type
 ## 2            #fastq            fastq File...
 ## 3 #genomeFastaFiles genomeFastaFiles    File</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get required input names and types only</span>
-app$<span class="kw">get_required</span>()</code></pre></div>
-<pre><code>##            fastq genomeFastaFiles 
-##        "File..."           "File"</code></pre>
+<p>Note <code>input_matrix</code> and <code>output_matrix</code> are useful accessor for <code>Tool</code>, <code>Flow</code>, <code>App</code> object as shown below in App example, you can directly call these two function on a JSON file as well.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tool.in =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/app"</span>, <span class="st">"tool_unpack_fastq.json"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
+flow.in =<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/app"</span>, <span class="st">"flow_star.json"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
+<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>(tool.in)
+<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>(tool.in, <span class="dt">required =</span> <span class="ot">TRUE</span>)
+<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>(flow.in)
+<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>(flow.in, <span class="kw">c</span>(<span class="st">"id"</span>, <span class="st">"type"</span>))
+<span class="kw"><a href="../reference/input_matrix.html">input_matrix</a></span>(flow.in, <span class="dt">required =</span> <span class="ot">TRUE</span>)
+<span class="kw"><a href="../reference/input_matrix.html">output_matrix</a></span>(tool.in)
+<span class="kw"><a href="../reference/input_matrix.html">output_matrix</a></span>(flow.in)</code></pre></div>
 <p>In the response body, locate the names of the required inputs. Note that task inputs need to match the expected data type and name. In the above example, we see two required fields:</p>
 <ul><li><strong>fastq:</strong> This input takes a file array as indicated by &ldquo;File&hellip;&rdquo;</li>
 <li><strong>genomeFastaFiles:</strong> This is a single file as indicated by &ldquo;File&rdquo;.</li>
@@ -558,7 +563,7 @@ tsk$<span class="kw">getInputs</span>()</code></pre></div>
 ##                                         cat("\r", "completed")
 ##                                         return(TRUE)
 ##                                     }
-## &lt;environment: 0x10b2d1830&gt;</code></pre>
+## &lt;environment: 0x10be089f8&gt;</code></pre>
 <p>If you want to customize the monitor function, you can adjust the following requirement. Your function must return <code>TRUE</code> or <code>FALSE</code> in the end. When it is <code>TRUE</code> (or non-logical value) it means the monitoring will be terminated after it finds a status matched and the function executes, such as when the task is completed. When it is <code>FALSE</code> it means the monitoring will continue for the next iteration of checking, e.g.&nbsp;when it is &ldquo;running&rdquo;, you want to keep tracking.</p>
 <p>Follow the example below to set a new function to monitor the status &ldquo;completed&rdquo;. Then, when the task is completed, it will download all task output files to local folder.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/setTaskHook.html">setTaskHook</a></span>(<span class="st">"completed"</span>, function(){
@@ -698,6 +703,30 @@ x =<span class="st"> </span>a$<span class="kw">app</span>(<span class="dt">visib
 a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">name =</span> <span class="st">"bed converter"</span>)
 <span class="co"># this return an app, because it pulls *all* app names and did search</span>
 a$<span class="kw">app</span>(<span class="dt">visibility =</span> <span class="st">"public"</span>, <span class="dt">name =</span> <span class="st">"bed converter"</span>, <span class="dt">complete =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div align="right">
+<a href="#top">top</a>
+</div>
+</div>
+<div id="query-parameter-fields" class="section level2">
+<h2 class="hasAnchor"><html><body><a href="#query-parameter-fields" class="anchor"> </a></body></html>Query Parameter <code>'fields'</code></h2>
+<p>Please read the documentation <a href="http://docs.sevenbridges.com/reference#section-general-api-information">detail</a>.</p>
+<p>All API calls take the optional query parameter fields. This parameter enables you to specify the fields you want to be returned when listing resources (e.g.&nbsp;all your projects) or getting details of a specific resource (e.g.&nbsp;a given project).</p>
+<p>The fields parameter can be used in the following ways:</p>
+<ol style="list-style-type: decimal"><li><p>No <code>fields</code> parameter specified: calls return default fields. For calls that return complete details of a single resource, this is all their properties; for calls that list resources of a certain type, this is some default properties.</p></li>
+<li><p>The <code>fields</code> parameter can be set to a list of fields: for example, to return the fields id, name and size for files in a project, you may issue the call <code>p$file(fields = "id,name,size")</code></p></li>
+<li><p>The fields parameter can be used to exclude a specific file: if you wish to omit certain field from the response, do so using the fields parameter with the prefix <code>!</code>. For example, to get the details of a file without listing its metadata, issue a call <code>p$file(fields = '!metadata')</code> The entire metadata field will be removed from the response.</p></li>
+<li><p>The fields parameter can be used to include or omit certain nested fields, in the same way as listed in 2 and 3 above: for example, you can use <code>metadata.sample_id</code> or <code>origin.task</code> for files.</p></li>
+<li><p>To see all fields for a resource, specify <code>fields="_all"</code>. This returns all fields for each resource returned. Note that if you are getting the details of a specific resource, the use of <code>fields="_all"</code> won&rsquo;t return any more properties than would have been shown without this parameter &mdash; the use case is instead for when you are listing details of many resources. Please use with care if your resource has particularly large fields; for example, the raw field for an app resource contains the complete CWL specification of the app which can result in bulky response if listing many apps.</p></li>
+<li><p>Negations and nesting can be combined freely, so, for example, you can issue <code>p$file(fields="id,name,status,!metadata.library,!origin")</code> or <code>p$task(fields="!inputs,!outputs")</code>.</p></li>
+</ol><p>Please try following examples</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## default fields id, name, project
+p$<span class="kw">file</span>()
+## return file(s) with id, name, siae information
+p$<span class="kw">file</span>(<span class="dt">fields =</span> <span class="st">"id,name,size"</span>)
+## return file(s) with all available info
+p$<span class="kw">file</span>(<span class="dt">detail =</span> <span class="ot">TRUE</span>)
+## same as above
+p$<span class="kw">file</span>(<span class="dt">fields =</span> <span class="st">"_all"</span>)</code></pre></div>
 <div align="right">
 <a href="#top">top</a>
 </div>
@@ -1741,6 +1770,7 @@ tsk$<span class="kw">monitor</span>()
       <li><a href="#seven-bridges-api-reference">Seven Bridges API Reference</a><ul class="nav nav-pills nav-stacked"><li><a href="#authentication">Authentication</a></li>
       <li><a href="#list-all-api-calls">List All API Calls</a></li>
       <li><a href="#offset-limit-and-search">Offset, Limit, and Search</a></li>
+      <li><a href="#query-parameter-fields">Query Parameter <code>'fields'</code></a></li>
       <li><a href="#rate-limits">Rate Limits</a></li>
       <li><a href="#users">Users</a></li>
       <li><a href="#billing-group-and-invoices">Billing Group and Invoices</a></li>

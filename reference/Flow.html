@@ -220,19 +220,19 @@ name then names of vector is type.</dd>
     <pre class="examples"><span class='no'>f1</span> <span class='kw'>=</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/app"</span>, <span class='st'>"flow_star.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"sevenbridges"</span>)
 <span class='no'>f1</span> <span class='kw'>=</span> <span class='fu'><a href='convert_app.html'>convert_app</a></span>(<span class='no'>f1</span>)
 <span class='co'># input matrix</span>
-<span class='no'>f1</span>$<span class='fu'>input_matrix</span>()
+<span class='no'>f1</span>$<span class='fu'><a href='input_matrix.html'>input_matrix</a></span>()
 <span class='co'># by name</span>
-<span class='no'>f1</span>$<span class='fu'>input_matrix</span>(<span class='fu'>c</span>(<span class='st'>"id"</span>, <span class='st'>"type"</span>, <span class='st'>"required"</span>, <span class='st'>"link_to"</span>))
+<span class='no'>f1</span>$<span class='fu'><a href='input_matrix.html'>input_matrix</a></span>(<span class='fu'>c</span>(<span class='st'>"id"</span>, <span class='st'>"type"</span>, <span class='st'>"required"</span>, <span class='st'>"link_to"</span>))
 <span class='co'># return only required</span>
-<span class='no'>f1</span>$<span class='fu'>input_matrix</span>(<span class='kw'>required</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>f1</span>$<span class='fu'><a href='input_matrix.html'>input_matrix</a></span>(<span class='kw'>required</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='co'># return everything</span>
-<span class='no'>f1</span>$<span class='fu'>input_matrix</span>(<span class='kw'>NULL</span>)
+<span class='no'>f1</span>$<span class='fu'><a href='input_matrix.html'>input_matrix</a></span>(<span class='kw'>NULL</span>)
 <span class='co'># return a output matrix with more informtion</span>
-<span class='no'>f1</span>$<span class='fu'>output_matrix</span>()
+<span class='no'>f1</span>$<span class='fu'><a href='input_matrix.html'>output_matrix</a></span>()
 <span class='co'># return only a few fields</span>
-<span class='no'>f1</span>$<span class='fu'>output_matrix</span>(<span class='fu'>c</span>(<span class='st'>"id"</span>, <span class='st'>"type"</span>))
+<span class='no'>f1</span>$<span class='fu'><a href='input_matrix.html'>output_matrix</a></span>(<span class='fu'>c</span>(<span class='st'>"id"</span>, <span class='st'>"type"</span>))
 <span class='co'># return everything</span>
-<span class='no'>f1</span>$<span class='fu'>output_matrix</span>(<span class='kw'>NULL</span>)
+<span class='no'>f1</span>$<span class='fu'><a href='input_matrix.html'>output_matrix</a></span>(<span class='kw'>NULL</span>)
 <span class='co'># flow inputs</span>
 <span class='no'>f1</span>$<span class='fu'>input_type</span>()
 <span class='co'># flow outouts</span>

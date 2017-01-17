@@ -88,7 +88,7 @@
   <span class='st'>"PUT"</span>, <span class='st'>"DELETE"</span>, <span class='st'>"PATCH"</span>), <span class='kw'>query</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>body</span> <span class='kw'>=</span> <span class='fu'>list</span>(),
   <span class='kw'>encode</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"json"</span>, <span class='st'>"form"</span>, <span class='st'>"multipart"</span>),
   <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"sevenbridges"</span>)$<span class='no'>limit</span>,
-  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"sevenbridges"</span>)$<span class='no'>offset</span>,
+  <span class='kw'>offset</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"sevenbridges"</span>)$<span class='no'>offset</span>, <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>base_url</span> <span class='kw'>=</span> <span class='fu'>paste0</span>(<span class='st'>"https://api.sbgenomics.com/"</span>, <span class='no'>version</span>, <span class='st'>"/"</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -123,6 +123,13 @@ a length 1 vector as a vector, wrap in <code>I()</code>.</dd>
       <dd>How many results to return</dd>
       <dt>offset</dt>
       <dd>The point at which to start displaying them</dd>
+      <dt>fields</dt>
+      <dd>All API calls take the optional query parameter fields.
+This parameter enables you to specify the fields you want to be returned
+when listing resources (e.g. all your projects) or getting details of a
+specific resource (e.g. a given project). For example, fields=&quot;id,name,size&quot;
+to return the fields id, name and size for files. More details please check
+<a href = 'http://docs.sevenbridges.com/reference#section-general-api-information'>http://docs.sevenbridges.com/reference#section-general-api-information</a></dd>
       <dt>base_url</dt>
       <dd>defeault is <code>&quot;https://api.sbgenomics.com/v2&quot;</code></dd>
       <dt>...</dt>
