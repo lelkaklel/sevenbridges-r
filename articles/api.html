@@ -58,7 +58,7 @@
 <div id="r-client-for-seven-bridges-api" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#r-client-for-seven-bridges-api" class="anchor"> </a></body></html>R Client for Seven Bridges API</h2>
 <p>The <code>sevenbridges</code> package only supports v2+ versions of the API, since versions prior to V2 are not compatible with the Common Workflow Language (CWL). This package provides a simple interface for accessing and trying out various methods.</p>
-<p>There are two ways of constructing API calls. For instance, you can use low-level API calls which use arguments like <code>path</code>, <code>query</code>, and <code>body</code>. These are documented in the API reference libraries for the <a href="http://docs.sevenbridges.com/v1.0/docs/list-of-api-calls">Seven Bridges Platform</a> and the <a href="http://docs.cancergenomicscloud.org/docs/new-1">CGC</a>. An example of a low-level request to &ldquo;list all projects&rdquo; is shown below. In this request, you can also pass <code>query</code> and <code>body</code> as a list.</p>
+<p>There are two ways of constructing API calls. For instance, you can use low-level API calls which use arguments like <code>path</code>, <code>query</code>, and <code>body</code>. These are documented in the API reference libraries for the <a href="http://docs.sevenbridges.com/reference#list-all-api-paths">Seven Bridges Platform</a> and the <a href="http://docs.cancergenomicscloud.org/docs/new-1">CGC</a>. An example of a low-level request to &ldquo;list all projects&rdquo; is shown below. In this request, you can also pass <code>query</code> and <code>body</code> as a list.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"sevenbridges"</span>)
 a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">token =</span> <span class="st">"8c3329a4de664c35bb657499bb2f335c"</span>,
           <span class="dt">platform =</span> <span class="st">"aws-us"</span>)
@@ -110,7 +110,7 @@ Limit defines the quantity of items you want to get.
 </div>
 <p><strong>If <code>devtools</code> is already installed</strong></p>
 <p>Install the latest version for <code>sevenbridges</code> from GitHub with the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"http://bioconductor.org/biocLite.R"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"https://bioconductor.org/biocLite.R"</span>)
 <span class="kw">biocLite</span>(<span class="st">"readr"</span>)
 
 devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbridges-r"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>,
@@ -563,7 +563,7 @@ tsk$<span class="kw">getInputs</span>()</code></pre></div>
 ##                                         cat("\r", "completed")
 ##                                         return(TRUE)
 ##                                     }
-## &lt;environment: 0x111109430&gt;</code></pre>
+## &lt;environment: 0x10d34bc30&gt;</code></pre>
 <p>If you want to customize the monitor function, you can adjust the following requirement. Your function must return <code>TRUE</code> or <code>FALSE</code> in the end. When it is <code>TRUE</code> (or non-logical value) it means the monitoring will be terminated after it finds a status matched and the function executes, such as when the task is completed. When it is <code>FALSE</code> it means the monitoring will continue for the next iteration of checking, e.g.&nbsp;when it is &ldquo;running&rdquo;, you want to keep tracking.</p>
 <p>Follow the example below to set a new function to monitor the status &ldquo;completed&rdquo;. Then, when the task is completed, it will download all task output files to local folder.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/setTaskHook.html">setTaskHook</a></span>(<span class="st">"completed"</span>, function(){

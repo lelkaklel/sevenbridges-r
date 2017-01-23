@@ -215,7 +215,7 @@ CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">docker</span> run -d -p 8787:8787 sevenbridges/sevenbridges-r
 <span class="ex">docker</span> run -d -p 8787:8787 -e USER=<span class="op">&lt;</span>username<span class="op">&gt;</span> -e PASSWORD=<span class="op">&lt;</span>password<span class="op">&gt;</span> rocker/rstudio</code></pre></div>
 <p>You will be able to access the RStudio in the browser by something like</p>
-<p><code>http://&lt;your ip address&gt;:8787</code></p>
+<p><code>http://&lt;your_ip_address&gt;:8787</code></p>
 <p>Sometimes you want to add more users, to add users</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">## Enter the container</span>
 <span class="ex">docker</span> exec -it <span class="op">&lt;</span>container-id<span class="op">&gt;</span> bash

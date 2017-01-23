@@ -50,23 +50,23 @@
 <div id="introdution" class="section level1">
 <h1 class="hasAnchor"><html><body><a href="#introdution" class="anchor"> </a></body></html>Introdution</h1>
 <p>There are currently three ways to find the data you need on CGC:</p>
-<ul><li>Most easy: use our powerful and pretty GUI called &lsquo;data explorer&rsquo; interactively on the platform, please read tutorial <a href="http://docs.cancergenomicscloud.org/docs/the-data-browser">here</a></li>
-<li>Most advanced: for advanced user, please SPARQL query directly <a href="http://docs.cancergenomicscloud.org/docs/query-tcga-metadata-programmatically#section-example-queries">tutorial</a></li>
-<li>Most sweet: use our Datasets API, by creating a query list in R (comming soon)</li>
+<ul><li>Most easy: use our powerful and pretty GUI called &lsquo;data explorer&rsquo; interactively on the platform, please read the tutorial <a href="http://docs.cancergenomicscloud.org/docs/about-the-data-browser">here</a>.</li>
+<li>Most advanced: for advanced user, please SPARQL query directly <a href="http://docs.cancergenomicscloud.org/docs/query-via-sparql">tutorial</a>.</li>
+<li>Most sweet: use CGC Datasets API, by creating a query list in R (comming soon).</li>
 </ul></div>
 <div id="quick-start" class="section level1">
 <h1 class="hasAnchor"><html><body><a href="#quick-start" class="anchor"> </a></body></html>Quick Start</h1>
 <div id="graphical-data-explorer" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#graphical-data-explorer" class="anchor"> </a></body></html>Graphical data explorer</h2>
-<p>Please read the tutorial <a href="http://docs.cancergenomicscloud.org/docs/the-data-browser">here</a>.</p>
+<p>Please read the tutorial <a href="http://docs.cancergenomicscloud.org/docs/about-the-data-browser">here</a>.</p>
 </div>
 <div id="sparql-examples" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#sparql-examples" class="anchor"> </a></body></html>SPARQL examples</h2>
 <p>Seven Bridges&rsquo; SPARQL console, available at <a href="https://opensparql.sbgenomics.com" class="uri">https://opensparql.sbgenomics.com</a>.</p>
 <p>Please read following tutorials first</p>
-<ul><li><a href="http://docs.cancergenomicscloud.org/docs/query-tcga-metadata-programmatically#section-example-queries">Query TCGA metadata programmatically</a></li>
-<li><a href="http://docs.cancergenomicscloud.org/docs/sample-sparql-queries">Examples of TCGA metadata queries in SPARQL</a></li>
-</ul><p>Here let me show you an example here, you will need R package &ldquo;SPARQL&rdquo;:</p>
+<ul><li><a href="http://docs.cancergenomicscloud.org/docs/query-via-sparql">Query TCGA metadata programmatically</a></li>
+<li><a href="http://docs.cancergenomicscloud.org/docs/example-sparql-queries">Example TCGA metadata queries in SPARQL</a></li>
+</ul><p>Let&rsquo;s see an example here, you will need the R package <code>SPARQL</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"SPARQL"</span>)
 endpoint =<span class="st"> "https://opensparql.sbgenomics.com/blazegraph/namespace/tcga_metadata_kb/sparql"</span>
 query =<span class="st"> "</span>
@@ -119,14 +119,14 @@ query =<span class="st"> "</span>
 qd &lt;-<span class="st"> </span><span class="kw">SPARQL</span>(endpoint, query)
 df &lt;-<span class="st"> </span>qd$results
 <span class="kw">head</span>(df)</code></pre></div>
-<p>You can use the CGC API to access the TCGA files found using SPARQL queries. To get files that have download links, you will need to use the SPARQL variable <strong>path</strong> in your query.</p>
+<p>You can use the CGC API to access the TCGA files found via SPARQL queries. To get files that have download links, you will need to use the SPARQL variable <strong>path</strong> in your query.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># api(api_url = base, auth_token = auth_token, path = "action/files/get_ids",</span>
 <span class="co">#     method = "POST", query = None, data = filelist)</span>
 df.path &lt;-<span class="st"> </span>df[,<span class="st">"path"</span>]
 df.path</code></pre></div>
 <p>You can directly copy those files to a project, make sure if the files is controlled access</p>
 <ul><li>project support TCGA controlled access</li>
-<li>you log in from eRA Commons</li>
+<li>you log in from NIH eRA Commons</li>
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"sevenbridges"</span>)
 a =<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">platform =</span> <span class="st">"cgc"</span>, <span class="dt">token =</span> <span class="st">"your_cgc_token"</span>)
 <span class="co"># get id (only works for CGC platform)</span>
@@ -134,7 +134,7 @@ ids =<span class="st"> </span>a$<span class="kw">get_id_from_path</span>(df.path
 <span class="co"># copy file from id to project with controlled access</span>
 (<span class="dt">p =</span> a$<span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/control-test"</span>))
 a$<span class="kw">copyFile</span>(ids, p$id)</code></pre></div>
-<p>Now have fun with more examples in this <a href="http://docs.cancergenomicscloud.org/docs/query-tcga-metadata-programmatically#section-example-queries">tutorial</a>.</p>
+<p>Now have fun with more examples in this <a href="http://docs.cancergenomicscloud.org/docs/query-via-sparql">tutorial</a>.</p>
 </div>
 <div id="datasets-api-examples" class="section level2">
 <h2 class="hasAnchor"><html><body><a href="#datasets-api-examples" class="anchor"> </a></body></html>Datasets API examples</h2>
