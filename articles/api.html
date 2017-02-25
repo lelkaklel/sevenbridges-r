@@ -39,9 +39,9 @@
   <div class="col-md-9">
     <div class="page-header toc-ignore">
       <h1>Complete Guide for Seven Bridges API R Client</h1>
-                        <h4 class="author">Tengfei Yin &lt;<a href="mailto:tengfei.yin@sbgenomics.com">tengfei.yin@sbgenomics.com</a>&gt;</h4>
+                        <h4 class="author">Tengfei Yin &lt;<a href="mailto:tengfei.yin@sevenbridges.com">tengfei.yin@sevenbridges.com</a>&gt; <br> Nan Xiao &lt;<a href="mailto:nan.xiao@sevenbridges.com">nan.xiao@sevenbridges.com</a>&gt;</h4>
             
-            <h4 class="date">2017-02-21</h4>
+            <h4 class="date">2017-02-25</h4>
           </div>
 
     
@@ -50,7 +50,7 @@
 <p><a name="top"></a></p>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor"><html><body><a href="#introduction" class="anchor"> </a></body></html>Introduction</h1>
-<p>sevenbridges-r is an R/Bioconductor package that provides an interface for the <a href="https://www.sbgenomics.com">Seven Bridges Platform</a> and <a href="https://www.cancergenomicscloud.org">Cancer Genomics Cloud (CGC)</a> public APIs.</p>
+<p><code>sevenbridges</code> is an R/Bioconductor package that provides an interface for Seven Bridges public API. The supported platforms includes the <a href="https://igor.sbgenomics.com/">Seven Bridges Platform</a>, <a href="https://www.cancergenomicscloud.org">Cancer Genomics Cloud (CGC)</a>, and <a href="https://cavatica.sbgenomics.com">Cavatica</a>.</p>
 <p>Learn more from our documentation on the <a href="http://docs.sevenbridges.com/page/api">Seven Bridges Platform</a> and the <a href="http://docs.cancergenomicscloud.org/v1.0/page/the-cgc-api">Cancer Genomics Cloud (CGC)</a>.</p>
 <div align="right">
 <a href="#top">top</a>
@@ -201,7 +201,7 @@ auth_token = token_for_this_user</code></pre>
 <pre><code>== User ==
 href : https://cgc-api.sbgenomics.com/v2/users/tengfei
 username : tengfei
-email : tengfei.yin@sbgenomics.com
+email : tengfei.yin@sevenbridges.com
 first_name : Tengfei
 last_name : Yin
 affiliation : Seven Bridges Genomics
@@ -330,52 +330,54 @@ app &lt;-<span class="st"> </span>p$<span class="kw">app_add</span>(<span class=
                   <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 <span class="kw">cat</span>(<span class="kw">readLines</span>(fl), <span class="dt">sep =</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</code></pre></div>
 <pre><code>library("sevenbridges")
-in.lst &lt;- list(input(id = "number",
-                     description = "number of observations",
-                     type = "integer",
-                     label = "number",
-                     prefix = "--n",
-                     default = 1,
-                     required = TRUE,
-                     cmdInclude = TRUE),
-               input(id = "min",
-                     description = "lower limits of the distribution",
-                     type = "float",
-                     label = "min",
-                     prefix = "--min",
-                     default = 0),
-               input(id = "max",
-                     description = "upper limits of the distribution",
-                     type = "float",
-                     label = "max",
-                     prefix = "--max",
-                     default = 1),
-               input(id = "seed",
-                     description = "seed with set.seed",
-                     type = "float",
-                     label = "seed",
-                     prefix = "--seed",
-                     default = 1))
 
+in.lst &lt;- list(
+    input(id = "number",
+          description = "number of observations",
+          type = "integer",
+          label = "number",
+          prefix = "--n",
+          default = 1,
+          required = TRUE,
+          cmdInclude = TRUE),
+    input(id = "min",
+          description = "lower limits of the distribution",
+          type = "float",
+          label = "min",
+          prefix = "--min",
+          default = 0),
+    input(id = "max",
+          description = "upper limits of the distribution",
+          type = "float",
+          label = "max",
+          prefix = "--max",
+          default = 1),
+    input(id = "seed",
+          description = "seed with set.seed",
+          type = "float",
+          label = "seed",
+          prefix = "--seed",
+          default = 1))
 
-## the same method for outputs
-out.lst &lt;- list(output(id = "random",
-                       type = "file",
-                       label = "output",
-                       description = "random number file",
-                       glob = "*.txt"),
-                output(id = "report",
-                       type = "file",
-                       label = "report",
-                       glob = "*.html"))
+# the same method for outputs
+out.lst &lt;- list(
+    output(id = "random",
+           type = "file",
+           label = "output",
+           description = "random number file",
+           glob = "*.txt"),
+    output(id = "report",
+           type = "file",
+           label = "report",
+           glob = "*.html"))
 
-rbx &lt;- Tool(id = "runif",
-            label = "Random number generator",
-            hints = requirements(docker(pull = "tengfei/runif"),
-                                 cpu(1), mem(2000)),
-            baseCommand = "runif.R",
-            inputs = in.lst,  # or ins.df
-            outputs = out.lst)
+rbx &lt;- Tool(
+    id = "runif",
+    label = "Random number generator",
+    hints = requirements(docker(pull = "tengfei/runif"), cpu(1), mem(2000)),
+    baseCommand = "runif.R",
+    inputs = in.lst,  # or ins.df
+    outputs = out.lst)
 
 fl &lt;- "inst/docker/sevenbridges/rabix/runif.json"
 write(rbx$toJSON(pretty = TRUE), fl)</code></pre>
@@ -560,10 +562,10 @@ tsk$<span class="kw">getInputs</span>()</code></pre></div>
 <p><a name="hooktask"></a>Instead of the default task monitor action, you can use <code>setTaskHook</code> to connect a function call to the status of a task. When you run <code>tsk$monitor(time = 30)</code> it will check your task every 30 seconds to see if the current task status matches one of the following statuses: &ldquo;queued&rdquo;, &ldquo;draft&rdquo;, &ldquo;running&rdquo;, &ldquo;completed&rdquo;, &ldquo;aborted&rdquo;, and &ldquo;failed&rdquo;. When it finds a match for the task status, <code>getTaskHook</code> returns the function call for the specific status.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/setTaskHook.html">getTaskHook</a></span>(<span class="st">"completed"</span>)</code></pre></div>
 <pre><code>## function(...) {
-##                                         cat("\r", "completed")
-##                                         return(TRUE)
-##                                     }
-## &lt;environment: 0x10d465e40&gt;</code></pre>
+##                     cat("\r", "completed")
+##                     return(TRUE)
+##                 }
+## &lt;environment: 0x113021898&gt;</code></pre>
 <p>If you want to customize the monitor function, you can adjust the following requirement. Your function must return <code>TRUE</code> or <code>FALSE</code> in the end. When it is <code>TRUE</code> (or non-logical value) it means the monitoring will be terminated after it finds a status matched and the function executes, such as when the task is completed. When it is <code>FALSE</code> it means the monitoring will continue for the next iteration of checking, e.g.&nbsp;when it is &ldquo;running&rdquo;, you want to keep tracking.</p>
 <p>Follow the example below to set a new function to monitor the status &ldquo;completed&rdquo;. Then, when the task is completed, it will download all task output files to local folder.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/setTaskHook.html">setTaskHook</a></span>(<span class="st">"completed"</span>, function(){
@@ -1064,14 +1066,14 @@ a$<span class="kw">project</span>(<span class="st">"demo"</span>)$<span class="k
 <a href="#top">top</a>
 </div>
 </div>
-<div id="upload-files" class="section level3">
-<h3 class="hasAnchor"><html><body><a href="#upload-files" class="anchor"> </a></body></html>Upload files</h3>
-<p>Seven Bridges environments provide a few different methods for data import, as follows:</p>
-<pre><code>- The command line uploader</code></pre>
-<ul><li>A graphic visual interface uploader</li>
-<li>From FTP, HTTP, etc. from the visual interface directly</li>
-<li>The API uploader that you can directly call with the <code>sevenbridges</code> package</li>
-</ul><p>Use the API client uploader by calling the <code>project$upload</code> function to upload a file, a file list, or a folder recursively or via a manifest file</p>
+<div id="upload-files-via-api" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#upload-files-via-api" class="anchor"> </a></body></html>Upload files via API</h3>
+<p>Seven Bridges platforms provide a few different methods for data import:</p>
+<ul><li>Import from FTP or HTTP with the web interface</li>
+<li>The GUI uploader</li>
+<li>The file upload API that you can directly call with the <code>sevenbridges</code> package</li>
+<li>The command line uploader which can be involked with the <code>sevenbridges</code> package</li>
+</ul><p>Use the API client uploader by calling the <code>project$upload</code> function to upload a file, a file list, or a folder recursively or via a manifest file.</p>
 <div id="upload-single-file" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#upload-single-file" class="anchor"> </a></body></html>Upload single file</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a  &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Auth-class.html">Auth</a></span>(<span class="dt">username =</span> <span class="st">"tengfei"</span>, <span class="dt">platform =</span> <span class="st">"cgc"</span>)
@@ -1093,8 +1095,8 @@ p$<span class="kw">upload</span>(fl, <span class="dt">overwrite =</span> <span c
 <span class="kw">list.files</span>(dir.ext)
 p$<span class="kw">upload</span>(dir.ext, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
-<div id="upload-a-file-list" class="section level4">
-<h4 class="hasAnchor"><html><body><a href="#upload-a-file-list" class="anchor"> </a></body></html>Upload a file list</h4>
+<div id="upload-a-list-of-files" class="section level4">
+<h4 class="hasAnchor"><html><body><a href="#upload-a-list-of-files" class="anchor"> </a></body></html>Upload a list of files</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dir.ext &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 <span class="co"># enable full name</span>
 fls &lt;-<span class="st"> </span><span class="kw">list.files</span>(dir.ext, <span class="dt">recursive =</span> <span class="ot">TRUE</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
@@ -1104,7 +1106,7 @@ p$<span class="kw">upload</span>(<span class="st">"~/Documents/Data/sbgtest/1000
 <div id="upload-files-via-defined-manifest-file" class="section level4">
 <h4 class="hasAnchor"><html><body><a href="#upload-files-via-defined-manifest-file" class="anchor"> </a></body></html>Upload files via defined manifest file</h4>
 <p>A manifest file is a file used to define metadata values for a set of files. It can be used when uploading files to the Platform to set their metadata.The supported file format for the manifest file is CSV, i.e.&nbsp;comma separated values. A CSV file contains a number of rows with columns which are separated with a comma. Format of manifest file is defined in the <a href="http://docs.sevenbridges.com/docs/format-of-a-manifest-file">documentaion online</a></p>
-<p>Some requirements</p>
+<p>Some requirements:</p>
 <ul><li>The first row has to contain column names which are parsed as metadata fields (e.g. &ldquo;sample&rdquo;&ldquo;,&rdquo;library&ldquo;&rdquo;). When it&rsquo;s not customized fields, we do converstion for meta fields like &ldquo;sample_id&rdquo; which need to be string.</li>
 <li>The first column has to contain the names of the files which will be uploaded. In case the files are not in the same directory as the manifest file, you should also include a path to the files (e.g. ../filename.fastq).</li>
 </ul><p>We allow users to</p>
@@ -1126,6 +1128,35 @@ p$upload(manifest_file = "~/manifest.csv", overwrite = TRUE,
 <div align="right">
 <a href="#top">top</a>
 </div>
+</div>
+</div>
+<div id="upload-files-via-command-line-uploader" class="section level3">
+<h3 class="hasAnchor"><html><body><a href="#upload-files-via-command-line-uploader" class="anchor"> </a></body></html>Upload files via command line uploader</h3>
+<p>As an alternative to API file uploading, we also offer an interface in the <code>sevenbridges</code> package for uploading (possibly large) files via the Java-based command line uploader.</p>
+<p>The first step is to download the command line uploader. With <code><a href="../reference/get_uploader.html">get_uploader()</a></code>, users can easily download the uploader to a local directory for a specified Seven Bridges platform, for example, the Cancer Genomics Cloud:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_uploader.html">get_uploader</a></span>(<span class="st">"cgc"</span>, <span class="st">"~/Downloads/"</span>)</code></pre></div>
+<p>To list the available projects accessible from your account via the uploader, use <code><a href="../reference/cli_list_projects.html">cli_list_projects()</a></code>, with your authentication token for that platform and the directory containing the uploader:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cgc_token =<span class="st"> "your_cgc_token"</span>
+cgc_uploader =<span class="st"> "~/Downloads/cgc-uploader/"</span>
+
+<span class="kw"><a href="../reference/cli_list_projects.html">cli_list_projects</a></span>(
+    <span class="dt">token =</span> cgc_token,
+    <span class="dt">uploader =</span> cgc_uploader)</code></pre></div>
+<p>The function will return a character vector containing the available projects which you could upload files to, in the form of <code>username/project-name</code>.</p>
+<p>Similarly, to list all the file tags in a project via the uploader, use <code><a href="../reference/cli_list_tags.html">cli_list_tags()</a></code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/cli_list_tags.html">cli_list_tags</a></span>(
+    <span class="dt">token =</span> cgc_token,
+    <span class="dt">uploader =</span> cgc_uploader,
+    <span class="dt">project =</span> <span class="st">"username/project-name"</span>)</code></pre></div>
+<p>Eventually, use <code><a href="../reference/cli_upload.html">cli_upload()</a></code> to upload local files to a project:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/cli_upload.html">cli_upload</a></span>(
+    <span class="dt">token =</span> cgc_token,
+    <span class="dt">uploader =</span> cgc_uploader,
+    <span class="dt">file =</span> <span class="st">"~/example.fastq"</span>,
+    <span class="dt">project =</span> <span class="st">"username/project-name"</span>
+)</code></pre></div>
+<div align="right">
+<a href="#top">top</a>
 </div>
 </div>
 <div id="update-a-file" class="section level3">
@@ -1172,15 +1203,15 @@ fl
 fl$<span class="kw">set_meta</span>(<span class="dt">new_item4 =</span> <span class="st">"item4"</span>, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)
 fl</code></pre></div>
 <p><strong>Check details of each metadata field</strong></p>
-<p>You can use the <code><a href="../reference/Metadata-class.html">Metadata()</a></code> constructor to check the details of each metadata field. Simply call the function (name of the metadata) to display descriptions and enumerated itemts. Please pay attention to the <code>suggested_values</code> field.</p>
+<p>You can use the <code><a href="../reference/misc_make_metadata.html">Metadata()</a></code> constructor to check the details of each metadata field. Simply call the function (name of the metadata) to display descriptions and enumerated itemts. Please pay attention to the <code>suggested_values</code> field.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># check which schema we have</span>
-<span class="kw"><a href="../reference/Metadata-class.html">Metadata</a></span>()$<span class="kw">show</span>(<span class="dt">full =</span> <span class="ot">TRUE</span>)
+<span class="kw"><a href="../reference/misc_make_metadata.html">Metadata</a></span>()$<span class="kw">show</span>(<span class="dt">full =</span> <span class="ot">TRUE</span>)
 <span class="co"># check details for each, play with it</span>
-<span class="kw"><a href="../reference/Metadata-class.html">platform</a></span>()
-<span class="kw"><a href="../reference/Metadata-class.html">paired_end</a></span>()
-<span class="kw"><a href="../reference/Metadata-class.html">quality_scale</a></span>()</code></pre></div>
-<p>As you can see, some metadata fields have suggested values. To construct the metadata, use <code><a href="../reference/Metadata-class.html">Metadata()</a></code> directly to pass the metadata fields and their values directly into the call. The call will perform the validation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/Metadata-class.html">Metadata</a></span>(<span class="dt">platform      =</span> <span class="st">"Affymetrix SNP Array 6.0"</span>,
+<span class="kw"><a href="../reference/misc_make_metadata.html">platform</a></span>()
+<span class="kw"><a href="../reference/misc_make_metadata.html">paired_end</a></span>()
+<span class="kw"><a href="../reference/misc_make_metadata.html">quality_scale</a></span>()</code></pre></div>
+<p>As you can see, some metadata fields have suggested values. To construct the metadata, use <code><a href="../reference/misc_make_metadata.html">Metadata()</a></code> directly to pass the metadata fields and their values directly into the call. The call will perform the validation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/misc_make_metadata.html">Metadata</a></span>(<span class="dt">platform      =</span> <span class="st">"Affymetrix SNP Array 6.0"</span>,
          <span class="dt">paired_end    =</span> <span class="dv">1</span>,
          <span class="dt">quality_scale =</span> <span class="st">"sanger"</span>,
          <span class="dt">new_item      =</span> <span class="st">"new test"</span>)</code></pre></div>

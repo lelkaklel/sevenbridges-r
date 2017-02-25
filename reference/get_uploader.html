@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set authentication environment variables for Seven Bridges API — sbg_get_env • sevenbridges</title>
+<title>Download Seven Bridges command line uploader and extract to
+ — get_uploader • sevenbridges</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,34 +78,52 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Set authentication environment variables for Seven Bridges API</h1>
+    <h1>Download Seven Bridges command line uploader and extract to
+</h1>
     </div>
 
     
-    <p>Set authentication environment variables for Seven Bridges API</p>
+    <p>This function downloads Seven Bridges command line uploader and
+extract the <code>.tgz</code> archive to a specified directory.</p>
     
 
-    <pre><span class='fu'>sbg_get_env</span>(<span class='no'>x</span>)</pre>
+    <pre><span class='fu'>get_uploader</span>(<span class='kw'>platform</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"cgc"</span>, <span class='st'>"aws-us"</span>, <span class='st'>"aws-eu"</span>, <span class='st'>"gcp"</span>), <span class='kw'>destdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>misc_get_uploader</span>()</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>x</dt>
-      <dd>Name of the system environment variable</dd>
+      <dt>platform</dt>
+      <dd>Seven Bridges platform for which the uploader
+is designed. Possible choices are:
+<code>&quot;cgc&quot;</code> (Cancer Genomics Cloud),
+<code>&quot;aws-us&quot;</code> (Amazon Web Services US),
+<code>&quot;aws-eu&quot;</code> (Amazon Web Services EU),
+and <code>&quot;gcp&quot;</code> (Google Cloud Platform).
+Default is <code>&quot;cgc&quot;</code>.</dd>
+      <dt>destdir</dt>
+      <dd>The directory to extract the downloaded Seven Bridges
+command line uploader to. If the specified directory is not present,
+it will be created.</dd>
+      <dt>quiet</dt>
+      <dd>Should the download progress be printed?</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>value of the environment variable</p>
+    <p><code>0</code> if the command line uploader is successfully
+downloaded and unarchived.</p>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p><a href = 'http://docs.sevenbridges.com/docs/upload-via-the-command-line'>http://docs.sevenbridges.com/docs/upload-via-the-command-line</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># set and get two environment variables for CGC</span>
-<span class='no'>token</span> <span class='kw'>=</span> <span class='st'>"your_token"</span>
-<span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># sbg_set_env("https://cgc-api.sbgenomics.com/v2", token)</span>
-<span class='co'># sbg_get_env("SB_API_ENDPOINT")</span>
-<span class='co'># sbg_get_env("SB_AUTH_TOKEN")</span>
-<span class='co'>## ---------------------------------------------</span></pre>
+    <pre class="examples"><span class='co'># Download CGC CLI uploader to `~/Downloads`</span>
+<span class='no'>dir</span> <span class='kw'>=</span> <span class='st'>"~/Downloads/"</span>
+<span class='fu'>get_uploader</span>(<span class='st'>"cgc"</span>, <span class='no'>dir</span>)</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -112,6 +131,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#references">References</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

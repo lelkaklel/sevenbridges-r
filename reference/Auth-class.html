@@ -145,17 +145,17 @@ and cost.</dd></p>
 project that you can access. For each file, the call
 returns: 1) Its ID 2) Its filename The project is
 specified as a query parameter in the call.</dd></p>
-    <p><dt><code>invoice(id = NULL, ...)</code></dt><dd>                            If no id provided, This call returns a list of invoices,
-                            with information about each, including whether or not
-                            the invoice is pending and the billing period it covers.</p>
+    <p><dt><code>invoice(id = NULL, ...)</code></dt><dd>            If no id provided, This call returns a list of invoices,
+            with information about each, including whether or not
+            the invoice is pending and the billing period it covers.</p>
     <p>The call returns information about all your available
-                            invoices, unless you use the query parameter bg_id to
-                            specify the ID of a particular billing group, in which
-                            case it will return the invoice incurred by that billing
-                            group only.</p>
+            invoices, unless you use the query parameter bg_id to
+            specify the ID of a particular billing group, in which
+            case it will return the invoice incurred by that billing
+            group only.</p>
     <p>If id was provided, This call retrieves information about
-                            a selected invoice, including the costs for analysis
-                            and storage, and the invoice period.</dd></p>
+            a selected invoice, including the costs for analysis
+            and storage, and the invoice period.</dd></p>
     <p><dt><code>project(name = NULL, id = NULL, index = NULL, ignore.case = TRUE,
   exact = FALSE, owner = NULL, detail = FALSE, ...)</code></dt><dd>If no id or name provided, this call returns a
 list of all projects you are a member of.
@@ -171,13 +171,13 @@ Each project&#39;s ID and URL will be returned.</dd></p>
     <p><dt><code>rate_limit(...)</code></dt><dd>This call returns information about your current
 rate limit. This is the number of API calls you can
 make in one hour.</dd></p>
-    <p><dt><code>user(username = NULL, ...)</code></dt><dd>                            This call returns a list of the resources, such as projects,
-                            billing groups, and organizations, that are accessible to you.</p>
+    <p><dt><code>user(username = NULL, ...)</code></dt><dd>            This call returns a list of the resources, such as projects,
+            billing groups, and organizations, that are accessible to you.</p>
     <p>If you are not an administrator, this call will only return a
-                            successful response if username is replaced with your own
-                            username. If you are an administrator, you can replace
-                            username with the username of any CGC user, to return
-                            information on their resources.</dd></p>
+            successful response if username is replaced with your own
+            username. If you are an administrator, you can replace
+            username with the username of any CGC user, to return
+            information on their resources.</dd></p>
     <p><dt><code>volume(name = NULL, id = NULL, index = NULL, ignore.case = TRUE,
   exact = FALSE, detail = FALSE, ...)</code></dt><dd>If no id or name provided, this call returns a list
 of all volumes you are a member of. If name or id

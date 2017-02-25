@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Set authentication environment variables for Seven Bridges API — sbg_get_env • sevenbridges</title>
+<title>List projects using Seven Bridges command line uploader — cli_list_projects • sevenbridges</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,34 +77,49 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Set authentication environment variables for Seven Bridges API</h1>
+    <h1>List projects using Seven Bridges command line uploader</h1>
     </div>
 
     
-    <p>Set authentication environment variables for Seven Bridges API</p>
+    <p>List projects available as upload targets using Seven Bridges
+command line uploader.</p>
     
 
-    <pre><span class='fu'>sbg_get_env</span>(<span class='no'>x</span>)</pre>
+    <pre><span class='fu'>cli_list_projects</span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>uploader</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>proxy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>x</dt>
-      <dd>Name of the system environment variable</dd>
+      <dt>token</dt>
+      <dd>Authentication token.</dd>
+      <dt>uploader</dt>
+      <dd>The directory where Seven Bridges command line uploader
+is located (the directory that contains the <code>bin/</code> directory).</dd>
+      <dt>proxy</dt>
+      <dd>A proxy server through which the uploader should connect.
+For details the proxy parameter format, see the part on parameter
+<code>--proxy</code> in the reference below.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>value of the environment variable</p>
+    <p>Character vector of the available project names.</p>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p><a href = 'http://docs.sevenbridges.com/docs/upload-via-the-command-line'>http://docs.sevenbridges.com/docs/upload-via-the-command-line</a></p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p>See <code><a href='cli_upload.html'>cli_upload</a></code> for uploading files with
+the command line uploader, <code><a href='cli_list_tags.html'>cli_list_tags</a></code> for listing
+all tags in a project.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># set and get two environment variables for CGC</span>
-<span class='no'>token</span> <span class='kw'>=</span> <span class='st'>"your_token"</span>
-<span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># sbg_set_env("https://cgc-api.sbgenomics.com/v2", token)</span>
-<span class='co'># sbg_get_env("SB_API_ENDPOINT")</span>
-<span class='co'># sbg_get_env("SB_AUTH_TOKEN")</span>
-<span class='co'>## ---------------------------------------------</span></pre>
+    <pre class="examples"><span class='no'>token</span> <span class='kw'>=</span> <span class='st'>"your_token"</span>
+<span class='fu'>cli_list_projects</span>(
+  <span class='kw'>token</span> <span class='kw'>=</span> <span class='no'>token</span>,
+  <span class='kw'>uploader</span> <span class='kw'>=</span> <span class='st'>"~/Downloads/sbg-uploader/"</span>)</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -112,6 +127,10 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#references">References</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

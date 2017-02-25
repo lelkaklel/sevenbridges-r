@@ -124,9 +124,10 @@ apt-get install libcurl4-gnutls-dev libssl-dev pandoc pandoc-citeproc</code></pr
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"https://bioconductor.org/biocLite.R"</span>)
 <span class="kw">biocLite</span>(<span class="st">"readr"</span>)
 
-devtools::<span class="kw">install_github</span>(<span class="st">"sbg/sevenbridges-r"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>,
-                         <span class="dt">repos =</span> BiocInstaller::<span class="kw">biocinstallRepos</span>(),
-                         <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
+devtools::<span class="kw">install_github</span>(
+    <span class="st">"sbg/sevenbridges-r"</span>,
+    <span class="dt">repos =</span> BiocInstaller::<span class="kw">biocinstallRepos</span>(),
+    <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>If you have trouble with <code>pandoc</code> and do not want to install it, set <code>build_vignettes = FALSE</code> to avoid building the vignettes.</p>
 </div>
 </div>
@@ -178,24 +179,27 @@ tsk$<span class="kw">monitor</span>()</code></pre></div>
 <a href="#batch-tasks-support" class="anchor"> </a>Batch Tasks Support</h3>
 <ul><li>Batch tasks by metadata and by item.</li>
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Batch by item</span>
-(tsk &lt;-<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> <span class="st">"RNA DE report new batch 2"</span>,
-                   <span class="dt">description =</span> <span class="st">"RNA DE analysis report"</span>,
-                   <span class="dt">app =</span> rna.app$id,
-                   <span class="dt">batch =</span> <span class="kw"><a href="reference/batch.html">batch</a></span>(<span class="dt">input =</span> <span class="st">"bamfiles"</span>),
-                   <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">bamfiles =</span> bamfiles.in,
-                                 <span class="dt">design =</span> design.in,
-                                 <span class="dt">gtffile =</span> gtf.in)))
+(tsk &lt;-<span class="st"> </span>p$<span class="kw">task_add</span>(
+    <span class="dt">name =</span> <span class="st">"RNA DE report new batch 2"</span>,
+    <span class="dt">description =</span> <span class="st">"RNA DE analysis report"</span>,
+    <span class="dt">app =</span> rna.app$id,
+    <span class="dt">batch =</span> <span class="kw"><a href="reference/batch.html">batch</a></span>(<span class="dt">input =</span> <span class="st">"bamfiles"</span>),
+    <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">bamfiles =</span> bamfiles.in,
+                  <span class="dt">design =</span> design.in,
+                  <span class="dt">gtffile =</span> gtf.in)))
 
-<span class="co"># Batch by metadata. Note that input files must have relevant metadata fields specified.</span>
-(tsk &lt;-<span class="st"> </span>p$<span class="kw">task_add</span>(<span class="dt">name =</span> <span class="st">"RNA DE report new batch 3"</span>,
-                   <span class="dt">description =</span> <span class="st">"RNA DE analysis report"</span>,
-                   <span class="dt">app =</span> rna.app$id,
-                   <span class="dt">batch =</span> <span class="kw"><a href="reference/batch.html">batch</a></span>(<span class="dt">input =</span> <span class="st">"fastq"</span>,
-                                 <span class="kw">c</span>(<span class="st">"metadata.sample_id"</span>,
-                                 <span class="st">"metadata.library_id"</span>)),
-                   <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">bamfiles =</span> bamfiles.in,
-                                 <span class="dt">design =</span> design.in,
-                                 <span class="dt">gtffile =</span> gtf.in)))</code></pre></div>
+<span class="co"># Batch by metadata. Note that input files must</span>
+<span class="co"># have relevant metadata fields specified.</span>
+(tsk &lt;-<span class="st"> </span>p$<span class="kw">task_add</span>(
+    <span class="dt">name =</span> <span class="st">"RNA DE report new batch 3"</span>,
+    <span class="dt">description =</span> <span class="st">"RNA DE analysis report"</span>,
+    <span class="dt">app =</span> rna.app$id,
+    <span class="dt">batch =</span> <span class="kw"><a href="reference/batch.html">batch</a></span>(<span class="dt">input =</span> <span class="st">"fastq"</span>,
+                  <span class="kw">c</span>(<span class="st">"metadata.sample_id"</span>,
+                    <span class="st">"metadata.library_id"</span>)),
+    <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="dt">bamfiles =</span> bamfiles.in,
+                  <span class="dt">design =</span> design.in,
+                  <span class="dt">gtffile =</span> gtf.in)))</code></pre></div>
 </div>
 <div id="cross-environment-support" class="section level3">
 <h3 class="hasAnchor">
@@ -207,25 +211,23 @@ tsk$<span class="kw">monitor</span>()</code></pre></div>
 <a href="#common-workflow-language-tool-interface" class="anchor"> </a>Common Workflow Language Tool Interface</h3>
 <ul><li>A <a href="http://www.commonwl.org/">Common Workflow Language (CWL)</a> Tool interface to directly describe your tool in R, export it to JSON or YAML, or add it to your online project. This package defines a complete set of CWL object, so you can describe tools as follows:</li>
 </ul><div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"readr"</span>)
-fd &lt;-<span class="st"> </span><span class="kw"><a href="reference/CPURequirement-class.html">fileDef</a></span>(<span class="dt">name =</span> <span class="st">"runif.R"</span>,
-              <span class="dt">content =</span> <span class="kw">read_file</span>(fl))
-rbx &lt;-<span class="st"> </span><span class="kw"><a href="reference/Tool-class.html">Tool</a></span>(<span class="dt">id =</span> <span class="st">"runif"</span>,
-            <span class="dt">label =</span> <span class="st">"runif"</span>,
-            <span class="dt">hints =</span> <span class="kw"><a href="reference/CPURequirement-class.html">requirements</a></span>(<span class="kw"><a href="reference/CPURequirement-class.html">docker</a></span>(<span class="dt">pull =</span> <span class="st">"rocker/r-base"</span>),
-                                 <span class="kw"><a href="reference/CPURequirement-class.html">cpu</a></span>(<span class="dv">1</span>), <span class="kw"><a href="reference/CPURequirement-class.html">mem</a></span>(<span class="dv">2000</span>)),
-            <span class="dt">requirements =</span> <span class="kw"><a href="reference/CPURequirement-class.html">requirements</a></span>(fd),
-            <span class="dt">baseCommand =</span> <span class="st">"Rscript runif.R"</span>,
-            <span class="dt">stdout =</span> <span class="st">"output.txt"</span>,
-            <span class="dt">inputs =</span> <span class="kw">list</span>(<span class="kw"><a href="reference/CLB.html">input</a></span>(<span class="dt">id =</span> <span class="st">"number"</span>,
-                                <span class="dt">type =</span> <span class="st">"integer"</span>,
-                                <span class="dt">position =</span> <span class="dv">1</span>),
-                          <span class="kw"><a href="reference/CLB.html">input</a></span>(<span class="dt">id =</span> <span class="st">"min"</span>,
-                                <span class="dt">type =</span> <span class="st">"float"</span>,
-                                <span class="dt">position =</span> <span class="dv">2</span>),
-                          <span class="kw"><a href="reference/CLB.html">input</a></span>(<span class="dt">id =</span> <span class="st">"max"</span>,
-                                <span class="dt">type =</span> <span class="st">"float"</span>,
-                                <span class="dt">position =</span> <span class="dv">3</span>)),
-            <span class="dt">outputs =</span> <span class="kw"><a href="reference/CLB.html">output</a></span>(<span class="dt">id =</span> <span class="st">"random"</span>, <span class="dt">glob =</span> <span class="st">"output.txt"</span>))
+fd &lt;-<span class="st"> </span><span class="kw"><a href="reference/CPURequirement-class.html">fileDef</a></span>(<span class="dt">name =</span> <span class="st">"runif.R"</span>, <span class="dt">content =</span> <span class="kw">read_file</span>(fl))
+
+rbx &lt;-<span class="st"> </span><span class="kw"><a href="reference/Tool-class.html">Tool</a></span>(
+    <span class="dt">id    =</span> <span class="st">"runif"</span>,
+    <span class="dt">label =</span> <span class="st">"runif"</span>,
+    <span class="dt">hints =</span> <span class="kw"><a href="reference/CPURequirement-class.html">requirements</a></span>(
+        <span class="kw"><a href="reference/CPURequirement-class.html">docker</a></span>(<span class="dt">pull =</span> <span class="st">"rocker/r-base"</span>),
+        <span class="kw"><a href="reference/CPURequirement-class.html">cpu</a></span>(<span class="dv">1</span>), <span class="kw"><a href="reference/CPURequirement-class.html">mem</a></span>(<span class="dv">2000</span>)),
+    <span class="dt">requirements =</span> <span class="kw"><a href="reference/CPURequirement-class.html">requirements</a></span>(fd),
+    <span class="dt">baseCommand  =</span> <span class="st">"Rscript runif.R"</span>,
+    <span class="dt">stdout =</span> <span class="st">"output.txt"</span>,
+    <span class="dt">inputs =</span> <span class="kw">list</span>(
+        <span class="kw"><a href="reference/CLB.html">input</a></span>(<span class="dt">id =</span> <span class="st">"number"</span>, <span class="dt">type =</span> <span class="st">"integer"</span>, <span class="dt">position =</span> <span class="dv">1</span>),
+        <span class="kw"><a href="reference/CLB.html">input</a></span>(<span class="dt">id =</span> <span class="st">"min"</span>,    <span class="dt">type =</span> <span class="st">"float"</span>,   <span class="dt">position =</span> <span class="dv">2</span>),
+        <span class="kw"><a href="reference/CLB.html">input</a></span>(<span class="dt">id =</span> <span class="st">"max"</span>,    <span class="dt">type =</span> <span class="st">"float"</span>,   <span class="dt">position =</span> <span class="dv">3</span>)),
+    <span class="dt">outputs =</span> <span class="kw"><a href="reference/CLB.html">output</a></span>(<span class="dt">id =</span> <span class="st">"random"</span>, <span class="dt">glob =</span> <span class="st">"output.txt"</span>))
+
 <span class="co"># output CWL JSON</span>
 rbx$<span class="kw">toJSON</span>(<span class="dt">pretty =</span> <span class="ot">TRUE</span>)
 <span class="co"># output CWL YAML</span>
@@ -354,12 +356,12 @@ t1$<span class="kw"><a href="reference/input_matrix.html">input_matrix</a></span
   <img src="https://travis-ci.org/sbg/sevenbridges-r.svg?branch=master" alt="Build Status"></a></li>
 <li><a href="https://ci.appveyor.com/project/road2stat/sevenbridges-r">
   <img src="https://ci.appveyor.com/api/projects/status/github/sbg/sevenbridges-r?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
-<li><a href="https://bioconductor.org/packages/release/bioc/html/sevenbridges.html#archives">
-  <img src="https://www.bioconductor.org/shields/availability/devel/sevenbridges.svg" alt="platform"></a></li>
 <li><a href="https://bioconductor.org/packages/release/bioc/html/sevenbridges.html#since">
-  <img src="https://www.bioconductor.org/shields/years-in-bioc/sevenbridges.svg" alt="bioc"></a></li>
+  <img src="https://www.bioconductor.org/shields/years-in-bioc/sevenbridges.svg" alt="BioC"></a></li>
 <li><a href="https://bioconductor.org/packages/stats/bioc/sevenbridges/">
-  <img src="https://www.bioconductor.org/shields/downloads/sevenbridges.svg" alt="downloads"></a></li>
+  <img src="https://www.bioconductor.org/shields/downloads/sevenbridges.svg" alt="Downloads"></a></li>
+<li><a href="https://hub.docker.com/r/sevenbridges/sevenbridges-r/">
+  <img src="https://img.shields.io/docker/pulls/sevenbridges/sevenbridges-r.svg" alt="Docker Pulls"></a></li>
 </ul></body></html></div>
 </div>
 
