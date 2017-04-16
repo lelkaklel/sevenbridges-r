@@ -25,12 +25,26 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87185344-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
   </head>
 
   <body>
@@ -84,13 +98,16 @@
     <p>Class Files</p>
     
 
-    <pre><span class='fu'>FilesList</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>FilesList</span>(<span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>...</dt>
-      <dd>one or more <code>Files</code> objects</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>...</th>
+      <td><p>one or more <code>Files</code> objects</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -98,46 +115,46 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>Files</code> (with &quot;<code>s</code>&quot;) class is usally returned by the API call
+    <p><code>Files</code> (with "<code>s</code>") class is usally returned by the API call
 which returns Files. A group of <code>Files</code> is defined as <code>FilesList</code>.
 Users do not usually need to construct <code>Files</code> or <code>FilesList</code>
 manually, they are generated from a API call most of the time.</p>
     
     <h2 class="hasAnchor" id="fields"><a class="anchor" href="#fields"></a>Fields</h2>
 
-    <p></p>
-    <p><dl class='dl-horizontal'>
-<dt><code>id</code></dt><dd>character used as file id</dd></p>
-    <p><dt><code>name</code></dt><dd>string used as file name</dd></p>
-    <p><dt><code>size</code></dt><dd>file size</dd></p>
-    <p><dt><code>project</code></dt><dd>project id if any, when returned by a API call,
-it usually return the project id and stored with the object.</dd></p>
-    <p><dt><code>created_on</code></dt><dd>date created on</dd></p>
-    <p><dt><code>modified_on</code></dt><dd>date modified on</dd></p>
-    <p><dt><code>storage</code></dt><dd>list as storage type</dd></p>
-    <p><dt><code>origin</code></dt><dd>list as origin</dd></p>
-    <p><dt><code>tags</code></dt><dd>list as tags</dd></p>
-    <p><dt><code>metadata</code></dt><dd>a list for metadata associated with the file</dd></p>
-    <p><dt><code>url</code></dt><dd>file download url</dd>
-</dl></p>
+    
+    <dl class='dl-horizontal'>
+<dt><code>id</code></dt><dd><p>character used as file id</p></dd>
+    <dt><code>name</code></dt><dd><p>string used as file name</p></dd>
+    <dt><code>size</code></dt><dd><p>file size</p></dd>
+    <dt><code>project</code></dt><dd><p>project id if any, when returned by a API call,
+it usually return the project id and stored with the object.</p></dd>
+    <dt><code>created_on</code></dt><dd><p>date created on</p></dd>
+    <dt><code>modified_on</code></dt><dd><p>date modified on</p></dd>
+    <dt><code>storage</code></dt><dd><p>list as storage type</p></dd>
+    <dt><code>origin</code></dt><dd><p>list as origin</p></dd>
+    <dt><code>tags</code></dt><dd><p>list as tags</p></dd>
+    <dt><code>metadata</code></dt><dd><p>a list for metadata associated with the file</p></dd>
+    <dt><code>url</code></dt><dd><p>file download url</p></dd>
+</dl>
     
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
-    <p></p>
-    <p><dl class='dl-horizontal'>
-<dt><code>add_tag(x, ...)</code></dt><dd>add new tags while keeping old tags</dd></p>
-    <p><dt><code>copy_to(project = NULL, name = NULL)</code></dt><dd>copy a file to a project (id) with new name</dd></p>
-    <p><dt><code>download(destfile, ..., method = &quot;curl&quot;)</code></dt><dd>see `help(download.file)` for more options</dd></p>
-    <p><dt><code>meta()</code></dt><dd>get metadata from a file</dd></p>
-    <p><dt><code>setMeta(..., overwrite = FALSE)</code></dt><dd>set metadata with provided list, when overwrite
-is set to TRUE, it overwrites the metadata</dd></p>
-    <p><dt><code>set_meta(..., overwrite = FALSE)</code></dt><dd>set metadata with provided list, when overwrite
-is set to TRUE, it overwrites the metadata</dd></p>
-    <p><dt><code>set_tag(x = NULL, overwrite = TRUE, ...)</code></dt><dd>set a tag for a file, your tag need to be a list or vector</dd></p>
-    <p><dt><code>tag()</code></dt><dd>get tag from a file</dd></p>
-    <p><dt><code>update(name = NULL, metadata = NULL, tags = NULL)</code></dt><dd>This call updates the name, the full set metadata,
-and tags for a specified file.</dd>
-</dl></p>
+    
+    <dl class='dl-horizontal'>
+<dt><code>add_tag(x, ...)</code></dt><dd><p>add new tags while keeping old tags</p></dd>
+    <dt><code>copy_to(project = NULL, name = NULL)</code></dt><dd><p>copy a file to a project (id) with new name</p></dd>
+    <dt><code>download(destfile, ..., method = "curl")</code></dt><dd><p>see `help(download.file)` for more options</p></dd>
+    <dt><code>meta()</code></dt><dd><p>get metadata from a file</p></dd>
+    <dt><code>setMeta(..., overwrite = FALSE)</code></dt><dd><p>set metadata with provided list, when overwrite
+is set to TRUE, it overwrites the metadata</p></dd>
+    <dt><code>set_meta(..., overwrite = FALSE)</code></dt><dd><p>set metadata with provided list, when overwrite
+is set to TRUE, it overwrites the metadata</p></dd>
+    <dt><code>set_tag(x = NULL, overwrite = TRUE, ...)</code></dt><dd><p>set a tag for a file, your tag need to be a list or vector</p></dd>
+    <dt><code>tag()</code></dt><dd><p>get tag from a file</p></dd>
+    <dt><code>update(name = NULL, metadata = NULL, tags = NULL)</code></dt><dd><p>This call updates the name, the full set metadata,
+and tags for a specified file.</p></dd>
+</dl>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
