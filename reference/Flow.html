@@ -11,7 +11,7 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -63,10 +64,40 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/api.html">Complete Guide for Seven Bridges API R Client</a>
+    </li>
+    <li>
+      <a href="../articles/apps.html">Describe and Execute CWL Tools/Workflows in R</a>
+    </li>
+    <li>
+      <a href="../articles/bioc-workflow.html">Master Tutorial: Use R for Cancer Genomics Cloud</a>
+    </li>
+    <li>
+      <a href="../articles/cgc-sparql.html">Find Data on CGC via Data Exploerer, SPARQL, and Datasets API</a>
+    </li>
+    <li>
+      <a href="../articles/docker.html">Creating Your Docker Container and Command Line Interface (with docopt)</a>
+    </li>
+    <li>
+      <a href="../articles/rstudio.html">IDE Container: RStudio Server, Shiny Server, and More</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -202,8 +233,8 @@ used for flow visualization on Seven Bridges platforms.</p></td>
     <dt><code>get_step(name = NULL, id = NULL)</code></dt><dd><p>get step object by name or id, name support pattern match</p></dd>
     <dt><code>get_tool(name = NULL, id = NULL)</code></dt><dd><p>get a tool object by name or id, name support pattern match</p></dd>
     <dt><code>input_id()</code></dt><dd><p>show input id</p></dd>
-    <dt><code>input_matrix(new.order = c("id", "label", "type", "required", "prefix",
-  "fileTypes"), required = NULL)</code></dt><dd><p>This return a matrix of input parameters,
+    <dt><code><a href='input_output_matrix.html'>input_matrix(new.order = c("id", "label", "type", "required", "prefix",
+  "fileTypes"), required = NULL)</a></code></dt><dd><p>This return a matrix of input parameters,
 by default, following the order id, label,
 type, required, prefix, fileTypes.
 new.order accept names of column you want to
@@ -217,7 +248,7 @@ names of them are input id</p></dd>
     <dt><code>linked_output_id()</code></dt><dd><p>output id that linked to an input</p></dd>
     <dt><code>list_tool()</code></dt><dd><p>list all tools included in this flow</p></dd>
     <dt><code>output_id()</code></dt><dd><p>show output id</p></dd>
-    <dt><code>output_matrix(new.order = c("id", "label", "type", "fileTypes"))</code></dt><dd><p>This return a matrix of output parameters,
+    <dt><code><a href='input_output_matrix.html'>output_matrix(new.order = c("id", "label", "type", "fileTypes"))</a></code></dt><dd><p>This return a matrix of output parameters,
 by default, following the order id, label,
 type, fileTypes. new.order accept names of
 column you want to print, but it has to be
@@ -255,7 +286,8 @@ name then names of vector is type.</p></dd>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='no'>f1</span> <span class='kw'>=</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/app"</span>, <span class='st'>"flow_star.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"sevenbridges"</span>)
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>f1</span> <span class='kw'>=</span> <span class='fu'>system.file</span>(<span class='st'>"extdata/app"</span>, <span class='st'>"flow_star.json"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"sevenbridges"</span>)
 <span class='no'>f1</span> <span class='kw'>=</span> <span class='fu'><a href='convert_app.html'>convert_app</a></span>(<span class='no'>f1</span>)
 <span class='co'># input matrix</span>
 <span class='no'>f1</span>$<span class='fu'><a href='input_output_matrix.html'>input_matrix</a></span>()
@@ -338,7 +370,8 @@ name then names of vector is type.</p></dd>
 <span class='co'># add source to id</span>
 <span class='no'>f1</span>$<span class='fu'>link_map</span>()
 <span class='no'>f1</span>$<span class='fu'>add_source_to_id</span>(<span class='fu'>c</span>(<span class='st'>"test1"</span>, <span class='st'>"test2"</span>), <span class='fu'>c</span>(<span class='st'>"#STAR.genome"</span>, <span class='st'>"#STAR.reads"</span>))
-<span class='no'>f1</span>$<span class='fu'>link_map</span>()</pre>
+<span class='no'>f1</span>$<span class='fu'>link_map</span>()
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

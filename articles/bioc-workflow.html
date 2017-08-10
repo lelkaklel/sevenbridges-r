@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Master Tutorial: Use R for Cancer Genomics Cloud • sevenbridges</title>
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -38,10 +38,40 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/api.html">Complete Guide for Seven Bridges API R Client</a>
+    </li>
+    <li>
+      <a href="../articles/apps.html">Describe and Execute CWL Tools/Workflows in R</a>
+    </li>
+    <li>
+      <a href="../articles/bioc-workflow.html">Master Tutorial: Use R for Cancer Genomics Cloud</a>
+    </li>
+    <li>
+      <a href="../articles/cgc-sparql.html">Find Data on CGC via Data Exploerer, SPARQL, and Datasets API</a>
+    </li>
+    <li>
+      <a href="../articles/docker.html">Creating Your Docker Container and Command Line Interface (with docopt)</a>
+    </li>
+    <li>
+      <a href="../articles/rstudio.html">IDE Container: RStudio Server, Shiny Server, and More</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -69,7 +99,7 @@
       <h1>Master Tutorial: Use R for Cancer Genomics Cloud</h1>
                         <h4 class="author">Tengfei Yin &lt;<a href="mailto:tengfei.yin@sevenbridges.com">tengfei.yin@sevenbridges.com</a>&gt;</h4>
             
-            <h4 class="date">2017-04-28</h4>
+            <h4 class="date">2017-08-10</h4>
           </div>
 
     
@@ -105,9 +135,9 @@
 <p>To install the latest development version from GitHub, run the following commands in R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">"devtools"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) <span class="kw">install.packages</span>(<span class="st">"devtools"</span>)
 <span class="kw">source</span>(<span class="st">"https://bioconductor.org/biocLite.R"</span>)
-devtools<span class="op">::</span><span class="kw">install_github</span>(
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(
     <span class="st">"sbg/sevenbridges-r"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>,
-    <span class="dt">repos =</span> BiocInstaller<span class="op">::</span><span class="kw">biocinstallRepos</span>(), <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
+    <span class="dt">repos =</span> BiocInstaller<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/BiocInstaller/topics/biocinstallRepos">biocinstallRepos</a></span>(), <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>After the installation you can always browse the vignettes</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">browseVignettes</span>(<span class="dt">package =</span> <span class="st">"sevenbridges"</span>)</code></pre></div>
 </div>
@@ -161,7 +191,7 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(
 <a href="#create-a-project-under-your-account-via-api-r-client" class="anchor"></a>Create a project under your account via API R client</h2>
 <p>I know, we can always do it via graphic user interface, but let’s have fun with the <code>sevenbridges</code> packages you just installed.</p>
 <p>For complete API tutorial and reference manual, please read another tutorial.</p>
-<pre><code>vignette("api", package = "sevenbridges")</code></pre>
+<pre><code><a href="https://cran.rstudio.com/web/packages/sevenbridges/vignettes/api.html">vignette("api", package = "sevenbridges")</a></code></pre>
 <p>Now let’s do some simple steps, first thing to do is to create an <em>Auth</em> object, almost everything started from this object. Our API client follow a style like this <code>Auth$properties$action</code>. On the platform, <code>Auth</code> is your account, and it contains projects, billing groups, users, project contains tasks, apps, files etc, so it’s easy to imagine your API call.</p>
 <p>To create an <code>Auth</code> object, simply pass the token and platform name (or alternatively, API base URL) to the <code>Auth</code> function. The default platform is set to CGC. Good news you can use the <code>sevenbridges</code> package to access any Seven Bridges platform with API (v2).</p>
 <p>This is the main way to create an Auth object, just replace <code>your_token</code> with your own authentication token from the CGC:</p>
@@ -384,7 +414,7 @@ rbx &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Tool-cl
 <li>For advanced developer/users: if you think a cool command line interface is worth doing, and convenient in any case, then go ahead and make one and create our own container will always be a better idea. this allow you to provide much formal interface at both command line level or container level.</li>
 </ol>
 <p>Here is Dockerfile I used to generate the workflow I need</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"docker/rnaseqGene"</span>, <span class="st">"Dockerfile"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"docker/rnaseqGene"</span>, <span class="st">"Dockerfile"</span>,
                   <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)</code></pre></div>
 <p>Here is the current content of the <code>Dockerfile</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="kw">readLines</span>(fl), <span class="dt">sep =</span> <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</code></pre></div>
@@ -419,7 +449,7 @@ RUN chmod a+x /usr/local/bin/performDE.R \
 <li>Test function inside container</li>
 </ol>
 <p>Here is the command line I am using it’s called “performDE.R”</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"docker/rnaseqGene/src"</span>, <span class="st">"performDE.R"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"docker/rnaseqGene/src"</span>, <span class="st">"performDE.R"</span>,
                   <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)</code></pre></div>
 <p>Here is the current content of the <code>Dockerfile</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="kw">readLines</span>(fl), <span class="dt">sep =</span> <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</code></pre></div>
@@ -486,8 +516,8 @@ options:
 <div id="step-4-add-default-report-template-to-your-app" class="section level3">
 <h3 class="hasAnchor">
 <a href="#step-4-add-default-report-template-to-your-app" class="anchor"></a>Step 4: Add default report template to your app</h3>
-<p>As a developer, if you always have a fixed report template provided for you tool, you can hard-code your template into your Docker container, like you noticed in the Dockerfile I created, I insert a report R Markdown template. And in the command line interface, in the end, I pass it to <code>rmarkdown::render</code> function as parameters ‘param’. In this way, you define your input in the header of R Markdown. Examples like this, this template I used here, is exactly the same report on Bioconductor’s RNA-Seq workflow <a href="https://www.bioconductor.org/help/workflows/rnaseqGene/">website</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"docker/rnaseqGene/report"</span>, <span class="st">"rnaseqGene.Rmd"</span>,
+<p>As a developer, if you always have a fixed report template provided for you tool, you can hard-code your template into your Docker container, like you noticed in the Dockerfile I created, I insert a report R Markdown template. And in the command line interface, in the end, I pass it to <code><a href="http://www.rdocumentation.org/packages/rmarkdown/topics/render">rmarkdown::render</a></code> function as parameters ‘param’. In this way, you define your input in the header of R Markdown. Examples like this, this template I used here, is exactly the same report on Bioconductor’s RNA-Seq workflow <a href="https://www.bioconductor.org/help/workflows/rnaseqGene/">website</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"docker/rnaseqGene/report"</span>, <span class="st">"rnaseqGene.Rmd"</span>,
                   <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)</code></pre></div>
 <p>Here is the current content (first 50 lines of the whole report) of the template:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="kw">readLines</span>(fl, <span class="dt">n =</span> <span class="dv">50</span>), <span class="dt">sep =</span> <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</code></pre></div>
@@ -540,7 +570,7 @@ opts_chunk$set(message = FALSE, error = FALSE,
 ```
 
 # Contents</code></pre>
-<p>See the header, you will see ‘params’ which is passed from <code>rmarkdown::render</code>, so you can use it directly in the report like <code>params$bamfiles</code>.</p>
+<p>See the header, you will see ‘params’ which is passed from <code><a href="http://www.rdocumentation.org/packages/rmarkdown/topics/render">rmarkdown::render</a></code>, so you can use it directly in the report like <code>params$bamfiles</code>.</p>
 <p>Now you have</p>
 <ul>
 <li><code>Dockerfile</code></li>
@@ -922,7 +952,7 @@ arguments: []</code></pre>
 <code>metadata</code>: a list of meta otherwise search for the same file name ended with “.meta”</li>
 </ul>
 <p>For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"sample1.fastq"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"sample1.fastq"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 (p &lt;-<span class="st"> </span>a<span class="op">$</span><span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/quickstart"</span>))
 <span class="co"># by default load .meta for the file</span>
 p<span class="op">$</span><span class="kw">upload</span>(fl, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)
@@ -933,14 +963,14 @@ p<span class="op">$</span><span class="kw">upload</span>(fl, <span class="dt">ov
          <span class="dt">metadata =</span> <span class="kw">list</span>(<span class="dt">library_id =</span> <span class="st">"new_id"</span>))
 
 <span class="co"># upload folder</span>
-dir.ext &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
+dir.ext &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 p<span class="op">$</span><span class="kw">upload</span>(dir.ext, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)
 
 <span class="co"># upload file list</span>
 fls &lt;-<span class="st"> </span><span class="kw">list.files</span>(dir.ext, <span class="dt">recursive =</span> <span class="ot">TRUE</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
 p<span class="op">$</span><span class="kw">upload</span>(fls, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>For now try using our graphic user interface to import all files listed here:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">download.fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"extdata/download.txt"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">download.fl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"extdata/download.txt"</span>, <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 <span class="kw">cat</span>(<span class="kw">readLines</span>(download.fl), <span class="dt">sep =</span> <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</code></pre></div>
 <pre><code>Warning in readLines(download.fl): incomplete final line found on '/usr/
 local/lib/R/3.4/site-library/sevenbridges/extdata/download.txt'</code></pre>
@@ -1056,7 +1086,7 @@ tsk<span class="op">$</span><span class="kw">monitor</span>()</code></pre></div>
 </ol>
 <p>If you are interested, you can still read my <code>Dockerfile</code>, command line, tool generator and JSON.</p>
 <p><em>I will suggest you directly copy the json into your project.</em> Just to try add an app in a different way.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"docker/reporttool/rabix/reporttool.json"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"docker/reporttool/rabix/reporttool.json"</span>,
                   <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 <span class="kw">cat</span>(<span class="kw">readLines</span>(fl), <span class="dt">sep=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</code></pre></div>
 <pre><code>{
@@ -1386,7 +1416,7 @@ tsk<span class="op">$</span><span class="kw">monitor</span>()</code></pre></div>
 p &lt;-<span class="st"> </span>a<span class="op">$</span><span class="kw">project</span>(<span class="dt">id =</span> <span class="st">"tengfei/hackathon"</span>)
 (report.app &lt;-<span class="st"> </span>p<span class="op">$</span><span class="kw">app_add</span>(<span class="st">"report-tool"</span>, fl))</code></pre></div>
 <p>Checkout the Dockerfile</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"docker/reporttool/Dockerfile"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"docker/reporttool/Dockerfile"</span>,
                   <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 <span class="kw">cat</span>(<span class="kw">readLines</span>(fl), <span class="dt">sep=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</code></pre></div>
 <pre><code>FROM rocker/hadleyverse
@@ -1406,11 +1436,11 @@ ADD src/report.R /usr/local/bin/
 
 RUN chmod a+x /usr/local/bin/report.R</code></pre>
 <p>Checkout the command line</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"docker/reporttool/src/report.R"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"docker/reporttool/src/report.R"</span>,
                   <span class="dt">package =</span> <span class="st">"sevenbriges"</span>)
 <span class="kw">cat</span>(<span class="kw">readLines</span>(fl), <span class="dt">sep=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</code></pre></div>
 <p>Checkout the tool generator</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"docker/reporttool/rabix/generator.R"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"docker/reporttool/rabix/generator.R"</span>,
                   <span class="dt">package =</span> <span class="st">"sevenbriges"</span>)
 <span class="kw">cat</span>(<span class="kw">readLines</span>(fl), <span class="dt">sep=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</code></pre></div>
 </div>
@@ -1442,7 +1472,8 @@ RUN chmod a+x /usr/local/bin/report.R</code></pre>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#introduction">Introduction</a></li>
       <li>
@@ -1450,7 +1481,7 @@ RUN chmod a+x /usr/local/bin/report.R</code></pre>
 <li><a href="#installation">Installation</a></li>
       <li><a href="#register-on-cancer-genomics-cloud">Register on Cancer Genomics Cloud</a></li>
       <li><a href="#authentication">Authentication</a></li>
-      <li><a href="#register-on-shinyapps.io-optional">Register on shinyapps.io (Optional)</a></li>
+      <li><a href="#register-on-shinyapps-io-optional">Register on shinyapps.io (Optional)</a></li>
       <li><a href="#report-issues">Report issues</a></li>
       </ul>
 </li>

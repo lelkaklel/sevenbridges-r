@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Complete Guide for Seven Bridges API R Client • sevenbridges</title>
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -38,10 +38,40 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="..//index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/api.html">Complete Guide for Seven Bridges API R Client</a>
+    </li>
+    <li>
+      <a href="../articles/apps.html">Describe and Execute CWL Tools/Workflows in R</a>
+    </li>
+    <li>
+      <a href="../articles/bioc-workflow.html">Master Tutorial: Use R for Cancer Genomics Cloud</a>
+    </li>
+    <li>
+      <a href="../articles/cgc-sparql.html">Find Data on CGC via Data Exploerer, SPARQL, and Datasets API</a>
+    </li>
+    <li>
+      <a href="../articles/docker.html">Creating Your Docker Container and Command Line Interface (with docopt)</a>
+    </li>
+    <li>
+      <a href="../articles/rstudio.html">IDE Container: RStudio Server, Shiny Server, and More</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -69,7 +99,7 @@
       <h1>Complete Guide for Seven Bridges API R Client</h1>
                         <h4 class="author">Tengfei Yin &lt;<a href="mailto:tengfei.yin@sevenbridges.com">tengfei.yin@sevenbridges.com</a>&gt; <br> Nan Xiao &lt;<a href="mailto:nan.xiao@sevenbridges.com">nan.xiao@sevenbridges.com</a>&gt;</h4>
             
-            <h4 class="date">2017-04-28</h4>
+            <h4 class="date">2017-08-10</h4>
           </div>
 
     
@@ -147,8 +177,8 @@ Limit defines the quantity of items you want to get.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"https://bioconductor.org/biocLite.R"</span>)
 <span class="kw">biocLite</span>(<span class="st">"readr"</span>)
 
-devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"sbg/sevenbridges-r"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>,
-  <span class="dt">repos =</span> BiocInstaller<span class="op">::</span><span class="kw">biocinstallRepos</span>(),
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"sbg/sevenbridges-r"</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>,
+  <span class="dt">repos =</span> BiocInstaller<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/BiocInstaller/topics/biocinstallRepos">biocinstallRepos</a></span>(),
   <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>If you have trouble with <code>pandoc</code> and do not want to install it, set <code>build_vignettes = FALSE</code> to avoid the vignettes build.</p>
 </div>
@@ -464,7 +494,7 @@ write(rbx$toJSON(pretty = TRUE), fl)</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># rbx is the object returned by `Tool` function</span>
 app &lt;-<span class="st"> </span>p<span class="op">$</span><span class="kw">app_add</span>(<span class="st">"runif"</span>, rbx)
 (aid &lt;-<span class="st"> </span>app<span class="op">$</span>id)</code></pre></div>
-<p>Please consult another tutorial <code>vignette("apps", "sevenbridges")</code> about how to describe tools and flows in R.</p>
+<p>Please consult another tutorial <code><a href="https://cran.rstudio.com/web/packages/sevenbridges/vignettes/apps.html">vignette("apps", "sevenbridges")</a></code> about how to describe tools and flows in R.</p>
 <div align="right">
 <a href="#top">top</a>
 </div>
@@ -660,11 +690,12 @@ tsk<span class="op">$</span><span class="kw">getInputs</span>()</code></pre></di
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tsk<span class="op">$</span><span class="kw"><a href="../reference/download-methods.html">download</a></span>(<span class="st">"~/Downloads"</span>)</code></pre></div>
 <p><a name="hooktask"></a>Instead of the default task monitor action, you can use <code>setTaskHook</code> to connect a function call to the status of a task. When you run <code>tsk$monitor(time = 30)</code> it will check your task every 30 seconds to see if the current task status matches one of the following statuses: “queued”, “draft”, “running”, “completed”, “aborted”, and “failed”. When it finds a match for the task status, <code>getTaskHook</code> returns the function call for the specific status.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/TaskHook.html">getTaskHook</a></span>(<span class="st">"completed"</span>)</code></pre></div>
-<pre><code>## function(...) {
-##                     cat("\r", "completed")
-##                     return(TRUE)
-##                 }
-## &lt;environment: 0x7fca2b226ae0&gt;</code></pre>
+<pre><code>## function (...) 
+## {
+##     cat("\\r", "completed")
+##     return(TRUE)
+## }
+## &lt;environment: 0x7fdad0700238&gt;</code></pre>
 <p>If you want to customize the monitor function, you can adjust the following requirement. Your function must return <code>TRUE</code> or <code>FALSE</code> in the end. When it is <code>TRUE</code> (or non-logical value) it means the monitoring will be terminated after it finds a status matched and the function executes, such as when the task is completed. When it is <code>FALSE</code> it means the monitoring will continue for the next iteration of checking, e.g. when it is “running”, you want to keep tracking.</p>
 <p>Follow the example below to set a new function to monitor the status “completed”. Then, when the task is completed, it will download all task output files to local folder.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/TaskHook.html">setTaskHook</a></span>(<span class="st">"completed"</span>, <span class="cf">function</span>(){
@@ -1550,7 +1581,7 @@ a<span class="op">$</span><span class="kw">project</span>(<span class="st">"demo
 <div id="describe-cwl-in-r-directly" class="section level3">
 <h3 class="hasAnchor">
 <a href="#describe-cwl-in-r-directly" class="anchor"></a>Describe CWL in R directly</h3>
-<p>This is introduced in another vignette (<code>vignette("apps", "sevenbridges")</code>).</p>
+<p>This is introduced in another vignette (<code><a href="https://cran.rstudio.com/web/packages/sevenbridges/vignettes/apps.html">vignette("apps", "sevenbridges")</a></code>).</p>
 <div align="right">
 <a href="#top">top</a>
 </div>
@@ -2013,7 +2044,8 @@ tsk<span class="op">$</span><span class="kw">monitor</span>()
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li>
 <a href="#introduction">Introduction</a><ul class="nav nav-pills nav-stacked">
