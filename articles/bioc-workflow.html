@@ -99,7 +99,7 @@
       <h1>Master Tutorial: Use R for Cancer Genomics Cloud</h1>
                         <h4 class="author">Tengfei Yin &lt;<a href="mailto:tengfei.yin@sevenbridges.com">tengfei.yin@sevenbridges.com</a>&gt;</h4>
             
-            <h4 class="date">2017-08-10</h4>
+            <h4 class="date">2017-08-22</h4>
           </div>
 
     
@@ -191,7 +191,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <a href="#create-a-project-under-your-account-via-api-r-client" class="anchor"></a>Create a project under your account via API R client</h2>
 <p>I know, we can always do it via graphic user interface, but let’s have fun with the <code>sevenbridges</code> packages you just installed.</p>
 <p>For complete API tutorial and reference manual, please read another tutorial.</p>
-<pre><code><a href="https://cran.rstudio.com/web/packages/sevenbridges/vignettes/api.html">vignette("api", package = "sevenbridges")</a></code></pre>
+<pre><code>vignette("api", package = "sevenbridges")</code></pre>
 <p>Now let’s do some simple steps, first thing to do is to create an <em>Auth</em> object, almost everything started from this object. Our API client follow a style like this <code>Auth$properties$action</code>. On the platform, <code>Auth</code> is your account, and it contains projects, billing groups, users, project contains tasks, apps, files etc, so it’s easy to imagine your API call.</p>
 <p>To create an <code>Auth</code> object, simply pass the token and platform name (or alternatively, API base URL) to the <code>Auth</code> function. The default platform is set to CGC. Good news you can use the <code>sevenbridges</code> package to access any Seven Bridges platform with API (v2).</p>
 <p>This is the main way to create an Auth object, just replace <code>your_token</code> with your own authentication token from the CGC:</p>

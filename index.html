@@ -96,16 +96,16 @@
       
       </header><div class="row">
   <div class="contents col-md-9">
-    <div id="sevenbridges" class="section level1">
+    <div id="sevenbridges-r" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#sevenbridges" class="anchor"></a>sevenbridges <a href="https://www.sevenbridges.com"><img src="logo.png" align="right" alt="logo" height="128" width="128"></a>
+<a href="#sevenbridges-r" class="anchor"></a>sevenbridges-r <a href="https://www.sevenbridges.com"><img src="logo.png" align="right" alt="logo" height="128" width="128"></a>
 </h1></div>
 
 <p><a href="https://www.bioconductor.org/packages/release/bioc/html/sevenbridges.html">BioC (Release)</a> · <a href="https://www.bioconductor.org/packages/devel/bioc/html/sevenbridges.html">BioC (Development)</a> · <a href="https://github.com/sbg/sevenbridges-r">GitHub (Latest)</a></p>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>sevenbridges is an <a href="https://cran.r-project.org/">R</a>/<a href="https://www.bioconductor.org/">Bioconductor</a> package that provides an interface for the <a href="https://www.sbgenomics.com/">Seven Bridges Platform</a> and <a href="https://www.cancergenomicscloud.org/">Cancer Genomics Cloud</a> public APIs.</p>
+<p>sevenbridges-r is an <a href="https://cran.r-project.org/">R</a>/<a href="https://www.bioconductor.org/">Bioconductor</a> package that provides an interface for the <a href="https://www.sbgenomics.com/">Seven Bridges Platform</a> and <a href="https://www.cancergenomicscloud.org/">Cancer Genomics Cloud</a> public APIs.</p>
 <p>The Seven Bridges Platform is a cloud-based environment for conducting bioinformatic analyses. It is a central hub for teams to store, analyze, and jointly interpret their bioinformatic data. The Platform co-locates analysis workflows alongside the largest genomic datasets to optimize processing, allocating storage and compute resources on demand.</p>
 <p>The Cancer Genomics Cloud (CGC), powered by Seven Bridges, is also a cloud-based computation environment. It was built as one of three pilot systems funded by the <a href="https://www.cancer.gov/">National Cancer Institute</a> to explore the paradigm of colocalizing massive genomics datasets, like <a href="https://cancergenome.nih.gov/">The Cancer Genome Atlas (TCGA)</a>, alongside secure and scalable computational resources to analyze them. The CGC makes more than a petabyte of multi-dimensional data available immediately to authorized researchers. You can add your own data to analyze alongside TCGA using predefined analytical workflows or your own tools.</p>
 </div>
@@ -131,6 +131,7 @@
 <li><a href="#faq">FAQ</a></li>
 <li><a href="#events">Events</a></li>
 <li><a href="#contribute">Contribute</a></li>
+<li><a href="#copyright">Copyright</a></li>
 </ul>
 </div>
 <div id="installation" class="section level2">
@@ -140,7 +141,7 @@
 <h3 class="hasAnchor">
 <a href="#bioconductor---release-version" class="anchor"></a>Bioconductor - Release Version</h3>
 <p>This installation is recommended for most users as it is the most stable. The current release of Bioconductor is version 3.5, and it works with <strong>R version 3.4.0</strong>. Users of older R and Bioconductor versions should upgrade to take advantage of new features.</p>
-<p>If you do not want to update R, please install the sevenbridges package directly from GitHub by following the instructions below.</p>
+<p>If you do not want to update R, please install the <code>sevenbridges</code> package directly from GitHub by following the instructions below.</p>
 <div id="check-r-version" class="section level4">
 <h4 class="hasAnchor">
 <a href="#check-r-version" class="anchor"></a>Check R version</h4>
@@ -151,7 +152,7 @@
 <div id="install-the-package" class="section level4">
 <h4 class="hasAnchor">
 <a href="#install-the-package" class="anchor"></a>Install the package</h4>
-<p>Install the sevenbridges package as shown below:</p>
+<p>Install the <code>sevenbridges</code> package as shown below:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"https://bioconductor.org/biocLite.R"</span>)
 <span class="kw">biocLite</span>(<span class="st">"sevenbridges"</span>)</code></pre></div>
 </div>
@@ -169,11 +170,11 @@
 <div id="latest-development-version" class="section level3">
 <h3 class="hasAnchor">
 <a href="#latest-development-version" class="anchor"></a>Latest Development Version</h3>
-<p>You can always install the latest development version of the sevenbridges package from GitHub. We push to the Bioconductor branch (<code>release</code>/<code>devel</code>) regularly.</p>
+<p>You can always install the latest development version of the <code>sevenbridges</code> package from GitHub. We push to the Bioconductor branch (<code>release</code>/<code>devel</code>) regularly.</p>
 <div id="if-devtools-was-not-installed" class="section level4">
 <h4 class="hasAnchor">
 <a href="#if-devtools-was-not-installed" class="anchor"></a>If <code>devtools</code> was not installed</h4>
-<p>Installing the sevenbridges package requires you have the <code>devtools</code> package. If you do not have <code>devtools</code>, install it from <a href="https://cran.r-project.org/web/packages/devtools/README.html">CRAN</a>.</p>
+<p>Installing the <code>sevenbridges</code> package requires you have the <code>devtools</code> package. If you do not have <code>devtools</code>, install it from <a href="https://cran.r-project.org/web/packages/devtools/README.html">CRAN</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>)</code></pre></div>
 <p>You may got an error and need system dependecies for curl and ssl. For example, you probably need to do the following first in order to install <code>devtools</code> and in order to build vignettes since you need <code>pandoc</code> under Ubuntu.</p>
 <pre><code>apt-get update
@@ -182,7 +183,7 @@ apt-get install libcurl4-gnutls-dev libssl-dev pandoc pandoc-citeproc</code></pr
 <div id="if-devtools-is-already-installed" class="section level4">
 <h4 class="hasAnchor">
 <a href="#if-devtools-is-already-installed" class="anchor"></a>If <code>devtools</code> is already installed</h4>
-<p>Install latest version of sevenbridges from GitHub with the following:</p>
+<p>Install latest version of <code>sevenbridges</code> from GitHub with the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">"https://bioconductor.org/biocLite.R"</span>)
 <span class="kw">biocLite</span>(<span class="st">"readr"</span>)
 
@@ -197,7 +198,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <div id="features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#features" class="anchor"></a>Features</h2>
-<p>The sevenbridges package includes the following features:</p>
+<p>The <code>sevenbridges</code> package includes the following features:</p>
 <div id="flexible-authentication-methods" class="section level3">
 <h3 class="hasAnchor">
 <a href="#flexible-authentication-methods" class="anchor"></a>Flexible Authentication Methods</h3>
@@ -214,7 +215,7 @@ a &lt;-<span class="st"> </span><span class="kw"><a href="reference/Auth-class.h
 a &lt;-<span class="st"> </span><span class="kw"><a href="reference/Auth-class.html">Auth</a></span>(<span class="dt">from =</span> <span class="st">"env"</span>)</code></pre></div>
 <p>Authentication via a user configuration file, collect and manage your credentials for multiple accounts across various Seven Bridges environments:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw"><a href="reference/Auth-class.html">Auth</a></span>(<span class="dt">from =</span> <span class="st">"file"</span>, <span class="dt">profile_name =</span> <span class="st">"aws-us-tengfei"</span>)</code></pre></div>
-<p>Please check <code><a href="https://cran.rstudio.com/web/packages/sevenbridges/vignettes/api.html">vignette("api", package = "sevenbridges")</a></code> for technical details about all available authentication methods.</p>
+<p>Please check <code>vignette("api", package = "sevenbridges")</code> for technical details about all available authentication methods.</p>
 </div>
 <div id="complete-api-r-client" class="section level3">
 <h3 class="hasAnchor">
@@ -393,7 +394,7 @@ t1<span class="op">$</span><span class="kw"><a href="reference/input_output_matr
 <div id="faq" class="section level2">
 <h2 class="hasAnchor">
 <a href="#faq" class="anchor"></a>FAQ</h2>
-<p>The best place to ask questions about the sevenbridges package is the <a href="https://groups.google.com/forum/#!forum/sevenbridges-r">mailing list</a>.</p>
+<p>The best place to ask questions about the <code>sevenbridges</code> package is the <a href="https://groups.google.com/forum/#!forum/sevenbridges-r">mailing list</a>.</p>
 <ul>
 <li><p><strong>Q</strong>: Does this package support Seven Bridges’ API v1 which was not CWL compatible?<br><strong>A</strong>: No. This package only supports API v2 +. For API v1, please check out the <a href="https://github.com/road2stat/sbgr">sbgr</a> package. Note that API v1 and associated legacy project types will be deprecated eventually.</p></li>
 <li><p><strong>Q</strong>: Which version of the Common Workflow Language (CWL) is supported?<br><strong>A</strong>: We support draft 2 and are making progress on supporting draft 3.</p></li>
@@ -459,10 +460,14 @@ t1<span class="op">$</span><span class="kw"><a href="reference/input_output_matr
 <div id="contribute" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contribute" class="anchor"></a>Contribute</h2>
-<p>All feedback is welcome! Please file bug reports/feature requests on the <a href="https://github.com/sbg/sevenbridges-r/issues">issue page</a>, or create pull requests <a href="https://github.com/sbg/sevenbridges-r/pulls">here</a>.</p>
+<p>Please file bug reports/feature requests on the <a href="https://github.com/sbg/sevenbridges-r/issues">issue page</a>, or create pull requests <a href="https://github.com/sbg/sevenbridges-r/pulls">here</a>.</p>
 <p>Contributors should read the <a href="https://drive.google.com/file/d/0B9ms5nmyMyvSY3ZmeDRqV1p4SHc/view?usp=sharing">Seven Bridges Notice to Contributors</a> and sign the <a href="https://secure.na1.echosign.com/public/esignWidget?wid=CBFCIBAA3AAABLblqZhAqt_9rHEqy2MggS0uWRmKHUN2HYi8DWNjkgg5N68iKAhRFTy7k2AOEpRHMMorxc_0*">Seven Bridges Contributor Agreement</a> before submitting a pull request.</p>
-<hr>
-<p>© 2017 Seven Bridges Genomics, Inc. Licensed under the Apache License 2.0.</p>
+</div>
+<div id="copyright" class="section level2">
+<h2 class="hasAnchor">
+<a href="#copyright" class="anchor"></a>Copyright</h2>
+<p>© 2017 Seven Bridges Genomics, Inc. All rights reserved.</p>
+<p>This project is licensed under the terms of the <a href="LICENSE">Apache License 2.0</a>.</p>
 </div>
 </div>
   </div>
