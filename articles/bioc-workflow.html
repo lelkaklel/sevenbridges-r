@@ -99,7 +99,7 @@
       <h1>Master Tutorial: Use R for Cancer Genomics Cloud</h1>
                         <h4 class="author">Tengfei Yin &lt;<a href="mailto:tengfei.yin@sevenbridges.com">tengfei.yin@sevenbridges.com</a>&gt;</h4>
             
-            <h4 class="date">2017-09-09</h4>
+            <h4 class="date">2017-09-24</h4>
           </div>
 
     
@@ -418,7 +418,7 @@ rbx &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Tool-cl
                   <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)</code></pre></div>
 <p>Here is the current content of the <code>Dockerfile</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="kw">readLines</span>(fl), <span class="dt">sep =</span> <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</code></pre></div>
-<pre><code>FROM rocker/hadleyverse
+<pre><code>FROM rocker/tidyverse
 
 MAINTAINER "Tengfei Yin" yintengfei@gmail.com
 
@@ -1419,7 +1419,7 @@ p &lt;-<span class="st"> </span>a<span class="op">$</span><span class="kw">proje
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fl &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/system.file">system.file</a></span>(<span class="st">"docker/reporttool/Dockerfile"</span>,
                   <span class="dt">package =</span> <span class="st">"sevenbridges"</span>)
 <span class="kw">cat</span>(<span class="kw">readLines</span>(fl), <span class="dt">sep=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</code></pre></div>
-<pre><code>FROM rocker/hadleyverse
+<pre><code>FROM rocker/tidyverse
 
 MAINTAINER "Tengfei Yin" yintengfei@gmail.com
 
