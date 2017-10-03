@@ -139,16 +139,16 @@
       <tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
+            <h2 id="section-api-client" class="hasAnchor"><a href="#section-api-client" class="anchor"></a>API Client</h2>
+            <p class="section-desc"><p>API client.</p></p>
           </th>
         </tr>
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="addIdNum.html">addIdNum</a></code> </p>
+            <p><code><a href="get_token.html">get_token</a></code> <code><a href="get_token.html">misc_get_token</a></code> </p>
           </td>
-          <td><p>add <code>#</code> prefix to id</p></td>
+          <td><p>Opens web browser to copy the auth token</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -158,16 +158,18 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="App-class.html">App-class</a></code> </p>
+            <p><code><a href="response-methods.html">response</a></code> <code><a href="response-methods.html">response<-</a></code> </p>
           </td>
-          <td><p>Class App</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="as-methods.html">asList</a></code> <code><a href="as-methods.html">asYAML</a></code> <code><a href="as-methods.html">asJSON</a></code> </p>
-          </td>
-          <td><p>Convert a object slots/fields to a list, json, or yaml file</p></td>
-        </tr><tr>
+          <td><p>Get raw response from an Item object</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-authentication" class="hasAnchor"><a href="#section-authentication" class="anchor"></a>Authentication</h2>
+            <p class="section-desc"><p>Authentication.</p></p>
+          </th>
+        </tr>
+        <tr>
           <!--  -->
           <td>
             <p><code><a href="Auth-class.html">Auth-class</a></code> </p>
@@ -176,21 +178,172 @@
         </tr><tr>
           <!--  -->
           <td>
+            <p><code><a href="sbg_get_env.html">sbg_get_env</a></code> </p>
+          </td>
+          <td><p>Set authentication environment variables for Seven Bridges API</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="sbg_set_env.html">sbg_set_env</a></code> </p>
+          </td>
+          <td><p>Set authentication environment variables for Seven Bridges API</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-project" class="hasAnchor"><a href="#section-project" class="anchor"></a>Project</h2>
+            <p class="section-desc"><p>Managing projects.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="project_details.html">project_details</a></code> </p>
+          </td>
+          <td><p>Returns the details of the project</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="project_members.html">project_members</a></code> </p>
+          </td>
+          <td><p>Returns a list of all users invited to the project and their privileges</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-files" class="hasAnchor"><a href="#section-files" class="anchor"></a>Files</h2>
+            <p class="section-desc"><p>Files I/O.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="File-class.html">FileList</a></code> </p>
+          </td>
+          <td><p>FileList Class</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Files-class.html">FilesList</a></code> </p>
+          </td>
+          <td><p>Class Files</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="download-methods.html">download</a></code> </p>
+          </td>
+          <td><p>Download files</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="delete-methods.html">delete</a></code> </p>
+          </td>
+          <td><p>Delete files</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="upload_complete_all.html">upload_complete_all</a></code> </p>
+          </td>
+          <td><p>Reports the complete file upload</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="upload_complete_part.html">upload_complete_part</a></code> </p>
+          </td>
+          <td><p>Reports the completion of the part upload</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="upload_delete.html">upload_delete</a></code> </p>
+          </td>
+          <td><p>Abort the upload</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="upload_info_part.html">upload_info_part</a></code> </p>
+          </td>
+          <td><p>Returns AWS S3 signed URL for a part of the file upload</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="upload_info.html">upload_info</a></code> </p>
+          </td>
+          <td><p>Returns upload information for the ongoing upload</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="upload_init.html">upload_init</a></code> </p>
+          </td>
+          <td><p>Initializes the upload of the specified file</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="tag-methods.html">set_tag</a></code> <code><a href="tag-methods.html">add_tag</a></code> </p>
+          </td>
+          <td><p>Set file tags</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-tasks" class="hasAnchor"><a href="#section-tasks" class="anchor"></a>Tasks</h2>
+            <p class="section-desc"><p>Managing tasks.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
             <p><code><a href="batch.html">batch</a></code> </p>
           </td>
           <td><p>batch function for task batch execution</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="Binding.html">Binding-class</a></code> </p>
+            <p><code><a href="TaskHook.html">setTaskHook</a></code> <code><a href="TaskHook.html">getTaskHook</a></code> </p>
           </td>
-          <td><p>Binding</p></td>
-        </tr><tr>
+          <td><p>set task function hook</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-file-systems" class="hasAnchor"><a href="#section-file-systems" class="anchor"></a>File Systems</h2>
+            <p class="section-desc"><p>File systems class.</p></p>
+          </th>
+        </tr>
+        <tr>
           <!--  -->
           <td>
-            <p><code><a href="CCBList.html">CCBList</a></code> </p>
+            <p><code><a href="FS-class.html">FS-class</a></code> </p>
           </td>
-          <td><p>characterORCommandLineBindingList Class</p></td>
+          <td><p>FS class</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-folders" class="hasAnchor"><a href="#section-folders" class="anchor"></a>Folders</h2>
+            <p class="section-desc"><p>Folders class.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Folders-class.html">Folders-class</a></code> </p>
+          </td>
+          <td><p>Class Folders</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-cli-uploader" class="hasAnchor"><a href="#section-cli-uploader" class="anchor"></a>CLI Uploader</h2>
+            <p class="section-desc"><p>Upload files with command line uploader.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_uploader.html">get_uploader</a></code> <code><a href="get_uploader.html">misc_get_uploader</a></code> </p>
+          </td>
+          <td><p>Download Seven Bridges command line uploader and extract to
+a specified directory</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -209,6 +362,122 @@
             <p><code><a href="cli_upload.html">cli_upload</a></code> <code><a href="cli_upload.html">misc_upload_cli</a></code> </p>
           </td>
           <td><p>Upload files using Seven Bridges command line uploader</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-common-workflow-language" class="hasAnchor"><a href="#section-common-workflow-language" class="anchor"></a>Common Workflow Language</h2>
+            <p class="section-desc"><p>Creating CWL tools and workflows in R.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="App-class.html">App-class</a></code> </p>
+          </td>
+          <td><p>Class App</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="convert_app.html">convert_app</a></code> <code><a href="convert_app.html">appType</a></code> </p>
+          </td>
+          <td><p>Convert App or a CWL JSON file to Tool or Flow object</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="input_output_matrix.html">input_matrix</a></code> <code><a href="input_output_matrix.html">output_matrix</a></code> </p>
+          </td>
+          <td><p>Get input/output matrix out of JSON CWL file directly</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Tool-class.html">Tool-class</a></code> </p>
+          </td>
+          <td><p>Class Tool</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="ToolUI.html">ToolUI</a></code> </p>
+          </td>
+          <td><p>Create Rabix tool object</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="test_tool_rabix.html">test_tool_rabix</a></code> </p>
+          </td>
+          <td><p>Test tools in rabix/rabix-devel (DEPRECATED)</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="test_tool_cwlrun.html">test_tool_cwlrun</a></code> </p>
+          </td>
+          <td><p>Test tools with cwl-runner</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="test_tool_bunny.html">test_tool_bunny</a></code> </p>
+          </td>
+          <td><p>Test tools in rabix/bunny</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="link.html">link</a></code> </p>
+          </td>
+          <td><p>link two nodes to form a new Workflow</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="link_what.html">link_what</a></code> </p>
+          </td>
+          <td><p>List possible linking methods</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Flow.html">SBGWorkflow-class</a></code> </p>
+          </td>
+          <td><p>Build workflow</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="WorkflowStep.html">WorkflowStepInputList</a></code> <code><a href="WorkflowStep.html">WorkflowStepOutputList</a></code> <code><a href="WorkflowStep.html">WorkflowStepList</a></code> </p>
+          </td>
+          <td><p>WorkflowStepInputList</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Workflow.html">WorkflowOutputParameterList</a></code> </p>
+          </td>
+          <td><p>Workflow</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="CWL.html">CWL-class</a></code> </p>
+          </td>
+          <td><p>Class CWL</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="cwl-utils.html">get_cwl_class</a></code> </p>
+          </td>
+          <td><p>Get class from CWL JSON file</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Process.html">Process-class</a></code> </p>
+          </td>
+          <td><p>Process Class</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="ProcessRequirement.html">FileDefList</a></code> <code><a href="ProcessRequirement.html">EnvironmentDefList</a></code> <code><a href="ProcessRequirement.html">ProcessRequirementList</a></code> </p>
+          </td>
+          <td><p>ProcessRequirement Class</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Parameter.html">InputParameterList</a></code> <code><a href="Parameter.html">OutputParameterList</a></code> </p>
+          </td>
+          <td><p>Paramter class (reference class)</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -254,48 +523,6 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="convert_app.html">convert_app</a></code> <code><a href="convert_app.html">appType</a></code> </p>
-          </td>
-          <td><p>Convert App or a CWL JSON file to Tool or Flow object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="cwl-utils.html">get_cwl_class</a></code> </p>
-          </td>
-          <td><p>Get class from CWL JSON file</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="CWL.html">CWL-class</a></code> </p>
-          </td>
-          <td><p>Class CWL</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="delete-methods.html">delete</a></code> </p>
-          </td>
-          <td><p>Delete files</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="download-methods.html">download</a></code> </p>
-          </td>
-          <td><p>Download files</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="DSCList.html">DSCList</a></code> </p>
-          </td>
-          <td><p>DSC list</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Enum.html">PrimitiveSingleEnum-class</a></code> </p>
-          </td>
-          <td><p>Pre-defiend enums</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="Expression-class.html">Expression-class</a></code> </p>
           </td>
           <td><p>Expression Class</p></td>
@@ -308,112 +535,9 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="File-class.html">FileList</a></code> </p>
-          </td>
-          <td><p>FileList Class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Files-class.html">FilesList</a></code> </p>
-          </td>
-          <td><p>Class Files</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Flow.html">SBGWorkflow-class</a></code> </p>
-          </td>
-          <td><p>Build workflow</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Folders-class.html">Folders-class</a></code> </p>
-          </td>
-          <td><p>Class Folders</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="FS-class.html">FS-class</a></code> </p>
-          </td>
-          <td><p>FS class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_token.html">get_token</a></code> <code><a href="get_token.html">misc_get_token</a></code> </p>
-          </td>
-          <td><p>Opens web browser to copy the auth token</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_uploader.html">get_uploader</a></code> <code><a href="get_uploader.html">misc_get_uploader</a></code> </p>
-          </td>
-          <td><p>Download Seven Bridges command line uploader and extract to
-a specified directory</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="Handler-class.html">Handler-class</a></code> </p>
           </td>
           <td><p>Handler instance</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="input_output_matrix.html">input_matrix</a></code> <code><a href="input_output_matrix.html">output_matrix</a></code> </p>
-          </td>
-          <td><p>Get input/output matrix out of JSON CWL file directly</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Item-class.html">Item-class</a></code> </p>
-          </td>
-          <td><p>Class Item</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="link_what.html">link_what</a></code> </p>
-          </td>
-          <td><p>List possible linking methods</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="link.html">link</a></code> </p>
-          </td>
-          <td><p>link two nodes to form a new Workflow</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Metadata.html">misc_make_metadata</a></code> </p>
-          </td>
-          <td><p>Meta schema</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Parameter.html">InputParameterList</a></code> <code><a href="Parameter.html">OutputParameterList</a></code> </p>
-          </td>
-          <td><p>Paramter class (reference class)</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Process.html">Process-class</a></code> </p>
-          </td>
-          <td><p>Process Class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ProcessRequirement.html">FileDefList</a></code> <code><a href="ProcessRequirement.html">EnvironmentDefList</a></code> <code><a href="ProcessRequirement.html">ProcessRequirementList</a></code> </p>
-          </td>
-          <td><p>ProcessRequirement Class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="project_details.html">project_details</a></code> </p>
-          </td>
-          <td><p>Returns the details of the project</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="project_members.html">project_members</a></code> </p>
-          </td>
-          <td><p>Returns a list of all users invited to the project and their privileges</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -423,27 +547,77 @@ a specified directory</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="response-methods.html">response</a></code> <code><a href="response-methods.html">response<-</a></code> </p>
+            <p><code><a href="DSCList.html">DSCList</a></code> </p>
           </td>
-          <td><p>Get raw response from an Item object</p></td>
+          <td><p>DSC list</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="sbg_get_env.html">sbg_get_env</a></code> </p>
+            <p><code><a href="CCBList.html">CCBList</a></code> </p>
           </td>
-          <td><p>Set authentication environment variables for Seven Bridges API</p></td>
+          <td><p>characterORCommandLineBindingList Class</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="sbg_set_env.html">sbg_set_env</a></code> </p>
+            <p><code><a href="shorthand-cwl.html">CLB</a></code> </p>
           </td>
-          <td><p>Set authentication environment variables for Seven Bridges API</p></td>
+          <td><p>Shorthand functions for cwl packages constructors</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="Schema.html">SchemaList</a></code> <code><a href="Schema.html">SchemaDefList</a></code> </p>
           </td>
           <td><p>SchemaList</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Enum.html">PrimitiveSingleEnum-class</a></code> </p>
+          </td>
+          <td><p>Pre-defiend enums</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Binding.html">Binding-class</a></code> </p>
+          </td>
+          <td><p>Binding</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-utilities" class="hasAnchor"><a href="#section-utilities" class="anchor"></a>Utilities</h2>
+            <p class="section-desc"><p>Utility functions.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="sevenbridges-package.html">sevenbridges-package</a></code> </p>
+          </td>
+          <td><p>Seven Bridges Platform API Client and CWL Tool Builder in R</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Item-class.html">Item-class</a></code> </p>
+          </td>
+          <td><p>Class Item</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Metadata.html">misc_make_metadata</a></code> </p>
+          </td>
+          <td><p>Meta schema</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="addIdNum.html">addIdNum</a></code> </p>
+          </td>
+          <td><p>add <code>#</code> prefix to id</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="as-methods.html">asList</a></code> <code><a href="as-methods.html">asYAML</a></code> <code><a href="as-methods.html">asJSON</a></code> </p>
+          </td>
+          <td><p>Convert a object slots/fields to a list, json, or yaml file</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -456,108 +630,6 @@ a specified directory</p></td>
             <p><code><a href="setListClass.html">setListClass</a></code> </p>
           </td>
           <td><p>List Class generator.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sevenbridges-package.html">sevenbridges-package</a></code> </p>
-          </td>
-          <td><p>Seven Bridges Platform API Client and CWL Tool Builder in R</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="shorthand-cwl.html">CLB</a></code> </p>
-          </td>
-          <td><p>Shorthand functions for cwl packages constructors</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tag-methods.html">set_tag</a></code> <code><a href="tag-methods.html">add_tag</a></code> </p>
-          </td>
-          <td><p>Set file tags</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="TaskHook.html">setTaskHook</a></code> <code><a href="TaskHook.html">getTaskHook</a></code> </p>
-          </td>
-          <td><p>set task function hook</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="test_tool_bunny.html">test_tool_bunny</a></code> </p>
-          </td>
-          <td><p>Test tools in rabix/bunny</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="test_tool_cwlrun.html">test_tool_cwlrun</a></code> </p>
-          </td>
-          <td><p>Test tools with cwl-runner</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="test_tool_rabix.html">test_tool_rabix</a></code> </p>
-          </td>
-          <td><p>Test tools in rabix/rabix-devel (DEPRECATED)</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Tool-class.html">Tool-class</a></code> </p>
-          </td>
-          <td><p>Class Tool</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="ToolUI.html">ToolUI</a></code> </p>
-          </td>
-          <td><p>Create Rabix tool object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="upload_complete_all.html">upload_complete_all</a></code> </p>
-          </td>
-          <td><p>Reports the complete file upload</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="upload_complete_part.html">upload_complete_part</a></code> </p>
-          </td>
-          <td><p>Reports the completion of the part upload</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="upload_delete.html">upload_delete</a></code> </p>
-          </td>
-          <td><p>Abort the upload</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="upload_info_part.html">upload_info_part</a></code> </p>
-          </td>
-          <td><p>Returns AWS S3 signed URL for a part of the file upload</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="upload_info.html">upload_info</a></code> </p>
-          </td>
-          <td><p>Returns upload information for the ongoing upload</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="upload_init.html">upload_init</a></code> </p>
-          </td>
-          <td><p>Initializes the upload of the specified file</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Workflow.html">WorkflowOutputParameterList</a></code> </p>
-          </td>
-          <td><p>Workflow</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="WorkflowStep.html">WorkflowStepInputList</a></code> <code><a href="WorkflowStep.html">WorkflowStepOutputList</a></code> <code><a href="WorkflowStep.html">WorkflowStepList</a></code> </p>
-          </td>
-          <td><p>WorkflowStepInputList</p></td>
         </tr>
       </tbody>
       </table>
@@ -567,7 +639,16 @@ a specified directory</p></td>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-api-client">API Client</a></li>
+      <li><a href="#section-authentication">Authentication</a></li>
+      <li><a href="#section-project">Project</a></li>
+      <li><a href="#section-files">Files</a></li>
+      <li><a href="#section-tasks">Tasks</a></li>
+      <li><a href="#section-file-systems">File Systems</a></li>
+      <li><a href="#section-folders">Folders</a></li>
+      <li><a href="#section-cli-uploader">CLI Uploader</a></li>
+      <li><a href="#section-common-workflow-language">Common Workflow Language</a></li>
+      <li><a href="#section-utilities">Utilities</a></li>
     </ul>
   </div>
 </div>
