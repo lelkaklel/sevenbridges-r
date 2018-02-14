@@ -144,16 +144,6 @@ prepare a object to be conveted to YAML/JSON.</p>
 <span class='co'># S4 method for SimpleList</span>
 <span class='fu'>asList</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
-<span class='fu'>asYAML</span>(<span class='no'>object</span>, <span class='no'>...</span>)
-
-<span class='co'># S4 method for ANY</span>
-<span class='fu'>asYAML</span>(<span class='no'>object</span>, <span class='no'>...</span>)
-
-<span class='fu'>asJSON</span>(<span class='no'>object</span>, <span class='no'>...</span>)
-
-<span class='co'># S4 method for ANY</span>
-<span class='fu'>asJSON</span>(<span class='no'>object</span>, <span class='no'>...</span>)
-
 <span class='co'># S4 method for DSCList</span>
 <span class='fu'>asList</span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
     
@@ -195,15 +185,7 @@ For example, class CWL, SimpleList.</p></td>
 <span class='fu'>asList</span>(<span class='no'>a</span>)
 <span class='fu'>asList</span>(<span class='no'>b</span>)
 <span class='no'>b</span>$<span class='fu'>toList</span>()
-
-<span class='co'>## asYAML</span>
-<span class='fu'>asYAML</span>(<span class='no'>a</span>)
-<span class='fu'>asYAML</span>(<span class='no'>b</span>)
 <span class='no'>b</span>$<span class='fu'>toYAML</span>()
-
-<span class='co'>## asJSON</span>
-<span class='fu'>asJSON</span>(<span class='no'>a</span>)
-<span class='fu'>asJSON</span>(<span class='no'>b</span>)
 <span class='no'>b</span>$<span class='fu'>toJSON</span>()
 <span class='co'># }</span></pre>
   </div>
