@@ -18,6 +18,8 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -25,6 +27,10 @@
 <script src="../pkgdown.js"></script>
   
   
+<meta property="og:title" content="All news" />
+
+<meta property="og:image" content="/logo.png" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -145,7 +151,7 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes" class="anchor"></a>Bug Fixes</h2>
 <ul>
-<li>Fixed the <code>baseCommand</code> conversion issue (<a href="https://github.com/sbg/sevenbridges-r/issues/59">#59</a>).</li>
+<li>Fixed the <code>baseCommand</code> conversion issue (<a href="https://github.com/sbg/sevenbridges-r/issues/59"><a href='https://github.com/sbg/sevenbridges-r/issues/59'>#59</a></a>).</li>
 </ul>
 </div>
 </div>
@@ -203,8 +209,8 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-2" class="anchor"></a>Bug Fixes</h2>
 <ul>
-<li>Fixed task output files download issue (<a href="https://github.com/sbg/sevenbridges-r/issues/52">#52</a>).</li>
-<li>Fixed IDE Docker image build issues; removed the libssl-dev dependency; updated Dockerfile (<a href="https://github.com/sbg/sevenbridges-r/issues/50">#50</a>).</li>
+<li>Fixed task output files download issue (<a href="https://github.com/sbg/sevenbridges-r/issues/52"><a href='https://github.com/sbg/sevenbridges-r/issues/52'>#52</a></a>).</li>
+<li>Fixed IDE Docker image build issues; removed the libssl-dev dependency; updated Dockerfile (<a href="https://github.com/sbg/sevenbridges-r/issues/50"><a href='https://github.com/sbg/sevenbridges-r/issues/50'>#50</a></a>).</li>
 </ul>
 </div>
 <div id="improvements-2" class="section level2">
@@ -215,7 +221,7 @@
 <li>
 <code><a href="../reference/Metadata.html">misc_make_metadata()</a></code> is deprecated, use <code><a href="../reference/Metadata.html">Metadata()</a></code> for metadata constructor instead.</li>
 <li>API status code has been updated to the latest version.</li>
-<li>Added docker pull stats badge (<a href="https://github.com/sbg/sevenbridges-r/issues/49">#49</a>).</li>
+<li>Added docker pull stats badge (<a href="https://github.com/sbg/sevenbridges-r/issues/49"><a href='https://github.com/sbg/sevenbridges-r/issues/49'>#49</a></a>).</li>
 </ul>
 </div>
 </div>
@@ -226,7 +232,7 @@
 <h2 class="hasAnchor">
 <a href="#bug-fixes-3" class="anchor"></a>Bug Fixes</h2>
 <ul>
-<li><p>Fixed task creation issues introduced by the recently added field <code>created_time</code> in the API (<a href="https://github.com/sbg/sevenbridges-r/issues/51">#51</a>).</p></li>
+<li><p>Fixed task creation issues introduced by the recently added field <code>created_time</code> in the API (<a href="https://github.com/sbg/sevenbridges-r/issues/51"><a href='https://github.com/sbg/sevenbridges-r/issues/51'>#51</a></a>).</p></li>
 <li><p>Fixed the user configuration file path (from <code>~/.sevenbridges/credential</code> to <code>~/.sevenbridges/credentials</code>), following the authentication specification. Thanks: Fabian Zimmer</p></li>
 </ul>
 </div>
@@ -275,7 +281,7 @@
 <h3 class="hasAnchor">
 <a href="#api-client-authentication" class="anchor"></a>API Client (Authentication)</h3>
 <ul>
-<li>Support three authentication methods: direct authentication, via environment variables, or via user configuration file. Compliant with the new API client authentication specification. Please check the latest vignette <code>vignette("api", package = "sevenbridges")</code> for the current authentication methods.</li>
+<li>Support three authentication methods: direct authentication, via environment variables, or via user configuration file. Compliant with the new API client authentication specification. Please check the latest vignette <code><a href="../articles/api.html">vignette("api", package = "sevenbridges")</a></code> for the current authentication methods.</li>
 <li>Updated platform types: now users can choose from <code>"cgc"</code>, <code>"aws-us"</code>, <code>"aws-eu"</code>, <code>"gcp"</code>, and <code>"cavatica"</code> in <code><a href="../reference/Auth-class.html">Auth()</a></code> to avoid using API base URLs explicitly.</li>
 <li>Removed credential information parsing when package is loaded.</li>
 </ul>
@@ -284,16 +290,16 @@
 <h3 class="hasAnchor">
 <a href="#api-client-task-and-upload" class="anchor"></a>API Client (Task and Upload)</h3>
 <ul>
-<li>File ID support on task input (directly) (<a href="https://github.com/sbg/sevenbridges-r/issues/27">#27</a>)</li>
-<li>New argument <code>keep_test</code> for <code>task_add()</code> added: when users push a Tool object with no <code>sbg:job</code> information, can still use <code>keep_test = TRUE</code> to keep previous test information. (<a href="https://github.com/sbg/sevenbridges-r/issues/31">#31</a>)</li>
-<li>Support manifest file upload with fitler and subsetting for uploader (<a href="https://github.com/sbg/sevenbridges-r/issues/46">#46</a>)</li>
+<li>File ID support on task input (directly) (<a href="https://github.com/sbg/sevenbridges-r/issues/27"><a href='https://github.com/sbg/sevenbridges-r/issues/27'>#27</a></a>)</li>
+<li>New argument <code>keep_test</code> for <code>task_add()</code> added: when users push a Tool object with no <code>sbg:job</code> information, can still use <code>keep_test = TRUE</code> to keep previous test information. (<a href="https://github.com/sbg/sevenbridges-r/issues/31"><a href='https://github.com/sbg/sevenbridges-r/issues/31'>#31</a></a>)</li>
+<li>Support manifest file upload with fitler and subsetting for uploader (<a href="https://github.com/sbg/sevenbridges-r/issues/46"><a href='https://github.com/sbg/sevenbridges-r/issues/46'>#46</a></a>)</li>
 </ul>
 </div>
 <div id="docker-image" class="section level3">
 <h3 class="hasAnchor">
 <a href="#docker-image" class="anchor"></a>Docker Image</h3>
 <ul>
-<li>Migrated Docker images to Seven Bridges Docker Hub account (<a href="https://github.com/sbg/sevenbridges-r/issues/43">#43</a>), now users could use <code>docker pull sevenbridges/sevenbridges-r</code>
+<li>Migrated Docker images to Seven Bridges Docker Hub account (<a href="https://github.com/sbg/sevenbridges-r/issues/43"><a href='https://github.com/sbg/sevenbridges-r/issues/43'>#43</a></a>), now users could use <code>docker pull sevenbridges/sevenbridges-r</code>
 </li>
 </ul>
 </div>
@@ -301,14 +307,14 @@
 <h3 class="hasAnchor">
 <a href="#cwl-support" class="anchor"></a>CWL Support</h3>
 <ul>
-<li>Improved robustness of <code><a href="../reference/convert_app.html">convert_app()</a></code> when a CWL JSON has more fields than defined (<a href="https://github.com/sbg/sevenbridges-r/issues/44">#44</a>)</li>
+<li>Improved robustness of <code><a href="../reference/convert_app.html">convert_app()</a></code> when a CWL JSON has more fields than defined (<a href="https://github.com/sbg/sevenbridges-r/issues/44"><a href='https://github.com/sbg/sevenbridges-r/issues/44'>#44</a></a>)</li>
 </ul>
 </div>
 <div id="miscellaneous" class="section level3">
 <h3 class="hasAnchor">
 <a href="#miscellaneous" class="anchor"></a>Miscellaneous</h3>
 <ul>
-<li>New vignette style (<a href="https://github.com/sbg/sevenbridges-r/issues/38">#38</a>)</li>
+<li>New vignette style (<a href="https://github.com/sbg/sevenbridges-r/issues/38"><a href='https://github.com/sbg/sevenbridges-r/issues/38'>#38</a></a>)</li>
 </ul>
 </div>
 </div>
@@ -421,7 +427,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
